@@ -1,0 +1,27 @@
+{
+  "name": "formkl",
+  "version": "0.0.1",
+  "description": "Form markup language",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/formkl/core.git"
+  },
+  "keywords": [
+    "form",
+    "formkl",
+    "formjs",
+    "form",
+    "generator",
+    "schema"
+  ],
+  "author": "thecodeorigin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/formkl/core/issues"
+  },
+  "homepage": "https://github.com/formkl/core#readme"
+}
