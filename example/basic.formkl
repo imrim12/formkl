@@ -1,5 +1,5 @@
-private formkl step by step allows 1 response {
-  "Personal Information" includes {
+formkl(private, step by step, allows 1 response) {
+  "Personal Information" {
     require us phone;
     require email;
 		"Secondary email" email; // Avoid duplicated field key by give it a different label
@@ -12,7 +12,7 @@ private formkl step by step allows 1 response {
 		512 words max "Custom regex" paragraph field regex(^[a-zA-Z]$)
     512 words max "Note" paragraph field;
   }
-  "Referrals" includes {
+  "Referrals" {
     require 1 in 4 email fields; // Plural "fields" for multiple response
   }
 }
