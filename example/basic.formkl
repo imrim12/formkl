@@ -1,18 +1,18 @@
-formkl(private, step by step, allows 1 response) {
-  "Personal Information" {
+formkl private step by step allows 1 response {
+  "Personal Information" includes {
     require us phone;
     require email;
 		"Secondary email" email; // Avoid duplicated field key by give it a different label
 		require gender from "Male""Female""Other";
-    require "Bio" paragraph field > 100 and < 300;
-    "Grade" number field > 1 and < 12;
+    require "Bio" paragraph valid(> 100 and < 300);
+    "Grade" number valid(> 1 and < 12);
 		require age;
-		require zip code;
+		require zip;
 		require 6 digits "SSN";
-		512 words max "Custom regex" paragraph field regex(^[a-zA-Z]$)
-    512 words max "Note" paragraph field;
+		512 words "Custom regex" paragraph regex(^[a-zA-Z]$)
+    512 words "Note" paragraph;
   }
-  "Referrals" {
+  "Referrals" includes {
     require 1 in 4 email fields; // Plural "fields" for multiple response
   }
 }
