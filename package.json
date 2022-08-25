@@ -4,12 +4,8 @@
   "description": "Form markup language",
   "main": "index.js",
   "scripts": {
-    "syntax": "./node_modules/.bin/syntax-cli",
     "test": "node __test__/formkl.test.js",
-    "test:json": "node __test__/json.test.js",
-    "build": "bash ./scripts/build.sh",
-    "build:json": "bash ./scripts/build-json.sh",
-    "build:nearly": "bash ./scripts/build-nearly.sh"
+    "build": "bash ./scripts/build.sh"
   },
   "repository": {
     "type": "git",
@@ -30,7 +26,6 @@
   },
   "homepage": "https://github.com/formkl/core#readme",
   "dependencies": {
-    "nearley": "^2.20.1",
-    "syntax-cli": "^0.1.26"
+    "nearley": "^2.20.1"
   }
 }

@@ -1,0 +1,136 @@
+{
+  "authentication": {
+    "required": true,
+    "allows": []
+  },
+  "layout": "STEP_BY_STEP",
+  "maxResponses": 1,
+  "sections": [
+    {
+      "key": "personal-information",
+      "title": "Personal Information",
+      "fields": [
+        {
+          "key": "personal-information-us-phone",
+          "label": "US Phone number",
+          "type": "TEXT",
+          "validation": {
+            "type": "PHONE_US"
+          },
+          "required": true
+        },
+        {
+          "key": "personal-information-email",
+          "label": "Email",
+          "type": "TEXT",
+          "validation": {
+            "type": "EMAIL"
+          },
+          "required": true
+        },
+        {
+          "key": "personal-information-secondary-email",
+          "label": "Secondary email",
+          "type": "TEXT",
+          "validation": {
+            "type": "EMAIL"
+          },
+          "required": true
+        },
+        {
+          "key": "personal-information-gender",
+          "label": "Gender",
+          "type": "RADIO",
+          "required": true,
+          "options": ["Male", "Female", "Other"]
+        },
+        {
+          "key": "personal-information-bio",
+          "label": "Bio",
+          "type": "PARAGRAPH",
+          "validation": {
+            "minLength": 100,
+            "maxLength": 300
+          },
+          "required": true
+        },
+        {
+          "key": "personal-information-grade",
+          "label": "Grade",
+          "type": "NUMBER",
+          "validation": {
+            "min": 1,
+            "max": 12
+          },
+          "required": false
+        },
+        {
+          "key": "personal-information-age",
+          "label": "Age",
+          "type": "NUMBER",
+          "validation": {
+            "min": 1,
+            "max": 200
+          },
+          "required": true
+        },
+        {
+          "key": "personal-information-zip-code",
+          "label": "Zip Code",
+          "type": "NUMBER",
+          "validation": {
+            "digits": 6
+          },
+          "required": true
+        },
+        {
+          "key": "personal-information-ssn",
+          "label": "SSN",
+          "type": "NUMBER",
+          "validation": {
+            "digits": 6
+          },
+          "required": true
+        },
+        {
+          "key": "personal-information-custom-regex",
+          "label": "Custom regex",
+          "type": "PARAGRAPH",
+          "validation": {
+            "regex": "^[a-zA-Z]$",
+            "minLength": 0,
+            "maxLength": 512
+          },
+          "required": false
+        },
+        {
+          "key": "personal-information-note",
+          "label": "Note",
+          "type": "PARAGRAPH",
+          "validation": {
+            "minLength": 0,
+            "maxLength": 512
+          },
+          "required": false
+        }
+      ]
+    },
+    {
+      "key": "referrals",
+      "title": "Referrals",
+      "fields": [
+        {
+          "key": "referrals-email",
+          "label": "Email",
+          "type": "TEXT",
+          "multiple": true,
+          "validation": {
+            "type": "EMAIL",
+            "maxResponses": 4,
+            "minResponses": 1
+          }
+        }
+      ]
+    }
+  ]
+}
