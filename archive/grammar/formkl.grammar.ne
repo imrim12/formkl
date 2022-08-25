@@ -2,17 +2,17 @@
 	const moo = require("moo");
 
 	const lexer = moo.compile({
-		WHITESPACE: /[ \t]+/,
-		LITERALSTRING: /"(?:\\["bfnrt\/\\]|\\u[a-fA-F0-9]{4}|[^"\\])*"/,
-		LITERALNUMBER: /-?(?:[0-9]|[1-9][0-9]+)(?:\.[0-9]+)?(?:[eE][-+]?[0-9]+)?\b/,
-		SUPPORTCONSTRAINT: /(?:require)/,
-		FIELDVALIDATEDPHONE: {
+		Whitespace: /[ \t]+/,
+		LitteralString: /"(?:\\["bfnrt\/\\]|\\u[a-fA-F0-9]{4}|[^"\\])*"/,
+		LitteralNumber: /-?(?:[0-9]|[1-9][0-9]+)(?:\.[0-9]+)?(?:[eE][-+]?[0-9]+)?\b/,
+		SupportConstraint: /(?:require)/,
+		FieldValidatedPhone: {
 			match: /(?:US|VN)\sphone/
 		},
-		FIELDVALIDATED: {
+		FieldValidated: {
 			match: /(?:email|zip|age)/,
 		},
-		FIELDDEFAULT: {
+		FieldDefault: {
 			match: /(?:text|paragraph|number|checkbox|radio|dropdown)/,
 		},
 	});
@@ -26,23 +26,23 @@ Field -> FieldDefault
 		| SupportConstraint _ FieldDefault
 		| SupportConstraint _ FieldValidated
 
-FieldDefault -> %FIELDDEFAULT
-				| FieldCustom %FIELDDEFAULT
+FieldDefault -> %FieldDefault
+				| FieldCustom %FieldDefault
 
-FieldValidated -> %FIELDVALIDATED
-				| %FIELDVALIDATEDPHONE
-				| FieldCustom %FIELDVALIDATED
-				| FieldCustom %FIELDVALIDATEDPHONE
+FieldValidated -> %FieldValidated
+				| %FieldValidatedPhone
+				| FieldCustom %FieldValidated
+				| FieldCustom %FieldValidatedPhone
 
 FieldCustom -> null | CustomLabel _
 
-SupportConstraint -> %SUPPORTCONSTRAINT
+SupportConstraint -> %SupportConstraint
 
 CustomLabel -> STRING
 
-__ -> %WHITESPACE:+
-_ -> %WHITESPACE:*
+__ -> %Whitespace:+
+_ -> %Whitespace:*
 
-STRING -> %LITERALSTRING
+STRING -> %LitteralString
 
-NUMBER -> %LITERALNUMBER
+NUMBER -> %LitteralNumber

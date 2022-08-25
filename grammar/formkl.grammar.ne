@@ -10,23 +10,22 @@ Field -> FieldDefault
 		| SupportConstraint _ FieldDefault
 		| SupportConstraint _ FieldValidated
 
-FieldDefault -> %FIELDDEFAULT
-				| FieldCustom %FIELDDEFAULT
+FieldDefault -> %TkFieldDefault
+				| FieldCustom %TkFieldDefault
 
-FieldValidated -> %FIELDVALIDATED
-				| %FIELDVALIDATEDPHONE
-				| FieldCustom %FIELDVALIDATED
-				| FieldCustom %FIELDVALIDATEDPHONE
+FieldValidated -> %TkFieldValidated
+				| %TkFieldValidatedPhone
+				| FieldCustom %TkFieldValidated
+				| FieldCustom %TkFieldValidatedPhone
 
-FieldCustom -> null | CustomLabel _
+FieldCustom -> CustomLabel _
 
-SupportConstraint -> %SUPPORTCONSTRAINT
+SupportConstraint -> %TkSupportConstraint
 
 CustomLabel -> STRING
 
-__ -> %WHITESPACE:+
-_ -> %WHITESPACE:*
+_ -> %TkWhitespace
 
-STRING -> %LITERALSTRING
+STRING -> %TkLitteralString
 
-NUMBER -> %LITERALNUMBER
+NUMBER -> %TkLitteralNumber

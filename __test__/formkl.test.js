@@ -1,7 +1,25 @@
 // Create a Parser object from our grammar.
 const parser = require("../dist");
 
-// Parse something!
-const parsed = parser.feed("email");
+const testCases = [
+  "email",
+  "require emailx",
+  "require email",
+  "require require email",
+  "US phone",
+  "require US phone",
+  `require "Email" email`,
+  "text",
+  "require text",
+];
 
-console.log(JSON.stringify(parsed.results));
+testCases.forEach((testCase) => {
+  try {
+    console.log("Testing: ", testCase);
+    const parsed = parser.feed(testCase);
+
+    console.log("Result: ", JSON.stringify(parsed.results));
+  } catch (e) {
+    console.error(e);
+  }
+});
