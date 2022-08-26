@@ -1,11 +1,6 @@
 mkdir -p dist
-yarn nearleyc ./grammar/formkl.grammar.ne -o ./dist/formkl.grammar.js
-cp ./grammar/formkl.tokenizer.js ./dist/formkl.tokenizer.js
+yarn nearleyc ./grammar.ne -o ./grammar.js
 
-echo "
-const nearley = require('nearley');
-const grammar = require('./formkl.grammar.js');
-const parser = new nearley.Parser(nearley.Grammar.fromCompiled(grammar));
-
-module.exports = parser;
-" > ./dist/index.js
+cp ./tokenizer.js ./dist/tokenizer.js
+cp ./grammar.js ./dist/grammar.js
+cp ./parser.js ./dist/parser.js

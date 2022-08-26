@@ -5,10 +5,10 @@
 # Pass your lexer with @lexer:
 @lexer lexer
 
-Field -> FieldDefault
-		| FieldValidated
-		| SupportConstraint _ FieldDefault
-		| SupportConstraint _ FieldValidated
+Field -> FieldDefault EndOfLine
+		| FieldValidated EndOfLine
+		| SupportConstraint _ FieldDefault EndOfLine
+		| SupportConstraint _ FieldValidated EndOfLine
 
 FieldDefault -> %TkFieldDefault
 				| FieldCustom %TkFieldDefault
@@ -23,6 +23,10 @@ FieldCustom -> CustomLabel _
 SupportConstraint -> %TkSupportConstraint
 
 CustomLabel -> STRING
+
+EndOfLine -> %TkEndOfLine
+
+__ -> %TkWhitespace:*
 
 _ -> %TkWhitespace
 

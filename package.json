@@ -4,7 +4,7 @@
   "description": "Form markup language",
   "main": "index.js",
   "scripts": {
-    "test": "node __test__/formkl.test.js",
+    "test": "node __test__/generate.js && jest",
     "build": "bash ./scripts/build.sh"
   },
   "repository": {
@@ -27,5 +27,12 @@
   "homepage": "https://github.com/formkl/core#readme",
   "dependencies": {
     "nearley": "^2.20.1"
+  },
+  "devDependencies": {
+    "jest": "^29.0.0"
+  },
+  "jest": {
+    "testPathIgnorePatterns": [],
+    "testRegex": ".*\\.test\\.js$"
   }
 }

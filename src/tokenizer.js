@@ -4,6 +4,20 @@ const DEFAULT_FIELDS = ["text", "paragraph", "number", "checkbox", "radio", "dro
 
 const VALIDATED_FIELDS = ["email", "zip", "age"];
 
+const DATETIME_FIELDS = [
+  "date",
+  "future date",
+  "past date",
+  "birthday",
+  "time",
+  "datetime",
+  "date range",
+  "datetime range",
+  "time range",
+];
+
+const VALIDATED_BY_NUMBER_FIELDS = ["digits", "words max", "words min"];
+
 const SUPPORT_COUNTRIES = ["US", "VN"];
 
 const SUPPORT_CONSTRAINTS = ["require"];
@@ -11,6 +25,10 @@ const SUPPORT_CONSTRAINTS = ["require"];
 module.exports = moo.compile({
   TkWhitespace: {
     match: /[\s\t]+/,
+    lineBreaks: true,
+  },
+  TkEndOfLine: {
+    match: /;/,
     lineBreaks: true,
   },
   TkLitteralString: {
@@ -26,9 +44,12 @@ module.exports = moo.compile({
     match: new RegExp(`(?:${SUPPORT_COUNTRIES.join("|")})\\sphone`),
   },
   TkFieldValidated: {
-    match: new RegExp(`(?:${VALIDATED_FIELDS.join("|")})`),
+    match: new RegExp(`(?:${VALIDATED_FIELDS.concat(...DATETIME_FIELDS).join("|")})`),
   },
   TkFieldDefault: {
     match: new RegExp(`(?:${DEFAULT_FIELDS.join("|")})`),
+  },
+  TkFieldValidatedByNumber: {
+    match: new RegExp(`(?:[\d]+\s${VALIDATED_BY_NUMBER_FIELDS.join("|")})`),
   },
 });
