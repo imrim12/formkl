@@ -1,5 +1,7 @@
 let parser = require("../dist");
 
 test("email;", () => {
-  expect(!!parser.parse("email;").length).toBe(true);
+  const result = parser.parse("email;");
+  console.log(result);
+  expect(!!result.length).toBe(true);
 });

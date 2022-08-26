@@ -27,6 +27,10 @@ module.exports = moo.compile({
     match: /[\s\t]+/,
     lineBreaks: true,
   },
+  TkLineBreak: {
+    match: /[\n]+/,
+    lineBreaks: true,
+  },
   TkSemi: {
     match: /;/,
   },

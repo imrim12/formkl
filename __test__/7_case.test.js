@@ -1,5 +1,7 @@
 let parser = require("../dist");
 
 test("require time;", () => {
-  expect(!!parser.parse("require time;").length).toBe(true);
+  const result = parser.parse("require time;");
+  console.log(result);
+  expect(!!result.length).toBe(true);
 });

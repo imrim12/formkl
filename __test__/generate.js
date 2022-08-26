@@ -9,7 +9,9 @@ try {
       `let parser = require("../dist");
 
 test(${JSON.stringify(testCase)}, () => {
-  expect(!!parser.parse(${JSON.stringify(testCase)}).length).toBe(true);
+  const result = parser.parse(${JSON.stringify(testCase)});
+  console.log(result);
+  expect(!!result.length).toBe(true);
 });
 `,
     );

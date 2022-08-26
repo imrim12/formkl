@@ -2,7 +2,7 @@ module.exports = [
   "email;",
   "require email;",
   'require "Fullname" text;',
-  '"Fullname" text;',
+  '"Fullname" text;\nUS phone;',
   "US phone;",
   "require US phone;",
   "require time;",

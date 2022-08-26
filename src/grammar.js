@@ -8,6 +8,10 @@ const { tokenStart, tokenEnd, convertToken, convertTokenId } = require("./utils.
 var grammar = {
     Lexer: lexer,
     ParserRules: [
+    {"name": "Section", "symbols": ["FieldValidatedSet"]},
+    {"name": "FieldValidatedSet", "symbols": ["FieldValidated"]},
+    {"name": "FieldValidatedSet", "symbols": ["FieldValidated", "__", "FieldValidatedSet"]},
+    {"name": "FieldValidatedSet", "symbols": ["FieldValidated", "__", "BR", "FieldValidatedSet"]},
     {"name": "FieldValidated", "symbols": ["FIELD", "EOL"]},
     {"name": "FieldValidated", "symbols": ["Label", "FIELD", "EOL"]},
     {"name": "FieldValidated", "symbols": ["REQUIRE", "__", "FIELD", "EOL"]},
@@ -22,10 +26,11 @@ var grammar = {
     {"name": "FIELD", "symbols": [(lexer.has("TkField") ? {type: "TkField"} : TkField)], "postprocess": convertTokenId},
     {"name": "REQUIRE", "symbols": [(lexer.has("TkRequire") ? {type: "TkRequire"} : TkRequire)], "postprocess": convertTokenId},
     {"name": "EOL", "symbols": [(lexer.has("TkSemi") ? {type: "TkSemi"} : TkSemi)], "postprocess": convertTokenId},
+    {"name": "BR", "symbols": [(lexer.has("TkLineBreak") ? {type: "TkLineBreak"} : TkLineBreak)], "postprocess": convertTokenId},
     {"name": "STRING", "symbols": [(lexer.has("TkLitteralString") ? {type: "TkLitteralString"} : TkLitteralString)], "postprocess": convertTokenId},
     {"name": "NUMBER", "symbols": [(lexer.has("TkLitteralNumber") ? {type: "TkLitteralNumber"} : TkLitteralNumber)], "postprocess": convertTokenId}
 ]
-  , ParserStart: "FieldValidated"
+  , ParserStart: "Section"
 }
 if (typeof module !== 'undefined'&& typeof module.exports !== 'undefined') {
    module.exports = grammar;
