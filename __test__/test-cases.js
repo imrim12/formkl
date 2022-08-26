@@ -7,4 +7,6 @@ module.exports = [
   "require US phone;",
   "require time;",
   'require "Date of birth" birthday;',
+  // "require 6 digits;",
+  // "512 words max;",
 ];

@@ -1,35 +1,29 @@
 @{%
-	const lexer = require("./formkl.tokenizer.js");
+const lexer = require("./tokenizer.js");
+const { tokenStart, tokenEnd, convertToken, convertTokenId } = require("./utils.js");
 %}
 
 # Pass your lexer with @lexer:
 @lexer lexer
 
-Field -> FieldDefault EndOfLine
-		| FieldValidated EndOfLine
-		| SupportConstraint _ FieldDefault EndOfLine
-		| SupportConstraint _ FieldValidated EndOfLine
+FieldValidated -> FIELD EOL
+								| Label FIELD EOL
+								| REQUIRE __ FIELD EOL
+								| REQUIRE __ Label FIELD EOL
 
-FieldDefault -> %TkFieldDefault
-				| FieldCustom %TkFieldDefault
 
-FieldValidated -> %TkFieldValidated
-				| %TkFieldValidatedPhone
-				| FieldCustom %TkFieldValidated
-				| FieldCustom %TkFieldValidatedPhone
+Label -> STRING __
 
-FieldCustom -> CustomLabel _
+__ -> %TkWhitespace:+
 
-SupportConstraint -> %TkSupportConstraint
+_ -> %TkWhitespace:*
 
-CustomLabel -> STRING
+FIELD -> %TkField {% convertTokenId %}
 
-EndOfLine -> %TkEndOfLine
+REQUIRE -> %TkRequire {% convertTokenId %}
 
-__ -> %TkWhitespace:*
+EOL -> %TkSemi  {% convertTokenId %}
 
-_ -> %TkWhitespace
+STRING -> %TkLitteralString {% convertTokenId %}
 
-STRING -> %TkLitteralString
-
-NUMBER -> %TkLitteralNumber
+NUMBER -> %TkLitteralNumber {% convertTokenId %}

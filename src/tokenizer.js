@@ -16,40 +16,33 @@ const DATETIME_FIELDS = [
   "time range",
 ];
 
-const VALIDATED_BY_NUMBER_FIELDS = ["digits", "words max", "words min"];
-
 const SUPPORT_COUNTRIES = ["US", "VN"];
 
-const SUPPORT_CONSTRAINTS = ["require"];
-
 module.exports = moo.compile({
+  TkComment: {
+    match: /#[^\n]*/,
+    value: (s) => s.substring(1),
+  },
   TkWhitespace: {
     match: /[\s\t]+/,
     lineBreaks: true,
   },
-  TkEndOfLine: {
+  TkSemi: {
     match: /;/,
-    lineBreaks: true,
   },
   TkLitteralString: {
-    match: /"(?:\\["bfnrt\/\\]|\\u[a-fA-F0-9]{4}|[^"\\])*"/,
+    match: /"(?:[^\n\\"]|\\["\\ntbfr])*"/,
+    value: (s) => JSON.parse(s),
   },
   TkLitteralNumber: {
-    match: /-?(?:[0-9]|[1-9][0-9]+)(?:\.[0-9]+)?(?:[eE][-+]?[0-9]+)?\b/,
+    match: /[0-9]+(?:\.[0-9]+)?/,
+    value: (s) => Number(s),
   },
-  TkSupportConstraint: {
-    match: new RegExp(`(?:${SUPPORT_CONSTRAINTS.join("|")})`),
-  },
-  TkFieldValidatedPhone: {
-    match: new RegExp(`(?:${SUPPORT_COUNTRIES.join("|")})\\sphone`),
-  },
-  TkFieldValidated: {
-    match: new RegExp(`(?:${VALIDATED_FIELDS.concat(...DATETIME_FIELDS).join("|")})`),
-  },
-  TkFieldDefault: {
-    match: new RegExp(`(?:${DEFAULT_FIELDS.join("|")})`),
-  },
-  TkFieldValidatedByNumber: {
-    match: new RegExp(`(?:[\d]+\s${VALIDATED_BY_NUMBER_FIELDS.join("|")})`),
-  },
+  TkRequire: "require",
+  TkField: [
+    ...DEFAULT_FIELDS,
+    ...VALIDATED_FIELDS,
+    ...DATETIME_FIELDS,
+    ...SUPPORT_COUNTRIES.map((c) => c + " phone"),
+  ],
 });
