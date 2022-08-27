@@ -19,6 +19,8 @@ const DATETIME_FIELDS = [
 const SUPPORT_COUNTRIES = ["US", "VN"];
 
 module.exports = moo.compile({
+  TkDeclareForm: ["formkl", "Formkl"],
+  TkDeclareSection: ["includes"],
   TkComment: {
     match: /#[^\n]*/,
     value: (s) => s.substring(1),

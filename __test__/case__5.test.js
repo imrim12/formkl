@@ -1,8 +1,8 @@
 const fs = require("fs");
 const parser = require("../dist");
 
-test("{\n     \"Fullname\" text;\n\n     US phone;\n\n  }", () => {
-  const result = parser.parse("{\n     \"Fullname\" text;\n\n     US phone;\n\n  }");
+test("formkl {\n    \"Personal Information\" includes{\n  \"Fullname\" text;\n  US phone;\n  }\n}", () => {
+  const result = parser.parse("formkl {\n    \"Personal Information\" includes{\n  \"Fullname\" text;\n  US phone;\n  }\n}");
   fs.writeFileSync(
     "./__test__/result/case__5.result.json",
     JSON.stringify(result, null, 2)

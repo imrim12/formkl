@@ -6,10 +6,17 @@ const { tokenStart, tokenEnd, convertToken, convertTokenId } = require("./utils.
 # Pass your lexer with @lexer:
 @lexer lexer
 
-Section -> "{" FieldValidatedSet "}"
-				| "{" EMPTY FieldValidatedSet "}"
-				| "{" EMPTY FieldValidatedSet EMPTY "}"
-				| "{" FieldValidatedSet EMPTY "}"
+Formkl -> DECLARE_FORM __ Form
+
+Form -> "{" EMPTY SectionSet EMPTY "}"
+
+SectionSet -> null
+					| Section
+					| Section EMPTY SectionSet
+					| Section EMPTY BR SectionSet
+					| Section EMPTY BR __ SectionSet
+
+Section -> Label EMPTY DECLARE_SECTION EMPTY "{" EMPTY FieldValidatedSet EMPTY "}"
 
 FieldValidatedSet -> null
 								| FieldValidated
@@ -18,14 +25,18 @@ FieldValidatedSet -> null
 								| FieldValidated __ BR __ FieldValidatedSet
 
 FieldValidated -> FIELD ";"
-								| Label FIELD ";"
+								| Label __ FIELD ";"
 								| "require" __ FIELD ";"
-								| "require" __ Label FIELD ";"
+								| "require" __ Label __ FIELD ";"
 
+Label -> STRING
 
-Label -> STRING __
+DECLARE_FORM -> %TkDeclareForm {% convertTokenId %}
 
-EMPTY -> __
+DECLARE_SECTION -> %TkDeclareSection {% convertTokenId %}
+
+EMPTY -> null
+			| __
 			| __ BR
 			| BR __
 			| __ BR __

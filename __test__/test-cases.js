@@ -1,21 +1,42 @@
 module.exports = [
-  "{email;}",
-  "{require email;}",
-  '{require "Fullname" text;}',
-  `{
+  // Most happy case
+  `Formkl {
+    "Personal Information"includes {
+     "Fullname" text;
+     VN phone;
+    }
+    "Other Information"includes {
+      require zip;
+      "Bio" paragraph;
+    }
+  }`,
+  'formkl { "Personal Information" includes {email;}}',
+  'formkl {"Personal Information"  includes   {require email;}}',
+  'formkl { "Personal Information"    includes {require "Fullname" text;}}',
+  `formkl {
+    "Personal Information" includes{
   "Fullname" text;
   US phone;
-  }`,
-  `{
+  }
+}`,
+  `formkl {
+    "Personal Information"includes {
      "Fullname" text;
+
 
      US phone;
 
+    }
+    "Other Information"includes {
+      require zip;
+      
+      
+      "Some field" text;
+
+    }
   }`,
-  "{   US phone;}",
-  "{require US phone;   }",
-  "{require time;}",
-  '{require "Date of birth" birthday;}',
-  // "require 6 digits;",
-  // "512 words max;",
+  'formkl {"Personal Information" includes {   US phone;}}',
+  'Formkl {   "Personal Information" includes  {require US phone;   }}',
+  'formkl {"Personal Information" includes  {require time;}}',
+  'formkl {"Personal Information" includes {require "Date of birth" birthday;}}',
 ];

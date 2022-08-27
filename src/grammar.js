@@ -8,20 +8,27 @@ const { tokenStart, tokenEnd, convertToken, convertTokenId } = require("./utils.
 var grammar = {
     Lexer: lexer,
     ParserRules: [
-    {"name": "Section", "symbols": [{"literal":"{"}, "FieldValidatedSet", {"literal":"}"}]},
-    {"name": "Section", "symbols": [{"literal":"{"}, "EMPTY", "FieldValidatedSet", {"literal":"}"}]},
-    {"name": "Section", "symbols": [{"literal":"{"}, "EMPTY", "FieldValidatedSet", "EMPTY", {"literal":"}"}]},
-    {"name": "Section", "symbols": [{"literal":"{"}, "FieldValidatedSet", "EMPTY", {"literal":"}"}]},
+    {"name": "Formkl", "symbols": ["DECLARE_FORM", "__", "Form"]},
+    {"name": "Form", "symbols": [{"literal":"{"}, "EMPTY", "SectionSet", "EMPTY", {"literal":"}"}]},
+    {"name": "SectionSet", "symbols": []},
+    {"name": "SectionSet", "symbols": ["Section"]},
+    {"name": "SectionSet", "symbols": ["Section", "EMPTY", "SectionSet"]},
+    {"name": "SectionSet", "symbols": ["Section", "EMPTY", "BR", "SectionSet"]},
+    {"name": "SectionSet", "symbols": ["Section", "EMPTY", "BR", "__", "SectionSet"]},
+    {"name": "Section", "symbols": ["Label", "EMPTY", "DECLARE_SECTION", "EMPTY", {"literal":"{"}, "EMPTY", "FieldValidatedSet", "EMPTY", {"literal":"}"}]},
     {"name": "FieldValidatedSet", "symbols": []},
     {"name": "FieldValidatedSet", "symbols": ["FieldValidated"]},
     {"name": "FieldValidatedSet", "symbols": ["FieldValidated", "__", "FieldValidatedSet"]},
     {"name": "FieldValidatedSet", "symbols": ["FieldValidated", "__", "BR", "FieldValidatedSet"]},
     {"name": "FieldValidatedSet", "symbols": ["FieldValidated", "__", "BR", "__", "FieldValidatedSet"]},
     {"name": "FieldValidated", "symbols": ["FIELD", {"literal":";"}]},
-    {"name": "FieldValidated", "symbols": ["Label", "FIELD", {"literal":";"}]},
+    {"name": "FieldValidated", "symbols": ["Label", "__", "FIELD", {"literal":";"}]},
     {"name": "FieldValidated", "symbols": [{"literal":"require"}, "__", "FIELD", {"literal":";"}]},
-    {"name": "FieldValidated", "symbols": [{"literal":"require"}, "__", "Label", "FIELD", {"literal":";"}]},
-    {"name": "Label", "symbols": ["STRING", "__"]},
+    {"name": "FieldValidated", "symbols": [{"literal":"require"}, "__", "Label", "__", "FIELD", {"literal":";"}]},
+    {"name": "Label", "symbols": ["STRING"]},
+    {"name": "DECLARE_FORM", "symbols": [(lexer.has("TkDeclareForm") ? {type: "TkDeclareForm"} : TkDeclareForm)], "postprocess": convertTokenId},
+    {"name": "DECLARE_SECTION", "symbols": [(lexer.has("TkDeclareSection") ? {type: "TkDeclareSection"} : TkDeclareSection)], "postprocess": convertTokenId},
+    {"name": "EMPTY", "symbols": []},
     {"name": "EMPTY", "symbols": ["__"]},
     {"name": "EMPTY", "symbols": ["__", "BR"]},
     {"name": "EMPTY", "symbols": ["BR", "__"]},
@@ -39,7 +46,7 @@ var grammar = {
     {"name": "STRING", "symbols": [(lexer.has("TkLitteralString") ? {type: "TkLitteralString"} : TkLitteralString)], "postprocess": convertTokenId},
     {"name": "NUMBER", "symbols": [(lexer.has("TkLitteralNumber") ? {type: "TkLitteralNumber"} : TkLitteralNumber)], "postprocess": convertTokenId}
 ]
-  , ParserStart: "Section"
+  , ParserStart: "Formkl"
 }
 if (typeof module !== 'undefined'&& typeof module.exports !== 'undefined') {
    module.exports = grammar;
