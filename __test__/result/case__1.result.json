@@ -1,0 +1,47 @@
+[
+  [
+    {
+      "type": "TkBlockOpen",
+      "value": "{",
+      "text": "{",
+      "offset": 0,
+      "lineBreaks": 0,
+      "line": 1,
+      "col": 1
+    },
+    [
+      [
+        {
+          "type": "TkField",
+          "value": "email",
+          "start": {
+            "line": 1,
+            "col": 1
+          },
+          "end": {
+            "line": 1,
+            "col": 6
+          }
+        },
+        {
+          "type": "TkSemi",
+          "value": ";",
+          "text": ";",
+          "offset": 6,
+          "lineBreaks": 0,
+          "line": 1,
+          "col": 7
+        }
+      ]
+    ],
+    {
+      "type": "TkBlockClose",
+      "value": "}",
+      "text": "}",
+      "offset": 7,
+      "lineBreaks": 0,
+      "line": 1,
+      "col": 8
+    }
+  ]
+]

@@ -1,5 +1,5 @@
 mkdir -p dist
-yarn nearleyc ./src/grammar.ne -o ./src/grammar.js
+yarn nearleyc ./src/grammar.bnf -o ./src/grammar.js
 
 cp ./src/parser.js ./dist/index.js
 

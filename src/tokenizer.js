@@ -28,12 +28,12 @@ module.exports = moo.compile({
     lineBreaks: true,
   },
   TkLineBreak: {
-    match: /[\n]+/,
+    match: /\n/,
     lineBreaks: true,
   },
-  TkSemi: {
-    match: /;/,
-  },
+  TkSemi: ";",
+  TkBlockOpen: "{",
+  TkBlockClose: "}",
   TkLitteralString: {
     match: /"(?:[^\n\\"]|\\["\\ntbfr])*"/,
     value: (s) => JSON.parse(s),

@@ -30,7 +30,8 @@
   },
   "devDependencies": {
     "jest": "^29.0.0",
-    "nodemon": "^2.0.19"
+    "nodemon": "^2.0.19",
+    "rimraf": "^3.0.2"
   },
   "jest": {
     "testPathIgnorePatterns": [],

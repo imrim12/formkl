@@ -6,19 +6,29 @@ const { tokenStart, tokenEnd, convertToken, convertTokenId } = require("./utils.
 # Pass your lexer with @lexer:
 @lexer lexer
 
-Section -> FieldValidatedSet
+Section -> "{" FieldValidatedSet "}"
+				| "{" EMPTY FieldValidatedSet "}"
+				| "{" EMPTY FieldValidatedSet EMPTY "}"
+				| "{" FieldValidatedSet EMPTY "}"
 
-FieldValidatedSet -> FieldValidated
+FieldValidatedSet -> null
+								| FieldValidated
 								| FieldValidated __ FieldValidatedSet
 								| FieldValidated __ BR FieldValidatedSet
+								| FieldValidated __ BR __ FieldValidatedSet
 
-FieldValidated -> FIELD EOL
-								| Label FIELD EOL
-								| REQUIRE __ FIELD EOL
-								| REQUIRE __ Label FIELD EOL
+FieldValidated -> FIELD ";"
+								| Label FIELD ";"
+								| "require" __ FIELD ";"
+								| "require" __ Label FIELD ";"
 
 
 Label -> STRING __
+
+EMPTY -> __
+			| __ BR
+			| BR __
+			| __ BR __
 
 __ -> %TkWhitespace:+
 
@@ -26,11 +36,7 @@ _ -> %TkWhitespace:*
 
 FIELD -> %TkField {% convertTokenId %}
 
-REQUIRE -> %TkRequire {% convertTokenId %}
-
-EOL -> %TkSemi  {% convertTokenId %}
-
-BR -> %TkLineBreak  {% convertTokenId %}
+BR -> %TkLineBreak:+  {% convertTokenId %}
 
 STRING -> %TkLitteralString {% convertTokenId %}
 
