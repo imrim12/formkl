@@ -2,9 +2,9 @@
   "name": "formkl",
   "version": "0.0.1",
   "description": "Form markup language",
-  "main": "dist/index.js",
+  "main": ".dist/index.js",
   "scripts": {
-    "test": "node __test__/generate.js && jest",
+    "test": "node __test__/index.js && jest",
     "build": "bash ./scripts/build.sh && yarn test"
   },
   "repository": {

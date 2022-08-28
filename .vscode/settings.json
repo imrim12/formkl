@@ -1,7 +1,10 @@
 {
   "material-icon-theme.files.associations": {
-    "_grammar.bnf": "i18n",
+    "grammar.bnf": "i18n",
     "_grammar.js": "i18n"
   },
-  "material-icon-theme.folders.associations": {}
+  "material-icon-theme.folders.associations": {
+    ".dist": "dist",
+    ".logs": "log"
+  }
 }

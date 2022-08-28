@@ -1,5 +1,5 @@
 const nearley = require("nearley");
-const grammar = require("./_grammar.js");
+const grammar = require("./grammar.js");
 const parser = new nearley.Parser(nearley.Grammar.fromCompiled(grammar));
 
 parser.parse = function (str = "") {
