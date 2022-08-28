@@ -1,0 +1,12 @@
+/.dist
+/.logs
+/.vscode
+
+/example
+/scripts
+/src
+/templates
+
+/__test__
+
+/node_modules
