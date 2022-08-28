@@ -1,0 +1,54 @@
+@{%
+const lexer = require("./tokenizer.js");
+const { tokenStart, tokenEnd, convertToken, convertTokenId } = require("./utils.js");
+%}
+
+# Pass your lexer with @lexer:
+@lexer lexer
+
+Formkl -> DECLARE_FORM __ Form
+
+Form -> "{" EMPTY SectionSet EMPTY "}"
+
+SectionSet -> null
+					| Section
+					| Section EMPTY SectionSet
+					| Section EMPTY BR SectionSet
+					| Section EMPTY BR __ SectionSet
+
+Section -> Label EMPTY DECLARE_SECTION EMPTY "{" EMPTY FieldValidatedSet EMPTY "}"
+
+FieldValidatedSet -> null
+								| FieldValidated
+								| FieldValidated __ FieldValidatedSet
+								| FieldValidated __ BR FieldValidatedSet
+								| FieldValidated __ BR __ FieldValidatedSet
+
+FieldValidated -> FIELD ";"
+								| Label __ FIELD ";"
+								| "require" __ FIELD ";"
+								| "require" __ Label __ FIELD ";"
+
+Label -> STRING
+
+DECLARE_FORM -> %TkDeclareForm {% convertTokenId %}
+
+DECLARE_SECTION -> %TkDeclareSection {% convertTokenId %}
+
+EMPTY -> null
+			| __
+			| __ BR
+			| BR __
+			| __ BR __
+
+__ -> %TkWhitespace:+
+
+_ -> %TkWhitespace:*
+
+FIELD -> %TkField {% convertTokenId %}
+
+BR -> %TkLineBreak:+  {% convertTokenId %}
+
+STRING -> %TkLitteralString {% convertTokenId %}
+
+NUMBER -> %TkLitteralNumber {% convertTokenId %}
