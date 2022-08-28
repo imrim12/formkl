@@ -2,7 +2,7 @@
   "name": "formkl",
   "version": "0.0.1",
   "description": "Form markup language",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "test": "node __test__/generate.js && jest",
     "build": "bash ./scripts/build.sh && yarn test"
@@ -30,7 +30,6 @@
   },
   "devDependencies": {
     "jest": "^29.0.0",
-    "nodemon": "^2.0.19",
     "rimraf": "^3.0.2"
   },
   "jest": {
