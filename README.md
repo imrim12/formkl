@@ -2,9 +2,7 @@
 
 Formkl (Form markup language) is an open-source DSL (Domain-Specific Language) to define and create form schema. It is designed to be simple, consistent and highly readable as natural language.
 
-## Syntax
-
-### Basic example
+## Basic example
 
 Basic signin form with email, password and checkbox fields
 
@@ -142,3 +140,52 @@ Now create any form with ease.
 ```
 
 ### React guide
+
+This can be re-used across your application.
+
+`Formkl.jsx`
+
+```jsx
+import { parser } from "formkl";
+import FormklAdapter from "@formkl/react";
+
+export default ({ formkl }) => {
+  const { FormklVNode } = FormklAdapter.create({
+    form: parser.parse(formkl),
+    options: {},
+  });
+
+  return <FormklVNode />;
+};
+```
+
+`YourPage.jsx`
+
+Now create any form with ease.
+
+```jsx
+export default () => {
+  const formKl = `
+    formkl {
+      "Signin Form" includes {
+        require email;
+        require password;
+        "Remember me" checkbox;
+      }
+    }
+  `;
+
+  const handleFormSubmit = async (payload) => {
+    try {
+      const response = await axios.post("/api/your-api", payload);
+      console.log("Form submitted", response);
+    } catch (error) {
+      console.log("Form submit error", error);
+    }
+  };
+
+  return <Formkl formkl={formKl} onSubmit={handleFormSubmit} />;
+};
+```
+
+## Syntax
