@@ -20,6 +20,13 @@ module.exports = [
   }
 }`,
   `formkl {
+    "Personal Information" includes{
+      "Fullname" text;
+      require "Bio" paragraph valid(> 100 and < 300);
+      "Custom regex" text regex("^[a-zA-Z]$");
+    }
+  }`,
+  `formkl {
     "Personal Information"includes {
      "Fullname" text;
 

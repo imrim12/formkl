@@ -24,12 +24,28 @@ FieldValidatedSet -> null
 								| FieldValidated __ BR FieldValidatedSet
 								| FieldValidated __ BR __ FieldValidatedSet
 
-FieldValidated -> FIELD ";"
-								| Label __ FIELD ";"
-								| "require" __ FIELD ";"
-								| "require" __ Label __ FIELD ";"
+FieldValidated -> Field ";"
+								| Field EMPTY "valid" "(" ExpressionConditionSet ")" EMPTY ";"
+								| Field EMPTY "regex" "(" STRING ")" EMPTY ";"
+
+Field -> FIELD
+			| Label __ FIELD
+			| "require" __ FIELD
+			| "require" __ Label __ FIELD
 
 Label -> STRING
+
+ExpressionConditionSet -> ExpressionCondition
+									| ExpressionCondition __ "and" __ ExpressionConditionSet
+									| ExpressionCondition __ "or" __ ExpressionConditionSet
+
+ExpressionCondition -> ">" _ NUMBER
+										| "<" _ NUMBER
+										| "==" _ NUMBER
+										| ">=" _ NUMBER
+										| "<=" _ NUMBER
+										| "==" _ STRING
+
 
 DECLARE_FORM -> %TkDeclareForm {% convertTokenId %}
 
