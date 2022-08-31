@@ -1,3 +1,3 @@
 module.exports = {
-  tokens: "STRING NUMBER { } [ ] , : TRUE FALSE NULL",
+  tokens: "string number { } [ ] , : true false null",
 };

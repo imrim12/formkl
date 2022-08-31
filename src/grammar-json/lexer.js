@@ -1,3 +1,11 @@
+function ifMatch(token) {
+  return token;
+}
+
+function returnToken(token) {
+  return `return '${token}'`;
+}
+
 module.exports = {
   macros: {
     digit: "[0-9]",
@@ -8,19 +16,19 @@ module.exports = {
   },
   rules: [
     ["\\s+", "/* skip whitespace */"],
-    ["{int}{frac}?{exp}?\\b", "return 'NUMBER';"],
+    ["{int}{frac}?{exp}?\\b", "return 'number';"],
     [
       '"(?:{esc}["bfnrt/{esc}]|{esc}u[a-fA-F0-9]{4}|[^"{esc}])*"',
-      "yytext = yytext.substr(1,yyleng-2); return 'STRING';",
+      "yytext = yytext.substr(1,yyleng-2); return 'string';",
     ],
-    ["\\{", "return '{'"],
-    ["\\}", "return '}'"],
-    ["\\[", "return '['"],
-    ["\\]", "return ']'"],
-    [",", "return ','"],
-    [":", "return ':'"],
-    ["true\\b", "return 'TRUE'"],
-    ["false\\b", "return 'FALSE'"],
-    ["null\\b", "return 'NULL'"],
+    [ifMatch("{"), "return '{';"],
+    ["}", "return '}';"],
+    ["[", "return '[';"],
+    ["]", "return ']';"],
+    [",", "return ',';"],
+    [":", "return ':';"],
+    ["true", "return 'true';"],
+    ["false", "return 'false';"],
+    ["null", "return 'null';"],
   ],
 };

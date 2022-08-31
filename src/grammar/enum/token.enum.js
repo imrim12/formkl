@@ -1,0 +1,21 @@
+module.exports = {
+  Token: Object.freeze({
+    STRING: "string",
+    NUMBER: "number",
+    LPAREN: "(",
+    RPAREN: ")",
+    LBRACE: "{",
+    RBRACE: "}",
+    LBRACK: "[",
+    RBRACK: "]",
+    COMMA: ",",
+    COLON: ":",
+    TRUE: "true",
+    FALSE: "false",
+    NULL: "null",
+    VALID: "valid",
+    REGEX: "regex",
+    REQUIRE: "require",
+    FIELD: "field",
+  }),
+};

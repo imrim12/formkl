@@ -10,16 +10,16 @@ module.exports = {
     ["JSONArray", "$$ = $1;"],
   ],
 
-  JSONNullLiteral: [["NULL", "$$ = null;"]],
+  JSONNullLiteral: [["null", "$$ = null;"]],
 
   JSONBooleanLiteral: [
-    ["TRUE", "$$ = true;"],
-    ["FALSE", "$$ = false;"],
+    ["true", "$$ = true;"],
+    ["false", "$$ = false;"],
   ],
 
-  JSONString: [["STRING", "$$ = yytext;"]],
+  JSONString: [["string", "$$ = yytext;"]],
 
-  JSONNumber: [["NUMBER", "$$ = Number(yytext);"]],
+  JSONNumber: [["number", "$$ = Number(yytext);"]],
 
   JSONObject: [
     ["{ }", "$$ = {};"],

@@ -1,12 +1,12 @@
 const fs = require("fs");
 const path = require("path");
 const lexer = require("./lexer");
-const tokens = require("./tokens");
 const bnf = require("./bnf");
+const { Token } = require("./enum/token.enum");
 
 const ast = {
-  lexer,
-  tokens,
+  lex: lexer,
+  tokens: Object.values(Token).join(" "),
   start: Object.keys(bnf)[0],
   bnf,
 };

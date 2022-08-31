@@ -1,11 +1,11 @@
 {
-  "lexer": {
+  "lex": {
     "macros": {
-      "digit": "[0-9]",
-      "esc": "\\\\",
-      "int": "-?(?:[0-9]|[1-9][0-9]+)",
-      "exp": "(?:[eE][-+]?[0-9]+)",
-      "frac": "(?:\\.[0-9]+)"
+      "DIGIT": "[0-9]",
+      "ESC": "\\\\",
+      "INT": "-?(?:[0-9]|[1-9][0-9]+)",
+      "EXP": "(?:[eE][-+]?[0-9]+)",
+      "FRAC": "(?:\\.[0-9]+)"
     },
     "rules": [
       [
@@ -13,88 +13,158 @@
         "/* skip whitespace */"
       ],
       [
-        "{int}{frac}?{exp}?\\b",
-        "return 'NUMBER';"
+        "\\(",
+        "return '(';"
       ],
       [
-        "\"(?:{esc}[\"bfnrt/{esc}]|{esc}u[a-fA-F0-9]{4}|[^\"{esc}])*\"",
-        "yytext = yytext.substr(1,yyleng-2); return 'STRING';"
+        "\\)",
+        "return ')';"
       ],
       [
         "\\{",
-        "return '{'"
+        "return '{';"
       ],
       [
         "\\}",
-        "return '}'"
+        "return '}';"
       ],
       [
         "\\[",
-        "return '['"
+        "return '[';"
       ],
       [
         "\\]",
-        "return ']'"
+        "return ']';"
       ],
       [
-        ",",
-        "return ','"
+        "\\,",
+        "return ',';"
       ],
       [
-        ":",
-        "return ':'"
+        "\\:",
+        "return ':';"
       ],
       [
-        "true\\b",
-        "return 'TRUE'"
+        "true",
+        "return 'true';"
       ],
       [
-        "false\\b",
-        "return 'FALSE'"
+        "false",
+        "return 'false';"
       ],
       [
-        "null\\b",
-        "return 'NULL'"
+        "null",
+        "return 'null';"
+      ],
+      [
+        "{INT}{FRAC}?{EXP}?\\b",
+        "return 'number';"
+      ],
+      [
+        "\"(?:{ESC}[\"bfnrt/{ESC}]|{ESC}u[a-fA-F0-9]{4}|[^\"{ESC}])*\"",
+        "yytext = yytext.substr(1,yyleng-2);return 'string';"
+      ],
+      [
+        "valid",
+        "return 'valid';"
+      ],
+      [
+        "regex",
+        "return 'regex';"
+      ],
+      [
+        "require",
+        "return 'require';"
+      ],
+      [
+        "text",
+        "return 'field';"
+      ],
+      [
+        "paragraph",
+        "return 'field';"
+      ],
+      [
+        "number",
+        "return 'field';"
+      ],
+      [
+        "checkbox",
+        "return 'field';"
+      ],
+      [
+        "radio",
+        "return 'field';"
+      ],
+      [
+        "dropdown",
+        "return 'field';"
+      ],
+      [
+        "email",
+        "return 'field';"
+      ],
+      [
+        "zip",
+        "return 'field';"
+      ],
+      [
+        "age",
+        "return 'field';"
+      ],
+      [
+        "date",
+        "return 'field';"
+      ],
+      [
+        "future date",
+        "return 'field';"
+      ],
+      [
+        "past date",
+        "return 'field';"
+      ],
+      [
+        "birthday",
+        "return 'field';"
+      ],
+      [
+        "time",
+        "return 'field';"
+      ],
+      [
+        "datetime",
+        "return 'field';"
+      ],
+      [
+        "date range",
+        "return 'field';"
+      ],
+      [
+        "datetime range",
+        "return 'field';"
+      ],
+      [
+        "time range",
+        "return 'field';"
+      ],
+      [
+        "US phone",
+        "return 'field';"
+      ],
+      [
+        "VN phone",
+        "return 'field';"
       ]
     ]
   },
-  "tokens": {
-    "tokens": "STRING NUMBER { } [ ] , : TRUE FALSE NULL"
-  },
+  "tokens": "string number ( ) { } [ ] , : true false null valid regex require field",
   "start": "JSONText",
   "bnf": {
     "JSONText": [
       [
         "JSONValue",
         "return $$ = $1;"
-      ]
-    ],
-    "JSONString": [
-      [
-        "STRING",
-        "$$ = yytext;"
-      ]
-    ],
-    "JSONNumber": [
-      [
-        "NUMBER",
-        "$$ = Number(yytext);"
-      ]
-    ],
-    "JSONNullLiteral": [
-      [
-        "NULL",
-        "$$ = null;"
-      ]
-    ],
-    "JSONBooleanLiteral": [
-      [
-        "TRUE",
-        "$$ = true;"
-      ],
-      [
-        "FALSE",
-        "$$ = false;"
       ]
     ],
     "JSONValue": [
@@ -123,6 +193,34 @@
         "$$ = $1;"
       ]
     ],
+    "JSONNullLiteral": [
+      [
+        "null",
+        "$$ = null;"
+      ]
+    ],
+    "JSONBooleanLiteral": [
+      [
+        "true",
+        "$$ = true;"
+      ],
+      [
+        "false",
+        "$$ = false;"
+      ]
+    ],
+    "JSONString": [
+      [
+        "string",
+        "$$ = yytext;"
+      ]
+    ],
+    "JSONNumber": [
+      [
+        "number",
+        "$$ = Number(yytext);"
+      ]
+    ],
     "JSONObject": [
       [
         "{ }",
@@ -131,22 +229,6 @@
       [
         "{ JSONMemberList }",
         "$$ = $2;"
-      ]
-    ],
-    "JSONMember": [
-      [
-        "JSONString : JSONValue",
-        "$$ = [$1, $3];"
-      ]
-    ],
-    "JSONMemberList": [
-      [
-        "JSONMember",
-        "$$ = {}; $$[$1[0]] = $1[1];"
-      ],
-      [
-        "JSONMemberList , JSONMember",
-        "$$ = $1; $1[$3[0]] = $3[1];"
       ]
     ],
     "JSONArray": [
@@ -167,6 +249,22 @@
       [
         "JSONElementList , JSONValue",
         "$$ = $1; $1.push($3);"
+      ]
+    ],
+    "JSONMemberList": [
+      [
+        "JSONMember",
+        "$$ = {}; $$[$1[0]] = $1[1];"
+      ],
+      [
+        "JSONMemberList , JSONMember",
+        "$$ = $1; $1[$3[0]] = $3[1];"
+      ]
+    ],
+    "JSONMember": [
+      [
+        "JSONString : JSONValue",
+        "$$ = [$1, $3];"
       ]
     ]
   }

@@ -1,3 +1,5 @@
+const { Token } = require("./enum/token.enum");
+
 module.exports = {
   JSONText: [["JSONValue", "return $$ = $1;"]],
 
@@ -10,16 +12,16 @@ module.exports = {
     ["JSONArray", "$$ = $1;"],
   ],
 
-  JSONNullLiteral: [["NULL", "$$ = null;"]],
+  JSONNullLiteral: [[Token.NULL, "$$ = null;"]],
 
   JSONBooleanLiteral: [
-    ["TRUE", "$$ = true;"],
-    ["FALSE", "$$ = false;"],
+    [Token.TRUE, "$$ = true;"],
+    [Token.FALSE, "$$ = false;"],
   ],
 
-  JSONString: [["STRING", "$$ = yytext;"]],
+  JSONString: [[Token.STRING, "$$ = yytext;"]],
 
-  JSONNumber: [["NUMBER", "$$ = Number(yytext);"]],
+  JSONNumber: [[Token.NUMBER, "$$ = Number(yytext);"]],
 
   JSONObject: [
     ["{ }", "$$ = {};"],
