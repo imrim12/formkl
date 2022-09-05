@@ -1,0 +1,31 @@
+{
+  "sections": [
+    {
+      "title": "Personal Information",
+      "fields": [
+        {
+          "type": "text",
+          "label": "Fullname",
+          "require": false
+        },
+        {
+          "validation": {
+            "$and": [
+              {
+                "$gt": 100
+              },
+              {
+                "$lt": 300
+              }
+            ]
+          }
+        },
+        {
+          "validation": {
+            "regex": "^[a-zA-Z]$"
+          }
+        }
+      ]
+    }
+  ]
+}

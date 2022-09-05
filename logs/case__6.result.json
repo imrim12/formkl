@@ -1,0 +1,32 @@
+{
+  "sections": [
+    {
+      "title": "Personal Information",
+      "fields": [
+        {
+          "type": "text",
+          "label": "Fullname",
+          "require": false
+        },
+        {
+          "type": "US phone",
+          "require": false
+        }
+      ]
+    },
+    {
+      "title": "Other Information",
+      "fields": [
+        {
+          "type": "zip",
+          "require": true
+        },
+        {
+          "type": "text",
+          "label": "Some field",
+          "require": false
+        }
+      ]
+    }
+  ]
+}

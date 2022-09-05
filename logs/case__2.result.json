@@ -1,0 +1,13 @@
+{
+  "sections": [
+    {
+      "title": "Personal Information",
+      "fields": [
+        {
+          "type": "email",
+          "require": true
+        }
+      ]
+    }
+  ]
+}

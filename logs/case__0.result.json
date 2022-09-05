@@ -1,0 +1,32 @@
+{
+  "sections": [
+    {
+      "title": "Personal Information",
+      "fields": [
+        {
+          "type": "text",
+          "label": "Fullname",
+          "require": false
+        },
+        {
+          "type": "VN phone",
+          "require": false
+        }
+      ]
+    },
+    {
+      "title": "Other Information",
+      "fields": [
+        {
+          "type": "zip",
+          "require": true
+        },
+        {
+          "type": "paragraph",
+          "label": "Bio",
+          "require": false
+        }
+      ]
+    }
+  ]
+}

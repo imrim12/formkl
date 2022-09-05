@@ -2,11 +2,10 @@
   "name": "formkl",
   "version": "0.0.3",
   "description": "Form markup language",
-  "main": ".dist/index.js",
+  "main": "dist/index.js",
   "scripts": {
     "test": "node __test__/index.js && jest",
     "build": "bash ./scripts/build.sh && yarn test",
-    "build:cli": "bash ./scripts/build-cli.sh",
     "syntax": "./node_modules/.bin/syntax-cli"
   },
   "repository": {
@@ -27,9 +26,7 @@
     "url": "https://github.com/formkl/core/issues"
   },
   "homepage": "https://github.com/formkl/core#readme",
-  "dependencies": {
-    "nearley": "^2.20.1"
-  },
+  "dependencies": {},
   "devDependencies": {
     "jest": "^29.0.0",
     "rimraf": "^3.0.2",
