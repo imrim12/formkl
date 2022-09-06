@@ -1,8 +1,9 @@
 {
   "name": "formkl",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Form markup language",
   "main": "dist/index.min.js",
+  "types": "types/index.d.ts",
   "scripts": {
     "test": "node __test__/index.js && jest",
     "build": "bash ./scripts/build.sh && yarn test",

@@ -13,7 +13,8 @@ try {
       fs.writeFileSync(
         path.resolve(__dirname, `./${index}__.test.js`),
         data
-          .replace(/"<--TEST_CASE-->"/g, JSON.stringify(testCase))
+          .replace(/"<--TEST_CASE-->"/g, JSON.stringify(testCase[0]))
+          .replace(/"<--TEST_CASE_EXPECTED_RESULT-->"/g, JSON.stringify(testCase[1]))
           .replace(/<--TEST_CASE_INDEX-->/g, index),
       );
     });
