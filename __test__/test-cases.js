@@ -1,6 +1,7 @@
 module.exports = [
   [
     `Formkl {
+      // Your info
     "Personal Information"includes {
      "Fullname" text;
      VN phone;
@@ -96,6 +97,8 @@ module.exports = [
   [
     `formkl {
     "Personal Information" includes{
+      /* Some
+       comment */
   "Fullname" text;
   US phone;
   }
