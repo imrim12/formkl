@@ -23,19 +23,20 @@ module.exports = [
     "Personal Information" includes{
       "Fullname" text;
       require "Bio" paragraph regex("^[a-zA-Z]$") valid(> 100 and < 300);
-      "Custom regex" text regex("^[a-zA-Z]$");
+      multiple "Custom regex" text regex("^[a-zA-Z]$");
     }
   }`,
   `formkl {
-    "Personal Information"includes {
+    multiple "Personal Information"includes {
      "Fullname" text;
-      "Gender" radio from "Male""Female""Other";
+      "Gender" radio ("Male","Female","Other");
+      require "Current Company" select url("/api/company");
 
      US phone;
 
     }
-    "Other Information"includes {
-      require zip;
+    multiple "Other Information"includes {
+      multiple require zip;
       
       
       "Some field" text valid(< 512);
@@ -46,4 +47,31 @@ module.exports = [
   'Formkl {   "Personal Information" includes  {require US phone;   }}',
   'formkl {"Personal Information" includes  {require time;}}',
   'formkl {"Personal Information" includes {require "Date of birth" birthday;}}',
+  `formkl {
+    "Re-Index User" includes {
+      require "User email" email;
+    }
+  }
+  `,
+  `formkl {
+    "Reverting location keywords" includes {
+      require "Target Company" select url("/api/company");
+      require "From keyword" text;
+      require "To keyword" text;
+      "Force update" switch;
+    }
+  }
+  `,
+  `formkl {
+    multiple "Target" includes {
+      require "Target Company" select url("/api/company");
+      require "Group" select url("https://someapi.com/api/group");
+      "From unassign location" switch;
+    }
+    "Date" includes {
+      require "From date" date;
+      require "To date" date;
+    }
+  }
+  `,
 ];

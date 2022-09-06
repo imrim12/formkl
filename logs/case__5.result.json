@@ -30,7 +30,8 @@
           "require": false,
           "validation": {
             "regex": "^[a-zA-Z]$"
-          }
+          },
+          "multiple": true
         }
       ]
     }

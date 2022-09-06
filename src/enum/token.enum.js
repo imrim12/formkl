@@ -1,7 +1,13 @@
 module.exports = {
   Token: Object.freeze({
+    FORMKL: "formkl",
+    //
     STRING: "string",
     NUMBER: "number",
+    TRUE: "true",
+    FALSE: "false",
+    NULL: "null",
+    //
     LPAREN: "(",
     RPAREN: ")",
     LBRACE: "{",
@@ -17,19 +23,18 @@ module.exports = {
     GT: ">",
     LT: "<",
     BREAKLINE: "\\n",
-    TRUE: "true",
-    FALSE: "false",
-    NULL: "null",
-    VALID: "valid",
-    REGEX: "regex",
+    //
     REQUIRE: "require",
     OR: "or",
     AND: "and",
+    //
     FIELD: "field",
     FIELDSELECT: "fieldselect",
-    FORMKL: "formkl",
     INCLUDES: "includes",
     MULTIPLE: "multiple",
-    FROM: "from",
+    //
+    VALID: "valid",
+    REGEX: "regex",
+    URL: "url",
   }),
 };

@@ -1,7 +1,7 @@
 const { Field } = require("./enum/field.enum");
 const { Macro } = require("./enum/macro.enum");
 const { Token } = require("./enum/token.enum");
-const { ifMatch, returnToken, allowMatchToken } = require("./utils");
+const { returnToken, allowMatchToken } = require("./utils");
 
 module.exports = {
   macros: Macro,
@@ -10,6 +10,15 @@ module.exports = {
     ["\\/\\/.*", `/* skip single line comments */`],
     ["/\\*[\\s\\S]*?\\*/", `/* skip multiline comments */`],
     [`[\\s\\n]+`, `/* skip whitespace */`],
+    // Litteral
+    allowMatchToken(Token.TRUE),
+    allowMatchToken(Token.FALSE),
+    allowMatchToken(Token.NULL),
+    ["{INT}{FRAC}?{EXP}?\\b", returnToken(Token.NUMBER)],
+    [
+      `\\"(?:[^\\"{ESC}]|{ESC}.)*\\"`,
+      "yytext = yytext.substr(1,yyleng-2);" + returnToken(Token.STRING),
+    ],
     // Special characters
     allowMatchToken(Token.LPAREN, true),
     allowMatchToken(Token.RPAREN, true),
@@ -29,23 +38,14 @@ module.exports = {
     allowMatchToken(Token.LT, true),
     allowMatchToken(Token.OR, true),
     allowMatchToken(Token.AND, true),
-    // Litteral
-    allowMatchToken(Token.TRUE),
-    allowMatchToken(Token.FALSE),
-    allowMatchToken(Token.NULL),
-    ["{INT}{FRAC}?{EXP}?\\b", returnToken(Token.NUMBER)],
-    [
-      `\\"(?:[^\\"{ESC}]|{ESC}.)*\\"`,
-      "yytext = yytext.substr(1,yyleng-2);" + returnToken(Token.STRING),
-    ],
     // Custom token
     allowMatchToken(Token.VALID, false, true),
     allowMatchToken(Token.REGEX, false, true),
+    allowMatchToken(Token.URL, false, true),
     allowMatchToken(Token.REQUIRE, false, true),
     allowMatchToken(Token.FORMKL, false, true),
     allowMatchToken(Token.INCLUDES, false, true),
     allowMatchToken(Token.MULTIPLE, false, true),
-    allowMatchToken(Token.FROM, false, true),
     ...[...Field.DEFAULT, ...Field.VALIDATED, ...Field.DATETIME, ...Field.PHONE].map((f) => [
       f,
       returnToken(Token.FIELD),

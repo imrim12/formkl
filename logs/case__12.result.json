@@ -1,0 +1,31 @@
+{
+  "sections": [
+    {
+      "title": "Reverting location keywords",
+      "fields": [
+        {
+          "type": "select",
+          "options": [],
+          "fetchUrl": "/api/company",
+          "label": "Target Company",
+          "require": true
+        },
+        {
+          "type": "text",
+          "label": "From keyword",
+          "require": true
+        },
+        {
+          "type": "text",
+          "label": "To keyword",
+          "require": true
+        },
+        {
+          "type": "switch",
+          "label": "Force update",
+          "require": false
+        }
+      ]
+    }
+  ]
+}

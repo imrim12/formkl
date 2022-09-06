@@ -1,6 +1,6 @@
 module.exports = {
   Field: Object.freeze({
-    DEFAULT: ["text", "paragraph", "number"],
+    DEFAULT: ["text", "paragraph", "number", "switch"],
     SELECTION: ["checkbox", "radio", "select"],
     VALIDATED: ["email", "zip", "age"],
     DATETIME: [
@@ -10,9 +10,9 @@ module.exports = {
       "birthday",
       "time",
       "datetime",
-      "date range",
-      "datetime range",
-      "time range",
+      "daterange",
+      "datetimerange",
+      "timerange",
     ],
     PHONE: ["US", "VN"].map((c) => c + " phone"),
   }),

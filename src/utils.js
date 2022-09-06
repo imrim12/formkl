@@ -1,7 +1,3 @@
-function ifMatch(token = "") {
-  return token;
-}
-
 function returnToken(token = "") {
   return `return '${token}';`;
 }
@@ -18,7 +14,6 @@ function allowMatchToken(token = "", esc = false, allowCapital = false) {
 }
 
 module.exports = {
-  ifMatch,
   returnToken,
   allowMatchToken,
 };

@@ -10,23 +10,32 @@ module.exports = {
 
   ExpressionSection: [
     ["LiteralString includes { ExpressionFieldValidList }", "$$ = { title: $1, fields: $4 };"],
+    [
+      "multiple LiteralString includes { ExpressionFieldValidList }",
+      "$$ = { title: $2, multiple: true, fields: $5 };",
+    ],
   ],
 
   ExpressionFieldValidList: [
-    ["ExpressionFieldValid", "$$ = [$1];"],
-    ["ExpressionFieldValidList ExpressionFieldValid", "$$ = [...$1, $2];"],
+    ["ExpressionFieldMultiple", "$$ = [$1];"],
+    ["ExpressionFieldValidList ExpressionFieldMultiple", "$$ = [...$1, $2];"],
+  ],
+
+  ExpressionFieldMultiple: [
+    ["ExpressionFieldValid ;", "$$ = $1;"],
+    ["multiple ExpressionFieldValid ;", "$$ = { ...$2, multiple: true };"],
   ],
 
   ExpressionFieldValid: [
-    ["ExpressionField ;", "$$ = $1;"],
-    ["ExpressionField valid ( ExpressionConditionList ) ;", "$$ = $1; $1.validation = $4;"],
-    ["ExpressionField regex ( LiteralString ) ;", "$$ = $1; $1.validation = { regex: $4 };"],
+    ["ExpressionField", "$$ = $1;"],
+    ["ExpressionField valid ( ExpressionConditionList )", "$$ = $1; $1.validation = $4;"],
+    ["ExpressionField regex ( LiteralString )", "$$ = $1; $1.validation = { regex: $4 };"],
     [
-      "ExpressionField valid ( ExpressionConditionList ) regex ( LiteralString ) ;",
+      "ExpressionField valid ( ExpressionConditionList ) regex ( LiteralString )",
       "$$ = $1; $1.validation = { regex: $8, ...$4 };",
     ],
     [
-      "ExpressionField regex ( LiteralString ) valid ( ExpressionConditionList ) ;",
+      "ExpressionField regex ( LiteralString ) valid ( ExpressionConditionList )",
       "$$ = $1; $1.validation = { regex: $4, ...$8 };",
     ],
   ],
@@ -40,7 +49,8 @@ module.exports = {
 
   ElementField: [
     ["LiteralField", "$$ = { type: $1 };"],
-    ["LiteralSelection from LiteralStringList", "$$ = { type: $1, options: $3 };"],
+    ["LiteralSelection ( LiteralStringList )", "$$ = { type: $1, options: $3 };"],
+    ["LiteralSelection url ( LiteralString )", "$$ = { type: $1, options: [], fetchUrl: $4 };"],
   ],
 
   ExpressionConditionList: [
@@ -60,7 +70,7 @@ module.exports = {
 
   LiteralStringList: [
     ["LiteralString", "$$ = [$1];"],
-    ["LiteralStringList LiteralString", "$$ = [...$1, $2];"],
+    ["LiteralStringList , LiteralString", "$$ = [...$1, $3];"],
   ],
 
   LiteralSelection: [[Token.FIELDSELECT, "$$ = yytext;"]],
