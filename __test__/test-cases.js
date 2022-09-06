@@ -10,7 +10,7 @@ module.exports = [
       "Bio" paragraph;
     }
   }`,
-  'formkl { "Personal Information" includes {email;}}',
+  'formkl "A random survey" { "Personal Information" includes {email;}}',
   'formkl {"Personal Information"  includes   {require email;}}',
   'formkl { "Personal Information"    includes {require "Fullname" text;}}',
   `formkl {
@@ -19,7 +19,7 @@ module.exports = [
   US phone;
   }
 }`,
-  `formkl {
+  `formkl "Some random survey" "This form is to survey and stuff " {
     "Personal Information" includes{
       "Fullname" text;
       require "Bio" paragraph regex("^[a-zA-Z]$") valid(> 100 and < 300);

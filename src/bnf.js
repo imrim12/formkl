@@ -1,7 +1,14 @@
 const { Token } = require("./enum/token.enum");
 
 module.exports = {
-  ExpressionForm: [["formkl { ExpressionSectionList }", "return $$ = { sections: $3 };"]],
+  ExpressionForm: [
+    ["formkl { ExpressionSectionList }", "return $$ = { sections: $3 };"],
+    ["formkl LiteralString { ExpressionSectionList }", "return $$ = { title: $2, sections: $4 };"],
+    [
+      "formkl LiteralString LiteralString { ExpressionSectionList }",
+      "return $$ = { title: $2, description: $3, sections: $5 };",
+    ],
+  ],
 
   ExpressionSectionList: [
     ["ExpressionSection", "$$ = [$1];"],

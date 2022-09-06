@@ -1,4 +1,6 @@
 {
+  "title": "Some random survey",
+  "description": "This form is to survey and stuff ",
   "sections": [
     {
       "title": "Personal Information",
