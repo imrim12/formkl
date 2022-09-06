@@ -1,0 +1,44 @@
+{
+  "sections": [
+    {
+      "title": "Target",
+      "multiple": true,
+      "fields": [
+        {
+          "type": "select",
+          "options": [],
+          "fetchUrl": "/api/company",
+          "label": "Target Company",
+          "require": true
+        },
+        {
+          "type": "select",
+          "options": [],
+          "fetchUrl": "https://someapi.com/api/group",
+          "label": "Group",
+          "require": true
+        },
+        {
+          "type": "switch",
+          "label": "From unassign location",
+          "require": false
+        }
+      ]
+    },
+    {
+      "title": "Date",
+      "fields": [
+        {
+          "type": "date",
+          "label": "From date",
+          "require": true
+        },
+        {
+          "type": "date",
+          "label": "To date",
+          "require": true
+        }
+      ]
+    }
+  ]
+}

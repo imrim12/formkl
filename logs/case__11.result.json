@@ -1,0 +1,14 @@
+{
+  "sections": [
+    {
+      "title": "Re-Index User",
+      "fields": [
+        {
+          "type": "email",
+          "label": "User email",
+          "require": true
+        }
+      ]
+    }
+  ]
+}

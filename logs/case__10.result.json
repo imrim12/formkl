@@ -1,0 +1,14 @@
+{
+  "sections": [
+    {
+      "title": "Personal Information",
+      "fields": [
+        {
+          "type": "birthday",
+          "label": "Date of birth",
+          "require": true
+        }
+      ]
+    }
+  ]
+}

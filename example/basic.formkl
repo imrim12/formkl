@@ -10,8 +10,8 @@ formkl private step by step allows 1 response {
 		require age;
 		require zip;
 		require 6 digits "SSN";
-		512 words min "Custom regex" paragraph regex(^[a-zA-Z]$)
-    512 words max "Note" paragraph;
+		"Custom regex" paragraph regex(^[a-zA-Z]$)
+    "Note" paragraph;
   }
   "Referrals" includes {
     require 1 in 4 email fields; // Plural "fields" for multiple response

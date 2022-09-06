@@ -1,0 +1,39 @@
+{
+  "sections": [
+    {
+      "title": "Personal Information",
+      "fields": [
+        {
+          "type": "text",
+          "label": "Fullname",
+          "require": false
+        },
+        {
+          "type": "paragraph",
+          "label": "Bio",
+          "require": true,
+          "validation": {
+            "regex": "^[a-zA-Z]$",
+            "$and": [
+              {
+                "$gt": 100
+              },
+              {
+                "$lt": 300
+              }
+            ]
+          }
+        },
+        {
+          "type": "text",
+          "label": "Custom regex",
+          "require": false,
+          "validation": {
+            "regex": "^[a-zA-Z]$"
+          },
+          "multiple": true
+        }
+      ]
+    }
+  ]
+}

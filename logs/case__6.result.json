@@ -1,0 +1,55 @@
+{
+  "sections": [
+    {
+      "title": "Personal Information",
+      "multiple": true,
+      "fields": [
+        {
+          "type": "text",
+          "label": "Fullname",
+          "require": false
+        },
+        {
+          "type": "radio",
+          "options": [
+            "Male",
+            "Female",
+            "Other"
+          ],
+          "label": "Gender",
+          "require": false
+        },
+        {
+          "type": "select",
+          "options": [],
+          "fetchUrl": "/api/company",
+          "label": "Current Company",
+          "require": true
+        },
+        {
+          "type": "US phone",
+          "require": false
+        }
+      ]
+    },
+    {
+      "title": "Other Information",
+      "multiple": true,
+      "fields": [
+        {
+          "type": "zip",
+          "require": true,
+          "multiple": true
+        },
+        {
+          "type": "text",
+          "label": "Some field",
+          "require": false,
+          "validation": {
+            "$lt": 512
+          }
+        }
+      ]
+    }
+  ]
+}

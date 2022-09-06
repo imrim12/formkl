@@ -1,9 +1,12 @@
-mkdir -p .dist
-mkdir -p .logs
+mkdir -p dist
+mkdir -p logs
 
-yarn nearleyc ./src/grammar.bnf -o ./.dist/grammar.js
+node ./src/index.js
 
-cp ./templates/index.js ./.dist/index.js
+yarn syntax \
+--grammar ./dist/formkl.ast.json \
+--mode slr1 \
+--output ./dist/index.js \
+--parse 'formkl { "Personal Info 1" Includes { "From Your email" email; US phone; } "Personal Info 2" includes { "Your email" email; US phone; } }'
 
-cp ./src/utils.js ./.dist/utils.js
-cp ./src/tokenizer.js ./.dist/tokenizer.js
+minify ./dist/index.js > ./dist/index.min.js

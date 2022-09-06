@@ -1,0 +1,13 @@
+{
+  "sections": [
+    {
+      "title": "Personal Information",
+      "fields": [
+        {
+          "type": "US phone",
+          "require": false
+        }
+      ]
+    }
+  ]
+}

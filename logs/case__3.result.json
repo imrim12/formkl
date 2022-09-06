@@ -1,0 +1,14 @@
+{
+  "sections": [
+    {
+      "title": "Personal Information",
+      "fields": [
+        {
+          "type": "text",
+          "label": "Fullname",
+          "require": true
+        }
+      ]
+    }
+  ]
+}
