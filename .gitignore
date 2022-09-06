@@ -1,5 +1,6 @@
 /dist
-/.logs
+
+/logs
 
 /__test__/*.test.js
 
