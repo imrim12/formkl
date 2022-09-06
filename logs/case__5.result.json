@@ -9,7 +9,11 @@
           "require": false
         },
         {
+          "type": "paragraph",
+          "label": "Bio",
+          "require": true,
           "validation": {
+            "regex": "^[a-zA-Z]$",
             "$and": [
               {
                 "$gt": 100
@@ -21,6 +25,9 @@
           }
         },
         {
+          "type": "text",
+          "label": "Custom regex",
+          "require": false,
           "validation": {
             "regex": "^[a-zA-Z]$"
           }

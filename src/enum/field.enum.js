@@ -1,6 +1,7 @@
 module.exports = {
   Field: Object.freeze({
-    DEFAULT: ["text", "paragraph", "number", "checkbox", "radio", "dropdown"],
+    DEFAULT: ["text", "paragraph", "number"],
+    SELECTION: ["checkbox", "radio", "select"],
     VALIDATED: ["email", "zip", "age"],
     DATETIME: [
       "date",

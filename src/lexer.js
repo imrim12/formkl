@@ -44,9 +44,12 @@ module.exports = {
     allowMatchToken(Token.REQUIRE, false, true),
     allowMatchToken(Token.FORMKL, false, true),
     allowMatchToken(Token.INCLUDES, false, true),
+    allowMatchToken(Token.MULTIPLE, false, true),
+    allowMatchToken(Token.FROM, false, true),
     ...[...Field.DEFAULT, ...Field.VALIDATED, ...Field.DATETIME, ...Field.PHONE].map((f) => [
       f,
       returnToken(Token.FIELD),
     ]),
+    ...Field.SELECTION.map((f) => [f, returnToken(Token.FIELDSELECT)]),
   ],
 };

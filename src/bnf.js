@@ -5,7 +5,7 @@ module.exports = {
 
   ExpressionSectionList: [
     ["ExpressionSection", "$$ = [$1];"],
-    ["ExpressionSectionList ExpressionSection", "$$ = $1; $1.push($2);"],
+    ["ExpressionSectionList ExpressionSection", "$$ = [...$1, $2];"],
   ],
 
   ExpressionSection: [
@@ -14,20 +14,33 @@ module.exports = {
 
   ExpressionFieldValidList: [
     ["ExpressionFieldValid", "$$ = [$1];"],
-    ["ExpressionFieldValidList ExpressionFieldValid", "$$ = $1; $1.push($2);"],
+    ["ExpressionFieldValidList ExpressionFieldValid", "$$ = [...$1, $2];"],
   ],
 
   ExpressionFieldValid: [
     ["ExpressionField ;", "$$ = $1;"],
-    ["ExpressionField valid ( ExpressionConditionList ) ;", "$$ = { validation: $4 };"],
-    ["ExpressionField regex ( LiteralString ) ;", "$$ = { validation: { regex: $4 } };"],
+    ["ExpressionField valid ( ExpressionConditionList ) ;", "$$ = $1; $1.validation = $4;"],
+    ["ExpressionField regex ( LiteralString ) ;", "$$ = $1; $1.validation = { regex: $4 };"],
+    [
+      "ExpressionField valid ( ExpressionConditionList ) regex ( LiteralString ) ;",
+      "$$ = $1; $1.validation = { regex: $8, ...$4 };",
+    ],
+    [
+      "ExpressionField regex ( LiteralString ) valid ( ExpressionConditionList ) ;",
+      "$$ = $1; $1.validation = { regex: $4, ...$8 };",
+    ],
   ],
 
   ExpressionField: [
-    ["LiteralField", "$$ = { type: $1, require: false };"],
-    ["LiteralString LiteralField", "$$ = { type: $2, label: $1, require: false };"],
-    ["require LiteralField", "$$ = { type: $2, require: true };"],
-    ["require LiteralString LiteralField", "$$ = { type: $3, label: $2, require: true };"],
+    ["ElementField", "$$ = { ...$1, require: false };"],
+    ["LiteralString ElementField", "$$ = { ...$2, label: $1, require: false };"],
+    ["require ElementField", "$$ = { ...$2, require: true };"],
+    ["require LiteralString ElementField", "$$ = { ...$3, label: $2, require: true };"],
+  ],
+
+  ElementField: [
+    ["LiteralField", "$$ = { type: $1 };"],
+    ["LiteralSelection from LiteralStringList", "$$ = { type: $1, options: $3 };"],
   ],
 
   ExpressionConditionList: [
@@ -44,6 +57,13 @@ module.exports = {
     ["== LiteralNumber", "$$ = { $eq: Number(yytext) };"],
     ["== LiteralString", "$$ = { $eq: yytext };"],
   ],
+
+  LiteralStringList: [
+    ["LiteralString", "$$ = [$1];"],
+    ["LiteralStringList LiteralString", "$$ = [...$1, $2];"],
+  ],
+
+  LiteralSelection: [[Token.FIELDSELECT, "$$ = yytext;"]],
 
   LiteralField: [[Token.FIELD, "$$ = yytext;"]],
 

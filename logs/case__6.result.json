@@ -9,6 +9,16 @@
           "require": false
         },
         {
+          "type": "radio",
+          "options": [
+            "Male",
+            "Female",
+            "Other"
+          ],
+          "label": "Gender",
+          "require": false
+        },
+        {
           "type": "US phone",
           "require": false
         }
@@ -24,7 +34,10 @@
         {
           "type": "text",
           "label": "Some field",
-          "require": false
+          "require": false,
+          "validation": {
+            "$lt": 512
+          }
         }
       ]
     }

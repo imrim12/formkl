@@ -26,7 +26,10 @@ module.exports = {
     OR: "or",
     AND: "and",
     FIELD: "field",
+    FIELDSELECT: "fieldselect",
     FORMKL: "formkl",
     INCLUDES: "includes",
+    MULTIPLE: "multiple",
+    FROM: "from",
   }),
 };

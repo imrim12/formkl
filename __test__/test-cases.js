@@ -22,14 +22,14 @@ module.exports = [
   `formkl {
     "Personal Information" includes{
       "Fullname" text;
-      require "Bio" paragraph valid(> 100 and < 300);
+      require "Bio" paragraph regex("^[a-zA-Z]$") valid(> 100 and < 300);
       "Custom regex" text regex("^[a-zA-Z]$");
     }
   }`,
   `formkl {
     "Personal Information"includes {
      "Fullname" text;
-
+      "Gender" radio from "Male""Female""Other";
 
      US phone;
 
@@ -38,7 +38,7 @@ module.exports = [
       require zip;
       
       
-      "Some field" text;
+      "Some field" text valid(< 512);
 
     }
   }`,
