@@ -46,6 +46,7 @@ module.exports = {
     allowMatchToken(Token.FORMKL, false, true),
     allowMatchToken(Token.INCLUDES, false, true),
     allowMatchToken(Token.MULTIPLE, false, true),
+    allowMatchToken(Token.AS, false, true),
     ...[...Field.DEFAULT, ...Field.VALIDATED, ...Field.DATETIME, ...Field.PHONE].map((f) => [
       f,
       returnToken(Token.FIELD),

@@ -2,11 +2,13 @@
   "sections": [
     {
       "title": "Re-Index User",
+      "key": "re-index-user",
       "fields": [
         {
           "type": "email",
           "label": "User email",
-          "require": true
+          "require": true,
+          "key": "user-email"
         }
       ]
     }

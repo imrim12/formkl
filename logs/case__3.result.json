@@ -2,11 +2,13 @@
   "sections": [
     {
       "title": "Personal Information",
+      "key": "personal-information",
       "fields": [
         {
           "type": "text",
           "label": "Fullname",
-          "require": true
+          "require": true,
+          "key": "fullname"
         }
       ]
     }

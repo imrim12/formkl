@@ -2,12 +2,14 @@
   "sections": [
     {
       "title": "Personal Information",
+      "key": "personal-information",
       "multiple": true,
       "fields": [
         {
           "type": "text",
           "label": "Fullname",
-          "require": false
+          "require": false,
+          "key": "fullname"
         },
         {
           "type": "radio",
@@ -17,34 +19,40 @@
             "Other"
           ],
           "label": "Gender",
-          "require": false
+          "require": false,
+          "key": "gender"
         },
         {
           "type": "select",
           "options": [],
           "fetchUrl": "/api/company",
           "label": "Current Company",
-          "require": true
+          "require": true,
+          "key": "current-company"
         },
         {
           "type": "US phone",
-          "require": false
+          "require": false,
+          "key": "us-phone"
         }
       ]
     },
     {
       "title": "Other Information",
+      "key": "other-information",
       "multiple": true,
       "fields": [
         {
           "type": "zip",
           "require": true,
+          "key": "zip",
           "multiple": true
         },
         {
           "type": "text",
           "label": "Some field",
           "require": false,
+          "key": "some-field",
           "validation": {
             "$lt": 512
           }
