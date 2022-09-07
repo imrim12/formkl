@@ -2,10 +2,12 @@
   "sections": [
     {
       "title": "Personal Information",
+      "key": "personal-information",
       "fields": [
         {
           "type": "US phone",
-          "require": false
+          "require": false,
+          "key": "us-phone"
         }
       ]
     }

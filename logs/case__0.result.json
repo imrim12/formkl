@@ -2,29 +2,74 @@
   "sections": [
     {
       "title": "Personal Information",
+      "key": "personal-information",
       "fields": [
         {
           "type": "text",
           "label": "Fullname",
-          "require": false
+          "require": false,
+          "key": "fullname"
         },
         {
           "type": "VN phone",
-          "require": false
+          "require": false,
+          "key": "vn-phone"
         }
       ]
     },
     {
-      "title": "Other Information",
+      "title": "Personal Information",
+      "key": "personal-information1",
       "fields": [
         {
+          "type": "text",
+          "label": "Fullname",
+          "require": false,
+          "key": "fullname1"
+        },
+        {
           "type": "zip",
-          "require": true
+          "require": true,
+          "key": "zip"
+        },
+        {
+          "type": "zip",
+          "require": true,
+          "key": "zip1"
         },
         {
           "type": "paragraph",
           "label": "Bio",
-          "require": false
+          "require": false,
+          "key": "bio"
+        }
+      ]
+    },
+    {
+      "title": "Personal Information",
+      "key": "personal-information2",
+      "fields": [
+        {
+          "type": "text",
+          "label": "Fullname",
+          "require": false,
+          "key": "fullname2"
+        },
+        {
+          "type": "zip",
+          "require": true,
+          "key": "zip2"
+        },
+        {
+          "type": "zip",
+          "require": true,
+          "key": "zip3"
+        },
+        {
+          "type": "paragraph",
+          "label": "Bio",
+          "require": false,
+          "key": "bio1"
         }
       ]
     }

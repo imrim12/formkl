@@ -48,10 +48,10 @@ declare module "formkl" {
     fields: Array<FieldDefault | FieldSelection>;
   }
 
-  interface Formkl {
+  export interface Formkl {
     title?: string;
     sections: Array<Section>;
   }
 
-  const parse: (str: string) => Formkl;
+  export const parse: (str: string) => Formkl;
 }

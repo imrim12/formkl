@@ -16,10 +16,13 @@ module.exports = {
   ],
 
   ExpressionSection: [
-    ["LiteralString includes { ExpressionFieldValidList }", "$$ = { title: $1, fields: $4 };"],
+    [
+      "LiteralString includes { ExpressionFieldValidList }",
+      "$$ = { title: $1, key: generateKey($1, 'section'), fields: $4 };",
+    ],
     [
       "multiple LiteralString includes { ExpressionFieldValidList }",
-      "$$ = { title: $2, multiple: true, fields: $5 };",
+      "$$ = { title: $2, key: generateKey($2, 'section'), multiple: true, fields: $5 };",
     ],
   ],
 
@@ -34,17 +37,22 @@ module.exports = {
   ],
 
   ExpressionFieldValid: [
-    ["ExpressionField", "$$ = $1;"],
-    ["ExpressionField valid ( ExpressionConditionList )", "$$ = $1; $1.validation = $4;"],
-    ["ExpressionField regex ( LiteralString )", "$$ = $1; $1.validation = { regex: $4 };"],
+    ["ExpressionFieldAliased", "$$ = $1;"],
+    ["ExpressionFieldAliased valid ( ExpressionConditionList )", "$$ = $1; $1.validation = $4;"],
+    ["ExpressionFieldAliased regex ( LiteralString )", "$$ = $1; $1.validation = { regex: $4 };"],
     [
-      "ExpressionField valid ( ExpressionConditionList ) regex ( LiteralString )",
+      "ExpressionFieldAliased valid ( ExpressionConditionList ) regex ( LiteralString )",
       "$$ = $1; $1.validation = { regex: $8, ...$4 };",
     ],
     [
-      "ExpressionField regex ( LiteralString ) valid ( ExpressionConditionList )",
+      "ExpressionFieldAliased regex ( LiteralString ) valid ( ExpressionConditionList )",
       "$$ = $1; $1.validation = { regex: $4, ...$8 };",
     ],
+  ],
+
+  ExpressionFieldAliased: [
+    ["ExpressionField", "$$ = { ...$1, key: generateKey($1.label || $1.type) };"],
+    ["ExpressionField as LiteralString", "$$ = { ...$1, key: $3 };"],
   ],
 
   ExpressionField: [

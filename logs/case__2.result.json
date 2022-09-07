@@ -2,10 +2,12 @@
   "sections": [
     {
       "title": "Personal Information",
+      "key": "personal-information",
       "fields": [
         {
           "type": "email",
-          "require": true
+          "require": true,
+          "key": "email"
         }
       ]
     }

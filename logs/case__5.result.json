@@ -4,16 +4,19 @@
   "sections": [
     {
       "title": "Personal Information",
+      "key": "personal-information",
       "fields": [
         {
           "type": "text",
           "label": "Fullname",
-          "require": false
+          "require": false,
+          "key": "fullname"
         },
         {
           "type": "paragraph",
           "label": "Bio",
           "require": true,
+          "key": "bio",
           "validation": {
             "regex": "^[a-zA-Z]$",
             "$and": [
@@ -30,6 +33,7 @@
           "type": "text",
           "label": "Custom regex",
           "require": false,
+          "key": "custom-regex",
           "validation": {
             "regex": "^[a-zA-Z]$"
           },

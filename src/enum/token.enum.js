@@ -25,6 +25,7 @@ module.exports = {
     BREAKLINE: "\\n",
     //
     REQUIRE: "require",
+    AS: "as",
     OR: "or",
     AND: "and",
     //

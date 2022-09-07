@@ -2,28 +2,33 @@
   "sections": [
     {
       "title": "Reverting location keywords",
+      "key": "reverting-location-keywords",
       "fields": [
         {
           "type": "select",
           "options": [],
           "fetchUrl": "/api/company",
           "label": "Target Company",
-          "require": true
+          "require": true,
+          "key": "target-company"
         },
         {
           "type": "text",
           "label": "From keyword",
-          "require": true
+          "require": true,
+          "key": "from-keyword"
         },
         {
           "type": "text",
           "label": "To keyword",
-          "require": true
+          "require": true,
+          "key": "to-keyword"
         },
         {
           "type": "switch",
           "label": "Force update",
-          "require": false
+          "require": false,
+          "key": "force-update"
         }
       ]
     }

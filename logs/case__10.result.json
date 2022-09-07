@@ -2,11 +2,13 @@
   "sections": [
     {
       "title": "Personal Information",
+      "key": "personal-information",
       "fields": [
         {
           "type": "birthday",
           "label": "Date of birth",
-          "require": true
+          "require": true,
+          "key": "date-of-birth"
         }
       ]
     }
