@@ -29,8 +29,8 @@ module.exports = {
     OR: "or",
     AND: "and",
     //
-    FIELD: "field",
     FIELDSELECT: "fieldselect",
+    FIELD: "field",
     INCLUDES: "includes",
     MULTIPLE: "multiple",
     //
