@@ -29,6 +29,7 @@ declare module "formkl" {
     label?: string;
     require: boolean;
     multiple?: boolean;
+    key: string;
     validation?: Validation;
   }
 
@@ -39,6 +40,7 @@ declare module "formkl" {
     require: boolean;
     multiple?: boolean;
     options: Array<string>;
+    key: string;
     validation?: Validation;
   }
 
