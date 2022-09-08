@@ -12,6 +12,7 @@
         },
         {
           "type": "US phone",
+          "label": "US Phone",
           "require": false,
           "key": "us-phone"
         }

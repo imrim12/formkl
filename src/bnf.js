@@ -56,9 +56,9 @@ module.exports = {
   ],
 
   ExpressionField: [
-    ["ElementField", "$$ = { ...$1, require: false };"],
+    ["ElementField", "$$ = { ...$1, label: generateLabel($1.type), require: false };"],
     ["LiteralString ElementField", "$$ = { ...$2, label: $1, require: false };"],
-    ["require ElementField", "$$ = { ...$2, require: true };"],
+    ["require ElementField", "$$ = { ...$2, label: generateLabel($2.type), require: true };"],
     ["require LiteralString ElementField", "$$ = { ...$3, label: $2, require: true };"],
   ],
 
@@ -90,7 +90,11 @@ module.exports = {
 
   LiteralSelection: [[Token.FIELDSELECT, "$$ = yytext;"]],
 
-  LiteralField: [[Token.FIELD, "$$ = yytext;"]],
+  LiteralField: [
+    [Token.FIELD, "$$ = yytext;"],
+    [Token.FIELDDATETIME, "$$ = yytext;"],
+    [Token.FIELDVALIDATED, "$$ = yytext;"],
+  ],
 
   LiteralString: [[Token.STRING, "$$ = yytext;"]],
 

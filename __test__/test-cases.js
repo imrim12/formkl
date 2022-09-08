@@ -11,6 +11,16 @@ module.exports = [
       require zip;
       require zip;
       "Bio" paragraph;
+      "Datetime Range" datetimerange;
+      "Datetime" datetime;
+      "Date Range" daterange;
+      "Time Range" timerange;
+      "Time" time;
+      "Date" date;
+      "Future Date" future date;
+      "Past Date" past date;
+      "Birthday" birthday;
+
     }
     "Personal Information"includes {
       "Fullname" text;
@@ -33,6 +43,7 @@ module.exports = [
             },
             {
               type: "VN phone",
+              label: "VN Phone",
               require: false,
               key: "vn-phone",
             },
@@ -50,11 +61,13 @@ module.exports = [
             },
             {
               type: "zip",
+              label: "Zip",
               require: true,
               key: "zip",
             },
             {
               type: "zip",
+              label: "Zip",
               require: true,
               key: "zip1",
             },
@@ -63,6 +76,60 @@ module.exports = [
               label: "Bio",
               require: false,
               key: "bio",
+            },
+            {
+              type: "datetimerange",
+              label: "Datetime Range",
+              require: false,
+              key: "datetime-range",
+            },
+            {
+              type: "datetime",
+              label: "Datetime",
+              require: false,
+              key: "datetime",
+            },
+            {
+              type: "daterange",
+              label: "Date Range",
+              require: false,
+              key: "date-range",
+            },
+            {
+              type: "timerange",
+              label: "Time Range",
+              require: false,
+              key: "time-range",
+            },
+            {
+              type: "time",
+              label: "Time",
+              require: false,
+              key: "time",
+            },
+            {
+              type: "date",
+              label: "Date",
+              require: false,
+              key: "date",
+            },
+            {
+              type: "future date",
+              label: "Future Date",
+              require: false,
+              key: "future-date",
+            },
+            {
+              type: "past date",
+              label: "Past Date",
+              require: false,
+              key: "past-date",
+            },
+            {
+              type: "birthday",
+              label: "Birthday",
+              require: false,
+              key: "birthday",
             },
           ],
         },
@@ -78,11 +145,13 @@ module.exports = [
             },
             {
               type: "zip",
+              label: "Zip",
               require: true,
               key: "zip2",
             },
             {
               type: "zip",
+              label: "Zip",
               require: true,
               key: "zip3",
             },
@@ -108,6 +177,7 @@ module.exports = [
           fields: [
             {
               type: "email",
+              label: "Email",
               require: false,
               key: "email",
             },
@@ -126,6 +196,7 @@ module.exports = [
           fields: [
             {
               type: "email",
+              label: "Email",
               require: true,
               key: "email",
             },
@@ -176,6 +247,7 @@ module.exports = [
             },
             {
               type: "US phone",
+              label: "US Phone",
               require: false,
               key: "us-phone",
             },
@@ -286,6 +358,7 @@ module.exports = [
             },
             {
               type: "US phone",
+              label: "US Phone",
               require: false,
               key: "us-phone",
             },
@@ -298,6 +371,7 @@ module.exports = [
           fields: [
             {
               type: "zip",
+              label: "Zip",
               require: true,
               key: "zip",
               multiple: true,
@@ -326,6 +400,7 @@ module.exports = [
           fields: [
             {
               type: "US phone",
+              label: "US Phone",
               require: false,
               key: "us-phone",
             },
@@ -344,6 +419,7 @@ module.exports = [
           fields: [
             {
               type: "US phone",
+              label: "US Phone",
               require: true,
               key: "us-phone",
             },
@@ -362,6 +438,7 @@ module.exports = [
           fields: [
             {
               type: "time",
+              label: "Time",
               require: true,
               key: "time",
             },

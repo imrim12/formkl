@@ -32,6 +32,7 @@
         },
         {
           "type": "US phone",
+          "label": "US Phone",
           "require": false,
           "key": "us-phone"
         }
@@ -44,6 +45,7 @@
       "fields": [
         {
           "type": "zip",
+          "label": "Zip",
           "require": true,
           "key": "zip",
           "multiple": true

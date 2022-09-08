@@ -6,6 +6,7 @@
       "fields": [
         {
           "type": "US phone",
+          "label": "US Phone",
           "require": true,
           "key": "us-phone"
         }
