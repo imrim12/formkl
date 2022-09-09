@@ -260,7 +260,8 @@ module.exports = [
     `formkl "Some random survey" "This form is to survey and stuff " {
     "Personal Information" includes{
       "Fullname" text;
-      require "Bio" paragraph regex("^[a-zA-Z]$") valid(> 100 and < 300);
+      require "Bio" paragraph regex("^[a-zA-Z]$") valid((> 100 or == 100) and < 300);
+      require "Bio" paragraph regex("^[a-zA-Z]$") valid(== 500 or > 100 and < 300);
       multiple "Custom regex" text regex("^[a-zA-Z]$");
     }
   }`,
@@ -287,10 +288,41 @@ module.exports = [
                 regex: "^[a-zA-Z]$",
                 $and: [
                   {
-                    $gt: 100,
+                    $or: [
+                      {
+                        $gt: 100,
+                      },
+                      {
+                        $eq: 100,
+                      },
+                    ],
                   },
                   {
                     $lt: 300,
+                  },
+                ],
+              },
+            },
+            {
+              type: "paragraph",
+              label: "Bio",
+              require: true,
+              key: "bio1",
+              validation: {
+                regex: "^[a-zA-Z]$",
+                $or: [
+                  {
+                    $eq: 500,
+                  },
+                  {
+                    $and: [
+                      {
+                        $gt: 100,
+                      },
+                      {
+                        $lt: 300,
+                      },
+                    ],
                   },
                 ],
               },

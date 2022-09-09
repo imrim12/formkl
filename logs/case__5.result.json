@@ -21,10 +21,41 @@
             "regex": "^[a-zA-Z]$",
             "$and": [
               {
-                "$gt": 100
+                "$or": [
+                  {
+                    "$gt": 100
+                  },
+                  {
+                    "$eq": 100
+                  }
+                ]
               },
               {
                 "$lt": 300
+              }
+            ]
+          }
+        },
+        {
+          "type": "paragraph",
+          "label": "Bio",
+          "require": true,
+          "key": "bio1",
+          "validation": {
+            "regex": "^[a-zA-Z]$",
+            "$or": [
+              {
+                "$eq": 500
+              },
+              {
+                "$and": [
+                  {
+                    "$gt": 100
+                  },
+                  {
+                    "$lt": 300
+                  }
+                ]
               }
             ]
           }

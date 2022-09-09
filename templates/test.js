@@ -1,6 +1,6 @@
 const fs = require("fs");
 const path = require("path");
-const parser = require(path.resolve(__dirname, "../dist/index.min.js"));
+const parser = require(path.resolve(__dirname, "../dist/index.js"));
 
 test("<--TEST_CASE-->", () => {
   const result = parser.parse("<--TEST_CASE-->");

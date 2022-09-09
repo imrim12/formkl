@@ -38,14 +38,14 @@ module.exports = {
 
   ExpressionFieldValid: [
     ["ExpressionFieldAliased", "$$ = $1;"],
-    ["ExpressionFieldAliased valid ( ExpressionConditionList )", "$$ = $1; $1.validation = $4;"],
+    ["ExpressionFieldAliased valid ( ExpressionCondition )", "$$ = $1; $1.validation = $4;"],
     ["ExpressionFieldAliased regex ( LiteralString )", "$$ = $1; $1.validation = { regex: $4 };"],
     [
-      "ExpressionFieldAliased valid ( ExpressionConditionList ) regex ( LiteralString )",
+      "ExpressionFieldAliased valid ( ExpressionCondition ) regex ( LiteralString )",
       "$$ = $1; $1.validation = { regex: $8, ...$4 };",
     ],
     [
-      "ExpressionFieldAliased regex ( LiteralString ) valid ( ExpressionConditionList )",
+      "ExpressionFieldAliased regex ( LiteralString ) valid ( ExpressionCondition )",
       "$$ = $1; $1.validation = { regex: $4, ...$8 };",
     ],
   ],
@@ -88,13 +88,32 @@ module.exports = {
     ],
   ],
 
-  ExpressionConditionList: [
-    ["ExpressionCondition", "$$ = $1;"],
-    ["ExpressionConditionList and ExpressionCondition", "$$ = { ['$' + 'and']: [ $1, $3 ] }"],
-    ["ExpressionConditionList or ExpressionCondition", "$$ = { ['$' + 'or']: [ $1, $3 ] }"],
+  ExpressionCondition: [
+    ["ExpressionMutiplicativeCondition", "$$ = $1;"],
+    ["ExpressionAdditionalCondition", "$$ = $1;"],
   ],
 
-  ExpressionCondition: [
+  ExpressionMutiplicativeCondition: [
+    ["ExpressionConditionPrimary", "$$ = $1;"],
+    [
+      "ExpressionConditionPrimary and ExpressionConditionPrimary",
+      "$$ = { ['$' + 'and']: [ $1, $3 ] }",
+    ],
+  ],
+
+  ExpressionAdditionalCondition: [
+    [
+      "ExpressionMutiplicativeCondition or ExpressionMutiplicativeCondition",
+      "$$ = { ['$' + 'or']: [ $1, $3 ] }",
+    ],
+  ],
+
+  ExpressionConditionPrimary: [
+    ["( ExpressionAdditionalCondition )", "$$ = $2"],
+    ["Condition", "$$ = $1"],
+  ],
+
+  Condition: [
     ["> LiteralNumber", "$$ = { $gt: Number(yytext) };"],
     ["< LiteralNumber", "$$ = { $lt: Number(yytext) };"],
     [">= LiteralNumber", "$$ = { $gteq: Number(yytext) };"],
