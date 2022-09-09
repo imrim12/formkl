@@ -1,3 +1,6 @@
+rimraf dist
+rimraf logs
+
 mkdir -p dist
 mkdir -p logs
 
