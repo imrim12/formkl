@@ -271,6 +271,7 @@ module.exports = [
             },
             {
               type: "radio",
+              fetchDataPath: "",
               options: ["Male", "Female", "Other"],
               label: "Gender",
               require: false,
@@ -278,8 +279,11 @@ module.exports = [
             },
             {
               type: "select",
+              fetchDataPath: "",
               options: [],
               fetchUrl: "/api/company",
+              valueKey: "id",
+              labelKey: "name",
               label: "Current Company",
               require: true,
               key: "current-company",
@@ -431,8 +435,11 @@ module.exports = [
           fields: [
             {
               type: "select",
+              fetchDataPath: "",
               options: [],
               fetchUrl: "/api/company",
+              valueKey: "id",
+              labelKey: "name",
               label: "Target Company",
               require: true,
               key: "target-company",
@@ -464,7 +471,7 @@ module.exports = [
     `formkl {
     multiple "Target" includes {
       require "Target Company" select url("/api/company");
-      require "Group" select url("https://someapi.com/api/group");
+      require "Country By ISO3" select "data" url("https://countriesnow.space/api/v0.1/countries/iso", "Iso3");
       "From unassign location" switch;
     }
     "Date" includes {
@@ -482,19 +489,25 @@ module.exports = [
           fields: [
             {
               type: "select",
+              fetchDataPath: "",
               options: [],
               fetchUrl: "/api/company",
+              valueKey: "id",
+              labelKey: "name",
               label: "Target Company",
               require: true,
               key: "target-company",
             },
             {
               type: "select",
+              fetchDataPath: "data",
               options: [],
-              fetchUrl: "https://someapi.com/api/group",
-              label: "Group",
+              fetchUrl: "https://countriesnow.space/api/v0.1/countries/iso",
+              valueKey: "Iso3",
+              labelKey: "name",
+              label: "Country By ISO3",
               require: true,
-              key: "group",
+              key: "country-by-iso3",
             },
             {
               type: "switch",

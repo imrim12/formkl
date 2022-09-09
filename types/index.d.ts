@@ -36,10 +36,13 @@ declare module "formkl" {
   interface FieldSelection {
     type: "checkbox" | "radio" | "select";
     label?: string;
-    fetchUrl?: string;
     require: boolean;
     multiple?: boolean;
-    options: Array<string>;
+    options: Array<any>;
+    fetchDataPath?: string;
+    fetchUrl?: string;
+    valueKey?: string;
+    labelKey?: string;
     key: string;
     validation?: Validation;
   }

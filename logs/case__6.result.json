@@ -13,6 +13,7 @@
         },
         {
           "type": "radio",
+          "fetchDataPath": "",
           "options": [
             "Male",
             "Female",
@@ -24,8 +25,11 @@
         },
         {
           "type": "select",
+          "fetchDataPath": "",
           "options": [],
           "fetchUrl": "/api/company",
+          "valueKey": "id",
+          "labelKey": "name",
           "label": "Current Company",
           "require": true,
           "key": "current-company"

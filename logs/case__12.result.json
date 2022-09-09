@@ -6,8 +6,11 @@
       "fields": [
         {
           "type": "select",
+          "fetchDataPath": "",
           "options": [],
           "fetchUrl": "/api/company",
+          "valueKey": "id",
+          "labelKey": "name",
           "label": "Target Company",
           "require": true,
           "key": "target-company"

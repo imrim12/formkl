@@ -64,8 +64,28 @@ module.exports = {
 
   ElementField: [
     ["LiteralField", "$$ = { type: $1 };"],
-    ["LiteralSelection ( LiteralStringList )", "$$ = { type: $1, options: $3 };"],
-    ["LiteralSelection url ( LiteralString )", "$$ = { type: $1, options: [], fetchUrl: $4 };"],
+    ["ElementSelection SelectFetchFunction", "$$ = { ...$1, ...$2 };"],
+  ],
+
+  ElementSelection: [
+    ["LiteralSelection", "$$ = { type: $1, fetchDataPath: '' };"],
+    ["LiteralSelection LiteralString", "$$ = { type: $1, fetchDataPath: $2 };"],
+  ],
+
+  SelectFetchFunction: [
+    ["( LiteralStringList )", "$$ = { options: $2 }"],
+    [
+      "url ( LiteralString )",
+      "$$ = { options: [], fetchUrl: $3, valueKey: 'id', labelKey: 'name' }",
+    ],
+    [
+      "url ( LiteralString , LiteralString )",
+      "$$ = { options: [], fetchUrl: $3, valueKey: $5, labelKey: 'name' }",
+    ],
+    [
+      "url ( LiteralString , LiteralString , LiteralString )",
+      "$$ = { options: [], fetchUrl: $3, valueKey: $5, labelKey: $7 }",
+    ],
   ],
 
   ExpressionConditionList: [
