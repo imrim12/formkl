@@ -120,6 +120,14 @@ module.exports = {
     ["<= LiteralNumber", "$$ = { $lteq: Number(yytext) };"],
     ["== LiteralNumber", "$$ = { $eq: Number(yytext) };"],
     ["== LiteralString", "$$ = { $eq: yytext };"],
+    ["!= LiteralNumber", "$$ = { $neq: Number(yytext) };"],
+    ["!= LiteralString", "$$ = { $neq: yytext };"],
+    ["has Element", "$$ = { $has: yytext };"],
+  ],
+
+  Element: [
+    ["LiteralString", "$$ = $1"],
+    ["LiteralNumber", "$$ = $1"],
   ],
 
   LiteralStringList: [

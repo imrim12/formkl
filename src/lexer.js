@@ -30,6 +30,7 @@ module.exports = {
     allowMatchToken(Token.COLON, true),
     allowMatchToken(Token.SEMICOLON, true),
     // Must goes before GT and LT
+    allowMatchToken(Token.NEQ, true),
     allowMatchToken(Token.GTEQ, true),
     allowMatchToken(Token.LTEQ, true),
     allowMatchToken(Token.EQ, true),
@@ -47,6 +48,7 @@ module.exports = {
     allowMatchToken(Token.INCLUDES, false, true),
     allowMatchToken(Token.MULTIPLE, false, true),
     allowMatchToken(Token.AS, false, true),
+    allowMatchToken(Token.HAS, false, true),
     ...Field.PHONE.map((f) => [f, returnToken(Token.FIELD)]),
     ...Field.DATETIME.map((f) => [f, returnToken(Token.FIELDDATETIME)]),
     ...Field.VALIDATED.map((f) => [f, returnToken(Token.FIELDVALIDATED)]),

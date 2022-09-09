@@ -17,6 +17,7 @@ module.exports = {
     COMMA: ",",
     COLON: ":",
     SEMICOLON: ";",
+    NEQ: "!=",
     GTEQ: ">=",
     LTEQ: "<=",
     EQ: "==",
@@ -28,6 +29,7 @@ module.exports = {
     AS: "as",
     OR: "or",
     AND: "and",
+    HAS: "has",
     //
     FIELDVALIDATED: "fieldvalidated",
     FIELDDATETIME: "fielddatetime",
