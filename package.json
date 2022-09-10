@@ -1,6 +1,6 @@
 {
   "name": "formkl",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Form markup language",
   "main": "dist/index.min.js",
   "types": "types/index.d.ts",

@@ -49,12 +49,14 @@ declare module "formkl" {
 
   interface Section {
     title: string;
+    key: string;
     multiple?: boolean;
     fields: Array<FieldDefault | FieldSelection>;
   }
 
   export interface Formkl {
     title?: string;
+    model: "base" | "flat";
     sections: Array<Section>;
   }
 

@@ -1,4 +1,5 @@
 {
+  "model": "base",
   "sections": [
     {
       "title": "Reverting location keywords",

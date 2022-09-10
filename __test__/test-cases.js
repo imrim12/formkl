@@ -1,6 +1,6 @@
 module.exports = [
   [
-    `Formkl {
+    ` Formkl flat {
       // Your info
     "Personal Information"includes {
      "Fullname" text;
@@ -30,6 +30,7 @@ module.exports = [
     }
   }`,
     {
+      model: "flat",
       sections: [
         {
           title: "Personal Information",
@@ -170,6 +171,7 @@ module.exports = [
     'formkl "A random survey" { "Personal Information" includes {email as "email";}}',
     {
       title: "A random survey",
+      model: "base",
       sections: [
         {
           title: "Personal Information",
@@ -187,8 +189,9 @@ module.exports = [
     },
   ],
   [
-    'formkl {"Personal Information"  includes   {require email;}}',
+    ' formkl base{"Personal Information"  includes   {require email;}}',
     {
+      model: "base",
       sections: [
         {
           title: "Personal Information",
@@ -208,6 +211,7 @@ module.exports = [
   [
     'formkl { "Personal Information"    includes {require "Fullname" text;}}',
     {
+      model: "base",
       sections: [
         {
           title: "Personal Information",
@@ -234,6 +238,7 @@ module.exports = [
   }
 }`,
     {
+      model: "base",
       sections: [
         {
           title: "Personal Information",
@@ -268,6 +273,7 @@ module.exports = [
     {
       title: "Some random survey",
       description: "This form is to survey and stuff ",
+      model: "base",
       sections: [
         {
           title: "Personal Information",
@@ -361,6 +367,7 @@ module.exports = [
     }
   }`,
     {
+      model: "base",
       sections: [
         {
           title: "Personal Information",
@@ -429,6 +436,7 @@ module.exports = [
   [
     'formkl {"Personal Information" includes {   US phone;}}',
     {
+      model: "base",
       sections: [
         {
           title: "Personal Information",
@@ -448,6 +456,7 @@ module.exports = [
   [
     'Formkl {   "Personal Information" includes  {require US phone;   }}',
     {
+      model: "base",
       sections: [
         {
           title: "Personal Information",
@@ -465,8 +474,9 @@ module.exports = [
     },
   ],
   [
-    'formkl {"Personal Information" includes  {require time;}}',
+    ' formkl flat {"Personal Information" includes  {require time;}}',
     {
+      model: "flat",
       sections: [
         {
           title: "Personal Information",
@@ -486,6 +496,7 @@ module.exports = [
   [
     'formkl {"Personal Information" includes {require "Date of birth" birthday;}}',
     {
+      model: "base",
       sections: [
         {
           title: "Personal Information",
@@ -510,6 +521,7 @@ module.exports = [
   }
   `,
     {
+      model: "base",
       sections: [
         {
           title: "Re-Index User",
@@ -537,6 +549,7 @@ module.exports = [
   }
   `,
     {
+      model: "base",
       sections: [
         {
           title: "Reverting location keywords",
@@ -590,6 +603,7 @@ module.exports = [
   }
   `,
     {
+      model: "base",
       sections: [
         {
           title: "Target",

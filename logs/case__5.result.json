@@ -1,4 +1,5 @@
 {
+  "model": "base",
   "title": "Some random survey",
   "description": "This form is to survey and stuff ",
   "sections": [

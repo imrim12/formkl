@@ -37,6 +37,8 @@ module.exports = {
     FIELD: "field",
     INCLUDES: "includes",
     MULTIPLE: "multiple",
+    BASE: "base",
+    FLAT: "flat",
     //
     VALID: "valid",
     REGEX: "regex",
