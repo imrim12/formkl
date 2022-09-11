@@ -1,63 +1,57 @@
 # Formkl - Form markup language (WORK IN PROGRESS)
 
+First beta can be avaialable by the end of September 2022.
+
 Formkl (Form markup language) is an open-source DSL (Domain-Specific Language) to define and create form schema. It is designed to be simple, consistent and highly readable as natural language.
 
 ## Basic example
 
-Basic signin form with email, password and checkbox fields
+Install the parser
+
+```bash
+# install the package
+npm install formkl
+
+# with yarn
+yarn add formkl
+```
 
 ```javascript
-import { parser } from "formkl";
+import FormklParser from "formkl";
 
 const yourFormklSyntax = `
   formkl {
-    "Signin Form" includes {
-      require email;
-      require password;
-      "Remember me" checkbox;
+    "Personal Information"includes {
+      "Fullname" text;
+      "Bio" paragraph;
     }
   }
 `;
 
-const parsedForm = parser.parse(yourFormklSyntax);
+const parsedForm = FormklParser.parse(yourFormklSyntax);
 ```
 
 The above formkl will be parsed into
 
 ```json
 {
-  "authentication": {
-    "required": false,
-    "allows": []
-  },
-  "layout": null,
-  "maxResponses": null,
+  "model": "flat",
   "sections": [
     {
-      "key": "signin-form",
-      "title": "Signin Form",
+      "title": "Personal Information",
+      "key": "personal-information2",
       "fields": [
         {
-          "key": "email",
-          "label": "Email",
-          "type": "TEXT",
-          "validation": {
-            "regex": "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"
-          },
-          "required": true
+          "type": "text",
+          "label": "Fullname",
+          "require": false,
+          "key": "fullname"
         },
         {
-          "key": "password",
-          "label": "Password",
-          "type": "PASSWORD",
-          "validation": null,
-          "required": true
-        },
-        {
-          "key": "remember-me",
-          "label": "Remember me",
-          "type": "CHECKBOX",
-          "required": false
+          "type": "paragraph",
+          "label": "Bio",
+          "require": false,
+          "key": "bio"
         }
       ]
     }
@@ -66,73 +60,41 @@ The above formkl will be parsed into
 ```
 
 This piece of JSON can be rendered into UI using our Formkl Adapter
+Or you can just use this to implement your own render logic.
 
 ## Adapter
 
 ### Vue guide
 
-This can be re-used across your application.
+```bash
+# install the package
+npm install @formkl/vue
 
-`Formkl.vue`
-
-```js
-import { parser } from "formkl";
-import FormklAdapter from "@formkl/vue";
-
-export default defineComponent({
-  props: {
-    formkl: {
-      type: String,
-      required: true,
-    },
-  },
-  setup() {
-    const { FormklVNode } = FormklAdapter.create({
-      form: parser.parse(props.formkl),
-      options: {},
-    });
-
-    return () => FormklVNode;
-  },
-});
+# with yarn
+yarn add @formkl/vue
 ```
 
 `YourPage.vue`
 
-Now create any form with ease.
-
 ```html
 <template>
-  <Formkl :formkl="formKl" @change="handleFormChange" />
+  <Formkl v-model="formData">
+    {{` formkl { "Personal Information"includes { "Fullname" text; "Bio" paragraph; } } `}}
+  </Formkl>
 </template>
 ```
 
 ```html
 <script>
+  import { ref } from "vue";
+  import { Formkl } from "@formkl/vue";
+
   export default defineComponent({
     setup() {
-      const formKl = `
-        formkl {
-          "Signin Form" includes {
-            require email;
-            require password;
-            "Remember me" checkbox;
-          }
-        }
-      `;
-
-      const handleFormSubmit = async (payload) => {
-        try {
-          const response = await axios.post("/api/your-api", payload);
-          console.log("Form submitted", response);
-        } catch (error) {
-          console.log("Form submit error", error);
-        }
-      };
+      const formData = ref({});
 
       return {
-        formKl,
-        handleFormSubmit,
+        formData,
       };
     },
   });
@@ -141,51 +103,71 @@ Now create any form with ease.
 
 ### React guide
 
-This can be re-used across your application.
-
-`Formkl.jsx`
-
-```jsx
-import { parser } from "formkl";
-import FormklAdapter from "@formkl/react";
-
-export default ({ formkl }) => {
-  const { FormklVNode } = FormklAdapter.create({
-    form: parser.parse(formkl),
-    options: {},
-  });
-
-  return <FormklVNode />;
-};
-```
-
-`YourPage.jsx`
-
-Now create any form with ease.
-
-```jsx
-export default () => {
-  const formKl = `
-    formkl {
-      "Signin Form" includes {
-        require email;
-        require password;
-        "Remember me" checkbox;
-      }
-    }
-  `;
-
-  const handleFormSubmit = async (payload) => {
-    try {
-      const response = await axios.post("/api/your-api", payload);
-      console.log("Form submitted", response);
-    } catch (error) {
-      console.log("Form submit error", error);
-    }
-  };
-
-  return <Formkl formkl={formKl} onSubmit={handleFormSubmit} />;
-};
-```
+(coming soon)
 
 ## Syntax
+
+### Form Declaration
+
+```bash
+# Minimal declaration
+formkl {
+	"" includes {
+		text;
+	}
+}
+```
+
+```bash
+# Clear example
+formkl "Your form title" {
+	"Your section" includes {
+		text;
+		"Another text with label" text;
+	}
+}
+# Or with description
+formkl
+	"Your form title"
+	"Your form description"
+{
+	"Your section" includes {
+		text;
+		"Another text with label" text;
+	}
+}
+```
+
+### Field Expression
+
+```bash
+["multiple"] ["require"] [LABEL] [FIELD NAME] [VALIDATION];
+
+# Examples:
+
+text;
+
+"Field with label" text;
+
+require "Your name" text;
+
+multiple "Favourite food" text;
+
+multiple require "Home Address" text;
+```
+
+### Field Validation
+
+Formkl support parsing a set of condition with `or` and `and` operators in `valid` conditional expression
+
+```bash
+valid([CONDITION]) regex("[REGULAR EXPRESSION STRING]")
+
+# Examples:
+
+"Grade" number valid(< 12 and >= 1);
+
+"Note" paragraph regex("[A-z0-9]");
+
+"Short answer" text regex("[A-z0-9]") valid(< 256);
+```
