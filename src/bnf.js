@@ -4,7 +4,11 @@ module.exports = {
   ExpressionForm: [
     [
       "ExpressionDeclarationForm { ExpressionSectionList }",
-      "keyPool = {}; sectionKeyPool = {}; return $$ = { ...$1, sections: $3 };",
+      `
+      keyPool = {};
+      sectionKeyPool = {};
+      return $$ = { ...$1, sections: $3 };
+      `,
     ],
     [
       "ExpressionDeclarationForm LiteralString { ExpressionSectionList }",
@@ -34,7 +38,10 @@ module.exports = {
     ],
     [
       "multiple LiteralString includes { ExpressionFieldValidList }",
-      "$$ = { title: $2, key: generateKey($2, 'section'), multiple: true, fields: $5 };",
+      `
+      $$ = { title: $2, key: generateKey($2, 'section'), multiple: true, fields: $5 };
+      throwIfHasMultipleFields($5)
+      `,
     ],
   ],
 

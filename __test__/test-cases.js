@@ -358,7 +358,7 @@ module.exports = [
      US phone;
 
     }
-    multiple "Other Information"includes {
+    "Other Information"includes {
       multiple require zip;
       
       
@@ -410,7 +410,6 @@ module.exports = [
         {
           title: "Other Information",
           key: "other-information",
-          multiple: true,
           fields: [
             {
               type: "zip",

@@ -14,6 +14,9 @@ const ast = {
 
     let keyPool = {};
     let sectionKeyPool = {};
+
+    let sectionMultiplePool = {};
+
     function generateKey(key, type = "field", duplicateCount = 1) {
       let result = slugify(key).toLowerCase();
       
@@ -35,12 +38,16 @@ const ast = {
       }
     }
 
-    const generateLabel = (str = "") => {
+    function generateLabel(str = "") {
       const words = str.split(" ");
 
       return words.map((word) => { 
         return word[0].toUpperCase() + word.substring(1); 
       }).join(" ");
+    }
+
+    function throwIfHasMultipleFields(fields) {
+      if (fields.some(f => f.multiple)) throw new SyntaxError("[Formkl]: A multiple response section cannot have multiple response fields!")
     }
   `,
 };
