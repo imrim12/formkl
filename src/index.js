@@ -12,9 +12,9 @@ const ast = {
   moduleInclude: `
     const slugify = require("slugify");
 
-    const keyPool = {};
-    const sectionKeyPool = {};
-    const generateKey = (key, type = "field", duplicateCount = 1) => {
+    let keyPool = {};
+    let sectionKeyPool = {};
+    function generateKey(key, type = "field", duplicateCount = 1) {
       let result = slugify(key).toLowerCase();
       
       const pool = type === "section" ? sectionKeyPool : keyPool
