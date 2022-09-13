@@ -108,7 +108,14 @@ module.exports = {
   ],
 
   ExpressionCondition: [
-    ["ExpressionConditionAdditional", `$$ = $1['$' + 'or'].length === 1 ? $1['$' + 'or'][0] : $1;`],
+    [
+      "ExpressionConditionAdditional",
+      `$$ = !$1['$' + 'or']
+        ? $1
+        : $1['$' + 'or'].length === 1
+          ? $1['$' + 'or'][0]
+          : $1;`,
+    ],
   ],
 
   ExpressionConditionAdditional: [
@@ -148,7 +155,14 @@ module.exports = {
   ],
 
   ExpressionConditionPrimary: [
-    ["( ExpressionConditionAdditional )", "$$ = $2;"],
+    [
+      "( ExpressionConditionAdditional )",
+      `$$ = !$2['$' + 'or']
+        ? $2
+        : $2['$' + 'or'].length === 1
+          ? $2['$' + 'or'][0]
+          : $2;`,
+    ],
     ["Condition", "$$ = $1"],
   ],
 
