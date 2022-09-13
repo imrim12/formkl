@@ -46,7 +46,6 @@
     {
       "title": "Other Information",
       "key": "other-information",
-      "multiple": true,
       "fields": [
         {
           "type": "zip",
