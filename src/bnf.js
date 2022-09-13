@@ -108,27 +108,47 @@ module.exports = {
   ],
 
   ExpressionCondition: [
-    ["ExpressionMutiplicativeCondition", "$$ = $1;"],
-    ["ExpressionAdditionalCondition", "$$ = $1;"],
+    ["ExpressionConditionAdditional", `$$ = $1['$' + 'or'].length === 1 ? $1['$' + 'or'][0] : $1;`],
   ],
 
-  ExpressionMutiplicativeCondition: [
-    ["ExpressionConditionPrimary", "$$ = $1;"],
+  ExpressionConditionAdditional: [
     [
-      "ExpressionConditionPrimary and ExpressionConditionPrimary",
-      "$$ = { ['$' + 'and']: [ $1, $3 ] }",
+      "ExpressionConditionMutiplicative",
+      `$$ = {
+        ['$' + 'or']: [
+          !$1['$' + 'and']
+            ? $1
+            : $1['$' + 'and'].length === 1
+              ? $1['$' + 'and'][0]
+              : $1,
+        ]
+      };`,
+    ],
+    [
+      "ExpressionConditionAdditional or ExpressionConditionMutiplicative",
+      `$$ = {
+        ['$' + 'or']: [
+          ...$1['$' + 'or'],
+          !$3['$' + 'and']
+            ? $3
+            : $3['$' + 'and'].length === 1
+              ? $3['$' + 'and'][0]
+              : $3,
+        ]
+      };`,
     ],
   ],
 
-  ExpressionAdditionalCondition: [
+  ExpressionConditionMutiplicative: [
+    ["ExpressionConditionPrimary", `$$ = { ['$' + 'and']: [ $1 ] }`],
     [
-      "ExpressionMutiplicativeCondition or ExpressionMutiplicativeCondition",
-      "$$ = { ['$' + 'or']: [ $1, $3 ] }",
+      "ExpressionConditionMutiplicative and ExpressionConditionPrimary",
+      `$$ = { ['$' + 'and']: [ ...$1['$' + 'and'], $3 ] };`,
     ],
   ],
 
   ExpressionConditionPrimary: [
-    ["( ExpressionAdditionalCondition )", "$$ = $2"],
+    ["( ExpressionConditionAdditional )", "$$ = $2;"],
     ["Condition", "$$ = $1"],
   ],
 
@@ -137,10 +157,8 @@ module.exports = {
     ["< LiteralNumber", "$$ = { $lt: Number(yytext) };"],
     [">= LiteralNumber", "$$ = { $gteq: Number(yytext) };"],
     ["<= LiteralNumber", "$$ = { $lteq: Number(yytext) };"],
-    ["== LiteralNumber", "$$ = { $eq: Number(yytext) };"],
-    ["== LiteralString", "$$ = { $eq: yytext };"],
-    ["!= LiteralNumber", "$$ = { $neq: Number(yytext) };"],
-    ["!= LiteralString", "$$ = { $neq: yytext };"],
+    ["== Element", "$$ = { $eq: isNaN(yytext) ? yytext : Number(yytext) };"],
+    ["!= Element", "$$ = { $neq: isNaN(yytext) ? yytext : Number(yytext) };"],
     ["has Element", "$$ = { $has: yytext };"],
   ],
 

@@ -5,7 +5,7 @@
   "main": "dist/index.min.js",
   "types": "types/index.d.ts",
   "scripts": {
-    "test": "rimraf __test__/**/*.test.js && node __test__/index.js && jest",
+    "test": "jest",
     "build": "bash ./scripts/build.sh && yarn test",
     "syntax": "./node_modules/.bin/syntax-cli"
   },
