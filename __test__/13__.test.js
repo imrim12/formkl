@@ -15,12 +15,22 @@ const testCase = `formkl {
 test(testCase, () => {
   const result = parser.parse(testCase);
 
+  fs.writeFileSync(
+    path.resolve(__dirname, "../logs/13__.result.json"),
+    JSON.stringify(result, null, 2),
+  );
+
   expect(result).toStrictEqual({
     model: "base",
+    method: "",
+    endpoint: "",
+    title: "",
+    description: "",
     sections: [
       {
         title: "Reverting location keywords",
         key: "reverting-location-keywords",
+        multiple: false,
         fields: [
           {
             type: "select",
@@ -32,10 +42,29 @@ test(testCase, () => {
             label: "Target Company",
             require: true,
             key: "target-company",
+            multiple: false,
           },
-          { type: "text", label: "From keyword", require: true, key: "from-keyword" },
-          { type: "text", label: "To keyword", require: true, key: "to-keyword" },
-          { type: "switch", label: "Force update", require: false, key: "force-update" },
+          {
+            type: "text",
+            label: "From keyword",
+            require: true,
+            key: "from-keyword",
+            multiple: false,
+          },
+          {
+            type: "text",
+            label: "To keyword",
+            require: true,
+            key: "to-keyword",
+            multiple: false,
+          },
+          {
+            type: "switch",
+            label: "Force update",
+            require: false,
+            key: "force-update",
+            multiple: false,
+          },
         ],
       },
     ],

@@ -43,5 +43,11 @@ module.exports = {
     VALID: "valid",
     REGEX: "regex",
     URL: "url",
+    //
+    GET: "get",
+    POST: "post",
+    PUT: "put",
+    PATCH: "patch",
+    DELETE: "delete",
   }),
 };

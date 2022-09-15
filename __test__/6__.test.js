@@ -14,16 +14,30 @@ const testCase = `formkl "Some random survey" "This form is to survey and stuff 
 test(testCase, () => {
   const result = parser.parse(testCase);
 
+  fs.writeFileSync(
+    path.resolve(__dirname, "../logs/6__.result.json"),
+    JSON.stringify(result, null, 2),
+  );
+
   expect(result).toStrictEqual({
+    model: "base",
+    method: "",
+    endpoint: "",
     title: "Some random survey",
     description: "This form is to survey and stuff ",
-    model: "base",
     sections: [
       {
         title: "Personal Information",
         key: "personal-information",
+        multiple: false,
         fields: [
-          { type: "text", label: "Fullname", require: false, key: "fullname" },
+          {
+            type: "text",
+            label: "Fullname",
+            require: false,
+            key: "fullname",
+            multiple: false,
+          },
           {
             type: "paragraph",
             label: "Bio",
@@ -31,8 +45,23 @@ test(testCase, () => {
             key: "bio",
             validation: {
               regex: "^[a-zA-Z]$",
-              $and: [{ $or: [{ $gt: 100 }, { $eq: 100 }] }, { $lt: 300 }],
+              $and: [
+                {
+                  $or: [
+                    {
+                      $gt: 100,
+                    },
+                    {
+                      $eq: 100,
+                    },
+                  ],
+                },
+                {
+                  $lt: 300,
+                },
+              ],
             },
+            multiple: false,
           },
           {
             type: "paragraph",
@@ -41,15 +70,32 @@ test(testCase, () => {
             key: "bio1",
             validation: {
               regex: "^[a-zA-Z]$",
-              $or: [{ $eq: 500 }, { $and: [{ $gt: 100 }, { $lt: 300 }] }],
+              $or: [
+                {
+                  $eq: 500,
+                },
+                {
+                  $and: [
+                    {
+                      $gt: 100,
+                    },
+                    {
+                      $lt: 300,
+                    },
+                  ],
+                },
+              ],
             },
+            multiple: false,
           },
           {
             type: "text",
             label: "Custom regex",
             require: false,
             key: "custom-regex",
-            validation: { regex: "^[a-zA-Z]$" },
+            validation: {
+              regex: "^[a-zA-Z]$",
+            },
             multiple: true,
           },
         ],

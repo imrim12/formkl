@@ -13,14 +13,22 @@ formkl {
 test(testCase, () => {
   const result = parser.parse(testCase);
 
-  console.log(JSON.stringify(result, null, 2));
+  fs.writeFileSync(
+    path.resolve(__dirname, "../logs/19__.result.json"),
+    JSON.stringify(result, null, 2),
+  );
 
   expect(result).toStrictEqual({
     model: "base",
+    method: "",
+    endpoint: "",
+    title: "",
+    description: "",
     sections: [
       {
         title: "Personal Information",
         key: "personal-information",
+        multiple: false,
         fields: [
           {
             type: "text",
@@ -54,6 +62,7 @@ test(testCase, () => {
                 },
               ],
             },
+            multiple: false,
           },
         ],
       },

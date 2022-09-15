@@ -3,20 +3,36 @@ const { Token } = require("./enum/token.enum");
 module.exports = {
   ExpressionForm: [
     [
-      "ExpressionDeclarationForm { ExpressionSectionList }",
+      "ExpressionSubmittedForm { ExpressionSectionList }",
       `
       keyPool = {};
       sectionKeyPool = {};
-      return $$ = { ...$1, sections: $3 };
+      return $$ = { ...$1, title: '', description: '', sections: $3 };
       `,
     ],
     [
-      "ExpressionDeclarationForm LiteralString { ExpressionSectionList }",
-      "return $$ = { ...$1, title: $2, sections: $4 };",
+      "ExpressionSubmittedForm LiteralString { ExpressionSectionList }",
+      `
+      keyPool = {};
+      sectionKeyPool = {};
+      return $$ = { ...$1, title: $2, description: '', sections: $4 };
+      `,
     ],
     [
-      "ExpressionDeclarationForm LiteralString LiteralString { ExpressionSectionList }",
-      "return $$ = { ...$1, title: $2, description: $3, sections: $5 };",
+      "ExpressionSubmittedForm LiteralString LiteralString { ExpressionSectionList }",
+      `
+      keyPool = {};
+      sectionKeyPool = {};
+      return $$ = { ...$1, title: $2, description: $3, sections: $5 };
+      `,
+    ],
+  ],
+
+  ExpressionSubmittedForm: [
+    ["ExpressionDeclarationForm", "$$ = { ...$1, method: '', endpoint: '' };"],
+    [
+      "ExpressionDeclarationForm LiteralRequestMethod ( LiteralString )",
+      "$$ = { ...$1, method: $2, endpoint: $4 };",
     ],
   ],
 
@@ -34,7 +50,7 @@ module.exports = {
   ExpressionSection: [
     [
       "LiteralString includes { ExpressionFieldValidList }",
-      "$$ = { title: $1, key: generateKey($1, 'section'), fields: $4 };",
+      "$$ = { title: $1, key: generateKey($1, 'section'), multiple: false, fields: $4 };",
     ],
     [
       "multiple LiteralString includes { ExpressionFieldValidList }",
@@ -51,7 +67,7 @@ module.exports = {
   ],
 
   ExpressionFieldMultiple: [
-    ["ExpressionFieldValid ;", "$$ = $1;"],
+    ["ExpressionFieldValid ;", "$$ = { ...$1, multiple: false };"],
     ["multiple ExpressionFieldValid ;", "$$ = { ...$2, multiple: true };"],
   ],
 
@@ -192,6 +208,14 @@ module.exports = {
     [Token.FIELD, "$$ = yytext;"],
     [Token.FIELDDATETIME, "$$ = yytext;"],
     [Token.FIELDVALIDATED, "$$ = yytext;"],
+  ],
+
+  LiteralRequestMethod: [
+    [Token.GET, "$$ = yytext;"],
+    [Token.POST, "$$ = yytext;"],
+    [Token.PUT, "$$ = yytext;"],
+    [Token.PATCH, "$$ = yytext;"],
+    [Token.DELETE, "$$ = yytext;"],
   ],
 
   LiteralString: [[Token.STRING, "$$ = yytext;"]],

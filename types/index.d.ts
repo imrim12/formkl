@@ -11,6 +11,7 @@ declare module "formkl" {
     $gteq?: string | number;
     $lteq?: string | number;
     $eq?: string | number;
+    $has?: string | number;
     $and?: Array<ValidationOperator>;
     $or?: Array<ValidationOperator>;
   }
@@ -26,18 +27,18 @@ declare module "formkl" {
       | "daterange"
       | "timerange"
       | "datetimerange";
-    label?: string;
+    label: string;
     require: boolean;
-    multiple?: boolean;
+    multiple: boolean;
     key: string;
     validation?: Validation;
   }
 
   interface FieldSelection {
     type: "checkbox" | "radio" | "select";
-    label?: string;
+    label: string;
     require: boolean;
-    multiple?: boolean;
+    multiple: boolean;
     options: Array<any>;
     fetchDataPath?: string;
     fetchUrl?: string;
@@ -50,13 +51,16 @@ declare module "formkl" {
   interface Section {
     title: string;
     key: string;
-    multiple?: boolean;
+    multiple: boolean;
     fields: Array<FieldDefault | FieldSelection>;
   }
 
   export interface Formkl {
-    title?: string;
+    title: string;
+    description: string;
     model: "base" | "flat";
+    method: "get" | "post" | "put" | "patch" | "delete";
+    endpoint: string;
     sections: Array<Section>;
   }
 

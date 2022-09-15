@@ -7,13 +7,31 @@ const testCase = ' formkl flat {"Personal Information" includes  {require time;}
 test(testCase, () => {
   const result = parser.parse(testCase);
 
+  fs.writeFileSync(
+    path.resolve(__dirname, "../logs/10__.result.json"),
+    JSON.stringify(result, null, 2),
+  );
+
   expect(result).toStrictEqual({
     model: "flat",
+    method: "",
+    endpoint: "",
+    title: "",
+    description: "",
     sections: [
       {
         title: "Personal Information",
         key: "personal-information",
-        fields: [{ type: "time", label: "Time", require: true, key: "time" }],
+        multiple: false,
+        fields: [
+          {
+            type: "time",
+            label: "Time",
+            require: true,
+            key: "time",
+            multiple: false,
+          },
+        ],
       },
     ],
   });

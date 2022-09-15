@@ -7,13 +7,31 @@ const testCase = 'formkl {"Personal Information" includes {require "Date of birt
 test(testCase, () => {
   const result = parser.parse(testCase);
 
+  fs.writeFileSync(
+    path.resolve(__dirname, "../logs/11__.result.json"),
+    JSON.stringify(result, null, 2),
+  );
+
   expect(result).toStrictEqual({
     model: "base",
+    method: "",
+    endpoint: "",
+    title: "",
+    description: "",
     sections: [
       {
         title: "Personal Information",
         key: "personal-information",
-        fields: [{ type: "birthday", label: "Date of birth", require: true, key: "date-of-birth" }],
+        multiple: false,
+        fields: [
+          {
+            type: "birthday",
+            label: "Date of birth",
+            require: true,
+            key: "date-of-birth",
+            multiple: false,
+          },
+        ],
       },
     ],
   });

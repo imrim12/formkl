@@ -12,13 +12,31 @@ const testCase = `formkl {
 test(testCase, () => {
   const result = parser.parse(testCase);
 
+  fs.writeFileSync(
+    path.resolve(__dirname, "../logs/12__.result.json"),
+    JSON.stringify(result, null, 2),
+  );
+
   expect(result).toStrictEqual({
     model: "base",
+    method: "",
+    endpoint: "",
+    title: "",
+    description: "",
     sections: [
       {
         title: "Re-Index User",
         key: "re-index-user",
-        fields: [{ type: "email", label: "User email", require: true, key: "user-email" }],
+        multiple: false,
+        fields: [
+          {
+            type: "email",
+            label: "User email",
+            require: true,
+            key: "user-email",
+            multiple: false,
+          },
+        ],
       },
     ],
   });

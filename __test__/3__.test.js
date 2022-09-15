@@ -7,13 +7,31 @@ const testCase = ' formkl base{"Personal Information"  includes   {require email
 test(testCase, () => {
   const result = parser.parse(testCase);
 
+  fs.writeFileSync(
+    path.resolve(__dirname, "../logs/3__.result.json"),
+    JSON.stringify(result, null, 2),
+  );
+
   expect(result).toStrictEqual({
     model: "base",
+    method: "",
+    endpoint: "",
+    title: "",
+    description: "",
     sections: [
       {
         title: "Personal Information",
         key: "personal-information",
-        fields: [{ type: "email", label: "Email", require: true, key: "email" }],
+        multiple: false,
+        fields: [
+          {
+            type: "email",
+            label: "Email",
+            require: true,
+            key: "email",
+            multiple: false,
+          },
+        ],
       },
     ],
   });

@@ -51,6 +51,13 @@ module.exports = {
     allowMatchToken(Token.LT, true),
     allowMatchToken(Token.AND, true),
     allowMatchToken(Token.OR, true),
+    // Submit method
+    allowMatchToken(Token.GET, false, true),
+    allowMatchToken(Token.POST, false, true),
+    allowMatchToken(Token.PUT, false, true),
+    allowMatchToken(Token.PATCH, false, true),
+    allowMatchToken(Token.DELETE, false, true),
+    // Field
     ...Field.PHONE.map((f) => [f, returnToken(Token.FIELD)]),
     ...Field.DATETIME.map((f) => [f, returnToken(Token.FIELDDATETIME)]),
     ...Field.VALIDATED.map((f) => [f, returnToken(Token.FIELDVALIDATED)]),

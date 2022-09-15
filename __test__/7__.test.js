@@ -23,15 +23,30 @@ const testCase = `formkl {
 test(testCase, () => {
   const result = parser.parse(testCase);
 
+  fs.writeFileSync(
+    path.resolve(__dirname, "../logs/7__.result.json"),
+    JSON.stringify(result, null, 2),
+  );
+
   expect(result).toStrictEqual({
     model: "base",
+    method: "",
+    endpoint: "",
+    title: "",
+    description: "",
     sections: [
       {
         title: "Personal Information",
         key: "personal-information",
         multiple: true,
         fields: [
-          { type: "text", label: "Fullname", require: false, key: "fullname" },
+          {
+            type: "text",
+            label: "Fullname",
+            require: false,
+            key: "fullname",
+            multiple: false,
+          },
           {
             type: "radio",
             fetchDataPath: "",
@@ -39,6 +54,7 @@ test(testCase, () => {
             label: "Gender",
             require: false,
             key: "gender",
+            multiple: false,
           },
           {
             type: "select",
@@ -50,21 +66,38 @@ test(testCase, () => {
             label: "Current Company",
             require: true,
             key: "current-company",
+            multiple: false,
           },
-          { type: "US phone", label: "US Phone", require: false, key: "us-phone" },
+          {
+            type: "US phone",
+            label: "US Phone",
+            require: false,
+            key: "us-phone",
+            multiple: false,
+          },
         ],
       },
       {
         title: "Other Information",
         key: "other-information",
+        multiple: false,
         fields: [
-          { type: "zip", label: "Zip", require: true, key: "zip", multiple: true },
+          {
+            type: "zip",
+            label: "Zip",
+            require: true,
+            key: "zip",
+            multiple: true,
+          },
           {
             type: "text",
             label: "Some field",
             require: false,
             key: "some-field",
-            validation: { $lt: 512 },
+            validation: {
+              $lt: 512,
+            },
+            multiple: false,
           },
         ],
       },

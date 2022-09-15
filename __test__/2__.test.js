@@ -7,14 +7,31 @@ const testCase = 'formkl "A random survey" { "Personal Information" includes {em
 test(testCase, () => {
   const result = parser.parse(testCase);
 
+  fs.writeFileSync(
+    path.resolve(__dirname, "../logs/2__.result.json"),
+    JSON.stringify(result, null, 2),
+  );
+
   expect(result).toStrictEqual({
-    title: "A random survey",
     model: "base",
+    method: "",
+    endpoint: "",
+    title: "A random survey",
+    description: "",
     sections: [
       {
         title: "Personal Information",
         key: "personal-information",
-        fields: [{ type: "email", label: "Email", require: false, key: "email" }],
+        multiple: false,
+        fields: [
+          {
+            type: "email",
+            label: "Email",
+            require: false,
+            key: "email",
+            multiple: false,
+          },
+        ],
       },
     ],
   });
