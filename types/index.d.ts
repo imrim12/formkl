@@ -20,6 +20,7 @@ declare module "formkl" {
     type:
       | "text"
       | "paragraph"
+      | "switch"
       | "number"
       | "date"
       | "time"
