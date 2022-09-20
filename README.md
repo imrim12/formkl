@@ -36,22 +36,29 @@ The above formkl will be parsed into
 ```json
 {
   "model": "flat",
+  "method": "",
+  "endpoint": "",
+  "title": "",
+  "description": "",
   "sections": [
     {
       "title": "Personal Information",
       "key": "personal-information2",
+      "multiple": false,
       "fields": [
         {
           "type": "text",
           "label": "Fullname",
           "require": false,
-          "key": "fullname"
+          "key": "fullname",
+          "multiple": false
         },
         {
           "type": "paragraph",
           "label": "Bio",
           "require": false,
-          "key": "bio"
+          "key": "bio",
+          "multiple": false
         }
       ]
     }
@@ -78,9 +85,16 @@ yarn add @formkl/vue
 
 ```html
 <template>
-  <Formkl v-model="formData">
-    {{` formkl { "Personal Information"includes { "Fullname" text; "Bio" paragraph; } } `}}
-  </Formkl>
+  <div>
+    <Formkl
+      ref="formklRef"
+      :formkl="formklSyntax"
+      :options="formklOptions"
+    />
+    <button @click="submit">
+      Submit
+    </button>
+  </div>
 </template>
 ```
 
@@ -91,10 +105,38 @@ yarn add @formkl/vue
 
   export default defineComponent({
     setup() {
-      const formData = ref({});
+      const formklOptions = {
+        // ... use formkl default submit method
+        // or
+        // override the default submit method
+        async submitMethod(url, method, model) {
+          // process your model, do anything here
+
+          await $axios.request({
+            url,
+            method,
+            data: model,
+          });
+        },
+      };
+      const formklRef = ref(); // Vue template ref
+      const formklSyntax = `
+        formkl flat post("/your/api") {
+          "Personal Information"includes {
+            "Fullname" text;
+            "Bio" paragraph;
+          }
+        }
+      `;
+
+      const submit = () => {
+        formklRef.value.submit();
+      };
 
       return {
-        formData,
+        formklOptions,
+        formklSyntax,
+        submit,
       };
     },
   });
@@ -120,7 +162,7 @@ formkl {
 
 ```bash
 # Clear example
-formkl "Your form title" {
+formkl flat "Your form title" {
 	"Your section" includes {
 		text;
 		"Another text with label" text;
@@ -138,6 +180,58 @@ formkl
 }
 ```
 
+## Form model
+
+There are 2 types of form model: basic and flattened
+
+By default, formkl will use the basic model
+
+```bash
+# Basic model declaration
+formkl
+# or
+formkl base
+```
+
+The model structure would look like this
+
+```json
+{
+  "data": [
+    {
+      "type": "text",
+      "label": "Fullname",
+      "require": false,
+      "key": "fullname",
+      "multiple": false
+    },
+    {
+      "type": "paragraph",
+      "label": "Bio",
+      "require": false,
+      "key": "bio",
+      "multiple": false
+    }
+  ]
+}
+```
+
+If you want to use a flattened model style, you can use the `flat` keyword
+
+```bash
+# Flattened model declaration
+formkl flat
+```
+
+And the model structure would look like this
+
+```json
+{
+  "fullname": "",
+  "bio": ""
+}
+```
+
 ### Field Expression
 
 ```bash
@@ -145,15 +239,23 @@ formkl
 
 # Examples:
 
+# Default field, has "Text" as label by default
 text;
 
+# With label
 "Field with label" text;
 
+# Required field
 require "Your name" text;
 
+# Allow multiple responses
 multiple "Favourite food" text;
 
+# Allow multiple responses and no empty answer allowed
 multiple require "Home Address" text;
+
+# With alias
+multiple require "Home Address" text as "address_1";
 ```
 
 ### Field Validation
