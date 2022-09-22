@@ -1,3 +1,3 @@
-import {isValueValidated} from './validation';
+import { isValueValidated } from './validation';
 
-export {isValueValidated};
+export { isValueValidated };

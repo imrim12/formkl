@@ -2,14 +2,12 @@
   "name": "@formkl/vue",
   "version": "0.0.2-alpha-10",
   "description": "A Vue adapter for Formkl",
+  "type": "module",
   "main": "dist/index.es.js",
   "types": "dist/types",
-  "scripts": {
-    "build": "rimraf dist && vue-tsc && vite build"
-  },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/formkl/vue.git"
+    "url": "git+https://github.com/formkl/formkl.git"
   },
   "keywords": [
     "formkl"
@@ -17,9 +15,9 @@
   "author": "thecodeorigin",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/formkl/vue/issues"
+    "url": "https://github.com/formkl/formkl/issues"
   },
-  "homepage": "https://github.com/formkl/vue#readme",
+  "homepage": "https://github.com/formkl/formkl#readme",
   "dependencies": {
     "@formkl/utils": "^0.0.1-alpha-2",
     "element-plus": "^2.2.16",

@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "allowJs": true,
     "target": "esnext",
     "useDefineForClassFields": true,
     "module": "esnext",
@@ -12,10 +13,11 @@
     "lib": ["esnext", "dom"],
     "declaration": true,
     "emitDeclarationOnly": true,
-    "declarationDir": "./dist/types",
     "isolatedModules": true,
     "skipLibCheck": true,
-    "types": ["vite/client"]
+    "types": ["vite/client"],
+    "outDir": "./dist",
+    "declarationDir": "./dist/types"
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "src/index.js"]
+  "include": ["**/*.js", "**/*.jsx", "**/*.ts", "**/*.d.ts", "**/*.tsx", "**/*.vue"]
 }

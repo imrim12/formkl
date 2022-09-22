@@ -1,18 +1,19 @@
 {
   "name": "@formkl/all",
+  "type": "module",
   "description": "Form markup language",
   "scripts": {
     "test": "vitest",
     "build": "bash ./scripts/build_parser.sh",
-    "build:vue": "",
-    "build:react": "",
-    "build:editor": "",
-    "build:docs": "",
+    "build:vue": "bash ./scripts/build_vue.sh",
+    "build:react": "bash ./scripts/build_react.sh",
+    "build:editor": "bash ./scripts/build_editor.sh",
+    "build:docs": "bash ./scripts/build_docs.sh",
     "pub": "bash ./scripts/publish_parser.sh",
-    "pub:vue": "",
-    "pub:react": "",
-    "pub:editor": "",
-    "pub:docs": "",
+    "pub:vue": "bash ./scripts/publish_vue.sh",
+    "pub:react": "bash ./scripts/publish_react.sh",
+    "pub:editor": "bash ./scripts/publish_editor.sh",
+    "pub:docs": "bash ./scripts/publish_docs.sh",
     "generate:parser": "./node_modules/.bin/syntax-cli"
   },
   "repository": {
@@ -35,6 +36,7 @@
   "homepage": "https://github.com/formkl/formkl#readme",
   "devDependencies": {
     "@babel/preset-typescript": "^7.18.6",
+    "@types/lodash": "^4.14.185",
     "@types/node": "^18.7.18",
     "@typescript-eslint/eslint-plugin": "^5.38.0",
     "@typescript-eslint/parser": "^5.38.0",

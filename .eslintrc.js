@@ -33,16 +33,16 @@ module.exports = {
     'no-unused-vars': 'off',
     '@typescript-eslint/no-unused-vars': [
       'error',
-      {argsIgnorePattern: '^_', varsIgnorePattern: '^_'},
+      { argsIgnorePattern: '^_', varsIgnorePattern: '^_' },
     ],
     'no-shadow': 'off',
-    '@typescript-eslint/no-shadow': ['error', {allow: ['_']}],
+    '@typescript-eslint/no-shadow': ['error', { allow: ['_'] }],
     'lines-between-class-members': ['error', 'always'],
-    'no-param-reassign': ['warn', {props: true, ignorePropertyModificationsFor: ['draft']}],
+    'no-param-reassign': ['warn', { props: true, ignorePropertyModificationsFor: ['draft'] }],
     'padding-line-between-statements': [
       'error',
-      {blankLine: 'always', prev: '*', next: 'return'},
-      {blankLine: 'always', prev: ['const', 'let', 'var'], next: '*'},
+      { blankLine: 'always', prev: '*', next: 'return' },
+      { blankLine: 'always', prev: ['const', 'let', 'var'], next: '*' },
       {
         blankLine: 'any',
         prev: ['const', 'let', 'var'],

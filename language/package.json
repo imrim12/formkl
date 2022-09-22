@@ -22,7 +22,7 @@
     "url": "https://github.com/formkl/formkl/issues"
   },
   "homepage": "https://github.com/formkl/formkl#readme",
-  "peerDependencies": {
+  "dependencies": {
     "slugify": "^1.6.5"
   }
 }

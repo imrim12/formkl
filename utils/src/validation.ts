@@ -1,4 +1,4 @@
-import {Validation} from 'formkl';
+import { Validation } from 'formkl';
 
 enum ValidationBuilder {
   AND = '$and',

@@ -1,5 +1,6 @@
 /__test__
 /logs
+/node_modules
 /src
 
 .gitignore

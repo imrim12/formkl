@@ -2,14 +2,12 @@
   "name": "@formkl/editor",
   "version": "0.0.1-alpha-2",
   "description": "An Editor for Formkl using Vue.js",
+  "type": "module",
   "main": "dist/index.es.js",
   "types": "dist/types",
-  "scripts": {
-    "build": "rimraf dist && vue-tsc && vite build"
-  },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/formkl/editor.git"
+    "url": "git+ssh://git@github.com/formkl/formkl.git"
   },
   "keywords": [
     "formkl",
@@ -18,11 +16,15 @@
   "author": "thecodeorigin",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/formkl/editor/issues"
+    "url": "https://github.com/formkl/formkl/issues"
   },
-  "homepage": "https://github.com/formkl/editor#readme",
+  "homepage": "https://github.com/formkl/formkl#readme",
   "dependencies": {
     "@codemirror/autocomplete": "^6.2.0",
-    "codemirror": "^6.0.1"
+    "@codemirror/lint": "^6.0.0",
+    "@codemirror/state": "^6.1.2",
+    "@codemirror/view": "^6.2.4",
+    "codemirror": "^6.0.1",
+    "formkl": "^0.0.8-alpha-7"
   }
 }
