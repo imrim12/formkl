@@ -29,15 +29,5 @@
   "homepage": "https://github.com/formkl/core#readme",
   "dependencies": {
     "slugify": "^1.6.5"
-  },
-  "devDependencies": {
-    "jest": "^29.0.0",
-    "minify": "^9.1.0",
-    "rimraf": "^3.0.2",
-    "syntax-cli": "^0.1.26"
-  },
-  "jest": {
-    "testPathIgnorePatterns": [],
-    "testRegex": ".*\\.test\\.js$"
   }
 }
