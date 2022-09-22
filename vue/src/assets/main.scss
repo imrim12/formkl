@@ -1,0 +1,49 @@
+.el-input {
+  + .el-input {
+    margin-top: 0.5rem;
+  }
+}
+
+.el-textarea {
+  + .el-textarea {
+    margin-top: 0.5rem;
+  }
+}
+
+.formkl-section_response {
+  + .formkl-section_response {
+    margin-top: 0.5rem;
+  }
+}
+
+.formkl-section__footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.formkl-field__inner {
+  + .formkl-field__inner {
+    margin-top: 0.5rem;
+  }
+}
+
+.formkl-field_response {
+  + .formkl-field_response {
+    margin-top: 0.5rem;
+  }
+}
+
+.formkl-field_response__remover {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.formkl-field__footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
