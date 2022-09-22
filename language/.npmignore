@@ -1,0 +1,7 @@
+/__test__
+/logs
+/src
+
+.gitignore
+.minify.json
+.npmignore

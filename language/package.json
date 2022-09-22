@@ -1,0 +1,28 @@
+{
+  "name": "formkl",
+  "version": "0.0.8-alpha-7",
+  "description": "Form markup language",
+  "main": "dist/index.min.js",
+  "types": "types/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/formkl/formkl.git"
+  },
+  "keywords": [
+    "form",
+    "formkl",
+    "formjs",
+    "form",
+    "generator",
+    "schema"
+  ],
+  "author": "thecodeorigin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/formkl/formkl/issues"
+  },
+  "homepage": "https://github.com/formkl/formkl#readme",
+  "peerDependencies": {
+    "slugify": "^1.6.5"
+  }
+}

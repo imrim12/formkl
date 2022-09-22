@@ -1,4 +1,38 @@
 {
+  "name": "@formkl/all",
+  "description": "Form markup language",
+  "scripts": {
+    "test": "vitest",
+    "build": "bash ./scripts/build_parser.sh",
+    "build:vue": "",
+    "build:react": "",
+    "build:editor": "",
+    "build:docs": "",
+    "pub": "bash ./scripts/publish_parser.sh",
+    "pub:vue": "",
+    "pub:react": "",
+    "pub:editor": "",
+    "pub:docs": "",
+    "generate:parser": "./node_modules/.bin/syntax-cli"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/formkl/formkl.git"
+  },
+  "keywords": [
+    "form",
+    "formkl",
+    "formjs",
+    "form",
+    "generator",
+    "schema"
+  ],
+  "author": "thecodeorigin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/formkl/formkl/issues"
+  },
+  "homepage": "https://github.com/formkl/formkl#readme",
   "devDependencies": {
     "@babel/preset-typescript": "^7.18.6",
     "@types/node": "^18.7.18",

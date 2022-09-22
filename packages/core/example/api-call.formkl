@@ -1,8 +1,0 @@
-formkl private step by step allows 1 response {
-  "Migrate location" includes {
-    require "From location" select from (https://randomsite.com/api/location);
-    require "To location" select from (https://randomsite.com/api/location);
-    require "Company" select from (https://randomsite.com/api/company);
-    "Force update" switch;
-  }
-}
