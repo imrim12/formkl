@@ -72,9 +72,9 @@
   integrity sha512-8TR5++Q/F//tpDsLd5zkrvEX5xxeemafEaek7mUp7Y+bI8cKQXdSqhzTOBaOogETcMOVr0pT3BBPXp13477ciw==
 
 "@lezer/highlight@^1.0.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@lezer/highlight/-/highlight-1.1.0.tgz#ce8cc593384e76210b1163dcd0a657f19c525f1d"
-  integrity sha512-DAGFnxWil6aMrfpJ1clvOQrMvgDXjah8K5eA6+TsETioHlSi7Z2n/KSpbJPeuItcI2OeOR5tIWsqZqLnFSGN/w==
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@lezer/highlight/-/highlight-1.1.1.tgz#1f4f12f21320d7de102b46a5416eff49fdf3c695"
+  integrity sha512-duv9D23O9ghEDnnUDmxu+L8pJy4nYo4AbCOHIudUhscrLSazqeJeK1V50EU6ZufWF1zv0KJwu/frFRyZWXxHBQ==
   dependencies:
     "@lezer/common" "^1.0.0"
 
@@ -103,10 +103,10 @@ crelt@^1.0.5:
   resolved "https://registry.yarnpkg.com/crelt/-/crelt-1.0.5.tgz#57c0d52af8c859e354bace1883eb2e1eb182bb94"
   integrity sha512-+BO9wPPi+DWTDcNYhr/W90myha8ptzftZT+LwcmUbbok0rcP/fequmFYCw8NMoH7pkAZQzU78b3kYrlua5a9eA==
 
-formkl@^0.0.8-alpha-7:
-  version "0.0.8-alpha-7"
-  resolved "https://registry.yarnpkg.com/formkl/-/formkl-0.0.8-alpha-7.tgz#50254526fe4397477944f05b02965ff99e18d3c4"
-  integrity sha512-gkVL1PECQQOTA11dcM8Hk0RDj9msACn5F3Fq56LmT8l6a3Ie8lomExueG+pQ3PmnBlUMqut8T2NapHzVEgPReg==
+formkl@^1.0.0-alpha.1:
+  version "1.0.0-alpha.1"
+  resolved "https://registry.yarnpkg.com/formkl/-/formkl-1.0.0-alpha.1.tgz#db5edeee4b2504466dbf0490b87081c8638fd41d"
+  integrity sha512-js44F+2kJk3/GR/zmSu3d39obxJbpIrdaPzqoUZTrs+sUu1KW5ghzaHg4OJx9b4LQCturdSMt4HmrEvs/nuirQ==
   dependencies:
     slugify "^1.6.5"
 

@@ -24,13 +24,6 @@
   dependencies:
     "@floating-ui/core" "^1.0.1"
 
-"@formkl/utils@^0.0.1-alpha-2":
-  version "0.0.1-alpha-2"
-  resolved "https://registry.yarnpkg.com/@formkl/utils/-/utils-0.0.1-alpha-2.tgz#22d046a2b157681c80d87bc0fd1e1c23c9498666"
-  integrity sha512-dMQDpOQF/QsIeBd4lIHBV+j46xoS1jcesjkFWZyD8A/RZLGuSIL3VRmdRlzuPgOwmRETx6L2M4ASQlROWXJm5A==
-  dependencies:
-    formkl "^0.0.8-alpha-6"
-
 "@popperjs/core@npm:@sxzz/popperjs-es@^2.11.7":
   version "2.11.7"
   resolved "https://registry.yarnpkg.com/@sxzz/popperjs-es/-/popperjs-es-2.11.7.tgz#a7f69e3665d3da9b115f9e71671dae1b97e13671"
@@ -111,10 +104,10 @@ escape-html@^1.0.3:
   resolved "https://registry.yarnpkg.com/escape-html/-/escape-html-1.0.3.tgz#0258eae4d3d0c0974de1c169188ef0051d1d1988"
   integrity sha512-NiSupZ4OeuGwr68lGIeym/ksIZMJodUGOSCZ/FSnTxcrekbvqrgdUxlJOMpijaKZVjAJrWrGs/6Jy8OMuyj9ow==
 
-formkl@^0.0.8-alpha-6:
-  version "0.0.8-alpha-7"
-  resolved "https://registry.yarnpkg.com/formkl/-/formkl-0.0.8-alpha-7.tgz#50254526fe4397477944f05b02965ff99e18d3c4"
-  integrity sha512-gkVL1PECQQOTA11dcM8Hk0RDj9msACn5F3Fq56LmT8l6a3Ie8lomExueG+pQ3PmnBlUMqut8T2NapHzVEgPReg==
+formkl@^1.0.0-alpha.1:
+  version "1.0.0-alpha.1"
+  resolved "https://registry.yarnpkg.com/formkl/-/formkl-1.0.0-alpha.1.tgz#db5edeee4b2504466dbf0490b87081c8638fd41d"
+  integrity sha512-js44F+2kJk3/GR/zmSu3d39obxJbpIrdaPzqoUZTrs+sUu1KW5ghzaHg4OJx9b4LQCturdSMt4HmrEvs/nuirQ==
   dependencies:
     slugify "^1.6.5"
 
