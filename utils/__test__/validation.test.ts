@@ -1,5 +1,5 @@
-import {describe, it, expect} from 'vitest';
-import {isValueValidated} from '../src';
+import { describe, it, expect } from 'vitest';
+import { isValueValidated } from '../src';
 
 describe('Test validation', () => {
   it('should be true', () => {

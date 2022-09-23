@@ -12,7 +12,7 @@ export default defineConfig({
     },
     rollupOptions: {
       // external modules won't be bundled into your library
-      external: ['vue', 'element-plus', 'lodash', 'formkl', '@formkl/utils'], // not every external has a global
+      external: ['vue', 'element-plus', 'lodash', 'formkl'], // not every external has a global
       output: {
         // disable warning on src/index.ts using both default and named export
         exports: 'named',
