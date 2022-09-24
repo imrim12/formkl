@@ -1,4 +1,5 @@
 {
+  "name": "@formkl/sandbox",
   "private": true,
   "scripts": {
     "build": "nuxt build",
@@ -8,8 +9,8 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
-    "@formkl/editor": "1.0.0-alpha.1",
-    "@formkl/vue": "1.0.0-alpha.1"
+    "@formkl/editor": "workspace:*",
+    "@formkl/vue": "workspace:*"
   },
   "devDependencies": {
     "nuxt": "3.0.0-rc.11"

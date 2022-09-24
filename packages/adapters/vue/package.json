@@ -40,8 +40,9 @@
   },
   "homepage": "https://github.com/formkl/formkl#readme",
   "dependencies": {
+    "@formkl/utils": "workspace:*",
     "element-plus": "^2.2.16",
-    "formkl": "1.0.0-alpha.1",
+    "formkl": "workspace:*",
     "lodash": "^4.17.21"
   }
 }

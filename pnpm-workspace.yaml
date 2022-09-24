@@ -1,6 +1,5 @@
 packages:
-  - language/*
-  - packages/adapters/vue/*
-  - packages/adapters/react/*
-  - packages/editor/*
-  - sandbox/*
+  - "language"
+  - "packages/**"
+  - "sandbox/*"
+  - "utils"

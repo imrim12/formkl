@@ -5,7 +5,12 @@
   "scripts": {
     "test": "vitest",
     "build:parser": "bash ./scripts/build_parser.sh",
-    "publish:parser": "bash ./scripts/publish_parser.sh"
+    "build:vue": "pnpm exec:vue build",
+    "build:editor": "pnpm exec:editor build",
+    "build:utils": "pnpm exec:utils build",
+    "exec:vue": "pnpm -F @formkl/vue",
+    "exec:editor": "pnpm -F @formkl/editor",
+    "exec:utils": "pnpm -F @formkl/utils"
   },
   "repository": {
     "type": "git",
