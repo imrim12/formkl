@@ -4,18 +4,8 @@
   "packageManager": "pnpm@7.12.2",
   "scripts": {
     "test": "vitest",
-    "build": "bash ./scripts/build_parser.sh",
-    "build:vue": "bash ./scripts/build_vue.sh",
-    "build:react": "bash ./scripts/build_react.sh",
-    "build:editor": "bash ./scripts/build_editor.sh",
-    "build:docs": "bash ./scripts/build_docs.sh",
-    "build:utils": "bash ./scripts/build_utils.sh",
-    "pub": "bash ./scripts/publish_parser.sh",
-    "pub:vue": "bash ./scripts/publish_vue.sh",
-    "pub:react": "bash ./scripts/publish_react.sh",
-    "pub:editor": "bash ./scripts/publish_editor.sh",
-    "pub:docs": "bash ./scripts/publish_docs.sh",
-    "generate:parser": "./node_modules/.bin/syntax-cli"
+    "build:parser": "bash ./scripts/build_parser.sh",
+    "publish:parser": "bash ./scripts/publish_parser.sh"
   },
   "repository": {
     "type": "git",
@@ -35,12 +25,6 @@
     "url": "https://github.com/formkl/formkl/issues"
   },
   "homepage": "https://github.com/formkl/formkl#readme",
-  "dependencies": {
-    "formkl": "*",
-    "@formkl/vue": "*",
-    "@formkl/editor": "*",
-    "@formkl/utils": "*"
-  },
   "devDependencies": {
     "@babel/preset-typescript": "^7.18.6",
     "@types/lodash": "^4.14.185",

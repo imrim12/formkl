@@ -6,7 +6,7 @@ mkdir -p ./language/logs
 
 node ./language/src/index.js
 
-yarn generate:parser \
+./node_modules/.bin/syntax-cli \
 --grammar ./language/dist/formkl.ast.json \
 --mode slr1 \
 --output ./language/dist/index.js \

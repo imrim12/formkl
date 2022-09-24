@@ -5,6 +5,9 @@
   "type": "module",
   "main": "dist/index.es.js",
   "types": "dist/types",
+  "scripts": {
+    "build": "vue-tsc && vite build"
+  },
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/formkl/formkl.git",
