@@ -4,23 +4,6 @@
   "description": "Form markup language",
   "main": "dist/index.min.js",
   "types": "types/index.d.ts",
-  "exports": {
-    ".": {
-      "import": "./dist/index.min.js",
-      "require": "./dist/index.min.js"
-    },
-    "./types": {
-      "import": "./types/index.d.ts",
-      "require": "./types/index.d.ts"
-    }
-  },
-  "typesVersions": {
-    "*": {
-      "*": [
-        "types/*"
-      ]
-    }
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/formkl/formkl.git",

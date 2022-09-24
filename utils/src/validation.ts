@@ -1,17 +1,17 @@
-import { Validation } from 'formkl';
+import { Validation } from "formkl";
 
 enum ValidationBuilder {
-  AND = '$and',
-  OR = '$or',
+  AND = "$and",
+  OR = "$or",
 }
 
 enum ValidationOperator {
-  LESS = '$lt',
-  LESS_OR_EQUAL = '$lteq',
-  GREATER = '$gt',
-  GREATER_OR_EQUAL = '$gteq',
-  EQUAL = '$eq',
-  HAS = '$has',
+  LESS = "$lt",
+  LESS_OR_EQUAL = "$lteq",
+  GREATER = "$gt",
+  GREATER_OR_EQUAL = "$gteq",
+  EQUAL = "$eq",
+  HAS = "$has",
 }
 
 function validationOperatorBuilder(
@@ -36,7 +36,7 @@ function validationOperatorBuilder(
        */
       return (value as string).includes(conditionValue as string);
     default:
-      throw new Error('Invalid operator ' + operator);
+      throw new Error("Invalid operator " + operator);
   }
 }
 
@@ -82,7 +82,7 @@ function normalizeArray(validatingArray: any[], operator: ValidationBuilder): bo
     return validatingArray.reduce((a, b) => a || b, false);
   }
 
-  throw new Error('Invalid operator');
+  throw new Error("Invalid operator");
 }
 
 /**
@@ -95,20 +95,20 @@ function normalizeArray(validatingArray: any[], operator: ValidationBuilder): bo
 export function isValueValidated(validatingValue: number | string, validationObject: Validation) {
   if (Object.keys(validationObject).length > 2) {
     throw new Error(
-      'Something wrong. The validation should not have $and and $or at the same level.',
+      "Something wrong. The validation should not have $and and $or at the same level.",
     );
   }
 
   if (validationObject.regex) {
     const regex = new RegExp(validationObject.regex);
-    const result = regex.test(validatingValue + '');
+    const result = regex.test(validatingValue + "");
 
     if (!result) {
       return false;
     }
   }
 
-  const validationIndicator = Object.keys(validationObject).find((key) => key !== 'regex') as
+  const validationIndicator = Object.keys(validationObject).find((key) => key !== "regex") as
     | ValidationBuilder
     | undefined;
 

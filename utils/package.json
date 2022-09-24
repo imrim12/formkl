@@ -3,24 +3,7 @@
   "version": "1.0.0-alpha.1",
   "description": "A utility library for Formkl",
   "main": "dist/index.es.js",
-  "types": "dist/types",
-  "exports": {
-    ".": {
-      "import": "./dist/index.es.js",
-      "require": "./dist/index.es.js"
-    },
-    "./types": {
-      "import": "./types/index.d.ts",
-      "require": "./types/index.d.ts"
-    }
-  },
-  "typesVersions": {
-    "*": {
-      "*": [
-        "types/*"
-      ]
-    }
-  },
+  "types": "dist/types/src",
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/formkl/formkl.git",

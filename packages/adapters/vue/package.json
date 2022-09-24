@@ -5,23 +5,6 @@
   "type": "module",
   "main": "dist/index.es.js",
   "types": "dist/types",
-  "exports": {
-    ".": {
-      "import": "./dist/index.es.js",
-      "require": "./dist/index.es.js"
-    },
-    "./types": {
-      "import": "./types/index.d.ts",
-      "require": "./types/index.d.ts"
-    }
-  },
-  "typesVersions": {
-    "*": {
-      "*": [
-        "types/*"
-      ]
-    }
-  },
   "scripts": {
     "build": "vue-tsc && vite build"
   },
