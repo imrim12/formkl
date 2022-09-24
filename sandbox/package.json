@@ -7,6 +7,10 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
   },
+  "dependencies": {
+    "@formkl/editor": "1.0.0-alpha.1",
+    "@formkl/vue": "1.0.0-alpha.1"
+  },
   "devDependencies": {
     "nuxt": "3.0.0-rc.11"
   }
