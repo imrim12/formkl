@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "target": "esnext",
+    "useDefineForClassFields": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "strict": true,
+    "jsx": "preserve",
+    "sourceMap": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "lib": ["esnext", "dom"],
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "isolatedModules": true,
+    "skipLibCheck": true,
+    "types": ["vite/client"],
+    "outDir": "./dist",
+    "declarationDir": "./dist/types"
+  },
+  "include": ["**/*.js", "**/*.jsx", "**/*.ts", "**/*.d.ts", "**/*.tsx"]
+}

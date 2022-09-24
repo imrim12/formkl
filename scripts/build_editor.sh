@@ -2,8 +2,4 @@ rimraf packages/editor/dist
 
 mkdir -p packages/editor/dist
 
-cd packages/editor
-
-yarn
-
-vue-tsc --project ./ && vite build --config ./vite.config.ts
+vue-tsc --project ./packages/editor && vite build --config ./packages/editor/vite.config.ts

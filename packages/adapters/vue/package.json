@@ -5,9 +5,27 @@
   "type": "module",
   "main": "dist/index.es.js",
   "types": "dist/types",
+  "exports": {
+    ".": {
+      "import": "./dist/index.es.js",
+      "require": "./dist/index.es.js"
+    },
+    "./types": {
+      "import": "./types/index.d.ts",
+      "require": "./types/index.d.ts"
+    }
+  },
+  "typesVersions": {
+    "*": {
+      "*": [
+        "types/*"
+      ]
+    }
+  },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/formkl/formkl.git"
+    "url": "git+https://github.com/formkl/formkl.git",
+    "directory": "packages/adapters/vue"
   },
   "keywords": [
     "formkl"
@@ -20,7 +38,7 @@
   "homepage": "https://github.com/formkl/formkl#readme",
   "dependencies": {
     "element-plus": "^2.2.16",
-    "formkl": "^1.0.0-alpha.1",
+    "formkl": "1.0.0-alpha.1",
     "lodash": "^4.17.21"
   }
 }

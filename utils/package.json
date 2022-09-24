@@ -4,7 +4,28 @@
   "description": "A utility library for Formkl",
   "main": "dist/index.es.js",
   "types": "dist/types",
-  "repository": "https://github.com/formkl/utils.git",
+  "exports": {
+    ".": {
+      "import": "./dist/index.es.js",
+      "require": "./dist/index.es.js"
+    },
+    "./types": {
+      "import": "./types/index.d.ts",
+      "require": "./types/index.d.ts"
+    }
+  },
+  "typesVersions": {
+    "*": {
+      "*": [
+        "types/*"
+      ]
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/formkl/formkl.git",
+    "directory": "utils"
+  },
   "license": "MIT",
   "scripts": {
     "build": "rimraf ./dist && tsc && vite build ",
@@ -12,6 +33,6 @@
     "coverage": "vitest run --coverage"
   },
   "dependencies": {
-    "formkl": "^1.0.0-alpha.1"
+    "formkl": "1.0.0-alpha.1"
   }
 }
