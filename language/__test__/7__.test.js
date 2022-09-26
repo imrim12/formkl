@@ -1,6 +1,6 @@
-const fs = require('fs');
-const path = require('path');
-const parser = require(path.resolve(__dirname, '../dist/index.js'));
+import fs from "fs";
+import path from "path";
+import parser from "../dist/index.js";
 
 const testCase = `formkl {
   multiple "Personal Information"includes {
@@ -20,81 +20,81 @@ const testCase = `formkl {
   }
 }`;
 
-describe('test', () => {
-  it('should parse the form syntax correctly', () => {
+describe("test", () => {
+  it("should parse the form syntax correctly", () => {
     const result = parser.parse(testCase);
 
     fs.writeFileSync(
-      path.resolve(__dirname, '../logs/7__.result.json'),
+      path.resolve(__dirname, "../logs/7__.result.json"),
       JSON.stringify(result, null, 2),
     );
 
     expect(result).toStrictEqual({
-      model: 'base',
-      method: '',
-      endpoint: '',
-      title: '',
-      description: '',
+      model: "base",
+      method: "",
+      endpoint: "",
+      title: "",
+      description: "",
       sections: [
         {
-          title: 'Personal Information',
-          key: 'personal-information',
+          title: "Personal Information",
+          key: "personal-information",
           multiple: true,
           fields: [
             {
-              type: 'text',
-              label: 'Fullname',
+              type: "text",
+              label: "Fullname",
               require: false,
-              key: 'fullname',
+              key: "fullname",
               multiple: false,
             },
             {
-              type: 'radio',
-              fetchDataPath: '',
-              options: ['Male', 'Female', 'Other'],
-              label: 'Gender',
+              type: "radio",
+              fetchDataPath: "",
+              options: ["Male", "Female", "Other"],
+              label: "Gender",
               require: false,
-              key: 'gender',
+              key: "gender",
               multiple: false,
             },
             {
-              type: 'select',
-              fetchDataPath: '',
+              type: "select",
+              fetchDataPath: "",
               options: [],
-              fetchUrl: '/api/company',
-              valueKey: 'id',
-              labelKey: 'name',
-              label: 'Current Company',
+              fetchUrl: "/api/company",
+              valueKey: "id",
+              labelKey: "name",
+              label: "Current Company",
               require: true,
-              key: 'current-company',
+              key: "current-company",
               multiple: false,
             },
             {
-              type: 'US phone',
-              label: 'US Phone',
+              type: "US phone",
+              label: "US Phone",
               require: false,
-              key: 'us-phone',
+              key: "us-phone",
               multiple: false,
             },
           ],
         },
         {
-          title: 'Other Information',
-          key: 'other-information',
+          title: "Other Information",
+          key: "other-information",
           multiple: false,
           fields: [
             {
-              type: 'zip',
-              label: 'Zip',
+              type: "zip",
+              label: "Zip",
               require: true,
-              key: 'zip',
+              key: "zip",
               multiple: true,
             },
             {
-              type: 'text',
-              label: 'Some field',
+              type: "text",
+              label: "Some field",
               require: false,
-              key: 'some-field',
+              key: "some-field",
               validation: {
                 $lt: 512,
               },

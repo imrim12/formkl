@@ -1,6 +1,6 @@
-const fs = require('fs');
-const path = require('path');
-const parser = require(path.resolve(__dirname, '../dist/index.js'));
+import fs from "fs";
+import path from "path";
+import parser from "../dist/index.js";
 
 const testCase = `formkl {
   "Reverting location keywords" includes {
@@ -12,58 +12,58 @@ const testCase = `formkl {
 }
 `;
 
-describe('test', () => {
-  it('should parse the form syntax correctly', () => {
+describe("test", () => {
+  it("should parse the form syntax correctly", () => {
     const result = parser.parse(testCase);
 
     fs.writeFileSync(
-      path.resolve(__dirname, '../logs/13__.result.json'),
+      path.resolve(__dirname, "../logs/13__.result.json"),
       JSON.stringify(result, null, 2),
     );
 
     expect(result).toStrictEqual({
-      model: 'base',
-      method: '',
-      endpoint: '',
-      title: '',
-      description: '',
+      model: "base",
+      method: "",
+      endpoint: "",
+      title: "",
+      description: "",
       sections: [
         {
-          title: 'Reverting location keywords',
-          key: 'reverting-location-keywords',
+          title: "Reverting location keywords",
+          key: "reverting-location-keywords",
           multiple: false,
           fields: [
             {
-              type: 'select',
-              fetchDataPath: '',
+              type: "select",
+              fetchDataPath: "",
               options: [],
-              fetchUrl: '/api/company',
-              valueKey: 'id',
-              labelKey: 'name',
-              label: 'Target Company',
+              fetchUrl: "/api/company",
+              valueKey: "id",
+              labelKey: "name",
+              label: "Target Company",
               require: true,
-              key: 'target-company',
+              key: "target-company",
               multiple: false,
             },
             {
-              type: 'text',
-              label: 'From keyword',
+              type: "text",
+              label: "From keyword",
               require: true,
-              key: 'from-keyword',
+              key: "from-keyword",
               multiple: false,
             },
             {
-              type: 'text',
-              label: 'To keyword',
+              type: "text",
+              label: "To keyword",
               require: true,
-              key: 'to-keyword',
+              key: "to-keyword",
               multiple: false,
             },
             {
-              type: 'switch',
-              label: 'Force update',
+              type: "switch",
+              label: "Force update",
               require: false,
-              key: 'force-update',
+              key: "force-update",
               multiple: false,
             },
           ],

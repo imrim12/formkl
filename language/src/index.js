@@ -1,16 +1,16 @@
-const fs = require('fs');
-const path = require('path');
-const lexer = require('./lexer');
-const bnf = require('./bnf');
-const {Token} = require('./enum/token.enum');
+import fs from "fs";
+import path from "path";
+import lexer from "./lexer.js";
+import bnf from "./bnf.js";
+import { Token } from "./enum/token.enum.js";
 
 const ast = {
   lex: lexer,
-  tokens: Object.values(Token).join(' '),
+  tokens: Object.values(Token).join(" "),
   start: Object.keys(bnf)[0],
   bnf,
   moduleInclude: `
-    const slugify = require("slugify");
+    const slugify = require("slugify"); // Must be commonjs
 
     let keyPool = {};
     let sectionKeyPool = {};
@@ -52,4 +52,10 @@ const ast = {
   `,
 };
 
-fs.writeFileSync(path.resolve(__dirname, '../dist/formkl.ast.json'), JSON.stringify(ast, null, 2));
+fs.writeFileSync("./dist/formkl.ast.json", JSON.stringify(ast, null, 2), (err) => {
+  if (err) {
+    console.log(err);
+  } else {
+    console.log("File written successfully\n");
+  }
+});

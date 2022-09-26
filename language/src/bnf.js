@@ -1,6 +1,6 @@
-const { Token } = require("./enum/token.enum");
+import { Token } from "./enum/token.enum.js";
 
-module.exports = {
+export default {
   ExpressionForm: [
     [
       "ExpressionSubmittedForm { ExpressionSectionList }",

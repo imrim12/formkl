@@ -1,8 +1,8 @@
-function returnToken(token = "") {
+export function returnToken(token = "") {
   return `return '${token}';`;
 }
 
-function allowMatchToken(token = "", esc = false, allowCapital = false) {
+export function allowMatchToken(token = "", esc = false, allowCapital = false) {
   return [
     esc
       ? "\\" + token
@@ -13,7 +13,7 @@ function allowMatchToken(token = "", esc = false, allowCapital = false) {
   ];
 }
 
-module.exports = {
+export default {
   returnToken,
   allowMatchToken,
 };

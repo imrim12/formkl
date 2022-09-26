@@ -1,9 +1,9 @@
-const { Field } = require("./enum/field.enum");
-const { Macro } = require("./enum/macro.enum");
-const { Token } = require("./enum/token.enum");
-const { returnToken, allowMatchToken } = require("./utils");
+import { Field } from "./enum/field.enum.js";
+import { Macro } from "./enum/macro.enum.js";
+import { Token } from "./enum/token.enum.js";
+import { returnToken, allowMatchToken } from "./utils.js";
 
-module.exports = {
+export default {
   macros: Macro,
   rules: [
     // Comments

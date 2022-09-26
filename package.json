@@ -4,10 +4,11 @@
   "packageManager": "pnpm@7.12.2",
   "scripts": {
     "test": "vitest",
-    "build:parser": "bash ./scripts/build_parser.sh",
+    "build:core": "pnpm exec:core build",
     "build:vue": "pnpm exec:vue build",
     "build:editor": "pnpm exec:editor build",
     "build:utils": "pnpm exec:utils build",
+    "exec:core": "pnpm -F formkl",
     "exec:vue": "pnpm -F @formkl/vue",
     "exec:editor": "pnpm -F @formkl/editor",
     "exec:utils": "pnpm -F @formkl/utils",
