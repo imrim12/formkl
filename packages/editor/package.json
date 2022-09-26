@@ -4,7 +4,7 @@
   "description": "An Editor for Formkl using Vue.js",
   "type": "module",
   "main": "dist/index.es.js",
-  "types": "dist/types",
+  "types": "dist/types/src",
   "scripts": {
     "build": "vue-tsc && vite build"
   },

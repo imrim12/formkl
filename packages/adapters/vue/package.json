@@ -4,7 +4,7 @@
   "description": "A Vue adapter for Formkl",
   "type": "module",
   "main": "dist/index.es.js",
-  "types": "dist/types",
+  "types": "dist/types/src",
   "scripts": {
     "build": "vue-tsc && vite build"
   },

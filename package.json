@@ -10,7 +10,8 @@
     "build:utils": "pnpm exec:utils build",
     "exec:vue": "pnpm -F @formkl/vue",
     "exec:editor": "pnpm -F @formkl/editor",
-    "exec:utils": "pnpm -F @formkl/utils"
+    "exec:utils": "pnpm -F @formkl/utils",
+    "exec:sandbox": "pnpm -F @formkl/sandbox"
   },
   "repository": {
     "type": "git",
