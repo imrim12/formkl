@@ -1,5 +1,14 @@
 <script lang="ts">
-import { defineComponent, getCurrentInstance, onMounted, PropType, provide, ref } from "vue";
+import {
+  computed,
+  defineComponent,
+  getCurrentInstance,
+  h,
+  onMounted,
+  PropType,
+  provide,
+  ref,
+} from "vue";
 import { Form, FormOptions } from "./core/Form";
 
 import FormklParser from "formkl";
@@ -22,9 +31,15 @@ export default defineComponent({
 
     provide("$http", props.options?.$http);
 
-    const formkl = FormklParser.parse(props.formkl);
+    const form = computed(() => {
+      try {
+        return props.formkl ? new Form(FormklParser.parse(props.formkl), props.options) : null;
+      } catch (err) {
+        console.warn("[Formkl Adapter]: ", err);
 
-    const form = new Form(formkl, props.options);
+        return null;
+      }
+    });
 
     const submit = (
       callbackSuccess?: (model: SchemaBase | SchemaFlat) => void,
@@ -32,8 +47,8 @@ export default defineComponent({
       callbackFinally?: () => void,
     ) => {
       formklRef.value.validate((isValid: boolean) => {
-        if (isValid) {
-          form.submit.call(form, callbackSuccess, callbackError, callbackFinally);
+        if (form.value && isValid) {
+          form.value.submit.call(form.value, callbackSuccess, callbackError, callbackFinally);
         }
       });
     };
@@ -43,16 +58,16 @@ export default defineComponent({
     };
 
     const fill = (fillModel: SchemaBase | SchemaFlat) => {
-      form.fill.call(form, fillModel);
+      form.value && form.value.fill.call(form.value, fillModel);
       vm?.$forceUpdate();
     };
 
     const getForm = () => {
-      return form;
+      return form.value;
     };
 
     onMounted(() => {
-      emit("ready", form);
+      emit("ready", form.value);
     });
 
     return {
@@ -65,7 +80,17 @@ export default defineComponent({
     };
   },
   render() {
-    return this.form.render();
+    return this.form
+      ? this.form.render()
+      : h(
+          "div",
+          {
+            class: "formkl-error__wrapper",
+          },
+          this.$slots.error
+            ? this.$slots.error()
+            : h("div", { class: "formkl-error" }, "Error parsing formkl"),
+        );
   },
 });
 </script>

@@ -17,13 +17,18 @@ export class FormRenderer {
   }
 
   private _renderHeader() {
-    return h(
-      "header",
-      {
-        class: "formkl__header",
-      },
-      h("h2", this._formkl.title),
-    );
+    return this._formkl.title || this._formkl.description
+      ? h(
+          "header",
+          {
+            class: "formkl__header",
+          },
+          [
+            this._formkl.title ? h("h2", this._formkl.title) : null,
+            this._formkl.description ? h("h3", this._formkl.description) : null,
+          ],
+        )
+      : null;
   }
 
   private _renderBody() {
