@@ -11,8 +11,7 @@
     "exec:core": "pnpm -F formkl",
     "exec:vue": "pnpm -F @formkl/vue",
     "exec:editor": "pnpm -F @formkl/editor",
-    "exec:utils": "pnpm -F @formkl/utils",
-    "exec:sandbox": "pnpm -F @formkl/sandbox"
+    "exec:utils": "pnpm -F @formkl/utils"
   },
   "repository": {
     "type": "git",
@@ -32,6 +31,12 @@
     "url": "https://github.com/formkl/formkl/issues"
   },
   "homepage": "https://github.com/formkl/formkl#readme",
+  "workspaces": [
+    "language",
+    "packages/**",
+    "sandbox",
+    "utils"
+  ],
   "dependencies": {
     "formkl": "workspace:*",
     "@formkl/vue": "workspace:*",
