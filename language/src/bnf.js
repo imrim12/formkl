@@ -59,6 +59,13 @@ export default {
       throwIfHasMultipleFields($5)
       `,
     ],
+    [
+      "LiteralNumber LiteralString includes { ExpressionFieldValidList }",
+      `
+      $$ = { title: $2, key: generateKey($2, 'section'), multiple: true, maxResponseAllowed: $1, fields: $5 };
+      throwIfHasMultipleFields($5)
+      `,
+    ],
   ],
 
   ExpressionFieldValidList: [
@@ -69,6 +76,10 @@ export default {
   ExpressionFieldMultiple: [
     ["ExpressionFieldValid ;", "$$ = { ...$1, multiple: false };"],
     ["multiple ExpressionFieldValid ;", "$$ = { ...$2, multiple: true };"],
+    [
+      "LiteralNumber ExpressionFieldValid ;",
+      "$$ = { ...$2, multiple: true, maxResponseAllowed: $1 };",
+    ],
   ],
 
   ExpressionFieldValid: [
