@@ -95,9 +95,7 @@ export class FieldRenderer {
     }
   }
 
-  private _renderSingleField() {
-    const propPath = this._buildSinglePropPath(this._sectionResponseIndex);
-
+  private _renderSingleField(propPath: string) {
     return h(
       ElFormItem,
       {
@@ -113,8 +111,7 @@ export class FieldRenderer {
     );
   }
 
-  private _renderMultipleField() {
-    const propPath = this._buildMultiplePropPath();
+  private _renderMultipleField(propPath: string[]) {
     const fieldRemoveBtn =
       Form.getComponentMap().get(DefaultComponent.FIELD_REMOVE_BTN) ||
       h(ElButton, { type: "danger" });
@@ -145,9 +142,13 @@ export class FieldRenderer {
                 {
                   class: "formkl-field_response__remover",
                 },
-                h(fieldRemoveBtn, {
-                  onClick: this._handler.removeResponse.bind(this._handler, responseIndex),
-                }),
+                h(
+                  fieldRemoveBtn,
+                  {
+                    onClick: this._handler.removeResponse.bind(this._handler, responseIndex),
+                  },
+                  () => "Remove field",
+                ),
               )
             : null,
         ],
@@ -155,35 +156,52 @@ export class FieldRenderer {
     );
   }
 
-  public render() {
+  private _renderBody(propPath: string | string[]) {
+    return this._field.multiple
+      ? this._renderMultipleField(propPath as string[])
+      : this._renderSingleField(propPath as string);
+  }
+
+  private _renderFooter(allowAddMoreResponse: boolean) {
     const fieldAddBtn =
       Form.getComponentMap().get(DefaultComponent.FIELD_ADD_BTN) || h(ElButton, {});
 
     return h(
       "div",
       {
-        class: "formkl-field",
+        class: "formkl-field__footer",
       },
       [
-        this._field.multiple ? this._renderMultipleField() : this._renderSingleField(),
-        h(
-          "div",
-          {
-            class: "formkl-field__footer",
-          },
-          [
-            this._field.multiple
-              ? h(
-                  fieldAddBtn,
-                  {
-                    onClick: this._handler.addResponse.bind(this._handler),
-                  },
-                  () => "Add field",
-                )
-              : null,
-          ],
-        ),
+        this._field.multiple && allowAddMoreResponse
+          ? h(
+              fieldAddBtn,
+              {
+                onClick: this._handler.addResponse.bind(this._handler),
+              },
+              () => "Add field",
+            )
+          : null,
       ],
+    );
+  }
+
+  public render() {
+    const propPath = computed(() => {
+      return this._field.multiple
+        ? this._buildMultiplePropPath()
+        : this._buildSinglePropPath(this._sectionResponseIndex);
+    });
+
+    const allowAddMoreResponse = computed(
+      () => propPath.value?.length < Number(this._field?.maxResponseAllowed || Infinity),
+    );
+
+    return h(
+      "div",
+      {
+        class: "formkl-field",
+      },
+      [this._renderBody(propPath.value), this._renderFooter(allowAddMoreResponse.value)],
     );
   }
 }

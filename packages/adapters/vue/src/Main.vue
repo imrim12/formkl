@@ -33,11 +33,17 @@ export default defineComponent({
 
     const form = computed(() => {
       try {
-        return props.formkl ? new Form(FormklParser.parse(props.formkl), props.options) : null;
-      } catch (err) {
+        return {
+          instance: props.formkl ? new Form(FormklParser.parse(props.formkl), props.options) : null,
+          error: null,
+        };
+      } catch (err: any) {
         console.warn("[Formkl Adapter]: ", err);
 
-        return null;
+        return {
+          instance: null,
+          error: err,
+        };
       }
     });
 
@@ -48,7 +54,12 @@ export default defineComponent({
     ) => {
       formklRef.value.validate((isValid: boolean) => {
         if (form.value && isValid) {
-          form.value.submit.call(form.value, callbackSuccess, callbackError, callbackFinally);
+          form.value.instance?.submit.call(
+            form.value,
+            callbackSuccess,
+            callbackError,
+            callbackFinally,
+          );
         }
       });
     };
@@ -58,16 +69,16 @@ export default defineComponent({
     };
 
     const fill = (fillModel: SchemaBase | SchemaFlat) => {
-      form.value && form.value.fill.call(form.value, fillModel);
+      form.value.instance && form.value.instance.fill.call(form.value, fillModel);
       vm?.$forceUpdate();
     };
 
     const getForm = () => {
-      return form.value;
+      return form.value.instance;
     };
 
     onMounted(() => {
-      emit("ready", form.value);
+      emit("ready", form.value.instance);
     });
 
     return {
@@ -80,8 +91,8 @@ export default defineComponent({
     };
   },
   render() {
-    return this.form
-      ? this.form.render()
+    return this.form.instance
+      ? this.form.instance.render()
       : h(
           "div",
           {
@@ -89,7 +100,7 @@ export default defineComponent({
           },
           this.$slots.error
             ? this.$slots.error()
-            : h("div", { class: "formkl-error" }, "Error parsing formkl"),
+            : h("div", { class: "formkl-error" }, this.form.error.message),
         );
   },
 });

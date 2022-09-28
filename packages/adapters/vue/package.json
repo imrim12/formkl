@@ -1,6 +1,6 @@
 {
   "name": "@formkl/vue",
-  "version": "1.0.0-alpha.4",
+  "version": "1.0.0-alpha.5",
   "description": "A Vue adapter for Formkl",
   "type": "module",
   "main": "dist/index.es.js",

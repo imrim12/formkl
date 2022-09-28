@@ -31,6 +31,7 @@ declare module "formkl" {
     label: string;
     require: boolean;
     multiple: boolean;
+    maxResponseAllowed?: number;
     key: string;
     validation?: Validation;
   }
@@ -40,6 +41,7 @@ declare module "formkl" {
     label: string;
     require: boolean;
     multiple: boolean;
+    maxResponseAllowed?: number;
     options: Array<any>;
     fetchDataPath?: string;
     fetchUrl?: string;
@@ -53,6 +55,7 @@ declare module "formkl" {
     title: string;
     key: string;
     multiple: boolean;
+    maxResponseAllowed?: number;
     fields: Array<FieldDefault | FieldSelection>;
   }
 

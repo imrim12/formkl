@@ -1,6 +1,6 @@
 import { ElButton } from "element-plus";
 import { Section, FieldDefault, FieldSelection, Formkl } from "formkl";
-import { h, Ref } from "vue";
+import { computed, h, Ref } from "vue";
 import { Form } from "../core/Form";
 import { SchemaBase, SchemaFlat } from "../core/Schema";
 import { SectionHandler } from "../handlers/SectionHandler";
@@ -46,26 +46,12 @@ export class SectionRenderer {
     );
   }
 
-  private _renderMultipleResponse() {
+  private _renderMultipleResponse(responseCount: number) {
     const sectionRemoveBtn =
       Form.getComponentMap().get(DefaultComponent.SECTION_REMOVE_BTN) ||
       h(ElButton, { type: "danger" });
 
-    let firstFieldResponse: any[] = [];
-
-    switch (this._formkl.model) {
-      case "flat":
-        const _flatModel = this._model.value as SchemaFlat;
-        firstFieldResponse = Object.values(_flatModel[this._section.key])[0];
-        break;
-      case "base":
-      default:
-        const _baseModel = this._model.value as SchemaBase;
-        firstFieldResponse = _baseModel.data.find((i) => i.section === this._section.key)?.value;
-        break;
-    }
-
-    return firstFieldResponse.map((_, responseIndex) =>
+    return new Array(responseCount).fill(null).map((_, responseIndex) =>
       h(
         "div",
         {
@@ -83,7 +69,7 @@ export class SectionRenderer {
 
             return fieldRenderer.render();
           }),
-          firstFieldResponse.length > 1
+          responseCount > 1
             ? h(
                 "div",
                 {
@@ -103,17 +89,19 @@ export class SectionRenderer {
     );
   }
 
-  private _renderBody() {
+  private _renderBody(responseCount: number) {
     return h(
       "section",
       {
         class: "formkl-section__body",
       },
-      this._section.multiple ? this._renderMultipleResponse() : this._renderSingleResponse(),
+      this._section.multiple
+        ? this._renderMultipleResponse(responseCount)
+        : this._renderSingleResponse(),
     );
   }
 
-  private _renderFooter() {
+  private _renderFooter(allowAddMoreResponse: boolean) {
     const sectionAddBtn =
       Form.getComponentMap().get(DefaultComponent.SECTION_ADD_BTN) || h(ElButton, {});
 
@@ -123,7 +111,7 @@ export class SectionRenderer {
         class: "formkl-section__footer",
       },
       [
-        this._section.multiple
+        allowAddMoreResponse
           ? h(
               sectionAddBtn,
               {
@@ -137,6 +125,27 @@ export class SectionRenderer {
   }
 
   public render() {
+    const firstFieldResponse = computed(() => {
+      if (this._section.multiple) {
+        switch (this._formkl.model) {
+          case "flat":
+            const _flatModel = this._model.value as SchemaFlat;
+            return Object.values(_flatModel[this._section.key])[0];
+          case "base":
+          default:
+            const _baseModel = this._model.value as SchemaBase;
+            return _baseModel.data.find((i) => i.section === this._section.key)?.value;
+        }
+      } else {
+        return null;
+      }
+    });
+
+    const allowAddMoreResponse = computed(
+      () =>
+        firstFieldResponse.value?.length < Number(this._section?.maxResponseAllowed || Infinity),
+    );
+
     return h(
       "div",
       {
@@ -145,7 +154,11 @@ export class SectionRenderer {
           this._section.multiple ? "formkl-section__wrapper--multiple" : "",
         ],
       },
-      [this._renderHeader(), this._renderBody(), this._renderFooter()],
+      [
+        this._renderHeader(),
+        this._renderBody(firstFieldResponse.value?.length || 1),
+        this._renderFooter(allowAddMoreResponse.value),
+      ],
     );
   }
 }
