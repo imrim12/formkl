@@ -2,6 +2,7 @@
   "name": "@formkl/sandbox",
   "version": "0.0.0",
   "type": "module",
+  "private": false,
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
