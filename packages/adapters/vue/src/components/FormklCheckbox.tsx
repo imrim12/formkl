@@ -1,10 +1,3 @@
-<template>
-  <el-checkbox-group :model-value="modelValue" @change="handleChange">
-    <el-checkbox v-for="option in options" :label="option" :key="option" />
-  </el-checkbox-group>
-</template>
-
-<script lang="ts">
 import { defineComponent, PropType } from "vue";
 import { ElCheckboxGroup, ElCheckbox } from "element-plus";
 
@@ -12,7 +5,6 @@ import type { CheckboxValueType } from "element-plus";
 
 export default defineComponent({
   name: "FormklCheckboxWrapper",
-  components: { ElCheckboxGroup, ElCheckbox },
   props: {
     modelValue: {
       type: Array as PropType<Array<string>>,
@@ -29,9 +21,12 @@ export default defineComponent({
       emit("update:modelValue", value);
     };
 
-    return {
-      handleChange,
-    };
+    return () => (
+      <ElCheckboxGroup modelValue={props.modelValue} onChange={handleChange}>
+        {props.options.map((option) => (
+          <ElCheckbox label={option} key={String(option)} />
+        ))}
+      </ElCheckboxGroup>
+    );
   },
 });
-</script>

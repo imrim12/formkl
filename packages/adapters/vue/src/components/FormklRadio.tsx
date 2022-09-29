@@ -1,16 +1,8 @@
-<template>
-  <el-radio-group :model-value="modelValue" @change="handleChange">
-    <el-radio v-for="option in options" :label="option" :key="String(option)" />
-  </el-radio-group>
-</template>
-
-<script lang="ts">
 import { defineComponent, PropType } from "vue";
 import { ElRadioGroup, ElRadio } from "element-plus";
 
 export default defineComponent({
   name: "FormklRadioWrapper",
-  components: { ElRadioGroup, ElRadio },
   props: {
     modelValue: {
       type: [String, Number, Boolean],
@@ -26,9 +18,12 @@ export default defineComponent({
       emit("update:modelValue", value);
     };
 
-    return {
-      handleChange,
-    };
+    return () => (
+      <ElRadioGroup modelValue={props.modelValue} onChange={handleChange}>
+        {props.options.map((option) => (
+          <ElRadio label={option} key={String(option)} />
+        ))}
+      </ElRadioGroup>
+    );
   },
 });
-</script>

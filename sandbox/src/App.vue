@@ -29,6 +29,8 @@ export default defineComponent({
 {
   "Something" includes {
     require "Email" text;
+    require "Gender" select("Male","Femail","Other");
+    multiple text;
   }
 }`);
 

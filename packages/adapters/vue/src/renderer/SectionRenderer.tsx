@@ -23,95 +23,76 @@ export class SectionRenderer {
   }
 
   private _renderHeader() {
-    return h(
-      "header",
-      {
-        class: "formkl-section__header",
-      },
-      h("h3", this._section.title),
+    return (
+      <header class="formkl-section__header">
+        <h3>{this._section.title}</h3>
+      </header>
     );
   }
 
   private _renderSingleResponse() {
-    return h(
-      "div",
-      {
-        class: "formkl-section_response",
-      },
-      this._fields.map((field) => {
-        const fieldRenderer = new FieldRenderer(this._formkl, this._section, field, this._model);
+    return (
+      <div class="formkl-section_response">
+        {this._fields.map((field) => {
+          const fieldRenderer = new FieldRenderer(this._formkl, this._section, field, this._model);
 
-        return fieldRenderer.render();
-      }),
+          return fieldRenderer.render();
+        })}
+      </div>
     );
   }
 
   private _renderMultipleResponse(responseCount: number) {
-    const sectionRemoveBtn =
-      Form.getComponentMap().get(DefaultComponent.SECTION_REMOVE_BTN) ||
-      h(ElButton, { type: "danger" });
-
-    return new Array(responseCount).fill(null).map((_, responseIndex) =>
-      h(
-        "div",
-        {
-          class: "formkl-section_response",
-        },
-        [
-          ...this._fields.map((field) => {
-            const fieldRenderer: FieldRenderer = new FieldRenderer(
-              this._formkl,
-              this._section,
-              field,
-              this._model,
-              responseIndex,
-            );
-
-            return fieldRenderer.render();
-          }),
-          responseCount > 1
-            ? h(
-                "div",
-                {
-                  class: "formkl-field_response__remover",
-                },
-                h(
-                  sectionRemoveBtn,
-                  {
-                    onClick: this._handler.removeResponse.bind(this._handler, responseIndex),
-                  },
-                  () => "Remove section",
-                ),
-              )
-            : null,
-        ],
-      ),
+    const sectionRemoveBtn = Form.getComponentMap().get(DefaultComponent.SECTION_REMOVE_BTN) || (
+      <ElButton type="danger" />
     );
+
+    return new Array(responseCount).fill(null).map((_, responseIndex) => (
+      <div class="formkl-section_response">
+        {this._fields.map((field) => {
+          const fieldRenderer: FieldRenderer = new FieldRenderer(
+            this._formkl,
+            this._section,
+            field,
+            this._model,
+            responseIndex,
+          );
+
+          return fieldRenderer.render();
+        })}
+        {responseCount > 1 ? (
+          <div class="formkl-field_response__remover">
+            {h(
+              sectionRemoveBtn,
+              {
+                onClick: this._handler.removeResponse.bind(this._handler, responseIndex),
+              },
+              () => "Remove section",
+            )}
+          </div>
+        ) : null}
+      </div>
+    ));
   }
 
   private _renderBody(responseCount: number) {
-    return h(
-      "section",
-      {
-        class: "formkl-section__body",
-      },
-      this._section.multiple
-        ? this._renderMultipleResponse(responseCount)
-        : this._renderSingleResponse(),
+    return (
+      <section class="formkl-section__body">
+        {this._section.multiple
+          ? this._renderMultipleResponse(responseCount)
+          : this._renderSingleResponse()}
+      </section>
     );
   }
 
   private _renderFooter(allowAddMoreResponse: boolean) {
-    const sectionAddBtn =
-      Form.getComponentMap().get(DefaultComponent.SECTION_ADD_BTN) || h(ElButton, {});
+    const sectionAddBtn = Form.getComponentMap().get(DefaultComponent.SECTION_ADD_BTN) || (
+      <ElButton />
+    );
 
-    return h(
-      "footer",
-      {
-        class: "formkl-section__footer",
-      },
-      [
-        allowAddMoreResponse
+    return (
+      <footer class="formkl-section__footer">
+        {allowAddMoreResponse
           ? h(
               sectionAddBtn,
               {
@@ -119,8 +100,8 @@ export class SectionRenderer {
               },
               () => "Add section",
             )
-          : null,
-      ],
+          : null}
+      </footer>
     );
   }
 
@@ -146,19 +127,17 @@ export class SectionRenderer {
         firstFieldResponse.value?.length < Number(this._section?.maxResponseAllowed || Infinity),
     );
 
-    return h(
-      "div",
-      {
-        class: [
+    return (
+      <div
+        class={[
           "formkl-section__wrapper",
           this._section.multiple ? "formkl-section__wrapper--multiple" : "",
-        ],
-      },
-      [
-        this._renderHeader(),
-        this._renderBody(firstFieldResponse.value?.length || 1),
-        this._renderFooter(allowAddMoreResponse.value),
-      ],
+        ]}
+      >
+        {this._renderHeader()}
+        {this._renderBody(firstFieldResponse.value?.length || 1)}
+        {this._renderFooter(allowAddMoreResponse.value)}
+      </div>
     );
   }
 }

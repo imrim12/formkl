@@ -1,15 +1,3 @@
-<template>
-  <el-select :model-value="modelValue" @change="handleChange">
-    <el-option
-      v-for="option in computedOptions"
-      :label="option.label"
-      :value="option.value"
-      :key="String(option.label)"
-    />
-  </el-select>
-</template>
-
-<script lang="ts">
 import { defineComponent, computed, ref, onBeforeMount, inject } from "vue";
 import { ElSelect, ElOption } from "element-plus";
 
@@ -17,7 +5,6 @@ import _get from "lodash/get";
 
 export default defineComponent({
   name: "FormklSelect",
-  components: { ElSelect, ElOption },
   props: {
     modelValue: {
       type: [String, Number, Boolean, Object],
@@ -81,10 +68,12 @@ export default defineComponent({
       }
     });
 
-    return {
-      handleChange,
-      computedOptions,
-    };
+    return () => (
+      <ElSelect modelValue={props.modelValue} onChange={handleChange}>
+        {computedOptions.value.map((option) => (
+          <ElOption label={option.label} value={option.value} key={String(option.value)} />
+        ))}
+      </ElSelect>
+    );
   },
 });
-</script>

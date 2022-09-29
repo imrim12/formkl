@@ -1,9 +1,7 @@
-<script lang="ts">
 import {
   computed,
   defineComponent,
   getCurrentInstance,
-  h,
   onMounted,
   PropType,
   provide,
@@ -91,17 +89,12 @@ export default defineComponent({
     };
   },
   render() {
-    return this.form.instance
-      ? this.form.instance.render()
-      : h(
-          "div",
-          {
-            class: "formkl-error__wrapper",
-          },
-          this.$slots.error
-            ? this.$slots.error()
-            : h("div", { class: "formkl-error" }, this.form.error.message),
-        );
+    return (
+      this.form.instance?.render?.() || (
+        <div class="formkl-error__wrapper">
+          {this.$slots?.error?.() || <div class="formkl-error">{this.form.error.message}</div>}
+        </div>
+      )
+    );
   },
 });
-</script>

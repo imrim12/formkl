@@ -3,7 +3,7 @@ import { Adapter } from "./core/Adapter";
 import { Plugin } from "./core/Plugin";
 import { DefaultComponent } from "./types/default-component.enum";
 
-import Formkl from "./Main.vue";
+import Formkl from "./Main";
 
 import FormklParser from "formkl";
 

@@ -7,6 +7,9 @@ import { SchemaBase, SchemaFlat } from "../core/Schema";
 import { Rule } from "../core/Rule";
 import { DefaultComponent } from "../types/default-component.enum";
 
+// Equivalent to React.createElement, but for Vue
+const createElement = h;
+
 export class FieldRenderer {
   private _formkl: Formkl;
   private _section: Section;
@@ -40,7 +43,7 @@ export class FieldRenderer {
 
   private _renderFieldDefault(responseIndex?: number) {
     return this._component
-      ? h(this._component, {
+      ? createElement(this._component, {
           ...this._handler.getEventHandler(responseIndex),
         })
       : null;
@@ -48,7 +51,7 @@ export class FieldRenderer {
 
   private _renderFieldSelection(responseIndex?: number) {
     return this._component
-      ? h(this._component, {
+      ? createElement(this._component, {
           ...this._field,
           ...this._handler.getEventHandler(responseIndex),
         })
@@ -96,64 +99,49 @@ export class FieldRenderer {
   }
 
   private _renderSingleField(propPath: string) {
-    return h(
-      ElFormItem,
-      {
-        label: this._field.label,
-        key: propPath,
-        prop: propPath,
-        rules: this._rules,
-      },
-      () =>
-        ["checkbox", "radio", "select"].includes(this._field.type)
-          ? this._renderFieldSelection(this._sectionResponseIndex)
-          : this._renderFieldDefault(this._sectionResponseIndex),
+    return (
+      <ElFormItem label={this._field.label} key={propPath} prop={propPath} rules={this._rules}>
+        {() =>
+          ["checkbox", "radio", "select"].includes(this._field.type)
+            ? this._renderFieldSelection(this._sectionResponseIndex)
+            : this._renderFieldDefault(this._sectionResponseIndex)
+        }
+      </ElFormItem>
     );
   }
 
   private _renderMultipleField(propPath: string[]) {
-    const fieldRemoveBtn =
-      Form.getComponentMap().get(DefaultComponent.FIELD_REMOVE_BTN) ||
-      h(ElButton, { type: "danger" });
-
-    return propPath.map((prop, responseIndex) =>
-      h(
-        "div",
-        {
-          class: "formkl-field_response",
-        },
-        [
-          h(
-            ElFormItem,
-            {
-              label: responseIndex === 0 ? this._field.label : "",
-              key: prop,
-              prop: prop,
-              rules: this._rules,
-            },
-            () =>
-              ["checkbox", "radio", "select"].includes(this._field.type)
-                ? this._renderFieldSelection(responseIndex)
-                : this._renderFieldDefault(responseIndex),
-          ),
-          propPath.length > 1
-            ? h(
-                "div",
-                {
-                  class: "formkl-field_response__remover",
-                },
-                h(
-                  fieldRemoveBtn,
-                  {
-                    onClick: this._handler.removeResponse.bind(this._handler, responseIndex),
-                  },
-                  () => "Remove field",
-                ),
-              )
-            : null,
-        ],
-      ),
+    const fieldRemoveBtn = Form.getComponentMap().get(DefaultComponent.FIELD_REMOVE_BTN) || (
+      <ElButton type="danger" />
     );
+
+    return propPath.map((prop, responseIndex) => (
+      <div class="formkl-field_response">
+        <ElFormItem
+          label={responseIndex === 0 ? this._field.label : ""}
+          key={prop}
+          prop={prop}
+          rules={this._rules}
+        >
+          {() =>
+            ["checkbox", "radio", "select"].includes(this._field.type)
+              ? this._renderFieldSelection(responseIndex)
+              : this._renderFieldDefault(responseIndex)
+          }
+        </ElFormItem>
+        {propPath.length > 1 ? (
+          <div class="formkl-field_response__remover">
+            {createElement(
+              fieldRemoveBtn,
+              {
+                onClick: this._handler.removeResponse.bind(this._handler, responseIndex),
+              },
+              () => "Remove field",
+            )}
+          </div>
+        ) : null}
+      </div>
+    ));
   }
 
   private _renderBody(propPath: string | string[]) {
@@ -163,25 +151,20 @@ export class FieldRenderer {
   }
 
   private _renderFooter(allowAddMoreResponse: boolean) {
-    const fieldAddBtn =
-      Form.getComponentMap().get(DefaultComponent.FIELD_ADD_BTN) || h(ElButton, {});
+    const fieldAddBtn = Form.getComponentMap().get(DefaultComponent.FIELD_ADD_BTN) || <ElButton />;
 
-    return h(
-      "div",
-      {
-        class: "formkl-field__footer",
-      },
-      [
-        this._field.multiple && allowAddMoreResponse
-          ? h(
+    return (
+      <div class="formkl-field__footer">
+        {this._field.multiple && allowAddMoreResponse
+          ? createElement(
               fieldAddBtn,
               {
                 onClick: this._handler.addResponse.bind(this._handler),
               },
               () => "Add field",
             )
-          : null,
-      ],
+          : null}
+      </div>
     );
   }
 
@@ -196,12 +179,11 @@ export class FieldRenderer {
       () => propPath.value?.length < Number(this._field?.maxResponseAllowed || Infinity),
     );
 
-    return h(
-      "div",
-      {
-        class: "formkl-field",
-      },
-      [this._renderBody(propPath.value), this._renderFooter(allowAddMoreResponse.value)],
+    return (
+      <div class="formkl-field">
+        {this._renderBody(propPath.value)}
+        {this._renderFooter(allowAddMoreResponse.value)}
+      </div>
     );
   }
 }

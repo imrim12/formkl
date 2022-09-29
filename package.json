@@ -38,10 +38,10 @@
     "utils"
   ],
   "dependencies": {
-    "formkl": "workspace:*",
-    "@formkl/vue": "workspace:*",
     "@formkl/editor": "workspace:*",
-    "@formkl/utils": "workspace:*"
+    "@formkl/utils": "workspace:*",
+    "@formkl/vue": "workspace:*",
+    "formkl": "workspace:*"
   },
   "devDependencies": {
     "@babel/preset-typescript": "^7.18.6",
@@ -50,6 +50,7 @@
     "@typescript-eslint/eslint-plugin": "^5.38.0",
     "@typescript-eslint/parser": "^5.38.0",
     "@vitejs/plugin-vue": "^3.1.0",
+    "@vitejs/plugin-vue-jsx": "^2.0.1",
     "eslint": "^8.23.1",
     "minify": "^9.1.0",
     "rimraf": "^3.0.2",
