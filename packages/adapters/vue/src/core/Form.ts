@@ -1,11 +1,14 @@
 import { FieldDefault, FieldSelection, Formkl, Section } from "formkl";
-import { ref, Ref, VNode } from "vue";
+import { h, Ref, VNode } from "vue";
 import { Adapter } from "./Adapter";
 import { Model } from "./Model";
-import { FormRenderer } from "../renderer/FormRenderer";
 import { Schema, SchemaBase, SchemaFlat } from "./Schema";
+import { FormNode } from "../nodes/Form";
 
 import _cloneDeep from "lodash/cloneDeep";
+
+// Equivalent to React.createElement, but for Vue
+const createElement = h;
 
 export interface FormOptions {
   /**
@@ -48,8 +51,6 @@ export class Form {
 
   private _model: Ref<SchemaBase | SchemaFlat>;
 
-  private _renderer: FormRenderer;
-
   private _schema: Schema;
 
   constructor(formkl: Formkl, options?: FormOptions) {
@@ -67,9 +68,6 @@ export class Form {
     // Build a reactive model from schema
     const model = new Model(this._formkl, this._schema, this._options?.modelDefault);
     this._model = model.getReactiveValue();
-
-    // Initialize renderer
-    this._renderer = new FormRenderer(this._formkl, this._model);
   }
 
   public fill(fillModel: SchemaBase | SchemaFlat) {
@@ -140,6 +138,6 @@ export class Form {
   }
 
   public render(): VNode {
-    return this._renderer.render();
+    return createElement(FormNode, { formkl: this._formkl, model: this._model });
   }
 }
