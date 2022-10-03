@@ -74,11 +74,13 @@ importers:
       element-plus: ^2.2.16
       formkl: workspace:*
       lodash: ^4.17.21
+      normalize.css: ^8.0.1
     dependencies:
       '@formkl/utils': link:../../../utils
       element-plus: 2.2.17_vue@3.2.39
       formkl: link:../../../language
       lodash: 4.17.21
+      normalize.css: 8.0.1
 
   packages/editor:
     specifiers:
@@ -2537,6 +2539,10 @@ packages:
 
   /normalize-wheel-es/1.2.0:
     resolution: {integrity: sha512-Wj7+EJQ8mSuXr2iWfnujrimU35R2W4FAErEyTmJoJ7ucwTn2hOUSsRehMb5RSYkxXGTM7Y9QpvPmp++w5ftoJw==}
+    dev: false
+
+  /normalize.css/8.0.1:
+    resolution: {integrity: sha512-qizSNPO93t1YUuUhP22btGOo3chcvDFqFaj2TRybP0DMxkHOCTYwp3n34fel4a31ORXy4m1Xq0Gyqpb5m33qIg==}
     dev: false
 
   /object-assign/4.1.1:

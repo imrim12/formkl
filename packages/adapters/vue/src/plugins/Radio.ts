@@ -3,7 +3,7 @@ import { h } from "vue";
 import { Plugin } from "../core/Plugin";
 import { DefaultComponent } from "../types/default-component.enum";
 
-import FormklRadio from "../components/FormklRadio";
+import FormklRadio from "../components/wrappers/FormklRadio";
 
 export const PluginRadio = new Plugin({
   name: DefaultComponent.RADIO,

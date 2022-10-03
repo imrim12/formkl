@@ -9,6 +9,8 @@ import FormklParser from "formkl";
 
 import { bootstrap } from "./bootstrap";
 
+import "normalize.css";
+
 import "./assets/main.scss";
 
 bootstrap();

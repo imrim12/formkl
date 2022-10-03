@@ -60,7 +60,7 @@ export const SectionNode = ({ formkl, section, model }: SectionNodeProps) => {
               />
             ))}
             {responseCount > 1 ? (
-              <div class="formkl-field_response__remover">
+              <div class="formkl-section_response__remover">
                 {createElement(
                   sectionRemoveBtn,
                   {

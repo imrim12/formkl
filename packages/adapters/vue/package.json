@@ -4,9 +4,10 @@
   "description": "A Vue adapter for Formkl",
   "type": "module",
   "main": "dist/index.es.js",
+  "style": "dist/style.css",
   "types": "dist/types/src",
   "scripts": {
-    "build": "vue-tsc && vite build"
+    "build": "rimraf ./dist && vue-tsc && vite build"
   },
   "repository": {
     "type": "git",
@@ -26,6 +27,7 @@
     "@formkl/utils": "workspace:*",
     "element-plus": "^2.2.16",
     "formkl": "workspace:*",
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.21",
+    "normalize.css": "^8.0.1"
   }
 }
