@@ -3,7 +3,7 @@
     <div class="flex-1">
       <FormklEditor v-model="formklSyntax" />
     </div>
-    <div class="flex-1">
+    <div class="flex-1 py-2 px-8">
       <Formkl :formkl="formklSyntax" />
     </div>
   </div>
@@ -14,8 +14,8 @@ import { Formkl } from "@formkl/vue";
 import { FormklEditor } from "@formkl/editor";
 import { defineComponent, ref } from "vue";
 
-import "@formkl/vue/dist/style.css";
 import "@formkl/editor/dist/style.css";
+import "@formkl/vue/dist/style.css";
 
 export default defineComponent({
   components: {
