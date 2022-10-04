@@ -1,6 +1,6 @@
 {
   "name": "@formkl/editor",
-  "version": "1.0.0-alpha.3",
+  "version": "1.0.0-alpha.4",
   "description": "An Editor for Formkl using Vue.js",
   "type": "module",
   "main": "dist/index.es.js",
@@ -30,6 +30,7 @@
     "@codemirror/state": "^6.1.2",
     "@codemirror/view": "^6.2.4",
     "codemirror": "^6.0.1",
-    "formkl": "workspace:*"
+    "formkl": "workspace:*",
+    "vue": "^3.2.40"
   }
 }
