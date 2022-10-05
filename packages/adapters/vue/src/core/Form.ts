@@ -3,7 +3,7 @@ import { h, Ref, VNode } from "vue";
 import { Adapter } from "./Adapter";
 import { Model } from "./Model";
 import { Schema, SchemaBase, SchemaFlat } from "./Schema";
-import { FormNode } from "../components/Form";
+import FormNode from "../components/Form";
 
 import _cloneDeep from "lodash/cloneDeep";
 
@@ -138,6 +138,6 @@ export class Form {
   }
 
   public render(): VNode {
-    return createElement(FormNode, { formkl: this._formkl, model: this._model });
+    return createElement(FormNode, { ref: "formklRef", formkl: this._formkl, model: this._model });
   }
 }

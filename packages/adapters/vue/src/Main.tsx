@@ -50,7 +50,7 @@ export default defineComponent({
       callbackError?: (error: any) => void,
       callbackFinally?: () => void,
     ) => {
-      formklRef.value.validate((isValid: boolean) => {
+      formklRef.value?.$refs.elFormRef?.validate((isValid: boolean) => {
         if (form.value && isValid) {
           form.value.instance?.submit.call(
             form.value,
@@ -63,7 +63,7 @@ export default defineComponent({
     };
 
     const reset = () => {
-      formklRef.value.resetFields();
+      formklRef.value?.$refs.elFormRef?.resetFields();
     };
 
     const fill = (fillModel: SchemaBase | SchemaFlat) => {

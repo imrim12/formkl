@@ -1,6 +1,6 @@
 {
   "name": "@formkl/vue",
-  "version": "1.0.0-alpha.8",
+  "version": "1.0.0-alpha.9",
   "description": "A Vue adapter for Formkl",
   "type": "module",
   "main": "dist/index.es.js",
@@ -25,6 +25,8 @@
   "homepage": "https://github.com/formkl/formkl#readme",
   "dependencies": {
     "@formkl/utils": "workspace:*",
+    "@vitejs/plugin-vue": "^3.1.2",
+    "@vitejs/plugin-vue-jsx": "^2.0.1",
     "element-plus": "^2.2.16",
     "formkl": "workspace:*",
     "lodash": "^4.17.21",
