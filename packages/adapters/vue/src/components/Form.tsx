@@ -7,7 +7,7 @@ import { SectionNode } from "./Section";
 // Equivalent to React.createElement, but for Vue
 const createElement = h;
 
-export default defineComponent({
+export const FormNode = defineComponent({
   name: "FormNode",
   props: {
     formkl: {
@@ -21,20 +21,17 @@ export default defineComponent({
   },
 
   setup(props) {
-    const _formkl = props.formkl;
-    const _model = props.model;
-
     return () => (
-      <ElForm ref="elFormRef" model={_model.value} labelWidth={130} labelPosition="left">
-        {_formkl.title || _formkl.description ? (
+      <ElForm ref="elFormRef" model={props.model.value} labelWidth={130} labelPosition="left">
+        {props.formkl.title || props.formkl.description ? (
           <header class="formkl__header">
-            {_formkl.title ? <h2>{_formkl.title}</h2> : null}
-            {_formkl.description ? <h3>{_formkl.description}</h3> : null}
+            {props.formkl.title ? <h2>{props.formkl.title}</h2> : null}
+            {props.formkl.description ? <h3>{props.formkl.description}</h3> : null}
           </header>
         ) : null}
         <div class="formkl__body">
-          {_formkl.sections.map((section) => (
-            <SectionNode formkl={_formkl} section={section} model={_model} />
+          {props.formkl.sections.map((section) => (
+            <SectionNode formkl={props.formkl} section={section} model={props.model} />
           ))}
         </div>
       </ElForm>

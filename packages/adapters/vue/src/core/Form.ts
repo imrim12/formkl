@@ -1,14 +1,10 @@
 import { FieldDefault, FieldSelection, Formkl, Section } from "formkl";
-import { h, Ref, VNode } from "vue";
+import { Ref, VNode } from "vue";
 import { Adapter } from "./Adapter";
 import { Model } from "./Model";
 import { Schema, SchemaBase, SchemaFlat } from "./Schema";
-import FormNode from "../components/Form";
 
 import _cloneDeep from "lodash/cloneDeep";
-
-// Equivalent to React.createElement, but for Vue
-const createElement = h;
 
 export interface FormOptions {
   /**
@@ -24,7 +20,10 @@ export interface FormOptions {
 }
 
 export class Form {
-  private _formkl: Formkl;
+  public formkl: Formkl;
+
+  public model: Ref<SchemaBase | SchemaFlat>;
+
   /**
    * Component map
    */
@@ -49,12 +48,10 @@ export class Form {
 
   private _options?: FormOptions;
 
-  private _model: Ref<SchemaBase | SchemaFlat>;
-
   private _schema: Schema;
 
   constructor(formkl: Formkl, options?: FormOptions) {
-    this._formkl = formkl;
+    this.formkl = formkl;
     this._options = options;
 
     // Register all plugins
@@ -64,17 +61,17 @@ export class Form {
     });
 
     // Initialize schema
-    this._schema = new Schema(this._formkl);
+    this._schema = new Schema(this.formkl);
     // Build a reactive model from schema
-    const model = new Model(this._formkl, this._schema, this._options?.modelDefault);
-    this._model = model.getReactiveValue();
+    const model = new Model(this.formkl, this._schema, this._options?.modelDefault);
+    this.model = model.getReactiveValue();
   }
 
   public fill(fillModel: SchemaBase | SchemaFlat) {
     // Reuse the model creation logic for filling data
-    const newModel = new Model(this._formkl, this._schema, fillModel);
+    const newModel = new Model(this.formkl, this._schema, fillModel);
     // But doesn't have to use its reactive value
-    this._model.value = _cloneDeep(newModel.getValue());
+    this.model.value = _cloneDeep(newModel.getValue());
   }
 
   public async submit(
@@ -87,17 +84,17 @@ export class Form {
 
       if (this._options?.submitMethod) {
         response = await this._options.submitMethod(
-          this._formkl.endpoint,
-          this._formkl.method,
-          this._model.value,
+          this.formkl.endpoint,
+          this.formkl.method,
+          this.model.value,
         );
       } else if (window) {
-        const data = await fetch(this._formkl.endpoint, {
-          method: this._formkl.method.toUpperCase() || "POST",
+        const data = await fetch(this.formkl.endpoint, {
+          method: this.formkl.method.toUpperCase() || "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(this._model.value || {}),
+          body: JSON.stringify(this.model.value || {}),
         });
 
         response = await data.json();
@@ -135,9 +132,5 @@ export class Form {
     >
   > {
     return this._eventMap;
-  }
-
-  public render(): VNode {
-    return createElement(FormNode, { ref: "formklRef", formkl: this._formkl, model: this._model });
   }
 }

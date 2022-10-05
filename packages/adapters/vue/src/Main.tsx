@@ -8,9 +8,10 @@ import {
   ref,
 } from "vue";
 import { Form, FormOptions } from "./core/Form";
+import { SchemaBase, SchemaFlat } from "./core/Schema";
+import { FormNode } from "./components/Form";
 
 import FormklParser from "formkl";
-import { SchemaBase, SchemaFlat } from "./core/Schema";
 
 export default defineComponent({
   name: "Formkl",
@@ -19,6 +20,10 @@ export default defineComponent({
       type: String,
       required: true,
     },
+    debounce: {
+      type: Number,
+      default: 300,
+    },
     options: Object as PropType<FormOptions>,
   },
   emits: ["ready"],
@@ -26,13 +31,19 @@ export default defineComponent({
     const vm = getCurrentInstance()?.proxy;
 
     const formklRef = ref();
+    const elFormRef = ref();
 
     provide("$http", props.options?.$http);
 
-    const form = computed(() => {
+    const form = computed<{
+      instance: Form | null;
+      error: Error | null;
+    }>(() => {
       try {
+        const instance: Form = new Form(FormklParser.parse(props.formkl), props.options);
+
         return {
-          instance: props.formkl ? new Form(FormklParser.parse(props.formkl), props.options) : null,
+          instance,
           error: null,
         };
       } catch (err: any) {
@@ -81,6 +92,7 @@ export default defineComponent({
 
     return {
       formklRef,
+      elFormRef,
       form,
       submit,
       reset,
@@ -89,12 +101,18 @@ export default defineComponent({
     };
   },
   render() {
-    return (
-      this.form.instance?.render?.() || (
-        <div class="formkl-error__wrapper">
-          {this.$slots?.error?.() || <div class="formkl-error">{this.form.error.message}</div>}
-        </div>
-      )
+    return this.form.instance ? (
+      <FormNode
+        ref="formklRef"
+        formkl={this.form.instance.formkl}
+        model={this.form.instance.model}
+      />
+    ) : (
+      <div class="formkl-error__wrapper">
+        {this.$slots?.error?.({ error: this.form.error?.message }) || (
+          <div class="formkl-error">{this.form.error?.message}</div>
+        )}
+      </div>
     );
   },
 });
