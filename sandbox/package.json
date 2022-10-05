@@ -9,7 +9,7 @@
     "@formkl/editor": "workspace:*",
     "@formkl/vue": "workspace:*",
     "element-plus": "^2.2.16",
-    "vue": "^3.2.37"
+    "vue": "^3.2.40"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^3.1.2",
