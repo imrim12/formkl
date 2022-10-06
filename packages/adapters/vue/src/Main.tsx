@@ -64,7 +64,7 @@ export default defineComponent({
       formklRef.value?.$refs.elFormRef?.validate((isValid: boolean) => {
         if (form.value && isValid) {
           form.value.instance?.submit.call(
-            form.value,
+            form.value.instance,
             callbackSuccess,
             callbackError,
             callbackFinally,
