@@ -149,6 +149,18 @@ pnpm add @formkl/vue
 </script>
 ```
 
+To prevent having duplicated version of Vue in your project, we recommend having this option in your `vite.config.js`
+
+Refer to this document: https://vitejs.dev/config/shared-options.html#resolve-dedupe
+
+```javascript
+{
+  resolve: {
+    dedupe: ["vue"],
+  }
+}
+```
+
 ### React guide
 
 (coming soon)
