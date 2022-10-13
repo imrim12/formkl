@@ -4,6 +4,9 @@
   "packageManager": "pnpm@7.12.2",
   "scripts": {
     "test": "vitest",
+    "dev:docs": "vitepress dev docs",
+    "serve:docs": "vitepress serve docs",
+    "build:docs": "vitepress build docs",
     "build:core": "pnpm exec:core build",
     "build:vue": "pnpm exec:vue build",
     "build:editor": "pnpm exec:editor build",
@@ -41,7 +44,8 @@
     "@formkl/editor": "workspace:*",
     "@formkl/utils": "workspace:*",
     "@formkl/vue": "workspace:*",
-    "formkl": "workspace:*"
+    "formkl": "workspace:*",
+    "vitepress": "1.0.0-alpha.20"
   },
   "devDependencies": {
     "@babel/preset-typescript": "^7.18.6",
