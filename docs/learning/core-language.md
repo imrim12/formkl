@@ -13,7 +13,8 @@ The grammar is defined in [BNF](https://en.wikipedia.org/wiki/Extended_Backus%E2
 An simple example of BNF:
 
 ```bash
-# BNF is a set of rules that express the possible valid cases of a set of keywords (tokens)
+# BNF is a set of rules that express the possible
+# valid cases of a set of keywords (tokens)
 
 Statement =
   Indefinite Subject # a girl, a boy, the spider man
