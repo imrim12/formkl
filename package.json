@@ -3,7 +3,7 @@
   "description": "Form markup language",
   "packageManager": "pnpm@7.12.2",
   "scripts": {
-    "test": "vitest",
+    "test": "vitest run",
     "dev:docs": "vitepress dev docs",
     "serve:docs": "vitepress serve docs",
     "build:docs": "vitepress build docs",
