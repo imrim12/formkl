@@ -111,17 +111,17 @@ We are currently working on Vue 3 support. React and Angular support will be ava
     {
       name: "Vue 3",
       image: VueLogo,
-      link: "/guide/install-with-vue",
+      link: "/installation/vue",
     },
     {
       name: "React",
       image: ReactLogo,
-      link: "/guide/install-with-react",
+      link: "/installation/react",
     },
     {
       name: "Angular",
       image: AngularLogo,
-      link: "/guide/install-with-angular",
+      link: "/installation/angular",
     },
   ]
 </script>

@@ -21,9 +21,9 @@ export default {
         text: "Installation",
         collapsible: true,
         items: [
-          { text: "Vue 3", link: "/guide/install-with-vue" },
-          { text: "React", link: "/guide/install-with-react" },
-          { text: "Angular", link: "/guide/install-with-angular" },
+          { text: "Vue 3", link: "/installation/vue" },
+          { text: "React", link: "/installation/react" },
+          { text: "Angular", link: "/installation/angular" },
         ],
       },
       {
@@ -35,6 +35,14 @@ export default {
           { text: "Model", link: "/syntax/model" },
           { text: "Validation", link: "/syntax/validation" },
           { text: "Multi-responses", link: "/syntax/multiple" },
+        ],
+      },
+      {
+        text: "Learning",
+        collapsible: true,
+        items: [
+          { text: "Project structure", link: "/learning/project-structure" },
+          { text: "Core language", link: "/learning/core-language" },
         ],
       },
     ],
