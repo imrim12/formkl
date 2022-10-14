@@ -77,5 +77,5 @@ This is an example `MyFormPage.vue` file that uses the `Formkl` component.
 ```
 
 ::: info Don't know the syntax in this example?
-You'll learn about the syntax in the [Syntax guide](/guide/syntax).
+You'll learn about the syntax in the [Syntax guide](/syntax/form).
 :::
