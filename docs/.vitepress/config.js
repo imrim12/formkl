@@ -43,6 +43,7 @@ export default {
         items: [
           { text: "Project structure", link: "/learning/project-structure" },
           { text: "Core language", link: "/learning/core-language" },
+          { text: "Adapter (Vue)", link: "/learning/adapter-vue" },
           { text: "Editor", link: "/learning/editor" },
         ],
       },
