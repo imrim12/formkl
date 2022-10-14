@@ -14,7 +14,7 @@ hero:
   actions:
     - theme: brand
       text: Get Started
-      link: /guide/introduction
+      link: /introduction
     - theme: alt
       text: Star on GitHub
       link: https://github.com/formkl/formkl

@@ -7,7 +7,7 @@ export default {
     siteTitle: "FORMKL",
     logo: "public/assets/logo.png",
 
-    nav: [{ text: "Guide", link: "/guide/syntax" }],
+    nav: [{ text: "Syntax guide", link: "/syntax/form" }],
 
     socialLinks: [{ icon: "github", link: "https://github.com/formkl/formkl" }],
 
@@ -15,10 +15,10 @@ export default {
       {
         text: "Getting started",
         collapsible: true,
-        items: [{ text: "Introduction", link: "/guide/introduction" }],
+        items: [{ text: "Introduction", link: "/introduction" }],
       },
       {
-        text: "Quick start",
+        text: "Installation",
         collapsible: true,
         items: [
           { text: "Vue 3", link: "/guide/install-with-vue" },
@@ -29,7 +29,13 @@ export default {
       {
         text: "Syntax",
         collapsible: true,
-        items: [{ text: "Declaration", link: "/guide/syntax" }],
+        items: [
+          { text: "Form", link: "/syntax/form" },
+          { text: "Field", link: "/syntax/field" },
+          { text: "Model", link: "/syntax/model" },
+          { text: "Validation", link: "/syntax/validation" },
+          { text: "Multi-responses", link: "/syntax/multiple" },
+        ],
       },
     ],
 
