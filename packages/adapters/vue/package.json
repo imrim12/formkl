@@ -3,7 +3,7 @@
   "version": "1.0.0-alpha.13",
   "description": "A Vue adapter for Formkl",
   "type": "module",
-  "main": "dist/index.es.js",
+  "main": "src/index.ts",
   "style": "dist/style.css",
   "types": "dist/types/src",
   "scripts": {
