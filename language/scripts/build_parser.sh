@@ -16,5 +16,3 @@ cp ./dist/index.js ./dist/index.cjs
 
 cjstoesm ./dist/index.js
 minify ./dist/index.js > ./dist/index.min.js
-
-vitest run

@@ -7,6 +7,8 @@ export default {
       `
       keyPool = {};
       sectionKeyPool = {};
+      sectionMultiplePool = {};
+
       return $$ = { ...$1, title: '', description: '', sections: $3 };
       `,
     ],
@@ -15,6 +17,8 @@ export default {
       `
       keyPool = {};
       sectionKeyPool = {};
+      sectionMultiplePool = {};
+
       return $$ = { ...$1, title: $2, description: '', sections: $4 };
       `,
     ],
@@ -23,6 +27,8 @@ export default {
       `
       keyPool = {};
       sectionKeyPool = {};
+      sectionMultiplePool = {};
+
       return $$ = { ...$1, title: $2, description: $3, sections: $5 };
       `,
     ],

@@ -12,6 +12,8 @@ import { SchemaBase, SchemaFlat } from "./core/Schema";
 import { FormNode } from "./components/Form";
 
 import FormklParser from "formkl";
+import { injectionModelKey } from "./keys/model";
+import { injectionFormklKey } from "./keys/formkl";
 
 export default defineComponent({
   name: "Formkl",
@@ -86,6 +88,14 @@ export default defineComponent({
       return form.value.instance;
     };
 
+    if (form.value.instance !== null) {
+      provide(injectionModelKey, form.value.instance.model);
+      provide(
+        injectionFormklKey,
+        computed(() => form.value.instance?.formkl),
+      );
+    }
+
     onMounted(() => {
       emit("ready", form.value.instance);
     });
@@ -102,11 +112,7 @@ export default defineComponent({
   },
   render() {
     return this.form.instance ? (
-      <FormNode
-        ref="formklRef"
-        formkl={this.form.instance.formkl}
-        model={this.form.instance.model}
-      />
+      <FormNode ref="formklRef" />
     ) : (
       <div class="formkl-error__wrapper">
         {this.$slots?.error?.({ error: this.form.error?.message }) || (
