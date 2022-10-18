@@ -6,14 +6,18 @@ import {
   PropType,
   provide,
   ref,
+  watch,
 } from "vue";
 import { Form, FormOptions } from "./core/Form";
 import { SchemaBase, SchemaFlat } from "./core/Schema";
 import { FormNode } from "./components/Form";
 
 import FormklParser from "formkl";
-import { injectionModelKey } from "./keys/model";
-import { injectionFormklKey } from "./keys/formkl";
+import { modelInjectionKey } from "./keys/model";
+import { formklInjectionKey } from "./keys/formkl";
+import { httpInjectionKey } from "./keys/http";
+
+import _debounce from "lodash/debounce";
 
 export default defineComponent({
   name: "Formkl",
@@ -24,7 +28,7 @@ export default defineComponent({
     },
     debounce: {
       type: Number,
-      default: 300,
+      default: 100,
     },
     options: Object as PropType<FormOptions>,
   },
@@ -35,28 +39,32 @@ export default defineComponent({
     const formklRef = ref();
     const elFormRef = ref();
 
-    provide("$http", props.options?.$http);
+    provide(httpInjectionKey, props.options?.$http);
 
-    const form = computed<{
-      instance: Form | null;
-      error: Error | null;
-    }>(() => {
+    const instance$ = ref<Form>();
+    const error$ = ref<Error>();
+
+    const _buildForm = () => {
+      error$.value = undefined;
+      instance$.value = undefined;
+
       try {
-        const instance: Form = new Form(FormklParser.parse(props.formkl), props.options);
+        const formkl = FormklParser.parse(props.formkl);
 
-        return {
-          instance,
-          error: null,
-        };
+        instance$.value = new Form(formkl, props.options);
       } catch (err: any) {
         console.warn("[Formkl Adapter]: ", err);
 
-        return {
-          instance: null,
-          error: err,
-        };
+        error$.value = err;
       }
-    });
+    };
+    _buildForm();
+    watch(
+      () => props.formkl,
+      _debounce(function () {
+        _buildForm();
+      }, props.debounce),
+    );
 
     const submit = (
       callbackSuccess?: (model: SchemaBase | SchemaFlat) => void,
@@ -64,9 +72,9 @@ export default defineComponent({
       callbackFinally?: () => void,
     ) => {
       formklRef.value?.$refs.elFormRef?.validate((isValid: boolean) => {
-        if (form.value && isValid) {
-          form.value.instance?.submit.call(
-            form.value.instance,
+        if (instance$.value && isValid) {
+          instance$.value.submit.call(
+            instance$.value,
             callbackSuccess,
             callbackError,
             callbackFinally,
@@ -80,43 +88,42 @@ export default defineComponent({
     };
 
     const fill = (fillModel: SchemaBase | SchemaFlat) => {
-      form.value.instance && form.value.instance.fill.call(form.value, fillModel);
+      instance$.value && instance$.value.fill.call(instance$.value, fillModel);
       vm?.$forceUpdate();
     };
 
-    const getForm = () => {
-      return form.value.instance;
-    };
+    onMounted(() => {
+      emit("ready", instance$.value);
+    });
 
-    if (form.value.instance !== null) {
-      provide(injectionModelKey, form.value.instance.model);
+    // TODO: provide the whole instance
+    if (instance$.value) {
       provide(
-        injectionFormklKey,
-        computed(() => form.value.instance?.formkl),
+        modelInjectionKey,
+        computed(() => instance$.value?.model),
+      );
+      provide(
+        formklInjectionKey,
+        computed(() => instance$.value?.formkl),
       );
     }
 
-    onMounted(() => {
-      emit("ready", form.value.instance);
-    });
-
     return {
       formklRef,
-      elFormRef,
-      form,
-      submit,
-      reset,
-      fill,
-      getForm,
+      instance$,
+      error$,
+      submit$: submit,
+      reset$: reset,
+      fill$: fill,
     };
   },
   render() {
-    return this.form.instance ? (
+    return this.instance$?.model ? (
       <FormNode ref="formklRef" />
     ) : (
       <div class="formkl-error__wrapper">
-        {this.$slots?.error?.({ error: this.form.error?.message }) || (
-          <div class="formkl-error">{this.form.error?.message}</div>
+        {this.$slots?.error?.({ error: this.error$?.message }) || (
+          <div class="formkl-error">{this.error$?.message}</div>
         )}
       </div>
     );

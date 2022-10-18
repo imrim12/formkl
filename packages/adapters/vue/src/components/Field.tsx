@@ -23,9 +23,9 @@ export const FieldNode = defineComponent({
     },
     sectionResponseIndex: Number,
   },
-  setup() {
+  setup(props) {
     const { formkl, model } = useFormkl();
-    const { section, field, handler, component, input, rules, sectionResponseIndex } = useField();
+    const { handler, component, input, rules, sectionResponseIndex } = useField();
 
     const FieldAddBtn = Form.getComponentMap().get(DefaultComponent.FIELD_ADD_BTN) || <ElButton />;
 
@@ -36,14 +36,16 @@ export const FieldNode = defineComponent({
     const _buildSinglePropPath = (responseIndex?: number): string => {
       switch (formkl.value.model) {
         case "flat":
-          return [section.key, field.key, responseIndex].filter((i) => i !== undefined).join(".");
+          return [props.section.key, props.field.key, responseIndex]
+            .filter((i) => i !== undefined)
+            .join(".");
 
         case "base":
         default:
           const modelBase: SchemaBase = model.value as SchemaBase;
 
           const fieldIndex = modelBase.data.findIndex(
-            (f) => f.field === field.key && f.section === section.key,
+            (f) => f.field === props.field.key && f.section === props.section.key,
           );
           return ["data", fieldIndex, "value", responseIndex]
             .filter((i) => i !== undefined)
@@ -54,8 +56,8 @@ export const FieldNode = defineComponent({
     const _buildMultiplePropPath = (): string[] => {
       switch (formkl.value.model) {
         case "flat":
-          return (input.value as any[]).map((_, responseIndex: number) =>
-            [section.key, field.key, responseIndex].join("."),
+          return input.value.map((_: any, responseIndex: number) =>
+            [props.section.key, props.field.key, responseIndex].join("."),
           );
 
         case "base":
@@ -63,29 +65,31 @@ export const FieldNode = defineComponent({
           const modelBase: SchemaBase = model.value as SchemaBase;
 
           const fieldIndex = modelBase.data.findIndex(
-            (f) => f.field === field.key && f.section === section.key,
+            (f) => f.field === props.field.key && f.section === props.section.key,
           );
-          return (input.value as any[]).map((_, responseIndex: number) =>
+          return input.value.map((_: any, responseIndex: number) =>
             ["data", fieldIndex, "value", responseIndex].join("."),
           );
       }
     };
 
     const propPath = computed(() => {
-      return field.multiple ? _buildMultiplePropPath() : _buildSinglePropPath(sectionResponseIndex);
+      return props.field.multiple
+        ? _buildMultiplePropPath()
+        : _buildSinglePropPath(sectionResponseIndex);
     });
 
     const allowAddMoreResponse = computed(
-      () => propPath.value?.length < Number(field?.maxResponseAllowed || Infinity),
+      () => propPath.value?.length < Number(props.field?.maxResponseAllowed || Infinity),
     );
 
     return () => (
       <div class="formkl-field">
-        {field.multiple ? (
+        {props.field.multiple ? (
           (propPath.value as string[]).map((prop, responseIndex) => (
             <div class="formkl-field_response">
               <ElFormItem
-                label={responseIndex === 0 ? field.label : ""}
+                label={responseIndex === 0 ? props.field.label : ""}
                 key={prop}
                 prop={prop}
                 rules={rules}
@@ -94,7 +98,9 @@ export const FieldNode = defineComponent({
                   component
                     ? createElement(component, {
                         ...handler.getEventHandler(responseIndex),
-                        ...(["checkbox", "radio", "select"].includes(field.type) ? field : {}),
+                        ...(["checkbox", "radio", "select"].includes(props.field.type)
+                          ? props.field
+                          : {}),
                       })
                     : null
                 }
@@ -114,7 +120,7 @@ export const FieldNode = defineComponent({
           ))
         ) : (
           <ElFormItem
-            label={field.label}
+            label={props.field.label}
             key={propPath.value as string}
             prop={propPath.value as string}
             rules={rules}
@@ -123,14 +129,16 @@ export const FieldNode = defineComponent({
               component
                 ? createElement(component, {
                     ...handler.getEventHandler(sectionResponseIndex),
-                    ...(["checkbox", "radio", "select"].includes(field.type) ? field : {}),
+                    ...(["checkbox", "radio", "select"].includes(props.field.type)
+                      ? props.field
+                      : {}),
                   })
                 : null
             }
           </ElFormItem>
         )}
         <div class="formkl-field__footer">
-          {field.multiple && allowAddMoreResponse.value
+          {props.field.multiple && allowAddMoreResponse.value
             ? createElement(
                 FieldAddBtn,
                 {

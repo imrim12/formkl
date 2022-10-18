@@ -10,18 +10,14 @@ export const useField = () => {
   const vm = getCurrentInstance()?.proxy;
   const props: any = vm?.$props;
 
-  const _section = props.section;
-  const _field = props.field;
   const _sectionResponseIndex = props.sectionResponseIndex;
   const _handler = useFieldHandler();
-  const _component = Form.getComponentMap().get(_field.type);
+  const _component = Form.getComponentMap().get(props.field.type);
   const _input = _handler.getReactiveInput();
 
-  const _rules = new Rule(formkl.value, _field).getRules();
+  const _rules = new Rule(formkl.value, props.field).getRules();
 
   return {
-    section: _section,
-    field: _field,
     sectionResponseIndex: _sectionResponseIndex,
     handler: _handler,
     component: _component,
