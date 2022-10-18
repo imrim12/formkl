@@ -19,9 +19,9 @@ export const SectionNode = defineComponent({
       required: true,
     },
   },
-  setup() {
+  setup(props) {
     const { formkl, model } = useFormkl();
-    const { section, handler } = useSection();
+    const { handler } = useSection();
 
     const SectionAddBtn = Form.getComponentMap().get(DefaultComponent.SECTION_ADD_BTN) || (
       <ElButton />
@@ -32,15 +32,15 @@ export const SectionNode = defineComponent({
     );
 
     const firstFieldResponse = computed(() => {
-      if (section.multiple) {
+      if (props.section.multiple) {
         switch (formkl.value.model) {
           case "flat":
             const _flatModel = model.value as SchemaFlat;
-            return Object.values(_flatModel[section.key])[0];
+            return Object.values(_flatModel[props.section.key])[0];
           case "base":
           default:
             const _baseModel = model.value as SchemaBase;
-            return _baseModel.data.find((i) => i.section === section.key)?.value;
+            return _baseModel.data.find((i) => i.section === props.section.key)?.value;
         }
       } else {
         return null;
@@ -48,7 +48,8 @@ export const SectionNode = defineComponent({
     });
 
     const allowAddMoreResponse = computed(
-      () => firstFieldResponse.value?.length < Number(section?.maxResponseAllowed || Infinity),
+      () =>
+        firstFieldResponse.value?.length < Number(props.section?.maxResponseAllowed || Infinity),
     );
 
     const numberOfAnswers = computed(() => firstFieldResponse.value?.length || 1);
@@ -57,18 +58,23 @@ export const SectionNode = defineComponent({
       <div
         class={[
           "formkl-section__wrapper",
-          section.multiple ? "formkl-section__wrapper--multiple" : "",
+          props.section.multiple ? "formkl-section__wrapper--multiple" : "",
         ]}
       >
         <header class="formkl-section__header">
-          <h3>{section.title}</h3>
+          <h3>{props.section.title}</h3>
         </header>
         <section class="formkl-section__body">
-          {section.multiple ? (
+          {props.section.multiple ? (
             new Array(numberOfAnswers.value).fill(null).map((_, responseIndex) => (
               <div class="formkl-section_response">
-                {section.fields.map((field) => (
-                  <FieldNode section={section} field={field} sectionResponseIndex={responseIndex} />
+                {props.section.fields.map((field) => (
+                  <FieldNode
+                    section={props.section}
+                    field={field}
+                    sectionResponseIndex={responseIndex}
+                    key={field.key}
+                  />
                 ))}
                 {numberOfAnswers.value > 1 ? (
                   <div class="formkl-section_response__remover">
@@ -85,8 +91,8 @@ export const SectionNode = defineComponent({
             ))
           ) : (
             <div class="formkl-section_response">
-              {section.fields.map((field) => (
-                <FieldNode section={section} field={field} />
+              {props.section.fields.map((field) => (
+                <FieldNode section={props.section} field={field} key={field.key} />
               ))}
             </div>
           )}

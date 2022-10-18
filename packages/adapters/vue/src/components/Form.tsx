@@ -21,7 +21,7 @@ export const FormNode = defineComponent({
         ) : null}
         <div class="formkl__body">
           {formkl.value.sections.map((section) => (
-            <SectionNode section={section} />
+            <SectionNode section={section} key={section.key} />
           ))}
         </div>
       </ElForm>

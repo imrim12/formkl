@@ -2,6 +2,7 @@ import { defineComponent, computed, ref, onBeforeMount, inject } from "vue";
 import { ElSelect, ElOption } from "element-plus";
 
 import _get from "lodash/get";
+import { httpInjectionKey } from "../../keys/http";
 
 export default defineComponent({
   name: "FormklSelect",
@@ -33,7 +34,7 @@ export default defineComponent({
   },
   emits: ["update:modelValue"],
   setup(props, { emit }) {
-    const $http = inject<any>("$http");
+    const $http = inject<any>(httpInjectionKey);
 
     const fetchedOptions = ref<Array<any>>([]);
 

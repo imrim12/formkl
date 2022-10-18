@@ -1,1 +1,1 @@
-export const injectionFormklKey = Symbol();
+export const formklInjectionKey = Symbol("formklInjectionKey");
