@@ -1,6 +1,6 @@
 {
   "name": "@formkl/editor",
-  "version": "1.0.0-alpha.4",
+  "version": "1.0.0-rc.1",
   "description": "An Editor for Formkl using Vue.js",
   "type": "module",
   "main": "dist/index.es.js",

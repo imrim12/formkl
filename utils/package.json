@@ -1,6 +1,6 @@
 {
   "name": "@formkl/utils",
-  "version": "1.0.0-alpha.2",
+  "version": "1.0.0-rc.1",
   "description": "A utility library for Formkl",
   "main": "dist/index.es.js",
   "types": "dist/types/src",
