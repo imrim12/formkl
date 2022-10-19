@@ -35,7 +35,6 @@ export default defineComponent({
     const vm = getCurrentInstance()?.proxy;
 
     const formklRef = ref();
-    const elFormRef = ref();
 
     provide(httpInjectionKey, props.options?.$http);
 

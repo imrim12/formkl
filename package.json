@@ -3,18 +3,11 @@
   "description": "Form markup language",
   "packageManager": "pnpm@7.12.2",
   "scripts": {
+    "build": "nx run-many --target=build --all",
     "test": "vitest run",
     "dev:docs": "vitepress dev docs",
     "serve:docs": "vitepress serve docs",
-    "build:docs": "vitepress build docs",
-    "build:core": "pnpm exec:core build",
-    "build:vue": "pnpm exec:vue build",
-    "build:editor": "pnpm exec:editor build",
-    "build:utils": "pnpm exec:utils build",
-    "exec:core": "pnpm -F formkl",
-    "exec:vue": "pnpm -F @formkl/vue",
-    "exec:editor": "pnpm -F @formkl/editor",
-    "exec:utils": "pnpm -F @formkl/utils"
+    "build:docs": "vitepress build docs"
   },
   "repository": {
     "type": "git",
@@ -57,6 +50,7 @@
     "@vitejs/plugin-vue-jsx": "^2.0.1",
     "eslint": "^8.23.1",
     "minify": "^9.1.0",
+    "nx": "^15.0.0",
     "rimraf": "^3.0.2",
     "sass": "^1.55.0",
     "slugify": "^1.6.5",
