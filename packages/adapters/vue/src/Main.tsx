@@ -1,23 +1,13 @@
-import {
-  computed,
-  defineComponent,
-  getCurrentInstance,
-  onMounted,
-  PropType,
-  provide,
-  ref,
-  watch,
-} from "vue";
+import { defineComponent, getCurrentInstance, onMounted, PropType, provide, ref, watch } from "vue";
 import { Form, FormOptions } from "./core/Form";
 import { SchemaBase, SchemaFlat } from "./core/Schema";
 import { FormNode } from "./components/Form";
 
 import FormklParser from "formkl";
-import { modelInjectionKey } from "./keys/model";
-import { formklInjectionKey } from "./keys/formkl";
 import { httpInjectionKey } from "./keys/http";
 
 import _debounce from "lodash/debounce";
+import { instanceInjectionKey } from "./keys/instance";
 
 export default defineComponent({
   name: "Formkl",
@@ -96,17 +86,7 @@ export default defineComponent({
       emit("ready", instance$.value);
     });
 
-    // TODO: provide the whole instance
-    if (instance$.value) {
-      provide(
-        modelInjectionKey,
-        computed(() => instance$.value?.model),
-      );
-      provide(
-        formklInjectionKey,
-        computed(() => instance$.value?.formkl),
-      );
-    }
+    provide(instanceInjectionKey, instance$);
 
     return {
       formklRef,

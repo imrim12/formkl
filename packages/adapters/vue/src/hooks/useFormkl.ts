@@ -1,12 +1,12 @@
-import { Formkl } from "formkl";
-import { ComputedRef, inject, Ref } from "vue";
-import { SchemaBase, SchemaFlat } from "../core/Schema";
-import { formklInjectionKey } from "../keys/formkl";
-import { modelInjectionKey } from "../keys/model";
+import { computed, inject, Ref, unref } from "vue";
+import { Form } from "../core/Form";
+import { instanceInjectionKey } from "../keys/instance";
 
 export const useFormkl = () => {
-  const formkl = inject(formklInjectionKey) as ComputedRef<Formkl>;
-  const model = inject(modelInjectionKey) as ComputedRef<SchemaBase | SchemaFlat>;
+  const instance$ = inject(instanceInjectionKey) as Ref<Form>;
+
+  const formkl = computed(() => instance$.value.formkl);
+  const model = computed(() => unref(instance$.value.model));
 
   return {
     formkl,
