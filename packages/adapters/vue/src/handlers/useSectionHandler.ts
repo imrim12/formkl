@@ -1,5 +1,5 @@
 import { Section } from "formkl";
-import { getCurrentInstance, Ref } from "vue";
+import { getCurrentInstance, Ref } from "vue-demi";
 import { DefaultValueMap } from "../core/Model";
 import { SchemaBase, SchemaFlat } from "../core/Schema";
 import { useFormkl } from "../hooks/useFormkl";

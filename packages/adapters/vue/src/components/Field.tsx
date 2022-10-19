@@ -1,6 +1,6 @@
 import { ElButton, ElFormItem } from "element-plus";
 import { FieldDefault, FieldSelection, Section } from "formkl";
-import { computed, defineComponent, h, PropType } from "vue";
+import { computed, defineComponent, h, PropType } from "vue-demi";
 import { Form } from "../core/Form";
 import { SchemaBase } from "../core/Schema";
 import { DefaultComponent } from "../types/default-component.enum";

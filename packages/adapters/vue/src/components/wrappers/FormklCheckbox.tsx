@@ -1,4 +1,4 @@
-import { defineComponent, PropType } from "vue";
+import { defineComponent, PropType } from "vue-demi";
 import { ElCheckboxGroup, ElCheckbox } from "element-plus";
 
 import type { CheckboxValueType } from "element-plus";

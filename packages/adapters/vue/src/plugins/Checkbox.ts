@@ -1,4 +1,4 @@
-import { h } from "vue";
+import { h } from "vue-demi";
 
 import { Plugin } from "../core/Plugin";
 import { DefaultComponent } from "../types/default-component.enum";

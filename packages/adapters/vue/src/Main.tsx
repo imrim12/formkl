@@ -1,4 +1,12 @@
-import { defineComponent, getCurrentInstance, onMounted, PropType, provide, ref, watch } from "vue";
+import {
+  defineComponent,
+  getCurrentInstance,
+  onMounted,
+  PropType,
+  provide,
+  ref,
+  watch,
+} from "vue-demi";
 import { Form, FormOptions } from "./core/Form";
 import { SchemaBase, SchemaFlat } from "./core/Schema";
 import { FormNode } from "./components/Form";

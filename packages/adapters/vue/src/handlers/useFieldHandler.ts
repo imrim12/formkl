@@ -1,5 +1,5 @@
 import { FieldDefault, FieldSelection, Formkl, Section } from "formkl";
-import { computed, getCurrentInstance, readonly, Ref } from "vue";
+import { computed, getCurrentInstance, readonly, Ref } from "vue-demi";
 import { Form } from "../core/Form";
 import { DefaultValueMap } from "../core/Model";
 import { SchemaBase, SchemaFlat } from "../core/Schema";

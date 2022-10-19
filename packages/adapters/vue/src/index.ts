@@ -1,4 +1,4 @@
-import { App } from "vue";
+import { App } from "vue-demi";
 import { Adapter } from "./core/Adapter";
 import { Plugin } from "./core/Plugin";
 import { DefaultComponent } from "./types/default-component.enum";

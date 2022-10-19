@@ -3,7 +3,7 @@
   "version": "1.0.0-alpha.13",
   "description": "A Vue adapter for Formkl",
   "type": "module",
-  "main": "src/index.ts",
+  "main": "dist/index.es.js",
   "style": "dist/style.css",
   "types": "dist/types/src",
   "scripts": {
@@ -30,6 +30,9 @@
     "element-plus": "^2.2.16",
     "formkl": "workspace:*",
     "lodash": "^4.17.21",
-    "vue": "^3.2.40"
+    "vue-demi": "^0.13.11"
+  },
+  "devDependencies": {
+    "terser": "^5.15.1"
   }
 }

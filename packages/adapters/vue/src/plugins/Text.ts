@@ -1,4 +1,4 @@
-import { h } from "vue";
+import { h } from "vue-demi";
 import { ElInput } from "element-plus";
 
 import { Plugin } from "../core/Plugin";

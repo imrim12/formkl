@@ -1,4 +1,4 @@
-import { defineComponent, computed, ref, onBeforeMount, inject } from "vue";
+import { defineComponent, computed, ref, onBeforeMount, inject } from "vue-demi";
 import { ElSelect, ElOption } from "element-plus";
 
 import _get from "lodash/get";

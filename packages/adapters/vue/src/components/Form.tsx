@@ -1,5 +1,5 @@
 import { ElForm } from "element-plus";
-import { h, defineComponent } from "vue";
+import { h, defineComponent } from "vue-demi";
 import { SectionNode } from "./Section";
 import { useFormkl } from "../hooks/useFormkl";
 

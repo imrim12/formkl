@@ -1,4 +1,4 @@
-import { getCurrentInstance } from "vue";
+import { getCurrentInstance } from "vue-demi";
 import { Form } from "../core/Form";
 import { Rule } from "../core/Rule";
 import { useFieldHandler } from "../handlers/useFieldHandler";

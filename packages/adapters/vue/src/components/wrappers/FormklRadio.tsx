@@ -1,4 +1,4 @@
-import { defineComponent, PropType } from "vue";
+import { defineComponent, PropType } from "vue-demi";
 import { ElRadioGroup, ElRadio } from "element-plus";
 
 export default defineComponent({

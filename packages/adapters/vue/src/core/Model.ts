@@ -1,5 +1,5 @@
 import { Formkl } from "formkl";
-import { ref, Ref } from "vue";
+import { ref, Ref } from "vue-demi";
 import { Schema, SchemaBase, SchemaFlat } from "./Schema";
 
 export const DefaultValueMap = Object.freeze({
@@ -118,11 +118,7 @@ export class Model {
     return model;
   }
 
-  public getValue(): SchemaBase | SchemaFlat {
+  public getModel(): SchemaBase | SchemaFlat {
     return this._model;
-  }
-
-  public getReactiveValue(): Ref<SchemaBase | SchemaFlat> {
-    return ref(this._model);
   }
 }
