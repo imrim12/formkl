@@ -1,8 +1,8 @@
-import { Formkl } from "formkl";
+import { Adapter } from "@formkl/vue-plugins";
+import { Formkl, SchemaBase, SchemaFlat } from "@formkl/shared";
 import { ref, Ref, VNode } from "vue-demi";
-import { Adapter } from "./Adapter";
 import { Model } from "./Model";
-import { Schema, SchemaBase, SchemaFlat } from "./Schema";
+import { Schema } from "./Schema";
 import { EventHandler } from "../types/event-handler.type";
 
 import _cloneDeep from "lodash/cloneDeep";

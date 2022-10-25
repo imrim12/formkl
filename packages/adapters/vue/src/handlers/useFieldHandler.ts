@@ -1,8 +1,14 @@
-import { FieldDefault, FieldSelection, Formkl, Section } from "formkl";
+import {
+  FieldDefault,
+  FieldSelection,
+  Formkl,
+  Section,
+  SchemaBase,
+  SchemaFlat,
+} from "@formkl/shared";
 import { computed, getCurrentInstance, readonly, Ref } from "vue-demi";
 import { Form } from "../core/Form";
 import { DefaultValueMap } from "../core/Model";
-import { SchemaBase, SchemaFlat } from "../core/Schema";
 import { useFormkl } from "../hooks/useFormkl";
 
 const FieldValueGetterMap = (

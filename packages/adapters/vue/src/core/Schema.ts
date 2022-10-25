@@ -1,18 +1,4 @@
-import { Formkl } from "formkl";
-
-export type SchemaFlat = {
-  [section: string]: {
-    [field: string]: any;
-  };
-};
-
-export type SchemaBase = {
-  data: Array<{
-    section: string;
-    field: string;
-    value: any;
-  }>;
-};
+import { Formkl, SchemaFlat, SchemaBase } from "@formkl/shared";
 
 export class Schema {
   private _formkl: Formkl;

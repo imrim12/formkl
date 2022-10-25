@@ -7,15 +7,13 @@ import {
   ref,
   watch,
 } from "vue-demi";
+import { httpInjectionKey, instanceInjectionKey, SchemaBase, SchemaFlat } from "@formkl/shared";
 import { Form, FormOptions } from "./core/Form";
-import { SchemaBase, SchemaFlat } from "./core/Schema";
 import { FormNode } from "./components/Form";
 
 import FormklParser from "formkl";
-import { httpInjectionKey } from "./keys/http";
 
 import _debounce from "lodash/debounce";
-import { instanceInjectionKey } from "./keys/instance";
 
 export default defineComponent({
   name: "Formkl",

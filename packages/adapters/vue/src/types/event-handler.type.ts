@@ -1,6 +1,12 @@
-import { FieldDefault, FieldSelection, Formkl, Section } from "formkl";
+import {
+  FieldDefault,
+  FieldSelection,
+  Formkl,
+  Section,
+  SchemaBase,
+  SchemaFlat,
+} from "@formkl/shared";
 import { Ref } from "vue-demi";
-import { SchemaBase, SchemaFlat } from "../core/Schema";
 
 export type EventHandler = (
   value: any,

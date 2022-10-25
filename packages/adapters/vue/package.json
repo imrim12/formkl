@@ -5,7 +5,7 @@
   "type": "module",
   "main": "dist/index.es.js",
   "style": "dist/style.css",
-  "types": "dist/types/src",
+  "types": "dist/types",
   "scripts": {
     "build": "rimraf ./dist && vue-tsc && vite build"
   },
@@ -24,7 +24,8 @@
   },
   "homepage": "https://github.com/formkl/formkl#readme",
   "dependencies": {
-    "@formkl/utils": "workspace:*",
+    "@formkl/shared": "workspace:*",
+    "@formkl/vue-plugins": "workspace:*",
     "@vitejs/plugin-vue": "^3.1.2",
     "@vitejs/plugin-vue-jsx": "^2.0.1",
     "element-plus": "^2.2.16",

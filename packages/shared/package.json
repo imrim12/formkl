@@ -1,0 +1,11 @@
+{
+  "name": "@formkl/shared",
+  "version": "1.0.0-rc.1",
+  "main": "dist/index.es.js",
+  "types": "dist/types",
+  "scripts": {
+    "build": "rimraf ./dist && tsc && vite build ",
+    "test": "vitest",
+    "coverage": "vitest run --coverage"
+  }
+}

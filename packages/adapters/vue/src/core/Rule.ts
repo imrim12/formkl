@@ -1,6 +1,5 @@
 import { FormItemRule } from "element-plus";
-import { FieldDefault, FieldSelection, Formkl } from "formkl";
-import { isValueValidated } from "@formkl/utils";
+import { FieldDefault, FieldSelection, Formkl, isValueValidated } from "@formkl/shared";
 
 export class Rule {
   private _formkl: Formkl;

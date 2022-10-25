@@ -1,9 +1,8 @@
+import { FieldDefault, FieldSelection, Section, SchemaBase } from "@formkl/shared";
+import { DefaultComponent } from "@formkl/vue-plugins";
 import { ElButton, ElFormItem } from "element-plus";
-import { FieldDefault, FieldSelection, Section } from "formkl";
 import { computed, defineComponent, h, PropType } from "vue-demi";
 import { Form } from "../core/Form";
-import { SchemaBase } from "../core/Schema";
-import { DefaultComponent } from "../types/default-component.enum";
 import { useField } from "../hooks/useField";
 import { useFormkl } from "../hooks/useFormkl";
 

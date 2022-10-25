@@ -1,7 +1,6 @@
-import { Section } from "formkl";
+import { Section, SchemaBase, SchemaFlat } from "@formkl/shared";
 import { getCurrentInstance, Ref } from "vue-demi";
 import { DefaultValueMap } from "../core/Model";
-import { SchemaBase, SchemaFlat } from "../core/Schema";
 import { useFormkl } from "../hooks/useFormkl";
 
 const SectionValueAddMap = (model: Ref<SchemaBase | SchemaFlat>, section: Section) => ({

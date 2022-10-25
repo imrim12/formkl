@@ -1,6 +1,6 @@
 import { computed, inject, Ref, unref } from "vue-demi";
 import { Form } from "../core/Form";
-import { instanceInjectionKey } from "../keys/instance";
+import { instanceInjectionKey } from "@formkl/shared";
 
 export const useFormkl = () => {
   const instance$ = inject(instanceInjectionKey) as Ref<Form>;
