@@ -14,7 +14,7 @@ export class Rule {
   }
 
   private _buildRequireRule() {
-    if (this._field.require) {
+    if (this._field.required) {
       this._rules.push({
         required: true,
         message: this._field.label + " field is required",
