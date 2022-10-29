@@ -5,7 +5,7 @@ export interface FieldDefault {
   type: FieldTypeDefault;
   label: string;
   key: string;
-  require?: boolean;
+  required?: boolean;
   multiple?: boolean;
   maxResponseAllowed?: number;
   validation?: Validation;

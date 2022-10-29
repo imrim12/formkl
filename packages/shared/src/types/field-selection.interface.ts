@@ -6,7 +6,7 @@ export interface FieldSelection {
   label: string;
   key: string;
   options: Array<any>;
-  require?: boolean;
+  required?: boolean;
   multiple?: boolean;
   maxResponseAllowed?: number;
   fetchDataPath?: string;

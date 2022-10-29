@@ -1,4 +1,4 @@
-import { Formkl, Section, FieldDefault, FieldSelection } from "@formkl/shared";
+import { Formkl, Section, FieldDefault, FieldSelection, HttpMethod } from "@formkl/shared";
 import { Tokenizer } from "./Tokenizer";
 import { Token } from "./types";
 
@@ -47,7 +47,10 @@ export class Parser {
    *  ;
    */
   private FormBlock(): Formkl {
-    const form: any = {};
+    const form: Formkl = {
+      model: "base",
+      sections: [],
+    };
 
     this._eat("FORMKL");
 
@@ -70,7 +73,7 @@ export class Parser {
     }
 
     if (this._lookahead?.type === "HTTPMETHOD") {
-      form.method = this._eat("HTTPMETHOD").value;
+      form.method = this._eat("HTTPMETHOD").value as HttpMethod;
       this._eat("(");
       form.endpoint = this.StringLiteral();
       this._eat(")");
@@ -119,7 +122,10 @@ export class Parser {
    *  ;
    */
   private SectionBlock(): Section {
-    const section: any = {};
+    const section: Section = {
+      key: "",
+      fields: [],
+    };
 
     if (this._lookahead?.type === "NUMBER") {
       section.maxResponseAllowed = this.NumericLiteral();
@@ -189,7 +195,11 @@ export class Parser {
    *  ;
    */
   private FieldStatement(): FieldDefault | FieldSelection {
-    const field: any = {};
+    const field: FieldDefault | FieldSelection = {
+      type: "text",
+      label: "",
+      key: "",
+    };
 
     if (this._lookahead?.type === "NUMBER") {
       field.maxResponseAllowed = this.NumericLiteral();
@@ -241,10 +251,10 @@ export class Parser {
    *  | 'FIELDSELECTION'
    *  | 'FIELDVALIDATED'
    *  | 'FIELDDATETIME'
-   *  | 'FIELD' ValidatedExpression
-   *  | 'FIELDSELECTION' ValidatedExpression
-   *  | 'FIELDVALIDATED' ValidatedExpression
-   *  | 'FIELDDATETIME' ValidatedExpression
+   *  | 'FIELD' ValidationExpression
+   *  | 'FIELDSELECTION' ValidationExpression
+   *  | 'FIELDVALIDATED' ValidationExpression
+   *  | 'FIELDDATETIME' ValidationExpression
    *  ;
    */
   private FieldExpression() {
@@ -260,7 +270,7 @@ export class Parser {
     if (expression) {
       Object.assign(field, { type: String(this._lookahead?.value).toLowerCase() }, expression());
 
-      const validation = this.ValidatedExpression();
+      const validation = this.ValidationExpression();
 
       Object.assign(field, validation);
     } else {
@@ -271,7 +281,11 @@ export class Parser {
   }
 
   private FieldDefaultExpression() {
-    const expression: any = {};
+    const expression: FieldDefault = {
+      type: "text",
+      label: "",
+      key: "",
+    };
 
     if (this._lookahead?.type === "FIELD") this._eat("FIELD");
 
@@ -289,7 +303,12 @@ export class Parser {
   private FieldSelectionExpression() {
     let fetchDataPath = "";
 
-    const expression: any = {};
+    const expression: FieldSelection = {
+      type: "select",
+      label: "",
+      key: "",
+      options: [],
+    };
 
     if (this._lookahead?.type === "FIELDSELECTION") {
       this._eat("FIELDSELECTION");
@@ -334,7 +353,11 @@ export class Parser {
   }
 
   private FieldValidatedExpression() {
-    const expression: any = {};
+    const expression: FieldDefault = {
+      type: "text",
+      label: "",
+      key: "",
+    };
 
     if (this._lookahead?.type === "FIELDVALIDATED") this._eat("FIELDVALIDATED");
 
@@ -342,7 +365,11 @@ export class Parser {
   }
 
   private FieldDatetimeExpression() {
-    const expression: any = {};
+    const expression: FieldDefault = {
+      type: "datetime",
+      label: "",
+      key: "",
+    };
 
     if (this._lookahead?.type === "FIELDDATETIME") this._eat("FIELDDATETIME");
 
@@ -350,14 +377,14 @@ export class Parser {
   }
 
   /**
-   * ValidatedExpression
+   * ValidationExpression
    *  : 'VALID' '(' LogicalORExpression ')'
    *  | 'VALID' '(' LogicalORExpression ')' 'REGEX' '(' StringLiteral ')'
    *  | 'REGEX' '(' StringLiteral ')'
    *  | 'REGEX' '(' StringLiteral ')' 'VALID' '(' LogicalORExpression ')'
    *  ;
    */
-  private ValidatedExpression() {
+  private ValidationExpression() {
     const expression: any = {};
 
     do {
