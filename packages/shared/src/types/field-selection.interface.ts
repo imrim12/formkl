@@ -1,18 +1,17 @@
+import { FieldTypeSelection } from "./field-selection.type";
 import { Validation } from "./validation.interface";
-
-type FieldTypeSelection = "checkbox" | "radio" | "select";
 
 export interface FieldSelection {
   type: FieldTypeSelection;
   label: string;
-  require: boolean;
-  multiple: boolean;
-  maxResponseAllowed?: number;
+  key: string;
   options: Array<any>;
+  require?: boolean;
+  multiple?: boolean;
+  maxResponseAllowed?: number;
   fetchDataPath?: string;
   fetchUrl?: string;
   valueKey?: string;
   labelKey?: string;
-  key: string;
   validation?: Validation;
 }

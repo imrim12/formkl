@@ -3,7 +3,7 @@
   "version": "1.0.0-rc.1",
   "description": "Form markup language",
   "type": "module",
-  "main": "./dist/index.min.js",
+  "main": "./dist/index.es.js",
   "types": "./dist/types",
   "scripts": {
     "build": "rimraf ./dist && tsc && vite build "
@@ -28,6 +28,7 @@
   },
   "homepage": "https://github.com/formkl/formkl#readme",
   "dependencies": {
+    "@formkl/shared": "workspace:*",
     "slugify": "^1.6.5"
   }
 }

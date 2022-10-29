@@ -20,6 +20,5 @@
     "declarationDir": "./dist/types"
   },
   "include": ["./src/**/*.ts"],
-  "exclude": ["./node_modules", "./dist", "src/__tests__"],
-  "references": [{ "path": "./tsconfig.vitest.json" }]
+  "exclude": ["./node_modules", "./dist", "src/__tests__"]
 }

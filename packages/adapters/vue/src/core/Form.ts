@@ -69,15 +69,21 @@ export class Form {
     try {
       let response: any = null;
 
+      if (!this.formkl.endpoint && !this.formkl.method) {
+        throw new Error(
+          "'endpoint' and 'method' must be specified for the use of form submission!",
+        );
+      }
+
       if (this._options?.submitMethod) {
         response = await this._options.submitMethod(
-          this.formkl.endpoint,
-          this.formkl.method,
+          this.formkl.endpoint || "",
+          this.formkl.method || "post",
           this.model.value,
         );
       } else if (window) {
-        const data = await fetch(this.formkl.endpoint, {
-          method: this.formkl.method.toUpperCase() || "POST",
+        const data = await fetch(this.formkl.endpoint || "", {
+          method: this.formkl.method?.toUpperCase() || "POST",
           headers: {
             "Content-Type": "application/json",
           },

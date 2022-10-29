@@ -10,7 +10,7 @@ export default defineConfig({
       fileName: (format) => `index.${format}.js`,
     },
     rollupOptions: {
-      external: ["slugify", "formkl"],
+      external: ["slugify", "formkl", "@formkl/shared"],
       output: {
         exports: "named",
         globals: {},

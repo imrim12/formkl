@@ -1,3 +1,4 @@
+import { Formkl, Section, FieldDefault, FieldSelection } from "@formkl/shared";
 import { Tokenizer } from "./Tokenizer";
 import { Token } from "./types";
 
@@ -20,7 +21,7 @@ export class Parser {
   /**
    * Parses a string into an AST
    */
-  parse(string: string) {
+  parse(string: string): Formkl {
     this._string = "";
     this._lookahead = null;
 
@@ -45,7 +46,7 @@ export class Parser {
    *  : SectionBlockList
    *  ;
    */
-  private FormBlock() {
+  private FormBlock(): Formkl {
     const form: any = {};
 
     this._eat("FORMKL");
@@ -117,7 +118,7 @@ export class Parser {
    *  : FieldStatementList
    *  ;
    */
-  private SectionBlock() {
+  private SectionBlock(): Section {
     const section: any = {};
 
     if (this._lookahead?.type === "NUMBER") {
@@ -187,7 +188,7 @@ export class Parser {
    *  | (REQUIRE) (MULTIPLE) (StringLiteral) FieldExpression (as StringLiteral) ';'
    *  ;
    */
-  private FieldStatement() {
+  private FieldStatement(): FieldDefault | FieldSelection {
     const field: any = {};
 
     if (this._lookahead?.type === "NUMBER") {

@@ -122,7 +122,7 @@ export function isValueValidated(validatingValue: number | string, validationObj
 
   const resultArray = validationBuilder(
     validatingValue,
-    validationObject[validationIndicator] as any,
+    validationObject.logic?.[validationIndicator] as any,
     [],
   );
 
