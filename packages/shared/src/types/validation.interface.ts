@@ -1,6 +1,6 @@
-import { ValidationOperator } from "./validation-operator.interface";
+import { ValidationLogic } from "./validation-logic.interface";
 
 export interface Validation {
   regex?: RegExp;
-  logic?: ValidationOperator;
+  logic?: ValidationLogic;
 }

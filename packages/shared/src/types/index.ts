@@ -5,5 +5,5 @@ export * from "./http-method.type";
 export * from "./model.type";
 export * from "./schema.type";
 export * from "./section.interface";
-export * from "./validation-operator.interface";
+export * from "./validation-logic.interface";
 export * from "./validation.interface";
