@@ -1,0 +1,4 @@
+{
+  "name": "@formkl/plugin-react",
+  "description": "A Formkl components plugin to register components that used in @formkl/react adapter"
+}

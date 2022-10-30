@@ -1,0 +1,4 @@
+{
+  "name": "@formkl/react",
+  "description": "A React adapter to generate usable React from component from Formkl syntax/schema"
+}

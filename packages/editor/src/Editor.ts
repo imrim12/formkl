@@ -1,7 +1,8 @@
 import { indentWithTab } from "@codemirror/commands";
 import { keymap } from "@codemirror/view";
 import { EditorView, basicSetup } from "codemirror";
-import { AutoCompleteExtension, LintExtension } from "./extensions";
+import { AutoCompleteExtension } from "./extensions/autocomplete";
+import { LintExtension } from "./extensions/lint";
 
 export class FormklEditor extends HTMLElement {
   static get observedAttributes() {
@@ -65,5 +66,3 @@ export class FormklEditor extends HTMLElement {
     }
   }
 }
-
-export default { FormklEditor };

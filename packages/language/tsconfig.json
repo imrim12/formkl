@@ -1,23 +1,11 @@
 {
+  "extends": "../tsconfig.base.json",
   "compilerOptions": {
-    "allowJs": true,
-    "allowSyntheticDefaultImports": true,
-    "module": "ESNext",
-    "moduleResolution": "Node",
-    "target": "ESNext",
-    "strict": true,
-    "sourceMap": true,
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "declaration": true,
-    "emitDeclarationOnly": true,
-    "useDefineForClassFields": true,
-    "lib": ["ESNext", "DOM"],
-    "types": ["vite/client", "vitest"],
     "outDir": "./dist",
-    "declarationDir": "./dist/types"
+    "declaration": true,
+    "declarationMap": true,
+    "declarationDir": "./dist/types",
+    "emitDeclarationOnly": true
   },
   "include": ["./src/**/*.ts"],
   "exclude": ["./node_modules", "./dist", "src/__tests__"]

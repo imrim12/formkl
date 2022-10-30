@@ -3,10 +3,10 @@
   "version": "1.0.0-rc.1",
   "description": "An Editor for Formkl using Vue.js",
   "type": "module",
-  "main": "dist/index.es.js",
+  "main": "src/index.ts",
   "types": "dist/types",
   "scripts": {
-    "build": "vue-tsc && vite build"
+    "build": "vue-tsc --noEmit && vite build"
   },
   "repository": {
     "type": "git",

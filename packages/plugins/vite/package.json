@@ -1,0 +1,4 @@
+{
+  "name": "@formkl/plugin-vite",
+  "description": "A Formkl plugin to include .formkl file into Vite build"
+}

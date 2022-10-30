@@ -1,4 +1,4 @@
-import { Adapter } from "@formkl/vue-plugins";
+import { Adapter } from "@formkl/plugin-vue";
 import { Formkl, SchemaBase, SchemaFlat } from "@formkl/shared";
 import { ref, Ref, VNode } from "vue-demi";
 import { Model } from "./Model";

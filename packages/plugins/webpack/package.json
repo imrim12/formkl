@@ -1,0 +1,4 @@
+{
+  "name": "@formkl/plugin-webpack",
+  "description": "A Formkl plugin to include .formkl file into Webpack build"
+}

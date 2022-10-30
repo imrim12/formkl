@@ -16,7 +16,7 @@ import {
   PluginText,
   PluginTime,
   PluginTimeRange,
-} from "@formkl/vue-plugins";
+} from "@formkl/plugin-vue";
 
 import Formkl from "./Main";
 

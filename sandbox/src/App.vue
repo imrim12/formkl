@@ -1,7 +1,7 @@
 <template>
   <div class="flex w-full justify-between">
     <div class="flex-1">
-      <FormklEditor v-model="formklSyntax" />
+      <formkl-editor v-model="formklSyntax" />
     </div>
     <div class="flex-1 py-2 px-8">
       <Formkl ref="formklRef" :formkl="formklSyntax" />
@@ -20,10 +20,11 @@ import { defineComponent, ref } from "vue";
 import "@formkl/editor/dist/style.css";
 import "@formkl/vue/dist/style.css";
 
+window.customElements.define("formkl-editor", FormklEditor);
+
 export default defineComponent({
   components: {
     Formkl,
-    FormklEditor,
   },
   setup() {
     const formklRef = ref();

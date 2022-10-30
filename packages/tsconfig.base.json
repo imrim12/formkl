@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
     "jsx": "preserve",
@@ -12,12 +13,9 @@
     "isolatedModules": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "declaration": true,
-    "emitDeclarationOnly": true,
     "useDefineForClassFields": true,
     "lib": ["ESNext", "DOM"],
     "types": ["vite/client"],
-    "outDir": "./dist",
-    "declarationDir": "./dist/types"
+    "outDir": "./dist"
   }
 }

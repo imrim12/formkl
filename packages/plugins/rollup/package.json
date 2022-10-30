@@ -1,0 +1,4 @@
+{
+  "name": "@formkl/plugin-rollup",
+  "description": "A Formkl plugin to include .formkl file into Rollup build"
+}

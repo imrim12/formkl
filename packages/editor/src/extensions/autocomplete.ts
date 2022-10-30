@@ -1,9 +1,8 @@
 import { autocompletion, CompletionContext, Completion } from "@codemirror/autocomplete";
-import { ref } from "vue";
 
 // Our list of completions (can be static, since the editor
 /// will do filtering based on context).
-export const completions = ref<Array<Completion>>([
+export const completions: Array<Completion> = [
   { label: "formkl", type: "class", detail: "Formkl block", info: "Start declaring a Form" },
   {
     label: "base",
@@ -90,7 +89,7 @@ export const completions = ref<Array<Completion>>([
   { label: "birthday", type: "constant", detail: "Field" },
   { label: "US phone", type: "constant", detail: "Field" },
   { label: "VN phone", type: "constant", detail: "Field" },
-]);
+];
 
 const keywordSuggestion = (context: CompletionContext) => {
   let before = context.matchBefore(/\w+/);
@@ -100,11 +99,9 @@ const keywordSuggestion = (context: CompletionContext) => {
 
   return {
     from: before ? before.from : context.pos,
-    options: completions.value,
+    options: completions,
     validFor: /^\w*$/,
   };
 };
-
-// TODO: Suggest base on current cursor position so user can type keywords in the correct order
 
 export const AutoCompleteExtension = autocompletion({ override: [keywordSuggestion] });

@@ -1,7 +1,7 @@
 {
   "name": "@formkl/vue",
   "version": "1.0.0-rc.1",
-  "description": "A Vue adapter for Formkl",
+  "description": "A Vue adapter to generate usable Vue from component from Formkl syntax/schema",
   "type": "module",
   "main": "dist/index.es.js",
   "style": "dist/style.css",
@@ -25,7 +25,7 @@
   "homepage": "https://github.com/formkl/formkl#readme",
   "dependencies": {
     "@formkl/shared": "workspace:*",
-    "@formkl/vue-plugins": "workspace:*",
+    "@formkl/plugin-vue": "workspace:*",
     "@vitejs/plugin-vue": "^3.1.2",
     "@vitejs/plugin-vue-jsx": "^2.0.1",
     "element-plus": "^2.2.16",

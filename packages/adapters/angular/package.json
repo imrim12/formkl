@@ -1,0 +1,4 @@
+{
+  "name": "@formkl/angular",
+  "description": "A Angular adapter to generate usable Angular from component from Formkl syntax/schema"
+}

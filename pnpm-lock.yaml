@@ -61,8 +61,8 @@ importers:
 
   packages/adapters/vue:
     specifiers:
+      '@formkl/plugin-vue': workspace:*
       '@formkl/shared': workspace:*
-      '@formkl/vue-plugins': workspace:*
       '@vitejs/plugin-vue': ^3.1.2
       '@vitejs/plugin-vue-jsx': ^2.0.1
       element-plus: ^2.2.16
@@ -71,8 +71,8 @@ importers:
       terser: ^5.15.1
       vue-demi: ^0.13.11
     dependencies:
+      '@formkl/plugin-vue': link:../../plugins/vue
       '@formkl/shared': link:../../shared
-      '@formkl/vue-plugins': link:../../plugins/vue
       '@vitejs/plugin-vue': 3.1.2_vite@3.1.8+vue@3.2.40
       '@vitejs/plugin-vue-jsx': 2.0.1_vite@3.1.8+vue@3.2.40
       element-plus: 2.2.17_vue@3.2.40

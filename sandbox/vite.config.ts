@@ -5,5 +5,16 @@ import WindiCSS from "vite-plugin-windicss";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [vue(), vueJsx(), WindiCSS()],
+  plugins: [
+    vue({
+      template: {
+        compilerOptions: {
+          // treat all tags with a dash as custom elements
+          isCustomElement: (tag) => ["formkl-editor"].includes(tag),
+        },
+      },
+    }),
+    vueJsx(),
+    WindiCSS(),
+  ],
 });

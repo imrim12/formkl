@@ -6,7 +6,7 @@ import { defineConfig } from "vite";
 export default defineConfig({
   build: {
     lib: {
-      name: "@formkl/vue-plugins",
+      name: "@formkl/plugin-vue",
       entry: path.resolve(__dirname, "./src/index.ts"),
       formats: ["es"], // adding 'umd' requires globals set to every external module
       fileName: (format: string) => `index.${format}.js`,
