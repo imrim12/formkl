@@ -123,7 +123,6 @@ export class Parser {
    */
   private SectionBlock(): Section {
     const section: Section = {
-      key: "",
       fields: [],
     };
 
@@ -278,7 +277,7 @@ export class Parser {
   }
 
   private FieldDefaultExpression() {
-    const expression: Exclude<{ type: string }, FieldDefault> = {
+    const expression: Pick<FieldDefault, "type"> = {
       type: "text",
     };
 
@@ -298,7 +297,7 @@ export class Parser {
   private FieldSelectionExpression() {
     let fetchDataPath = "";
 
-    const expression: Exclude<{ type: string; options: Array<any> }, FieldSelection> = {
+    const expression: Pick<FieldSelection, "type" | "options"> = {
       type: "select",
       options: [],
     };
@@ -346,7 +345,7 @@ export class Parser {
   }
 
   private FieldValidatedExpression() {
-    const expression: Exclude<{ type: string }, FieldDefault> = {
+    const expression: Pick<FieldDefault, "type"> = {
       type: "text",
     };
 
@@ -356,7 +355,7 @@ export class Parser {
   }
 
   private FieldDatetimeExpression() {
-    const expression: Exclude<{ type: string }, FieldDefault> = {
+    const expression: Pick<FieldDefault, "type"> = {
       type: "datetime",
     };
 

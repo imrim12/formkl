@@ -2,7 +2,7 @@ import { FieldDefault } from "./field-default.interface";
 import { FieldSelection } from "./field-selection.interface";
 
 export interface Section {
-  key: string;
+  key?: string;
   title?: string;
   multiple?: boolean;
   maxResponseAllowed?: number;

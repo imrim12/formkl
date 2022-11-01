@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import parser from "../../dist/index.es";
+import parser from "../../dist/index";
 
 describe("Form with title", () => {
   it("should parse the form syntax correctly", () => {
