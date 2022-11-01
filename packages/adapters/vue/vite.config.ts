@@ -1,6 +1,7 @@
 import path from "path";
 import vue from "@vitejs/plugin-vue";
 import vueJsx from "@vitejs/plugin-vue-jsx";
+import dts from "vite-plugin-dts";
 import { defineConfig } from "vite";
 
 export default defineConfig({
@@ -27,5 +28,13 @@ export default defineConfig({
     },
   },
   // https://github.com/vitejs/vite/issues/7843
-  plugins: [vue(), vueJsx()] as any[], // to process SFC
+  plugins: [
+    vue(),
+    vueJsx(),
+    dts({
+      root: ".",
+      entryRoot: "./src",
+      outputDir: "./dist/types",
+    }),
+  ],
 });

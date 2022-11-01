@@ -26,7 +26,10 @@ export default defineComponent({
       type: Number,
       default: 100,
     },
-    options: Object as PropType<FormOptions>,
+    options: {
+      type: Object as PropType<FormOptions>,
+      default: () => ({} as FormOptions),
+    },
   },
   emits: ["ready"],
   setup(props, { emit }) {

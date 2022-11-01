@@ -6,6 +6,7 @@
     "module": "ESNext",
     "moduleResolution": "Node",
     "target": "ESNext",
+    "declaration": false,
     "sourceMap": true,
     "resolveJsonModule": true,
     "isolatedModules": true,

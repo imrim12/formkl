@@ -1,5 +1,4 @@
-import type {} from "@codemirror/view";
-import type {} from "@codemirror/lint";
+import type { Extension } from "@codemirror/state";
 
 import { autocompletion, CompletionContext, Completion } from "@codemirror/autocomplete";
 
@@ -107,4 +106,4 @@ const keywordSuggestion = (context: CompletionContext) => {
   };
 };
 
-export const AutoCompleteExtension = autocompletion({ override: [keywordSuggestion] });
+export const AutoCompleteExtension: Extension = autocompletion({ override: [keywordSuggestion] });

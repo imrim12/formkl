@@ -12,7 +12,7 @@ type EditorOptions = EditorViewConfig & {
   };
 };
 
-const createEditor = (options?: EditorOptions): CustomElementConstructor => {
+export const createEditor = (options?: EditorOptions): CustomElementConstructor => {
   return class FormklEditor extends HTMLElement {
     static get observedAttributes() {
       return ["value"];
