@@ -59,6 +59,12 @@ importers:
       vue: 3.2.39
       vue-tsc: 0.40.13_typescript@4.8.3
 
+  packages/adapters/angular:
+    specifiers: {}
+
+  packages/adapters/react:
+    specifiers: {}
+
   packages/adapters/vue:
     specifiers:
       '@formkl/plugin-vue': workspace:*
@@ -91,7 +97,6 @@ importers:
       '@codemirror/view': ^6.2.4
       codemirror: ^6.0.1
       formkl: workspace:*
-      vue: ^3.2.40
     dependencies:
       '@codemirror/autocomplete': 6.3.0_vswjzb6pveu6y6iyyyir6hfjfy
       '@codemirror/commands': 6.1.0
@@ -100,7 +105,6 @@ importers:
       '@codemirror/view': 6.2.5
       codemirror: 6.0.1_@lezer+common@1.0.1
       formkl: link:../language
-      vue: 3.2.40
 
   packages/language:
     specifiers:
@@ -109,6 +113,18 @@ importers:
     dependencies:
       '@formkl/shared': link:../shared
       slugify: 1.6.5
+
+  packages/plugins/angular:
+    specifiers: {}
+
+  packages/plugins/react:
+    specifiers: {}
+
+  packages/plugins/rollup:
+    specifiers: {}
+
+  packages/plugins/vite:
+    specifiers: {}
 
   packages/plugins/vue:
     specifiers:
@@ -123,6 +139,9 @@ importers:
       element-plus: 2.2.17_vue@3.2.40
       lodash: 4.17.21
       vue-demi: 0.13.11_vue@3.2.40
+
+  packages/plugins/webpack:
+    specifiers: {}
 
   packages/shared:
     specifiers: {}

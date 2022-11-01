@@ -14,13 +14,12 @@
 
 <script lang="ts">
 import { Formkl } from "@formkl/vue";
-import { FormklEditor } from "@formkl/editor";
+import { createEditor } from "@formkl/editor";
 import { defineComponent, ref } from "vue";
 
-import "@formkl/editor/dist/style.css";
 import "@formkl/vue/dist/style.css";
 
-window.customElements.define("formkl-editor", FormklEditor);
+window.customElements.define("formkl-editor", createEditor());
 
 export default defineComponent({
   components: {

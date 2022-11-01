@@ -1,69 +1,75 @@
 import { indentWithTab } from "@codemirror/commands";
-import { keymap } from "@codemirror/view";
+import { EditorViewConfig, keymap } from "@codemirror/view";
 import { EditorView, basicSetup } from "codemirror";
 import { AutoCompleteExtension, LintExtension } from "./extensions";
 
-export class FormklEditor extends HTMLElement {
-  static get observedAttributes() {
-    return ["value"];
-  }
+type EditorOptions = EditorViewConfig & {
+  dark?: boolean;
+  theme?: {
+    [selector: string]: {
+      [propOrSelector: string]: string | number | null;
+    };
+  };
+};
 
-  editor: EditorView | null = null;
-
-  get value() {
-    return this.editor?.state.doc.toString() || "";
-  }
-
-  set value(newValue: string) {
-    this.setContent(newValue);
-  }
-
-  constructor() {
-    super();
-    const shadowRoot = this.attachShadow({ mode: "open" });
-
-    shadowRoot.innerHTML = '<div id="formkl__editor"></div>';
-
-    const attributes: { [key: string]: any } = {};
-
-    for (let i = 0; i < this.attributes.length; i++) {
-      if (this.attributes[i].nodeValue) {
-        attributes[this.attributes[i].nodeName] = this.attributes[i].nodeValue;
-      }
+export const createEditor = (options?: EditorOptions): CustomElementConstructor => {
+  return class FormklEditor extends HTMLElement {
+    static get observedAttributes() {
+      return ["value"];
     }
 
-    this.editor = new EditorView({
-      ...attributes,
-      parent: this.shadowRoot?.getElementById("formkl__editor") as HTMLElement,
-      doc: this.value,
-      extensions: [
-        basicSetup,
-        keymap.of([indentWithTab]),
-        AutoCompleteExtension,
-        LintExtension,
-        EditorView.updateListener.of((e) => {
-          const event = new CustomEvent("input", { detail: e.state.doc.toString() });
-          this.dispatchEvent(event);
-        }),
-      ],
-    });
-  }
+    editor: EditorView | null = null;
 
-  private setContent(value: string) {
-    this.editor?.dispatch({
-      changes: {
-        from: 0,
-        to: this.editor.state.doc.length,
-        insert: value,
-      },
-    });
-  }
+    get value() {
+      return this.editor?.state.doc.toString() || "";
+    }
 
-  attributeChangedCallback(name: string, oldValue: any, newValue: any) {
-    if (name === "value") {
+    set value(newValue: string) {
       this.setContent(newValue);
     }
-  }
-}
 
-export default { FormklEditor };
+    constructor() {
+      super();
+      this.attachShadow({ mode: "open" });
+    }
+
+    setContent(value: string) {
+      this.editor?.dispatch({
+        changes: {
+          from: 0,
+          to: this.editor.state.doc.length,
+          insert: value,
+        },
+      });
+    }
+
+    // Like mounted
+    connectedCallback() {
+      EditorView.theme(options?.theme || {}, { dark: Boolean(options?.dark) });
+
+      this.editor = new EditorView({
+        ...options,
+        parent: this.shadowRoot as DocumentFragment,
+        doc: this.value,
+        extensions: [
+          basicSetup,
+          keymap.of([indentWithTab]),
+          AutoCompleteExtension,
+          LintExtension,
+          EditorView.updateListener.of((e) => {
+            const event = new CustomEvent("input", { detail: e.state.doc.toString() });
+            this.dispatchEvent(event);
+          }),
+        ].concat(options?.extensions || []),
+      });
+    }
+
+    attributeChangedCallback(name: string, oldValue: any, newValue: any) {
+      if (name === "value") {
+        this.setContent(newValue);
+      }
+    }
+  };
+};
+
+export default { createEditor };
