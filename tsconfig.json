@@ -13,7 +13,6 @@
     "skipLibCheck": true,
     "useDefineForClassFields": true,
     "lib": ["ESNext", "DOM"],
-    "types": ["vite/client"],
     "outDir": "./dist"
   },
   "references": [{ "path": "./tsconfig.vitest.json" }]
