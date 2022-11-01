@@ -2,13 +2,9 @@
 
 FORMKL is a markup language used to annotate form model, sections and fields. It simply contains a set of grammar rules and a parser.
 
-## Parser
-
-Currently, the project use a tool called [Syntax CLI](https://www.npmjs.com/package/syntax-cli) to generate the parser from the BNF grammar. The generated parser can be used to parse the markup into a JSON object for further use.
-
 ## Grammar
 
-The grammar is defined in [BNF](https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form) and can be found in [`language/src/bnf.js`](https://github.com/formkl/formkl/blob/3543e4553c7812302bdbfa76edaaaf5b904cc6c1/language/src/bnf.js).
+The grammar is defined in [BNF](https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form).
 
 An simple example of BNF:
 
@@ -16,16 +12,29 @@ An simple example of BNF:
 # BNF is a set of rules that express the possible
 # valid cases of a set of keywords (tokens)
 
-Statement =
-  Indefinite Subject # a girl, a boy, the spider man
+Statement
+  : Indefinite Subject # a girl, a boy, the spider man
   | Adjective Subject # beautiful girl, awesome boy
   | Indefinite Adjective Subject # a beautiful girl, the amazing spider man
+  ;
 
-Subject = "girl" | "boy" | "spider man"
+Subject
+  : "girl"
+  | "boy"
+  | "spider man"
+  ;
 
-Adjective = "beautiful" | "amazing" | "awesome"
+Adjective
+  : "beautiful"
+  | "amazing"
+  | "awesome"
+  ;
 
-Indefinite = "a" | "an" | "the" ;
+Indefinite
+  : "a"
+  | "an"
+  | "the"
+  ;
 
 ```
 
@@ -40,48 +49,84 @@ Another simple example for programming language:
 #    var c = a + b;
 #    return c;
 # }
-FunctionDeclaration =
-  "function" Identifier "(" ParamList ")" BlockStatement
+FunctionDeclaration
+  : "function" Identifier "(" ParamList ")" BlockStatement
+  ;
 
 # Accept a list of parameters recursively or no parameter (null)
-ParamList =
-  null
+ParamList
+  : null
   | Param
   | ParamList "," Param
+  ;
 
-Param = "somethinghere"
+Param
+  : "somethinghere"
+  ;
 
 # Accept multiple lines of statements and wrapped in {  }
-BlockStatement = "{" StatementList "}"
+BlockStatement
+  : "{" StatementList "}"
+  ;
 
 # Accept multiple lines of statements
-StatementList =
-  null
+StatementList
+  : null
   | Statement
   | StatementList Statement
+  ;
 
 ```
 
-::: info Please aware that the grammar is over-simplified for the sake of example and is not correct 100%
+::: info Please aware that the grammar is over-simplified for the sake of example.
 :::
 
 ## Tokenizer
 
-The [Syntax CLI](https://www.npmjs.com/package/syntax-cli) allow us to include the valid tokens for the syntax, this will help us validate the syntax and give a clear SyntaxError messages.
+The Tokenizer allows us to include the valid tokens for the syntax, this will help us validate the syntax and give a clear SyntaxError messages.
 
 ```
 SyntaxError: Invalid token { at 12:34.
 ```
 
-The tokens are defined in [`language/src/enum/token.enum.js`](https://github.com/formkl/formkl/blob/3543e4553c7812302bdbfa76edaaaf5b904cc6c1/language/src/enum/token.enum.js#L1).
+The tokens are characters, symbols, keywords, operators, etc. that are used to build the syntax.
 
-## Lexer
+## Parser
 
-The lexer defines what value to be returned when the parser encounter a set of tokens that match some rules. The value will be used for writting the grammar. The lexer is defined in [`language/src/lexer.js`](https://github.com/formkl/formkl/blob/3543e4553c7812302bdbfa76edaaaf5b904cc6c1/language/src/lexer.js#L4)
+The parser uses the tokenizer to check for the syntax's grammar and return the parsed value as a usable JSON object.
 
-For examples:
+```typescript
+class Parser {
+  constructor() {
+    // Initialize the tokenizer
+    this._tokenizer = new Tokenizer();
+  }
 
-- Return the exact token if it is symbol like `[] () {}` etc.
-- Return nothing if the tokens match the comment syntax `//` or `/* */` or `space`, `tabs`, `break line` etc.
-- Return the keyword `formkl` when it matches `formkl` or `Formkl` (Like normalize the token)
+  parse(string: string): Formkl {
+    // Parse the input string
+    return this.FormBlock();
+  }
 
+  /**
+   * Main entry point.
+   *
+   * FormBlock
+   *  : SectionBlockList
+   *  ;
+   */
+  private FormBlock(): Formkl {}
+
+  /**
+   * SectionBlockList
+   *  : (SectionBlock)*
+   *  ;
+   */
+  private SectionBlockList(): Section[] {}
+
+  private SectionBlock(): Section {}
+
+  // ...
+}
+```
+::: info Please aware that this code is over-simplified for the sake of example.
+:::

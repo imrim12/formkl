@@ -41,7 +41,7 @@ export default {
         text: "Learning",
         collapsible: true,
         items: [
-          { text: "Project structure", link: "/learning/project-structure" },
+          { text: "Contribution guide", link: "/learning/contribution-guide" },
           { text: "Core language", link: "/learning/core-language" },
           { text: "Adapter (Vue)", link: "/learning/adapter-vue" },
           { text: "Editor", link: "/learning/editor" },
