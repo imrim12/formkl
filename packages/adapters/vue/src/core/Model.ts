@@ -1,6 +1,5 @@
-import { Formkl } from "formkl";
-import { ref, Ref } from "vue";
-import { Schema, SchemaBase, SchemaFlat } from "./Schema";
+import { Formkl, SchemaBase, SchemaFlat } from "@formkl/shared";
+import { Schema } from "./Schema";
 
 export const DefaultValueMap = Object.freeze({
   number: null,
@@ -118,11 +117,7 @@ export class Model {
     return model;
   }
 
-  public getValue(): SchemaBase | SchemaFlat {
+  public getModel(): SchemaBase | SchemaFlat {
     return this._model;
-  }
-
-  public getReactiveValue(): Ref<SchemaBase | SchemaFlat> {
-    return ref(this._model);
   }
 }

@@ -1,0 +1,49 @@
+{
+  "name": "formkl",
+  "version": "1.0.0-rc.1",
+  "description": "Form markup language",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "main": "./dist/index.cjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "rimraf ./dist && npx unbuild"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/formkl/formkl.git",
+    "directory": "language"
+  },
+  "keywords": [
+    "form",
+    "formkl",
+    "formjs",
+    "form",
+    "generator",
+    "schema"
+  ],
+  "author": "thecodeorigin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/formkl/formkl/issues"
+  },
+  "homepage": "https://github.com/formkl/formkl#readme",
+  "dependencies": {
+    "@formkl/shared": "workspace:*",
+    "slugify": "^1.6.5"
+  },
+  "devDependencies": {
+    "rimraf": "^3.0.2",
+    "typescript": "^4.8.4",
+    "unbuild": "^0.9.4",
+    "vitest": "^0.24.4"
+  }
+}

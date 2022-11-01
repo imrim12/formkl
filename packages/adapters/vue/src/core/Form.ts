@@ -1,8 +1,9 @@
-import { FieldDefault, FieldSelection, Formkl, Section } from "formkl";
-import { Ref, VNode } from "vue";
-import { Adapter } from "./Adapter";
+import { Adapter } from "@formkl/plugin-vue";
+import { Formkl, SchemaBase, SchemaFlat } from "@formkl/shared";
+import { ref, Ref, VNode } from "vue-demi";
 import { Model } from "./Model";
-import { Schema, SchemaBase, SchemaFlat } from "./Schema";
+import { Schema } from "./Schema";
+import { EventHandler } from "../types/event-handler.type";
 
 import _cloneDeep from "lodash/cloneDeep";
 
@@ -31,20 +32,7 @@ export class Form {
   /**
    * Custom event map
    */
-  private static _eventMap: Map<
-    string,
-    Record<
-      string,
-      (
-        value: any,
-        formkl: Formkl,
-        section: Section,
-        field: FieldDefault | FieldSelection,
-        model: Ref<SchemaBase | SchemaFlat>,
-        responseIndex?: number,
-      ) => void
-    >
-  > = new Map();
+  private static _eventMap: Map<string, Record<string, EventHandler>> = new Map();
 
   private _options?: FormOptions;
 
@@ -63,15 +51,14 @@ export class Form {
     // Initialize schema
     this._schema = new Schema(this.formkl);
     // Build a reactive model from schema
-    const model = new Model(this.formkl, this._schema, this._options?.modelDefault);
-    this.model = model.getReactiveValue();
+    this.model = ref(new Model(this.formkl, this._schema, this._options?.modelDefault).getModel());
   }
 
   public fill(fillModel: SchemaBase | SchemaFlat) {
     // Reuse the model creation logic for filling data
     const newModel = new Model(this.formkl, this._schema, fillModel);
     // But doesn't have to use its reactive value
-    this.model.value = _cloneDeep(newModel.getValue());
+    this.model.value = _cloneDeep(newModel.getModel());
   }
 
   public async submit(
@@ -82,15 +69,21 @@ export class Form {
     try {
       let response: any = null;
 
+      if (!this.formkl.endpoint && !this.formkl.method) {
+        throw new Error(
+          "'endpoint' and 'method' must be specified for the use of form submission!",
+        );
+      }
+
       if (this._options?.submitMethod) {
         response = await this._options.submitMethod(
-          this.formkl.endpoint,
-          this.formkl.method,
+          this.formkl.endpoint || "",
+          this.formkl.method || "post",
           this.model.value,
         );
       } else if (window) {
-        const data = await fetch(this.formkl.endpoint, {
-          method: this.formkl.method.toUpperCase() || "POST",
+        const data = await fetch(this.formkl.endpoint || "", {
+          method: this.formkl.method?.toUpperCase() || "POST",
           headers: {
             "Content-Type": "application/json",
           },
@@ -117,20 +110,7 @@ export class Form {
     return this._map;
   }
 
-  public static getEventMap(): Map<
-    string,
-    Record<
-      string,
-      (
-        value: any,
-        formkl: Formkl,
-        section: Section,
-        field: FieldDefault | FieldSelection,
-        model: Ref<SchemaBase | SchemaFlat>,
-        responseIndex?: number,
-      ) => void
-    >
-  > {
+  public static getEventMap(): Map<string, Record<string, EventHandler>> {
     return this._eventMap;
   }
 }

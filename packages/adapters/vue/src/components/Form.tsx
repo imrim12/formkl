@@ -1,37 +1,27 @@
 import { ElForm } from "element-plus";
-import { Formkl } from "formkl";
-import { Ref, h, defineComponent, PropType } from "vue";
-import { SchemaBase, SchemaFlat } from "../core/Schema";
+import { h, defineComponent } from "vue-demi";
 import { SectionNode } from "./Section";
+import { useFormkl } from "../hooks/useFormkl";
 
 // Equivalent to React.createElement, but for Vue
 const createElement = h;
 
 export const FormNode = defineComponent({
   name: "FormNode",
-  props: {
-    formkl: {
-      type: Object as PropType<Formkl>,
-      required: true,
-    },
-    model: {
-      type: Object as PropType<Ref<SchemaBase | SchemaFlat>>,
-      required: true,
-    },
-  },
+  setup() {
+    const { formkl, model } = useFormkl();
 
-  setup(props) {
     return () => (
-      <ElForm ref="elFormRef" model={props.model.value} labelWidth={130} labelPosition="left">
-        {props.formkl.title || props.formkl.description ? (
+      <ElForm ref="elFormRef" model={model.value} labelWidth={130} labelPosition="left">
+        {formkl.value.title || formkl.value.description ? (
           <header class="formkl__header">
-            {props.formkl.title ? <h2>{props.formkl.title}</h2> : null}
-            {props.formkl.description ? <h3>{props.formkl.description}</h3> : null}
+            {formkl.value.title ? <h2>{formkl.value.title}</h2> : null}
+            {formkl.value.description ? <h3>{formkl.value.description}</h3> : null}
           </header>
         ) : null}
         <div class="formkl__body">
-          {props.formkl.sections.map((section) => (
-            <SectionNode formkl={props.formkl} section={section} model={props.model} />
+          {formkl.value.sections.map((section) => (
+            <SectionNode section={section} key={section.key} />
           ))}
         </div>
       </ElForm>

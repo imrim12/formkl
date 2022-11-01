@@ -1,6 +1,5 @@
 import { FormItemRule } from "element-plus";
-import { FieldDefault, FieldSelection, Formkl } from "formkl";
-import { isValueValidated } from "@formkl/utils";
+import { FieldDefault, FieldSelection, Formkl, isValueValidated } from "@formkl/shared";
 
 export class Rule {
   private _formkl: Formkl;
@@ -15,7 +14,7 @@ export class Rule {
   }
 
   private _buildRequireRule() {
-    if (this._field.require) {
+    if (this._field.required) {
       this._rules.push({
         required: true,
         message: this._field.label + " field is required",

@@ -1,11 +1,11 @@
+import { Section, SchemaBase, SchemaFlat } from "@formkl/shared";
+import { DefaultComponent } from "@formkl/plugin-vue";
 import { ElButton } from "element-plus";
-import { Section, Formkl } from "formkl";
-import { computed, defineComponent, h, PropType, Ref } from "vue";
+import { computed, defineComponent, h, PropType } from "vue-demi";
 import { Form } from "../core/Form";
-import { SchemaBase, SchemaFlat } from "../core/Schema";
-import { SectionHandler } from "../handlers/SectionHandler";
-import { DefaultComponent } from "../types/default-component.enum";
 import { FieldNode } from "./Field";
+import { useSection } from "../hooks/useSection";
+import { useFormkl } from "../hooks/useFormkl";
 
 // Equivalent to React.createElement, but for Vue
 const createElement = h;
@@ -13,25 +13,14 @@ const createElement = h;
 export const SectionNode = defineComponent({
   name: "SectionNode",
   props: {
-    formkl: {
-      type: Object as PropType<Formkl>,
-      required: true,
-    },
     section: {
       type: Object as PropType<Section>,
       required: true,
     },
-    model: {
-      type: Object as PropType<Ref<SchemaFlat | SchemaBase>>,
-      required: true,
-    },
   },
   setup(props) {
-    const _formkl = props.formkl;
-    const _section = props.section;
-    const _fields = props.section.fields;
-    const _model = props.model;
-    const _handler = new SectionHandler(_formkl, _section, _model);
+    const { formkl, model } = useFormkl();
+    const { handler } = useSection();
 
     const SectionAddBtn = Form.getComponentMap().get(DefaultComponent.SECTION_ADD_BTN) || (
       <ElButton />
@@ -42,15 +31,15 @@ export const SectionNode = defineComponent({
     );
 
     const firstFieldResponse = computed(() => {
-      if (_section.multiple) {
-        switch (_formkl.model) {
+      if (props.section.multiple) {
+        switch (formkl.value.model) {
           case "flat":
-            const _flatModel = _model.value as SchemaFlat;
-            return Object.values(_flatModel[_section.key])[0];
+            const _flatModel = model.value as SchemaFlat;
+            return Object.values(_flatModel[props.section.key])[0];
           case "base":
           default:
-            const _baseModel = _model.value as SchemaBase;
-            return _baseModel.data.find((i) => i.section === _section.key)?.value;
+            const _baseModel = model.value as SchemaBase;
+            return _baseModel.data.find((i) => i.section === props.section.key)?.value;
         }
       } else {
         return null;
@@ -58,7 +47,8 @@ export const SectionNode = defineComponent({
     });
 
     const allowAddMoreResponse = computed(
-      () => firstFieldResponse.value?.length < Number(_section?.maxResponseAllowed || Infinity),
+      () =>
+        firstFieldResponse.value?.length < Number(props.section?.maxResponseAllowed || Infinity),
     );
 
     const numberOfAnswers = computed(() => firstFieldResponse.value?.length || 1);
@@ -67,23 +57,22 @@ export const SectionNode = defineComponent({
       <div
         class={[
           "formkl-section__wrapper",
-          _section.multiple ? "formkl-section__wrapper--multiple" : "",
+          props.section.multiple ? "formkl-section__wrapper--multiple" : "",
         ]}
       >
         <header class="formkl-section__header">
-          <h3>{_section.title}</h3>
+          <h3>{props.section.title}</h3>
         </header>
         <section class="formkl-section__body">
-          {_section.multiple ? (
+          {props.section.multiple ? (
             new Array(numberOfAnswers.value).fill(null).map((_, responseIndex) => (
               <div class="formkl-section_response">
-                {_fields.map((field) => (
+                {props.section.fields.map((field) => (
                   <FieldNode
-                    formkl={_formkl}
-                    section={_section}
+                    section={props.section}
                     field={field}
-                    model={_model}
                     sectionResponseIndex={responseIndex}
+                    key={field.key}
                   />
                 ))}
                 {numberOfAnswers.value > 1 ? (
@@ -91,7 +80,7 @@ export const SectionNode = defineComponent({
                     {createElement(
                       SectionRemoveBtn,
                       {
-                        onClick: _handler.removeResponse.bind(_handler, responseIndex),
+                        onClick: handler.removeResponse.bind(handler, responseIndex),
                       },
                       () => "Remove section",
                     )}
@@ -101,8 +90,8 @@ export const SectionNode = defineComponent({
             ))
           ) : (
             <div class="formkl-section_response">
-              {_fields.map((field) => (
-                <FieldNode formkl={_formkl} section={_section} field={field} model={_model} />
+              {props.section.fields.map((field) => (
+                <FieldNode section={props.section} field={field} key={field.key} />
               ))}
             </div>
           )}
@@ -112,7 +101,7 @@ export const SectionNode = defineComponent({
             ? createElement(
                 SectionAddBtn,
                 {
-                  onClick: _handler.addResponse.bind(_handler),
+                  onClick: handler.addResponse.bind(handler),
                 },
                 () => "Add section",
               )

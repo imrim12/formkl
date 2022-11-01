@@ -1,12 +1,21 @@
 {
   "name": "@formkl/editor",
-  "version": "1.0.0-alpha.4",
-  "description": "An Editor for Formkl using Vue.js",
+  "version": "1.0.0-rc.1",
+  "description": "A universal Editor for Formkl using web component API",
   "type": "module",
-  "main": "dist/index.es.js",
-  "types": "dist/types/src",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "main": "./dist/index.cjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "build": "vue-tsc && vite build"
+    "build": "rimraf ./dist && npx unbuild"
   },
   "repository": {
     "type": "git",
@@ -30,7 +39,12 @@
     "@codemirror/state": "^6.1.2",
     "@codemirror/view": "^6.2.4",
     "codemirror": "^6.0.1",
-    "formkl": "workspace:*",
-    "vue": "^3.2.40"
+    "formkl": "workspace:*"
+  },
+  "devDependencies": {
+    "rimraf": "^3.0.2",
+    "typescript": "^4.8.4",
+    "unbuild": "^0.9.4",
+    "vitest": "^0.24.4"
   }
 }

@@ -1,5 +1,8 @@
-import { EditorView } from "@codemirror/view";
-import { linter, Diagnostic } from "@codemirror/lint";
+import type { Extension } from "@codemirror/state";
+import type { EditorView } from "@codemirror/view";
+import type { Diagnostic } from "@codemirror/lint";
+
+import { linter } from "@codemirror/lint";
 
 import FormklParser from "formkl";
 
@@ -28,4 +31,4 @@ function lintSyntax(view: EditorView): readonly Diagnostic[] {
   return diagnostics;
 }
 
-export const LintExtension = linter(lintSyntax);
+export const LintExtension: Extension = linter(lintSyntax);

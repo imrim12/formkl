@@ -1,22 +1,65 @@
-import { App } from "vue";
-import { Adapter } from "./core/Adapter";
-import { Plugin } from "./core/Plugin";
-import { DefaultComponent } from "./types/default-component.enum";
+import { App } from "vue-demi";
+import {
+  Adapter,
+  Plugin,
+  DefaultComponent,
+  PluginCheckbox,
+  PluginDate,
+  PluginDateRange,
+  PluginDatetime,
+  PluginDatetimeRange,
+  PluginNumber,
+  PluginParagraph,
+  PluginRadio,
+  PluginSelect,
+  PluginSwitch,
+  PluginText,
+  PluginTime,
+  PluginTimeRange,
+} from "@formkl/plugin-vue";
 
 import Formkl from "./Main";
 
 import FormklParser from "formkl";
 
-import { bootstrap } from "./bootstrap";
-
 import "./assets/main.scss";
 
-bootstrap();
+interface PluginOptions {
+  globallyRegister?: boolean;
+  useDefaultPlugins?: boolean;
+  plugins?: Plugin[];
+}
 
-function install(app: App) {
-  app.component("formkl", Formkl);
+function install(app: App, options: PluginOptions = {}) {
+  const { globallyRegister = false, useDefaultPlugins = true, plugins = [] } = options;
 
-  app.config.globalProperties.$formkl = FormklParser;
+  // Default plugins
+  if (useDefaultPlugins) {
+    Adapter.registerPlugin(
+      PluginCheckbox,
+      PluginDate,
+      PluginDateRange,
+      PluginDatetime,
+      PluginDatetimeRange,
+      PluginNumber,
+      PluginParagraph,
+      PluginRadio,
+      PluginSelect,
+      PluginSwitch,
+      PluginText,
+      PluginTime,
+      PluginTimeRange,
+    );
+  }
+
+  // Overide default plugins
+  Adapter.registerPlugin(...plugins);
+
+  if (globallyRegister) {
+    app.component("formkl", Formkl);
+
+    app.config.globalProperties.$formkl = FormklParser;
+  }
 }
 
 export { Formkl, FormklParser, Adapter, Plugin, DefaultComponent };

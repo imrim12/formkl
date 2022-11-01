@@ -1,11 +1,10 @@
+import { FieldDefault, FieldSelection, Section, SchemaBase } from "@formkl/shared";
+import { DefaultComponent } from "@formkl/plugin-vue";
 import { ElButton, ElFormItem } from "element-plus";
-import { FieldDefault, FieldSelection, Formkl, Section } from "formkl";
-import { computed, defineComponent, h, PropType, readonly, Ref } from "vue";
+import { computed, defineComponent, h, PropType } from "vue-demi";
 import { Form } from "../core/Form";
-import { FieldHandler } from "../handlers/FieldHandler";
-import { SchemaBase, SchemaFlat } from "../core/Schema";
-import { Rule } from "../core/Rule";
-import { DefaultComponent } from "../types/default-component.enum";
+import { useField } from "../hooks/useField";
+import { useFormkl } from "../hooks/useFormkl";
 
 // Equivalent to React.createElement, but for Vue
 const createElement = h;
@@ -13,10 +12,6 @@ const createElement = h;
 export const FieldNode = defineComponent({
   name: "FieldNode",
   props: {
-    formkl: {
-      type: Object as PropType<Formkl>,
-      required: true,
-    },
     section: {
       type: Object as PropType<Section>,
       required: true,
@@ -25,23 +20,11 @@ export const FieldNode = defineComponent({
       type: Object as PropType<FieldDefault | FieldSelection>,
       required: true,
     },
-    model: {
-      type: Object as PropType<Ref<SchemaFlat | SchemaBase>>,
-      required: true,
-    },
     sectionResponseIndex: Number,
   },
   setup(props) {
-    const _formkl = props.formkl;
-    const _section = props.section;
-    const _field = props.field;
-    const _sectionResponseIndex = props.sectionResponseIndex;
-    const _handler = new FieldHandler(_formkl, _section, _field, props.model); // Keep the model reference and reactivity
-    const _model = readonly(props.model);
-    const _component = Form.getComponentMap().get(_field.type);
-    const _input = _handler.getReactiveInput();
-
-    const _rules = new Rule(_formkl, _field).getRules();
+    const { formkl, model } = useFormkl();
+    const { handler, component, input, rules, sectionResponseIndex } = useField();
 
     const FieldAddBtn = Form.getComponentMap().get(DefaultComponent.FIELD_ADD_BTN) || <ElButton />;
 
@@ -50,16 +33,18 @@ export const FieldNode = defineComponent({
     );
 
     const _buildSinglePropPath = (responseIndex?: number): string => {
-      switch (_formkl.model) {
+      switch (formkl.value.model) {
         case "flat":
-          return [_section.key, _field.key, responseIndex].filter((i) => i !== undefined).join(".");
+          return [props.section.key, props.field.key, responseIndex]
+            .filter((i) => i !== undefined)
+            .join(".");
 
         case "base":
         default:
-          const modelBase: SchemaBase = _model.value as SchemaBase;
+          const modelBase: SchemaBase = model.value as SchemaBase;
 
           const fieldIndex = modelBase.data.findIndex(
-            (f) => f.field === _field.key && f.section === _section.key,
+            (f) => f.field === props.field.key && f.section === props.section.key,
           );
           return ["data", fieldIndex, "value", responseIndex]
             .filter((i) => i !== undefined)
@@ -68,51 +53,53 @@ export const FieldNode = defineComponent({
     };
 
     const _buildMultiplePropPath = (): string[] => {
-      switch (_formkl.model) {
+      switch (formkl.value.model) {
         case "flat":
-          return (_input.value as any[]).map((_, responseIndex: number) =>
-            [_section.key, _field.key, responseIndex].join("."),
+          return input.value.map((_: any, responseIndex: number) =>
+            [props.section.key, props.field.key, responseIndex].join("."),
           );
 
         case "base":
         default:
-          const modelBase: SchemaBase = _model.value as SchemaBase;
+          const modelBase: SchemaBase = model.value as SchemaBase;
 
           const fieldIndex = modelBase.data.findIndex(
-            (f) => f.field === _field.key && f.section === _section.key,
+            (f) => f.field === props.field.key && f.section === props.section.key,
           );
-          return (_input.value as any[]).map((_, responseIndex: number) =>
+          return input.value.map((_: any, responseIndex: number) =>
             ["data", fieldIndex, "value", responseIndex].join("."),
           );
       }
     };
 
     const propPath = computed(() => {
-      return _field.multiple
+      return props.field.multiple
         ? _buildMultiplePropPath()
-        : _buildSinglePropPath(_sectionResponseIndex);
+        : _buildSinglePropPath(sectionResponseIndex);
     });
 
     const allowAddMoreResponse = computed(
-      () => propPath.value?.length < Number(_field?.maxResponseAllowed || Infinity),
+      () => propPath.value?.length < Number(props.field?.maxResponseAllowed || Infinity),
     );
 
     return () => (
       <div class="formkl-field">
-        {_field.multiple ? (
+        {props.field.multiple ? (
           (propPath.value as string[]).map((prop, responseIndex) => (
             <div class="formkl-field_response">
               <ElFormItem
-                label={responseIndex === 0 ? _field.label : ""}
+                label={responseIndex === 0 ? props.field.label : ""}
                 key={prop}
                 prop={prop}
-                rules={_rules}
+                rules={rules}
               >
                 {() =>
-                  _component
-                    ? createElement(_component, {
-                        ..._handler.getEventHandler(responseIndex),
-                        ...(["checkbox", "radio", "select"].includes(_field.type) ? _field : {}),
+                  component
+                    ? createElement(component, {
+                        ...handler.getEventHandler(responseIndex),
+                        ...(["checkbox", "radio", "select"].includes(props.field.type)
+                          ? props.field
+                          : {}),
                       })
                     : null
                 }
@@ -122,7 +109,7 @@ export const FieldNode = defineComponent({
                   {createElement(
                     FieldRemoveBtn,
                     {
-                      onClick: _handler.removeResponse.bind(_handler, responseIndex),
+                      onClick: handler.removeResponse.bind(handler, responseIndex),
                     },
                     () => "Remove field",
                   )}
@@ -132,27 +119,29 @@ export const FieldNode = defineComponent({
           ))
         ) : (
           <ElFormItem
-            label={_field.label}
+            label={props.field.label}
             key={propPath.value as string}
             prop={propPath.value as string}
-            rules={_rules}
+            rules={rules}
           >
             {() =>
-              _component
-                ? createElement(_component, {
-                    ..._handler.getEventHandler(_sectionResponseIndex),
-                    ...(["checkbox", "radio", "select"].includes(_field.type) ? _field : {}),
+              component
+                ? createElement(component, {
+                    ...handler.getEventHandler(sectionResponseIndex),
+                    ...(["checkbox", "radio", "select"].includes(props.field.type)
+                      ? props.field
+                      : {}),
                   })
                 : null
             }
           </ElFormItem>
         )}
         <div class="formkl-field__footer">
-          {_field.multiple && allowAddMoreResponse.value
+          {props.field.multiple && allowAddMoreResponse.value
             ? createElement(
                 FieldAddBtn,
                 {
-                  onClick: _handler.addResponse.bind(_handler),
+                  onClick: handler.addResponse.bind(handler),
                 },
                 () => "Add field",
               )
