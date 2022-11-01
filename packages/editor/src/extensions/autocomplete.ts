@@ -1,3 +1,6 @@
+import type {} from "@codemirror/view";
+import type {} from "@codemirror/lint";
+
 import { autocompletion, CompletionContext, Completion } from "@codemirror/autocomplete";
 
 // Our list of completions (can be static, since the editor

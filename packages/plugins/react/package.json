@@ -1,4 +1,10 @@
 {
   "name": "@formkl/plugin-react",
-  "description": "A Formkl components plugin to register components that used in @formkl/react adapter"
+  "description": "A Formkl components plugin to register components that used in @formkl/react adapter",
+  "devDependencies": {
+    "rimraf": "^3.0.2",
+    "typescript": "^4.8.3",
+    "vite": "^3.1.3",
+    "vitest": "^0.24.4"
+  }
 }

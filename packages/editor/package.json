@@ -31,5 +31,11 @@
     "@codemirror/view": "^6.2.4",
     "codemirror": "^6.0.1",
     "formkl": "workspace:*"
+  },
+  "devDependencies": {
+    "rimraf": "^3.0.2",
+    "typescript": "^4.8.3",
+    "vite": "^3.1.3",
+    "vitest": "^0.24.4"
   }
 }

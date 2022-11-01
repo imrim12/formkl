@@ -1,5 +1,7 @@
-import { EditorView } from "@codemirror/view";
-import { linter, Diagnostic } from "@codemirror/lint";
+import type { EditorView } from "@codemirror/view";
+import type { Diagnostic } from "@codemirror/lint";
+
+import { linter } from "@codemirror/lint";
 
 import FormklParser from "formkl";
 

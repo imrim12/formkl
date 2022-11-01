@@ -1,5 +1,4 @@
 /// <reference types="vite/client" />
-import type { FieldDefault, FieldSelection } from "formkl";
 
 declare module "*.tsx" {
   import { DefineComponent } from "vue-demi";

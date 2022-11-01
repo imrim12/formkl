@@ -1,18 +1,16 @@
 {
-  "extends": "../../tsconfig.base.json",
+  "extends": "../../../tsconfig.json",
   "compilerOptions": {
+    "baseUrl": ".",
     "outDir": "./dist",
-    "declaration": true,
-    "declarationMap": true,
-    "declarationDir": "./dist/types",
-    "emitDeclarationOnly": true
+    "declarationDir": "./dist/types"
   },
   "include": [
     "./src/**/*.js",
     "./src/**/*.jsx",
     "./src/**/*.ts",
     "./src/**/*.tsx",
-    "./src/**/*.vue"
+    "./src/**/*.d.ts"
   ],
   "exclude": ["./node_modules", "./dist", "./__tests__"]
 }
