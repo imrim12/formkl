@@ -251,10 +251,7 @@ export class Parser {
    *  | 'FIELDSELECTION'
    *  | 'FIELDVALIDATED'
    *  | 'FIELDDATETIME'
-   *  | 'FIELD' ValidationExpression
-   *  | 'FIELDSELECTION' ValidationExpression
-   *  | 'FIELDVALIDATED' ValidationExpression
-   *  | 'FIELDDATETIME' ValidationExpression
+   *  | FieldExpression ValidationExpression
    *  ;
    */
   private FieldExpression() {
@@ -281,10 +278,8 @@ export class Parser {
   }
 
   private FieldDefaultExpression() {
-    const expression: FieldDefault = {
+    const expression: Exclude<{ type: string }, FieldDefault> = {
       type: "text",
-      label: "",
-      key: "",
     };
 
     if (this._lookahead?.type === "FIELD") this._eat("FIELD");
@@ -303,10 +298,8 @@ export class Parser {
   private FieldSelectionExpression() {
     let fetchDataPath = "";
 
-    const expression: FieldSelection = {
+    const expression: Exclude<{ type: string; options: Array<any> }, FieldSelection> = {
       type: "select",
-      label: "",
-      key: "",
       options: [],
     };
 
@@ -353,10 +346,8 @@ export class Parser {
   }
 
   private FieldValidatedExpression() {
-    const expression: FieldDefault = {
+    const expression: Exclude<{ type: string }, FieldDefault> = {
       type: "text",
-      label: "",
-      key: "",
     };
 
     if (this._lookahead?.type === "FIELDVALIDATED") this._eat("FIELDVALIDATED");
@@ -365,10 +356,8 @@ export class Parser {
   }
 
   private FieldDatetimeExpression() {
-    const expression: FieldDefault = {
+    const expression: Exclude<{ type: string }, FieldDefault> = {
       type: "datetime",
-      label: "",
-      key: "",
     };
 
     if (this._lookahead?.type === "FIELDDATETIME") this._eat("FIELDDATETIME");
