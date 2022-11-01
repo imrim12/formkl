@@ -14,11 +14,7 @@
     "useDefineForClassFields": true,
     "lib": ["ESNext", "DOM"],
     "types": ["vite/client"],
-    "outDir": "./dist",
-    "declaration": true,
-    "declarationMap": true,
-    "declarationDir": "./dist/types",
-    "emitDeclarationOnly": true
+    "outDir": "./dist"
   },
   "references": [{ "path": "./tsconfig.vitest.json" }]
 }
