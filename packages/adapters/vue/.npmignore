@@ -1,9 +1,2 @@
-/node_modules
-/src
-
-.gitignore
-
-tsconfig.json
-
-vite.config.ts
-
+./__test__
+./node_modules

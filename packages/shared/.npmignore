@@ -1,2 +1,2 @@
-/__test__
-/src
+./__test__
+./node_modules
