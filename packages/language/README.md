@@ -4,13 +4,13 @@ Formkl (Form markup language) is an open-source DSL (Domain-Specific Language) t
 
 ## Getting Started
 
-Please follow the documentation at [formkl docs](https://formkl-docs.vercel.app)!
+Please follow the documentation at [formkl docs](https://formkl.vercel.app)!
 
-View [demo](https://formkl.vercel.app)
+View [demo](https://formkl-sandbox.vercel.app)
 
 ## Contribution
 
-Please make sure to read the [Contributing Guide](https://formkl-docs.vercel.app/learning/contribution-guide.html) before making a pull request.
+Please make sure to read the [Contributing Guide](https://formkl.vercel.app/learning/contribution-guide.html) before making a pull request.
 
 Thank you to all the people who already contributed to Vue!
 

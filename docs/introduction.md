@@ -22,7 +22,7 @@ FORMKL is a markup language for creating forms, an open-source DSL (Domain Speci
 
 ## Demo
 
-You can visit the playground here: https://formkl.vercel.app/
+You can visit the playground here: https://formkl-sandbox.vercel.app/
 
 ## Basic example
 
