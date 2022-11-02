@@ -2,6 +2,7 @@
   "name": "@formkl/plugin-rollup",
   "description": "A Formkl plugin to include .formkl file into Rollup build",
   "devDependencies": {
+    "@vitest/ui": "^0.24.5",
     "rimraf": "^3.0.2",
     "typescript": "^4.8.4",
     "vite": "^3.1.3",

@@ -1,12 +1,14 @@
 import { describe, it, expect } from "vitest";
-import parser from "../../dist/index";
+import parser from "../dist/index";
 
-describe("Multiple fields in a section", () => {
+describe("Multiple section in one form", () => {
   it("should parse the form syntax correctly", () => {
     const result = parser.parse(`formkl {
+      "Personal information" includes {
+        text;
+      }
       includes {
         text;
-        "Another text" text;
       }
     }`);
 
@@ -14,16 +16,22 @@ describe("Multiple fields in a section", () => {
       model: "base",
       sections: [
         {
+          title: "Personal information",
+          key: "personal-information",
           fields: [
             {
               type: "text",
               label: "Text",
               key: "text",
             },
+          ],
+        },
+        {
+          fields: [
             {
               type: "text",
-              label: "Another text",
-              key: "another-text",
+              label: "Text",
+              key: "text",
             },
           ],
         },
@@ -31,14 +39,16 @@ describe("Multiple fields in a section", () => {
     });
   });
 
-  it("should emit syntax error for duplicated field key", () => {
+  it("should emit syntax error for duplicated section key", () => {
     expect(() =>
       parser.parse(`formkl {
         includes {
           text;
+        }
+        includes {
           text;
         }
       }`),
-    ).toThrowError(/Duplicate field key "text"/);
+    ).toThrowError(/Duplicate section key "undefined"/);
   });
 });

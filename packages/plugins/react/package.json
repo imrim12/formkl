@@ -2,6 +2,7 @@
   "name": "@formkl/plugin-react",
   "description": "A Formkl components plugin to register components that used in @formkl/react adapter",
   "devDependencies": {
+    "@vitest/ui": "^0.24.5",
     "rimraf": "^3.0.2",
     "typescript": "^4.8.4",
     "vite": "^3.1.3",

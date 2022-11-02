@@ -5,6 +5,7 @@
   "scripts": {
     "build": "nx run-many --target=build --all",
     "test": "vitest run",
+    "test:ui": "vitest --ui",
     "dev:docs": "vitepress dev docs",
     "serve:docs": "vitepress serve docs",
     "build:docs": "vitepress build docs"
@@ -45,6 +46,7 @@
     "@types/node": "^18.11.8",
     "@typescript-eslint/eslint-plugin": "^5.38.0",
     "@typescript-eslint/parser": "^5.38.0",
+    "@vitest/ui": "^0.24.5",
     "eslint": "^8.23.1",
     "nx": "^15.0.0",
     "rimraf": "^3.0.2",

@@ -1,11 +1,12 @@
 import { describe, it, expect } from "vitest";
-import parser from "../../dist/index";
+import parser from "../dist/index";
 
-describe("Section with multiple responses support", () => {
+describe("Multiple fields in a section", () => {
   it("should parse the form syntax correctly", () => {
     const result = parser.parse(`formkl {
-      multiple includes {
+      includes {
         text;
+        "Another text" text;
       }
     }`);
 
@@ -13,12 +14,16 @@ describe("Section with multiple responses support", () => {
       model: "base",
       sections: [
         {
-          multiple: true,
           fields: [
             {
               type: "text",
               label: "Text",
               key: "text",
+            },
+            {
+              type: "text",
+              label: "Another text",
+              key: "another-text",
             },
           ],
         },
@@ -26,16 +31,14 @@ describe("Section with multiple responses support", () => {
     });
   });
 
-  it("should emit syntax error for multiple response field in multiple response section.", () => {
+  it("should emit syntax error for duplicated field key", () => {
     expect(() =>
       parser.parse(`formkl {
-        multiple includes {
-          multiple text;
-          "Test" text;
+        includes {
+          text;
+          text;
         }
       }`),
-    ).toThrowError(
-      "A section with multiple responses cannot have fields that also have multiple responses!",
-    );
+    ).toThrowError(/Duplicate field key "text"/);
   });
 });

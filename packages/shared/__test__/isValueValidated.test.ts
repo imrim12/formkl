@@ -1,5 +1,4 @@
-import { describe, it, expect } from "vitest";
-import { isValueValidated } from "..";
+import { isValueValidated } from "../src/validator";
 
 describe("Test recursive validator", () => {
   it("should return true", () => {

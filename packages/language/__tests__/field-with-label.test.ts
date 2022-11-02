@@ -1,29 +1,23 @@
 import { describe, it, expect } from "vitest";
-import parser from "../../dist/index";
+import parser from "../dist/index";
 
-describe("Form with description", () => {
+describe("Field with label", () => {
   it("should parse the form syntax correctly", () => {
-    const result = parser.parse(`
-    formkl
-      "Form title (Must has)"
-      "Form description"
-    {
+    const result = parser.parse(`formkl {
       includes {
-        text;
+        "Some field" text;
       }
     }`);
 
     expect(result).toStrictEqual({
       model: "base",
-      title: "Form title (Must has)",
-      description: "Form description",
       sections: [
         {
           fields: [
             {
               type: "text",
-              label: "Text",
-              key: "text",
+              label: "Some field",
+              key: "some-field",
             },
           ],
         },
