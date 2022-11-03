@@ -1,4 +1,6 @@
-import { App } from "vue-demi";
+import type { App } from "vue-demi";
+import type { FormOptions } from "./types/form-option.type";
+
 import {
   Adapter,
   Plugin,
@@ -63,5 +65,7 @@ function install(app: App, options: PluginOptions = {}) {
 }
 
 export { Formkl, FormklParser, Adapter, Plugin, DefaultComponent };
+
+export type { FormOptions };
 
 export default { install };

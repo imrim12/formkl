@@ -3,15 +3,8 @@
   "compilerOptions": {
     "baseUrl": ".",
     "outDir": "./dist",
-    "types": ["vite/client"]
+    "types": ["vite/client", "vitest/globals"]
   },
-  "include": [
-    "./src/**/*.js",
-    "./src/**/*.jsx",
-    "./src/**/*.ts",
-    "./src/**/*.tsx",
-    "./src/**/*.d.ts"
-  ],
-  "exclude": ["./node_modules", "./dist"],
-  "references": [{ "path": "./tsconfig.vitest.json" }]
+  "include": ["./**/*.ts", "./**/*.tsx", "./**/*.d.ts"],
+  "exclude": ["./node_modules", "./dist"]
 }

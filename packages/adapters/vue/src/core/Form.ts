@@ -4,21 +4,9 @@ import { ref, Ref, VNode } from "vue-demi";
 import { Model } from "./Model";
 import { Schema } from "./Schema";
 import { EventHandler } from "../types/event-handler.type";
+import type { FormOptions } from "../types/form-option.type";
 
 import _cloneDeep from "lodash/cloneDeep";
-
-export interface FormOptions {
-  /**
-   * The HTTP request instance
-   */
-  $http?: any;
-  modelDefault?: SchemaBase | SchemaFlat;
-  submitMethod?: (
-    url: string,
-    method: Formkl["method"],
-    model: SchemaBase | SchemaFlat,
-  ) => Promise<any>;
-}
 
 export class Form {
   public formkl: Formkl;

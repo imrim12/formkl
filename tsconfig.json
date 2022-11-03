@@ -14,7 +14,9 @@
     "skipLibCheck": true,
     "useDefineForClassFields": true,
     "lib": ["ESNext", "DOM"],
+    "types": ["vitest/globals"],
     "outDir": "./dist"
   },
-  "references": [{ "path": "./tsconfig.vitest.json" }]
+  "include": ["./**/*.ts", "./**/*.tsx", "./**/*.vue"],
+  "exclude": ["./node_modules", "./dist"]
 }

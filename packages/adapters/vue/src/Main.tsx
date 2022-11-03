@@ -8,8 +8,9 @@ import {
   watch,
 } from "vue-demi";
 import { httpInjectionKey, instanceInjectionKey, SchemaBase, SchemaFlat } from "@formkl/shared";
-import { Form, FormOptions } from "./core/Form";
+import { Form } from "./core/Form";
 import { FormNode } from "./components/Form";
+import type { FormOptions } from "./types/form-option.type";
 
 import FormklParser from "formkl";
 
