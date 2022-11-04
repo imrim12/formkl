@@ -1,11 +1,10 @@
-import { describe, it, expect } from "vitest";
-import parser from "../dist/index";
+import parser from "..";
 
-describe("Minimal test", () => {
+describe("Field with use of validation", () => {
   it("should parse the form syntax correctly", () => {
     const result = parser.parse(`formkl {
       includes {
-        text;
+        "Test with regex" text regex("^[0-9]+$");
       }
     }`);
 
@@ -16,8 +15,11 @@ describe("Minimal test", () => {
           fields: [
             {
               type: "text",
-              label: "Text",
-              key: "text",
+              label: "Test with regex",
+              key: "test-with-regex",
+              validation: {
+                regex: /^[0-9]+$/,
+              },
             },
           ],
         },

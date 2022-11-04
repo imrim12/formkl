@@ -1,11 +1,10 @@
-import { describe, it, expect } from "vitest";
-import parser from "../dist/index";
+import parser from "..";
 
-describe("Field with alias (Custom key)", () => {
+describe("Section with title", () => {
   it("should parse the form syntax correctly", () => {
     const result = parser.parse(`formkl {
-      includes {
-        text as "custom-key";
+      "Personal Information" includes {
+        "Fullname" text;
       }
     }`);
 
@@ -13,11 +12,13 @@ describe("Field with alias (Custom key)", () => {
       model: "base",
       sections: [
         {
+          title: "Personal Information",
+          key: "personal-information",
           fields: [
             {
               type: "text",
-              label: "Text",
-              key: "custom-key",
+              label: "Fullname",
+              key: "fullname",
             },
           ],
         },

@@ -1,5 +1,4 @@
-import { describe, it, expect } from "vitest";
-import parser from "../dist/index";
+import parser from "..";
 
 describe("Field with use of validation", () => {
   it("should parse the form syntax correctly", () => {

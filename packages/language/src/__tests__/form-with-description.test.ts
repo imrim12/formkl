@@ -1,16 +1,21 @@
-import parser from "../dist/index";
+import parser from "..";
 
-describe("Used with Capitalized syntax", () => {
+describe("Form with description", () => {
   it("should parse the form syntax correctly", () => {
-    const result = parser.parse(`Formkl {
-      Includes {
-        Text;
-        "Another" Text;
+    const result = parser.parse(`
+    formkl
+      "Form title (Must has)"
+      "Form description"
+    {
+      includes {
+        text;
       }
     }`);
 
     expect(result).toStrictEqual({
       model: "base",
+      title: "Form title (Must has)",
+      description: "Form description",
       sections: [
         {
           fields: [
@@ -18,11 +23,6 @@ describe("Used with Capitalized syntax", () => {
               type: "text",
               label: "Text",
               key: "text",
-            },
-            {
-              type: "text",
-              label: "Another",
-              key: "another",
             },
           ],
         },

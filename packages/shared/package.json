@@ -15,7 +15,7 @@
   ],
   "scripts": {
     "build": "rimraf ./dist && npx unbuild",
-    "test": "vitest",
+    "test": "vitest run",
     "coverage": "vitest run --coverage"
   },
   "devDependencies": {

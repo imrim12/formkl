@@ -1,12 +1,11 @@
-import { describe, it, expect } from "vitest";
-import parser from "../dist/index";
+import parser from "..";
 
-describe("Required field", () => {
+describe("Used with UPPERCASE syntax", () => {
   it("should parse the form syntax correctly", () => {
-    const result = parser.parse(`formkl {
-      includes {
-        require text;
-        "Not required" text;
+    const result = parser.parse(`FORMKL {
+      INCLUDES {
+        TEXT;
+        "Another" TEXT;
       }
     }`);
 
@@ -19,12 +18,11 @@ describe("Required field", () => {
               type: "text",
               label: "Text",
               key: "text",
-              required: true,
             },
             {
               type: "text",
-              label: "Not required",
-              key: "not-required",
+              label: "Another",
+              key: "another",
             },
           ],
         },

@@ -17,6 +17,6 @@
     "types": ["vitest/globals"],
     "outDir": "./dist"
   },
-  "include": ["./**/*.ts", "./**/*.tsx", "./**/*.vue"],
+  "include": ["./**/*.ts", "./**/*.test.ts"],
   "exclude": ["./node_modules", "./dist"]
 }

@@ -1,12 +1,11 @@
-import { describe, it, expect } from "vitest";
-import parser from "../dist/index";
+import parser from "..";
 
-describe("Used with UPPERCASE syntax", () => {
+describe("Used with Capitalized syntax", () => {
   it("should parse the form syntax correctly", () => {
-    const result = parser.parse(`FORMKL {
-      INCLUDES {
-        TEXT;
-        "Another" TEXT;
+    const result = parser.parse(`Formkl {
+      Includes {
+        Text;
+        "Another" Text;
       }
     }`);
 

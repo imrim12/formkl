@@ -15,7 +15,8 @@
     "dist"
   ],
   "scripts": {
-    "build": "rimraf ./dist && npx unbuild"
+    "build": "rimraf ./dist && npx unbuild",
+    "test": "vitest run"
   },
   "repository": {
     "type": "git",

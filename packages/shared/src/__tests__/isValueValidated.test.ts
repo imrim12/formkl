@@ -1,4 +1,4 @@
-import { isValueValidated } from "../src/validator";
+import { isValueValidated } from "..";
 
 describe("Test recursive validator", () => {
   it("should return true", () => {

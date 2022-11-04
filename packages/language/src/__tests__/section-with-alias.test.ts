@@ -1,5 +1,4 @@
-import { describe, it, expect } from "vitest";
-import parser from "../dist/index";
+import parser from "..";
 
 describe("Section with alias", () => {
   it("should parse the form syntax correctly", () => {
