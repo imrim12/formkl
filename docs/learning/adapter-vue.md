@@ -1,6 +1,8 @@
 # Adapter (Vue)
 
-## Rendering
+## Philosophy
+
+### Rendering
 
 We prefer [JSX](https://vuejs.org/guide/extras/render-function.html#jsx-tsx) over template due to its flexibility and readability.
 
@@ -17,15 +19,3 @@ A Form component tree is as follows:
 ├─(can be)─ FormklSelect.tsx
 ├─(can be)─ FormklRadio.tsx
 ```
-
-## Reactivity
-We believe that the form model value can be modified from:
-- Form event
-- Section event
-- Field event
-
-## Event handling
-
-## Validation
-
-## Extensibility

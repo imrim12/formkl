@@ -44,6 +44,8 @@ export default {
           { text: "Contribution guide", link: "/learning/contribution-guide" },
           { text: "Core language", link: "/learning/core-language" },
           { text: "Adapter (Vue)", link: "/learning/adapter-vue" },
+          { text: "Adapter (React)", link: "/learning/adapter-react" },
+          { text: "Adapter (Angular)", link: "/learning/adapter-angular" },
           { text: "Editor", link: "/learning/editor" },
         ],
       },

@@ -1,3 +1,3 @@
 # Quick start with React
 
-*(coming soon)*
+🚧 **[React](https://reactjs.org)** -- *coming soon*

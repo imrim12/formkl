@@ -1,3 +1,3 @@
-# Quick start with Angular
+# Adapter (Angular)
 
 🚧 **[Angular](https://angular.io)** -- *coming soon*
