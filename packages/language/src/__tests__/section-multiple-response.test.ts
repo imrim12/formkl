@@ -1,4 +1,4 @@
-import parser from "..";
+import parser from "formkl";
 
 describe("Section with multiple responses support", () => {
   it("should parse the form syntax correctly", () => {

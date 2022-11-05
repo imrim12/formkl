@@ -15,8 +15,8 @@
     "dist"
   ],
   "scripts": {
-    "build": "rimraf ./dist && npx unbuild",
-    "test": "vitest run"
+    "typecheck": "tsc --noEmit",
+    "build": "rimraf ./dist && npx unbuild"
   },
   "repository": {
     "type": "git",

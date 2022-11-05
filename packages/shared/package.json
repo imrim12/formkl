@@ -14,9 +14,8 @@
     "dist"
   ],
   "scripts": {
-    "build": "rimraf ./dist && npx unbuild",
-    "test": "vitest run",
-    "coverage": "vitest run --coverage"
+    "typecheck": "tsc --noEmit",
+    "build": "rimraf ./dist && npx unbuild"
   },
   "devDependencies": {
     "@vitest/ui": "^0.24.5",

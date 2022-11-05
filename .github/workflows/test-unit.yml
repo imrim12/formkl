@@ -48,5 +48,7 @@ jobs:
         run: pnpm -r install
       - name: Build all packages 🚀
         run: pnpm build
+      - name: Run typecheck 🧪
+        run: pnpm typecheck
       - name: Run test 🧪
         run: pnpm test

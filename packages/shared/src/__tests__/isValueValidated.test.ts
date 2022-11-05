@@ -1,4 +1,4 @@
-import { isValueValidated } from "..";
+import { isValueValidated } from "@formkl/shared";
 
 describe("Test recursive validator", () => {
   it("should return true", () => {

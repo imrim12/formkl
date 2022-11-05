@@ -1,4 +1,4 @@
-import parser from "..";
+import parser from "formkl";
 
 describe("Minimal test", () => {
   it("should parse the form syntax correctly", () => {

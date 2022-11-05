@@ -1,4 +1,4 @@
-import parser from "..";
+import parser from "formkl";
 
 describe("Used with UPPERCASE syntax", () => {
   it("should parse the form syntax correctly", () => {

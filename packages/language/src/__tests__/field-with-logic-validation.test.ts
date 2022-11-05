@@ -1,4 +1,4 @@
-import parser from "..";
+import parser from "formkl";
 
 describe("Field with use of validation", () => {
   it("should parse the form syntax correctly", () => {

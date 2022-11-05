@@ -7,8 +7,8 @@
   "style": "dist/style.css",
   "types": "dist/types",
   "scripts": {
-    "build": "rimraf ./dist && vue-tsc --noEmit && vite build",
-    "test": "vitest run"
+    "typecheck": "vue-tsc --noEmit",
+    "build": "rimraf ./dist && vite build"
   },
   "repository": {
     "type": "git",

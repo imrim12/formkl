@@ -1,4 +1,4 @@
-import parser from "..";
+import parser from "formkl";
 
 describe("Form with description", () => {
   it("should parse the form syntax correctly", () => {

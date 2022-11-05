@@ -6,7 +6,8 @@
   "main": "dist/index.es.js",
   "types": "dist/types",
   "scripts": {
-    "build": "rimraf ./dist && vue-tsc --noEmit && vite build"
+    "typecheck": "vue-tsc --noEmit",
+    "build": "rimraf ./dist && vite build"
   },
   "dependencies": {
     "element-plus": "^2.2.16",

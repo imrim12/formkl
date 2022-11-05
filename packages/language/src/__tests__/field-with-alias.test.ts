@@ -1,4 +1,4 @@
-import parser from "..";
+import parser from "formkl";
 
 describe("Field with alias (Custom key)", () => {
   it("should parse the form syntax correctly", () => {

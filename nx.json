@@ -3,7 +3,7 @@
     "default": {
       "runner": "nx/tasks-runners/default",
       "options": {
-        "cacheableOperations": ["build", "test"]
+        "cacheableOperations": ["build", "typecheck"]
       }
     }
   },
@@ -13,9 +13,9 @@
   "targetDefaults": {
     "build": {
       "inputs": ["noMarkDown", "^noMarkDown"],
-      "dependsOn": ["^build"]
+      "dependsOn": ["^typecheck"]
     },
-    "test": {
+    "typecheck": {
       "inputs": ["noMarkDown", "^noMarkDown"],
       "dependsOn": ["^build"]
     }

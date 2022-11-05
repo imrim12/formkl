@@ -1,8 +1,8 @@
 import { mount } from "@vue/test-utils";
-import type { FormOptions } from "..";
-import FormklPlugin, { Formkl } from "..";
+import type { FormOptions } from "@formkl/vue";
+import FormklPlugin, { Formkl } from "@formkl/vue";
 
-export const setupTest = (formklSyntax: string, options: FormOptions = {}, debounce = 100) =>
+export const setupForm = (formklSyntax: string, options?: FormOptions, debounce = 100) =>
   mount(Formkl, {
     props: {
       formkl: formklSyntax,

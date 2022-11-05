@@ -1,4 +1,4 @@
-import parser from "..";
+import parser from "formkl";
 
 describe("Multiple section in one form", () => {
   it("should parse the form syntax correctly", () => {
