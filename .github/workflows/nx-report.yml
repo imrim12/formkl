@@ -12,10 +12,11 @@ jobs:
     with:
       number-of-agents: 3
       init-commands: |
-        npx nx-cloud start-ci-run --stop-agents-after="build" --agent-count=3
+        npx nx-cloud start-ci-run --agent-count=3
       parallel-commands: |
         npx nx-cloud record -- npx nx affected --target=build
         npx nx-cloud record -- npx nx affected --target=typecheck
+        npx nx-cloud record -- npx nx affected --target=test
       parallel-commands-on-agents: |
         npx nx affected --target=build --parallel=3
         npx nx affected --target=typecheck --parallel=3
