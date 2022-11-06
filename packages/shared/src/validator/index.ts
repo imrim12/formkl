@@ -3,18 +3,11 @@ import { validateLogicOperator } from "./validateLogicOperator";
 import { validateRegex } from "./validateRegex";
 
 export const isValueValidated = (value: string | number, validation: Validation): boolean => {
-  let isRegexValid: boolean | undefined;
-  let isLogicValid: boolean | undefined;
+  let isRegexValid = validation.regex !== undefined ? validateRegex(value, validation.regex) : true;
+  let isLogicValid =
+    validation.logic !== undefined ? validateLogicOperator(value, validation.logic) : true;
 
-  if (validation.regex !== undefined) {
-    isRegexValid = validateRegex(value, validation.regex);
-  }
-
-  if (validation.logic !== undefined) {
-    isLogicValid = validateLogicOperator(value, validation.logic);
-  }
-
-  return [isRegexValid, isLogicValid].filter((i) => i !== undefined).every((result) => result);
+  return isRegexValid && isLogicValid;
 };
 
 export default { isValueValidated };

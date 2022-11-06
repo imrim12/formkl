@@ -10,6 +10,7 @@
     "build": "rimraf ./dist && vite build"
   },
   "dependencies": {
+    "@formkl/shared": "workspace:*",
     "element-plus": "^2.2.16",
     "lodash": "^4.17.21",
     "vue": "^3.2.41",

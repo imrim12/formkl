@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "@formkl/editor": "workspace:*",
+    "@formkl/shared": "workspace:*",
     "@formkl/vue": "workspace:*",
     "element-plus": "^2.2.16",
     "vue": "^3.2.41"
