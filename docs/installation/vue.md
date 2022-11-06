@@ -4,7 +4,7 @@ This guide will walk you through the process of creating a simple form using `fo
 
 ## Demo
 
-You can visit the playground here: https://formkl-sandbox.vercel.app/
+You can visit the playground here: https://sandbox.formkl.org/
 
 ## Instalation
 
