@@ -1,0 +1,28 @@
+name: Create Nx Report
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  main:
+    name: Nx Cloud - Main Job
+    uses: nrwl/ci/.github/workflows/nx-cloud-main.yml@v0.8
+    with:
+      number-of-agents: 3
+      init-commands: |
+        npx nx-cloud start-ci-run --stop-agents-after="build" --agent-count=3
+      parallel-commands: |
+        npx nx-cloud record -- npx nx affected --target=build
+        npx nx-cloud record -- npx nx affected --target=typecheck
+      parallel-commands-on-agents: |
+        npx nx affected --target=build --parallel=3
+        npx nx affected --target=typecheck --parallel=3
+        npx nx affected --target=test --parallel=3
+
+  agents:
+    name: Nx Cloud - Agents
+    uses: nrwl/ci/.github/workflows/nx-cloud-agents.yml@v0.8
+    with:
+      number-of-agents: 3
