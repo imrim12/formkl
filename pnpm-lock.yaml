@@ -306,19 +306,14 @@ importers:
 
   packages/shared:
     specifiers:
-      '@formkl/shared': workspace:*
       '@vitest/ui': ^0.24.5
       rimraf: ^3.0.2
       typescript: ^4.8.4
-      unbuild: ^0.9.4
       vitest: ^0.24.4
-    dependencies:
-      '@formkl/shared': 'link:'
     devDependencies:
       '@vitest/ui': 0.24.5
       rimraf: 3.0.2
       typescript: 4.8.4
-      unbuild: 0.9.4
       vitest: 0.24.4_@vitest+ui@0.24.5
 
   sandbox:
@@ -2015,7 +2010,7 @@ packages:
       '@babel/plugin-syntax-import-meta': 7.10.4_@babel+core@7.19.1
       '@babel/plugin-transform-typescript': 7.19.1_@babel+core@7.19.1
       '@vue/babel-plugin-jsx': 1.1.1_@babel+core@7.19.1
-      vite: 3.2.2
+      vite: 3.2.2_sass@1.55.0
       vue: 3.2.41
     transitivePeerDependencies:
       - supports-color
@@ -2050,7 +2045,7 @@ packages:
       vite: ^3.0.0
       vue: ^3.2.25
     dependencies:
-      vite: 3.2.2
+      vite: 3.2.2_sass@1.55.0
       vue: 3.2.41
     dev: true
 

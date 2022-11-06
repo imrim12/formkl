@@ -2,29 +2,13 @@
   "name": "@formkl/shared",
   "version": "1.0.0-rc.1",
   "type": "module",
-  "exports": {
-    ".": {
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.cjs"
-    }
-  },
-  "main": "./dist/index.cjs",
-  "types": "./dist/index.d.ts",
-  "files": [
-    "dist"
-  ],
+  "main": "./src/index.ts",
   "scripts": {
-    "typecheck": "tsc --noEmit",
-    "build": "rimraf ./dist && npx unbuild"
+    "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
     "@vitest/ui": "^0.24.5",
-    "rimraf": "^3.0.2",
     "typescript": "^4.8.4",
-    "unbuild": "^0.9.4",
     "vitest": "^0.24.4"
-  },
-  "dependencies": {
-    "@formkl/shared": "workspace:*"
   }
 }

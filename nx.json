@@ -3,37 +3,26 @@
     "default": {
       "runner": "@nrwl/nx-cloud",
       "options": {
-        "cacheableOperations": [
-          "build",
-          "typecheck"
-        ],
+        "cacheableOperations": ["build", "typecheck", "test"],
         "accessToken": "NzA3YzM4NWMtODk0Ni00M2I5LWJkMjItMzU1MjMzNGM0MGY4fHJlYWQtd3JpdGU="
       }
     }
   },
   "namedInputs": {
-    "noMarkDown": [
-      "!{projectRoot}/**/*.md"
-    ]
+    "noMarkDown": ["!{projectRoot}/**/*.md"]
   },
   "targetDefaults": {
     "build": {
-      "inputs": [
-        "noMarkDown",
-        "^noMarkDown"
-      ],
-      "dependsOn": [
-        "^build"
-      ]
+      "inputs": ["noMarkDown", "^noMarkDown"],
+      "dependsOn": ["^build"]
     },
     "typecheck": {
-      "inputs": [
-        "noMarkDown",
-        "^noMarkDown"
-      ],
-      "dependsOn": [
-        "^build"
-      ]
+      "inputs": ["noMarkDown", "^noMarkDown"],
+      "dependsOn": ["^build"]
+    },
+    "test": {
+      "inputs": ["noMarkDown", "^noMarkDown"],
+      "dependsOn": ["^build"]
     }
   }
 }
