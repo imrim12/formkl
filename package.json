@@ -30,13 +30,12 @@
   },
   "homepage": "https://github.com/formkl/formkl#readme",
   "workspaces": [
-    "language",
     "packages/**",
-    "sandbox",
-    "utils"
+    "sandbox"
   ],
   "dependencies": {
     "@formkl/editor": "workspace:*",
+    "@formkl/plugin-vue": "workspace:*",
     "@formkl/shared": "workspace:*",
     "@formkl/vue": "workspace:*",
     "formkl": "workspace:*",

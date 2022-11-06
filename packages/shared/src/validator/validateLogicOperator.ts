@@ -13,7 +13,7 @@ export const validateLogicOperator = (value: string | number, validation: Valida
     $gteq: () => (typeof value === "number" ? value >= val : value.length >= val),
     $lteq: () => (typeof value === "number" ? value <= val : value.length <= val),
     $eq: () => value === val,
-    $has: () => value.toString().includes(val.toString()),
+    $has: () => String(value).includes(val.toString()),
     $and: () => validation.$and && validateLogicAnd(value, validation.$and),
     $or: () => validation.$or && validateLogicOr(value, validation.$or),
   }[key]();
