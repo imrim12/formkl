@@ -307,12 +307,10 @@ importers:
   packages/shared:
     specifiers:
       '@vitest/ui': ^0.24.5
-      rimraf: ^3.0.2
       typescript: ^4.8.4
       vitest: ^0.24.4
     devDependencies:
       '@vitest/ui': 0.24.5
-      rimraf: 3.0.2
       typescript: 4.8.4
       vitest: 0.24.4_@vitest+ui@0.24.5
 
