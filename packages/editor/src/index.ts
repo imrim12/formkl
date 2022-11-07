@@ -18,6 +18,8 @@ export const createEditor = (options?: EditorOptions): CustomElementConstructor 
       return ["value"];
     }
 
+    private modified = false;
+
     editor: EditorView | null = null;
 
     get value() {
@@ -56,9 +58,25 @@ export const createEditor = (options?: EditorOptions): CustomElementConstructor 
           keymap.of([indentWithTab]),
           AutoCompleteExtension,
           LintExtension,
-          EditorView.updateListener.of((e) => {
-            const event = new CustomEvent("input", { detail: e.state.doc.toString() });
-            this.dispatchEvent(event);
+          EditorView.domEventHandlers({
+            input: (e) => {
+              const eventInput = new CustomEvent("input", {
+                detail: this.value,
+              });
+              this.dispatchEvent(eventInput);
+
+              this.modified = true;
+            },
+            blur: (e) => {
+              const eventBlur = new CustomEvent("blur");
+              this.dispatchEvent(eventBlur);
+
+              if (this.modified) {
+                const eventChange = new CustomEvent("change");
+                this.dispatchEvent(eventChange);
+                this.modified = false;
+              }
+            },
           }),
         ].concat(options?.extensions || []),
       });
@@ -73,3 +91,7 @@ export const createEditor = (options?: EditorOptions): CustomElementConstructor 
 };
 
 export default { createEditor };
+
+if (window && window.customElements) {
+  window.customElements.define("formkl-editor", createEditor());
+}

@@ -1,7 +1,7 @@
 <template>
   <div class="flex w-full justify-between">
     <div class="flex-1">
-      <formkl-editor v-model="formklSyntax" />
+      <formkl-editor v-model="formklSyntax" @change="handleChange" />
     </div>
     <div class="flex-1 py-2 px-8">
       <Formkl ref="formklRef" :formkl="formklSyntax" />
@@ -13,13 +13,13 @@
 </template>
 
 <script lang="ts">
-import { Formkl } from "@formkl/vue";
-import { createEditor } from "@formkl/editor";
+// import { Formkl } from "@formkl/vue";
+import { Formkl } from "@formkl/adapter";
 import { defineComponent, ref } from "vue";
 
-import "@formkl/vue/dist/style.css";
+import "@formkl/editor";
 
-window.customElements.define("formkl-editor", createEditor());
+import "@formkl/vue/dist/style.css";
 
 export default defineComponent({
   components: {
@@ -43,10 +43,15 @@ export default defineComponent({
       formklRef.value?.submit$();
     };
 
+    const handleChange = () => {
+      console.log("change");
+    };
+
     return {
       formklRef,
       formklSyntax,
       submit,
+      handleChange,
     };
   },
 });

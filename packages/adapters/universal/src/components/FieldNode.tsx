@@ -7,6 +7,7 @@ type FieldEvent = {
 };
 
 type FieldNodeProps = {
+  key: number | string;
   field: FieldDefault | FieldSelection;
   fieldIndex: number;
   onFieldChange: (payload: FieldEvent) => void;
@@ -15,10 +16,12 @@ type FieldNodeProps = {
 export default function FieldNode(props: FieldNodeProps) {
   const { field, fieldIndex, onFieldChange } = props;
   return (
-    <div className="field__wrapper">
-      {/* render label */}
-      {/* render field */}
-      {/* render error */}
-    </div>
+    <>
+      <div className="field__wrapper">
+        <label htmlFor={field.key}>{field.label}</label>
+        <input id={field.key} />
+        {/* render error */}
+      </div>
+    </>
   );
 }

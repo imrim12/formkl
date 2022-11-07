@@ -1,19 +1,19 @@
 {
-  "name": "@formkl/vue",
-  "version": "1.0.0-rc.1",
-  "description": "A Vue adapter to generate usable Vue from component from Formkl syntax/schema",
+  "name": "@formkl/adapter",
+  "version": "1.0.0-rc.2",
+  "description": "A Universal adapter to generate usable component from Formkl syntax/schema",
   "type": "module",
   "main": "dist/index.es.js",
   "style": "dist/style.css",
   "types": "dist/types",
   "scripts": {
-    "typecheck": "vue-tsc --noEmit",
+    "typecheck": "tsc --noEmit",
     "build": "rimraf ./dist && vite build"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/formkl/formkl.git",
-    "directory": "packages/adapters/vue"
+    "directory": "packages/adapters/universal"
   },
   "keywords": [
     "formkl"
