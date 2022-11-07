@@ -33,7 +33,8 @@
   "homepage": "https://github.com/formkl/formkl#readme",
   "workspaces": [
     "packages/**",
-    "sandbox"
+    "sandbox",
+    "sandbox-react"
   ],
   "dependencies": {
     "@formkl/editor": "workspace:*",

@@ -6,6 +6,7 @@ export default defineConfig({
   esbuild: {
     jsxFactory: "h",
     jsxFragment: "Fragment",
+    // jsxInject: "" // Can be used with unplugin-auto-import instead
   },
   build: {
     emptyOutDir: false,

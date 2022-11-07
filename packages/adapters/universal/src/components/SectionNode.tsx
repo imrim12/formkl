@@ -5,6 +5,7 @@ import { FieldEvent } from "../types/field-event.type";
 import FieldNode from "./FieldNode";
 
 type SectionNodeProps = {
+  key: number | string;
   section: Section;
   sectionIndex: number;
   onSectionChange: (payload: SectionEvent) => void;
@@ -26,6 +27,7 @@ export default function SectionNode(props: SectionNodeProps) {
       <div className="section__wrapper">
         {section.fields.map((field, fieldIndex) => (
           <FieldNode
+            key={fieldIndex}
             field={field}
             fieldIndex={fieldIndex}
             onFieldChange={(payload) => handleFieldChange(payload)}
