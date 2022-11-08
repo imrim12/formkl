@@ -11,6 +11,14 @@ type SectionNodeProps = {
   onSectionChange: (payload: SectionEvent) => void;
 };
 
+// Feature:
+// 1. Render section
+// 2. Adapt section input/change event from Component
+// 3. Render section title tip/description if declared
+// 4. Adapt section validator base on the used UI library
+// 5. Render section error message if has validation
+// 6. Support multiple responses
+// 7. Support conditional rendering
 export default function SectionNode(props: SectionNodeProps) {
   const { section, sectionIndex, onSectionChange } = props;
 

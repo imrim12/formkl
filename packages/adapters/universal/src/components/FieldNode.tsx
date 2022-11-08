@@ -13,6 +13,14 @@ type FieldNodeProps = {
   onFieldChange: (payload: FieldEvent) => void;
 };
 
+// Feature:
+// 1. Render field from a Component instance (default field or custom syntax field)
+// 2. Adapt field input/change event from Component
+// 3. Render field label tip/description if declared
+// 4. Adapt validator base on the used UI library
+// 5. Render field error message if has validation
+// 6. Support multiple responses
+// 7. Support conditional rendering
 export default function FieldNode(props: FieldNodeProps) {
   const { field, fieldIndex, onFieldChange } = props;
   return (

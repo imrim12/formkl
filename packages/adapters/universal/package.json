@@ -3,7 +3,7 @@
   "version": "1.0.0-rc.2",
   "description": "A Universal adapter to generate usable component from Formkl syntax/schema",
   "type": "module",
-  "main": "dist/index.es.js",
+  "main": "src/index.ts",
   "style": "dist/style.css",
   "types": "dist/types",
   "scripts": {

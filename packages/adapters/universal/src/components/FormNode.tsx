@@ -24,6 +24,12 @@ const safeFormklParse = (str: string) => {
   }
 };
 
+// Feature:
+// 1. Render form
+// 2. Adapt form input/change event
+// 3. Render form title tip/description if declared
+// 4. Render form error message if has validation
+// 5. Support presets for different UI libraries
 export default function FormNode(options: FormNodeProps) {
   const { formkl, model, onSubmit, onChange } = options;
 
