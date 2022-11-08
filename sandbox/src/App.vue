@@ -1,25 +1,19 @@
 <template>
   <div class="flex w-full justify-between">
     <div class="flex-1">
-      <formkl-editor v-model="formklSyntax" @change="handleChange" />
+      <formkl-editor v-model="formklSyntax" />
     </div>
     <div class="flex-1 py-2 px-8">
       <Formkl ref="formklRef" :formkl="formklSyntax" />
-      <div style="text-align: right">
-        <el-button type="primary" @click="submit"> Submit </el-button>
-      </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-// import { Formkl } from "@formkl/vue";
 import { Formkl } from "@formkl/adapter";
 import { defineComponent, ref } from "vue";
 
 import "@formkl/editor";
-
-import "@formkl/vue/dist/style.css";
 
 export default defineComponent({
   components: {
@@ -43,15 +37,10 @@ export default defineComponent({
       formklRef.value?.submit$();
     };
 
-    const handleChange = () => {
-      console.log("change");
-    };
-
     return {
       formklRef,
       formklSyntax,
       submit,
-      handleChange,
     };
   },
 });

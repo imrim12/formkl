@@ -1,8 +1,6 @@
 import { useState } from "react";
 import { Formkl } from "@formkl/adapter";
 
-const FormklEditor = ({ value, onInput }: any) => <formkl-editor value={value} onInput={onInput} />;
-
 function App() {
   const [formklSyntax, setFormklSyntax] = useState(`formkl
   "Your Formkl example"
@@ -20,12 +18,10 @@ function App() {
     setFormklSyntax(event.target.value);
   };
 
-  console.log("rerendered");
-
   return (
     <div className="flex w-full justify-between">
       <div className="flex-1">
-        <FormklEditor value={formklSyntax} onInput={handleInput} />
+        <formkl-editor value={formklSyntax} onInput={handleInput} />
       </div>
       <div className="flex-1 py-2 px-8">
         <Formkl formkl={formklSyntax} />
