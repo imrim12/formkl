@@ -4,14 +4,15 @@ import { Formkl, SchemaBase, SchemaFlat } from "@formkl/shared";
 import { Model } from "../core/Model";
 import { SectionEvent } from "../types/section-event.type";
 import { Schema } from "../core/Schema";
+import { Adapter } from "../core/Adapter";
 
 import SectionNode from "./SectionNode";
 
 type FormNodeProps = {
   formkl: Formkl | string;
   model?: SchemaBase | SchemaFlat;
-  onSubmit?: (model: SchemaBase | SchemaFlat) => void;
-  onChange?: (model: SchemaBase | SchemaFlat) => void;
+  onSubmit?: (model: SchemaBase | SchemaFlat) => Promise<void>;
+  onChange?: (model: SchemaBase | SchemaFlat) => Promise<void>;
 };
 
 const safeFormklParse = (str: string) => {
@@ -24,6 +25,8 @@ const safeFormklParse = (str: string) => {
   }
 };
 
+// TODO: Explain how our components are async and requires a <Suspense> wrapper
+
 // Feature:
 // 1. Render form
 // 2. Adapt form input/change event
@@ -35,18 +38,40 @@ export default function FormNode(options: FormNodeProps) {
 
   const parsedFormkl = typeof formkl === "string" ? safeFormklParse(formkl) : formkl;
 
+  Adapter.callHook("onParse", parsedFormkl);
+
   // construct a reactive model
   const formSchema = parsedFormkl ? new Schema(parsedFormkl) : null;
   const formModel = parsedFormkl ? new Model(parsedFormkl, formSchema, model) : null;
 
-  const handleSubmit = (event: SubmitEvent) => {
+  const handleSubmit = async (event: SubmitEvent) => {
     event.preventDefault();
 
-    onSubmit?.(formModel.getModel());
+    const { doContinue, resolvedPayload } = await Adapter.callHook(
+      "onBeforeSubmit",
+      formModel.getModel(),
+    );
+
+    if (doContinue) {
+      onSubmit?.(resolvedPayload);
+
+      await Adapter.callHook("onSubmit", resolvedPayload);
+    }
   };
 
-  const handleSectionChange = (payload: SectionEvent) => {
-    onChange?.(formModel.getModel());
+  const handleSectionChange = async (payload: SectionEvent) => {
+    const { doContinue, resolvedPayload } = await Adapter.callHook(
+      "onBeforeModelChange",
+      formModel.getModel(),
+    );
+
+    if (doContinue) {
+      formModel.setModel(resolvedPayload);
+
+      await onChange?.(formModel.getModel());
+
+      await Adapter.callHook("onModelChange", formModel.getModel());
+    }
   };
 
   return parsedFormkl ? (

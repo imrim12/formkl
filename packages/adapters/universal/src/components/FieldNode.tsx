@@ -1,16 +1,13 @@
 import { FieldDefault, FieldSelection } from "@formkl/shared";
-
-type FieldEvent = {
-  field: FieldDefault | FieldSelection;
-  fieldIndex: number;
-  value: any;
-};
+import { FieldEvent } from "../types/field-event.type";
+import { Adapter } from "../core/Adapter";
 
 type FieldNodeProps = {
   key: number | string;
   field: FieldDefault | FieldSelection;
   fieldIndex: number;
-  onFieldChange: (payload: FieldEvent) => void;
+  responseIndex?: number;
+  onFieldChange: (payload: FieldEvent) => Promise<void>;
 };
 
 // Feature:
@@ -22,7 +19,25 @@ type FieldNodeProps = {
 // 6. Support multiple responses
 // 7. Support conditional rendering
 export default function FieldNode(props: FieldNodeProps) {
-  const { field, fieldIndex, onFieldChange } = props;
+  const { field, fieldIndex, responseIndex, onFieldChange } = props;
+
+  const handleChange = async (value: any) => {
+    const payload = {
+      field,
+      fieldIndex,
+      responseIndex,
+      value,
+    };
+
+    const { doContinue, resolvedPayload } = await Adapter.callHook("onBeforeFieldChange", payload);
+
+    if (doContinue) {
+      await onFieldChange(resolvedPayload);
+
+      await Adapter.callHook("onFieldChange", resolvedPayload);
+    }
+  };
+
   return (
     <>
       <div className="field__wrapper">
