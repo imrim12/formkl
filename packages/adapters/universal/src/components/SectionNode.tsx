@@ -3,12 +3,13 @@ import { SectionEvent } from "../types/section-event.type";
 import { FieldEvent } from "../types/field-event.type";
 
 import FieldNode from "./FieldNode";
+import { Adapter } from "../core/Adapter";
 
 type SectionNodeProps = {
   key: number | string;
   section: Section;
   sectionIndex: number;
-  onSectionChange: (payload: SectionEvent) => void;
+  onSectionChange: (payload: SectionEvent) => Promise<void>;
 };
 
 // Feature:
@@ -22,12 +23,23 @@ type SectionNodeProps = {
 export default function SectionNode(props: SectionNodeProps) {
   const { section, sectionIndex, onSectionChange } = props;
 
-  const handleFieldChange = (payload: FieldEvent) => {
-    onSectionChange({
+  const handleFieldChange = async (payload: FieldEvent) => {
+    const sectionPayload = {
       section,
       sectionIndex,
       ...payload,
-    });
+    };
+
+    const { doContinue, resolvedPayload } = await Adapter.callHook(
+      "onBeforeSectionChange",
+      sectionPayload,
+    );
+
+    if (doContinue) {
+      await onSectionChange(resolvedPayload);
+
+      await Adapter.callHook("onSectionChange", resolvedPayload);
+    }
   };
 
   return (

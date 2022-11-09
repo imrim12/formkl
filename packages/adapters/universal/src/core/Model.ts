@@ -26,39 +26,18 @@ export class Model {
   constructor(formkl: Formkl, schema: Schema, modelDefault?: SchemaBase | SchemaFlat) {
     this._formkl = formkl;
     this._schema = schema;
-    this._modelDefault = modelDefault || {};
 
-    // Create the modelSchema
-    const { type, schema: modelSchema } = this._schema.getSchema();
-
-    // Prefill the model with default value
-    if (this._modelDefault) {
-      switch (type) {
-        case "flat":
-          this._model = this._prefillFlatModel(
-            modelSchema as SchemaFlat,
-            this._modelDefault as SchemaFlat,
-          );
-          break;
-        case "base":
-        default:
-          this._model = this._prefillBaseModel(
-            modelSchema as SchemaBase,
-            this._modelDefault as SchemaBase,
-          );
-          break;
-      }
-    } else {
-      this._model = modelSchema;
-    }
+    this.setModel(modelDefault || {});
   }
 
-  private _prefillFlatModel(schema: SchemaFlat, modelDefault: SchemaFlat): SchemaFlat {
-    const model: SchemaFlat = schema;
+  private _prefillFlatModel(prefilledModel: SchemaFlat): SchemaFlat {
+    const { schema } = this._schema.getSchema();
+
+    const model = schema as SchemaFlat;
 
     this._formkl.sections.forEach((section) => {
       section.fields.forEach((field) => {
-        const prefillValue = modelDefault?.[section.key]?.[field.key];
+        const prefillValue = prefilledModel?.[section.key]?.[field.key];
 
         const defaultValue =
           section.multiple || field.multiple
@@ -81,8 +60,10 @@ export class Model {
     return model;
   }
 
-  private _prefillBaseModel(schema: SchemaBase, modelDefault: SchemaBase): SchemaBase {
-    const model: SchemaBase = schema;
+  private _prefillBaseModel(prefilledModel: SchemaBase): SchemaBase {
+    const { schema } = this._schema.getSchema();
+
+    const model = schema as SchemaBase;
 
     this._formkl.sections.forEach((section) => {
       section.fields.forEach((field) => {
@@ -90,7 +71,7 @@ export class Model {
           (i) => i.section === section.key && i.field === field.key,
         );
         if (modelField) {
-          const prefillValue = modelDefault?.data?.find(
+          const prefillValue = prefilledModel?.data?.find(
             (i) => i.section === section.key && i.field === field.key,
           )?.value;
 
@@ -119,5 +100,25 @@ export class Model {
 
   public getModel(): SchemaBase | SchemaFlat {
     return this._model;
+  }
+
+  public setModel(model: SchemaBase | SchemaFlat) {
+    // Create the modelSchema
+    const { type, schema: modelSchema } = this._schema.getSchema();
+
+    // Prefill the model with default value
+    if (model) {
+      switch (type) {
+        case "flat":
+          this._model = this._prefillFlatModel(model as SchemaFlat);
+          break;
+        case "base":
+        default:
+          this._model = this._prefillBaseModel(model as SchemaBase);
+          break;
+      }
+    } else {
+      this._model = modelSchema;
+    }
   }
 }
