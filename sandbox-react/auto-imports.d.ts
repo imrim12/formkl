@@ -3,4 +3,5 @@ export {}
 declare global {
   const Fragment: typeof import('react')['Fragment']
   const h: typeof import('react')['createElement']
+  const ref: typeof import('react')['useRef']
 }

@@ -1,7 +1,7 @@
 import { getCurrentInstance } from "vue-demi";
 import { Form } from "../core/Form";
 import { Rule } from "../core/Rule";
-import { useFieldHandler } from "../hooks/useFieldHandler";
+import { useFieldHandler } from "../handlers/useFieldHandler";
 import { useFormkl } from "./useFormkl";
 
 export const useField = () => {

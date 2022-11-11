@@ -18,13 +18,17 @@ function App() {
     setFormklSyntax(event.target.value);
   };
 
+  const handleChange = (value: any) => {
+    console.log("Change", value);
+  };
+
   return (
     <div className="flex w-full justify-between">
       <div className="flex-1">
         <formkl-editor value={formklSyntax} onInput={handleInput} />
       </div>
       <div className="flex-1 py-2 px-8">
-        <Formkl formkl={formklSyntax} />
+        <Formkl formkl={formklSyntax} onChange={handleChange} />
       </div>
     </div>
   );
