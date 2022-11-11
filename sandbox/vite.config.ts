@@ -11,6 +11,7 @@ export default defineConfig({
       imports: [
         {
           vue: [
+            "ref", // import { ref } from 'vue',
             "h", // import { h } from 'vue',
             "Fragment", // import { Fragment } from 'vue',
           ],

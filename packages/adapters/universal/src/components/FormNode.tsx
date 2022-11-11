@@ -7,15 +7,16 @@ import { Schema } from "../core/Schema";
 import { Adapter } from "../core/Adapter";
 
 import SectionNode from "./SectionNode";
+import { FormWrapper } from "./FormWrapper";
 
 type FormNodeProps = {
   formkl: Formkl | string;
   model?: SchemaBase | SchemaFlat;
   onSubmit?: (model: SchemaBase | SchemaFlat) => Promise<void>;
-  onChange?: (model: SchemaBase | SchemaFlat) => Promise<void>;
+  onChange?: (model: SchemaBase | SchemaFlat) => void;
 };
 
-const safeFormklParse = (str: string) => {
+const safeFormklParse = (str: string): Formkl | null => {
   try {
     return FormklParser.parse(str);
   } catch (err: any) {
@@ -33,59 +34,54 @@ const safeFormklParse = (str: string) => {
 // 3. Render form title tip/description if declared
 // 4. Render form error message if has validation
 // 5. Support presets for different UI libraries
-export default function FormNode(options: FormNodeProps) {
-  const { formkl, model, onSubmit, onChange } = options;
+export default function FormNode(props: FormNodeProps) {
+  const { formkl, model, onSubmit, onChange } = props;
 
   const parsedFormkl = typeof formkl === "string" ? safeFormklParse(formkl) : formkl;
 
-  Adapter.callHook("onParse", parsedFormkl);
+  if (!(parsedFormkl && formkl)) return null;
 
   // construct a reactive model
-  const formSchema = parsedFormkl ? new Schema(parsedFormkl) : null;
-  const formModel = parsedFormkl ? new Model(parsedFormkl, formSchema, model) : null;
+  const formSchema = new Schema(parsedFormkl);
+  const formModel = new Model(parsedFormkl, formSchema, model);
+
+  const reactiveModel = ref(formModel.getModel());
 
   const handleSubmit = async (event: SubmitEvent) => {
     event.preventDefault();
 
-    const { doContinue, resolvedPayload } = await Adapter.callHook(
-      "onBeforeSubmit",
-      formModel.getModel(),
-    );
-
-    if (doContinue) {
-      onSubmit?.(resolvedPayload);
-
-      await Adapter.callHook("onSubmit", resolvedPayload);
-    }
+    await onSubmit?.(formModel.getModel());
   };
 
-  const handleSectionChange = async (payload: SectionEvent) => {
-    const { doContinue, resolvedPayload } = await Adapter.callHook(
-      "onBeforeModelChange",
-      formModel.getModel(),
-    );
-
-    if (doContinue) {
-      formModel.setModel(resolvedPayload);
-
-      await onChange?.(formModel.getModel());
-
-      await Adapter.callHook("onModelChange", formModel.getModel());
-    }
+  const handleSectionChange = (payload: SectionEvent) => {
+    // Change model with payload
+    const newModel = formModel.setModel(payload);
+    onChange?.(newModel);
   };
 
-  return parsedFormkl ? (
-    <form className="form__wrapper" onSubmit={handleSubmit}>
-      <div className="section__wrapper">
+  return (
+    <FormWrapper
+      {...Adapter.getFormWrapper()?.returnProps?.({
+        formModel: formModel.getModel(),
+        formkl: parsedFormkl,
+      })}
+      className="form__wrapper"
+      onSubmit={handleSubmit}
+    >
+      <h3 className="form__title">{parsedFormkl.title}</h3>
+      <h4 className="form__description">{parsedFormkl.description}</h4>
+      <div className="form__section">
         {parsedFormkl.sections.map((section, sectionIndex) => (
           <SectionNode
             key={sectionIndex}
+            formkl={parsedFormkl}
             section={section}
             sectionIndex={sectionIndex}
+            formModel={formModel}
             onSectionChange={handleSectionChange}
           />
         ))}
       </div>
-    </form>
-  ) : null;
+    </FormWrapper>
+  );
 }

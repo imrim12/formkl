@@ -1,13 +1,21 @@
-import { FieldDefault, FieldSelection } from "@formkl/shared";
+import { FieldDefault, FieldSelection, Formkl, Section } from "@formkl/shared";
 import { FieldEvent } from "../types/field-event.type";
 import { Adapter } from "../core/Adapter";
+import { DefaultValueMap, Model } from "../core/Model";
+import { FieldWrapper } from "./FieldWrapper";
+import { FieldBtnAddResponse } from "./FieldBtnAddResponse";
+import { FieldBtnRemoveResponse } from "./FieldBtnRemoveResponse";
 
 type FieldNodeProps = {
   key: number | string;
+  formkl: Formkl;
   field: FieldDefault | FieldSelection;
   fieldIndex: number;
+  section: Section;
+  sectionIndex: number;
   responseIndex?: number;
-  onFieldChange: (payload: FieldEvent) => Promise<void>;
+  formModel: Model;
+  onFieldChange: (payload: FieldEvent) => void;
 };
 
 // Feature:
@@ -19,32 +27,105 @@ type FieldNodeProps = {
 // 6. Support multiple responses
 // 7. Support conditional rendering
 export default function FieldNode(props: FieldNodeProps) {
-  const { field, fieldIndex, responseIndex, onFieldChange } = props;
+  const {
+    formkl,
+    field,
+    fieldIndex,
+    section,
+    sectionIndex,
+    responseIndex,
+    formModel,
+    onFieldChange,
+  } = props;
 
-  const handleChange = async (value: any) => {
-    const payload = {
+  const getModelValue = () => {
+    return formModel.getFieldModelValue(section.key, field.key);
+  };
+
+  const InputField = Adapter.getComponent(field.type) || "input";
+
+  const _updateFieldValue = (value: any, fieldIndex?: number) => {
+    const payload: FieldEvent = {
       field,
       fieldIndex,
-      responseIndex,
+      responseIndex: field.multiple ? fieldIndex : section.multiple ? responseIndex : undefined,
       value,
     };
 
-    const { doContinue, resolvedPayload } = await Adapter.callHook("onBeforeFieldChange", payload);
+    onFieldChange(payload);
+  };
 
-    if (doContinue) {
-      await onFieldChange(resolvedPayload);
+  const handleChange = async (event: any, fieldIndex: number) => {
+    let inputValue: any = event;
 
-      await Adapter.callHook("onFieldChange", resolvedPayload);
+    if (event.target) {
+      const inputElement = event.target as HTMLInputElement;
+      inputValue = inputElement.value || "";
     }
+
+    const currentModelValue = getModelValue();
+    if (field.multiple || section.multiple) {
+      currentModelValue[fieldIndex || 0] = inputValue;
+    }
+
+    _updateFieldValue(currentModelValue, fieldIndex);
+  };
+
+  const handleRemoveResponse = (fieldIndex: number) => {
+    let currentModelValue = getModelValue();
+
+    currentModelValue[fieldIndex] = undefined;
+    currentModelValue = [...currentModelValue.filter((v: any) => v !== undefined)];
+
+    _updateFieldValue(currentModelValue);
+  };
+
+  const handleAddResponse = () => {
+    const currentModelValue = getModelValue();
+
+    currentModelValue.push(DefaultValueMap[field.type]);
+
+    _updateFieldValue(currentModelValue);
   };
 
   return (
-    <>
-      <div className="field__wrapper">
-        <label htmlFor={field.key}>{field.label}</label>
-        <input id={field.key} />
-        {/* render error */}
-      </div>
-    </>
+    <FieldWrapper
+      {...(Adapter.getFieldWrapper()?.returnProps?.({
+        formModel: formModel.getModel(),
+        section,
+        field,
+        formkl,
+      }),
+      field)}
+    >
+      {field.multiple ? (
+        <>
+          {getModelValue().map((_: any, index: number) => (
+            <div key={field.key} className="field__response">
+              <InputField
+                id={[field.key, index].join("-")}
+                onInput={(e: any) => handleChange(e, index)}
+                onChange={(e: any) => handleChange(e, index)}
+              />
+              <div className="field__footer">
+                <FieldBtnRemoveResponse onClick={() => handleRemoveResponse(index)}>
+                  Remove response
+                </FieldBtnRemoveResponse>
+              </div>
+            </div>
+          ))}
+          <div className="field__inner--footer">
+            <FieldBtnAddResponse onClick={handleAddResponse}>Add response</FieldBtnAddResponse>
+          </div>
+        </>
+      ) : (
+        <InputField
+          id={field.key}
+          onInput={handleChange}
+          onChange={handleChange}
+          className="field__response"
+        />
+      )}
+    </FieldWrapper>
   );
 }

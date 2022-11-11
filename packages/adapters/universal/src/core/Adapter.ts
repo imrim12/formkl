@@ -1,69 +1,100 @@
+import {
+  FieldDefault,
+  FieldSelection,
+  Formkl,
+  SchemaBase,
+  SchemaFlat,
+  Section,
+} from "@formkl/shared";
 import { Component } from "./Component";
-import { Handler } from "./Handler";
+
+type AdapterOptions = {
+  FormWrapper?: {
+    component?: any;
+    returnProps?: (options: {
+      formModel: SchemaBase | SchemaFlat;
+      formkl: Formkl;
+    }) => Record<string, any>;
+  };
+  SectionWrapper?: {
+    component?: any;
+    returnProps?: (options: {
+      formModel: SchemaBase | SchemaFlat;
+      formkl: Formkl;
+      section: Section;
+    }) => Record<string, any>;
+  };
+  FieldWrapper?: {
+    component?: any;
+    returnProps?: (options: {
+      formModel: SchemaBase | SchemaFlat;
+      formkl: Formkl;
+      section: Section;
+      field: FieldDefault | FieldSelection;
+    }) => Record<string, any>;
+  };
+  SectionBtnAddResponse?: { component?: any };
+  SectionBtnRemoveResponse?: { component?: any };
+  FieldBtnAddResponse?: { component?: any };
+  FieldBtnRemoveResponse?: { component?: any };
+};
 
 /**
  * Static Adapter.
  */
 export class Adapter {
-  private static _instance: Adapter;
+  private static instance: Adapter;
+  private static options: AdapterOptions = {};
 
   private constructor() {
-    if (Adapter._instance) {
-      return Adapter._instance;
+    if (Adapter.instance) {
+      return Adapter.instance;
     } else {
-      Adapter._instance = new Adapter();
+      Adapter.instance = new Adapter();
     }
   }
 
-  private static handlers: Array<Handler> = [];
   private static components: Map<string, Component<any>["renderer"]> = new Map();
 
-  public static registerHandler(...handlers: Handler[]) {
-    Adapter.handlers.push(...handlers);
+  public static setOptions(options: AdapterOptions) {
+    Object.assign(Adapter.options, options);
   }
 
-  public static registerComponent<T>(...components: Component<T>[]) {
+  public static registerComponent<T = any>(...components: Component<T>[]) {
     components.forEach((component) => {
-      if (component.customSyntax && !/^\$\:[a-zA-Z0-9-_.\/]+$/g.test(component.customSyntax)) {
-        throw new Error(
-          "[Formkl]: Component with custom syntax must start with '$:' and only contains alphanumeric characters, '-', '_', '.', and '/'.",
-        );
-      }
-
-      Adapter.components.set(component.name, component.renderer);
+      Adapter.components.set(component.customSyntax || component.name, component.renderer);
     });
-  }
-
-  /**
-   * Execute a hook from all registered handlers.
-   *
-   * If a hook returns a falsy value, `doContinue` will be false and the lifecycle will be suspended.
-   *
-   * If a hook does not return anything, it will be resolved using the default payload.
-   *
-   * If there're multiple handlers that use the same hook, `resolvedPayload` will resolve the last overriden payload.
-   *
-   */
-  public static async callHook(hookName: keyof Handler["hook"], payload?: any) {
-    const results = await Promise.all(
-      Adapter.handlers
-        .filter((handler) => handler.gethook()[hookName])
-        .map((handler) => {
-          const resolvedPayload = handler.gethook()[hookName]?.call(handler, payload);
-
-          return resolvedPayload === undefined ? payload : resolvedPayload;
-        }),
-    );
-
-    const resolvedResults = results.filter((result) => result !== undefined);
-
-    return {
-      doContinue: resolvedResults.every((result) => Boolean(result)),
-      resolvedPayload: resolvedResults[resolvedResults.length - 1],
-    };
   }
 
   public static getComponent(name: string) {
     return Adapter.components.get(name);
+  }
+
+  public static getFormWrapper() {
+    return Adapter.options.FormWrapper;
+  }
+
+  public static getSectionWrapper() {
+    return Adapter.options.SectionWrapper;
+  }
+
+  public static getFieldWrapper() {
+    return Adapter.options.FieldWrapper;
+  }
+
+  public static getSectionBtnAddResponse() {
+    return Adapter.options.SectionBtnAddResponse;
+  }
+
+  public static getSectionBtnRemoveResponse() {
+    return Adapter.options.SectionBtnRemoveResponse;
+  }
+
+  public static getFieldBtnAddResponse() {
+    return Adapter.options.FieldBtnAddResponse;
+  }
+
+  public static getFieldBtnRemoveResponse() {
+    return Adapter.options.FieldBtnRemoveResponse;
   }
 }

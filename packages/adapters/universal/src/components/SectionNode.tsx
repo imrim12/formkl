@@ -1,15 +1,21 @@
-import { Section } from "@formkl/shared";
+import { Formkl, Section } from "@formkl/shared";
 import { SectionEvent } from "../types/section-event.type";
 import { FieldEvent } from "../types/field-event.type";
+import { Model } from "../core/Model";
+import { Adapter } from "../core/Adapter";
 
 import FieldNode from "./FieldNode";
-import { Adapter } from "../core/Adapter";
+import { SectionWrapper } from "./SectionWrapper";
+import { SectionBtnAddResponse } from "./SectionBtnAddResponse";
+import { SectionBtnRemoveResponse } from "./SectionBtnRemoveResponse";
 
 type SectionNodeProps = {
   key: number | string;
+  formkl: Formkl;
   section: Section;
   sectionIndex: number;
-  onSectionChange: (payload: SectionEvent) => Promise<void>;
+  formModel: Model;
+  onSectionChange: (payload: SectionEvent) => void;
 };
 
 // Feature:
@@ -21,39 +27,78 @@ type SectionNodeProps = {
 // 6. Support multiple responses
 // 7. Support conditional rendering
 export default function SectionNode(props: SectionNodeProps) {
-  const { section, sectionIndex, onSectionChange } = props;
+  const { formkl, section, sectionIndex, formModel, onSectionChange } = props;
 
-  const handleFieldChange = async (payload: FieldEvent) => {
-    const sectionPayload = {
+  const getFirstFieldModelValue = () => {
+    return formModel.getFieldModelValue(section.key, section.fields[0].key);
+  };
+
+  const handleFieldChange = (payload: FieldEvent) => {
+    const sectionPayload: SectionEvent = {
       section,
       sectionIndex,
       ...payload,
     };
 
-    const { doContinue, resolvedPayload } = await Adapter.callHook(
-      "onBeforeSectionChange",
-      sectionPayload,
-    );
-
-    if (doContinue) {
-      await onSectionChange(resolvedPayload);
-
-      await Adapter.callHook("onSectionChange", resolvedPayload);
-    }
+    onSectionChange(sectionPayload);
   };
 
   return (
-    <section className="section__inner">
-      <div className="section__wrapper">
-        {section.fields.map((field, fieldIndex) => (
-          <FieldNode
-            key={fieldIndex}
-            field={field}
-            fieldIndex={fieldIndex}
-            onFieldChange={(payload) => handleFieldChange(payload)}
-          />
-        ))}
-      </div>
-    </section>
+    <SectionWrapper
+      {...Adapter.getSectionWrapper()?.returnProps?.({
+        formModel: formModel.getModel(),
+        section,
+        formkl,
+      })}
+    >
+      {section.multiple ? (
+        <>
+          {getFirstFieldModelValue().map((_: any, responseIndex: number) => (
+            <div key={responseIndex} className="section__response">
+              <p className="section__title">{section.title}</p>
+              <div className="section__inner">
+                {section.fields.map((field, fieldIndex) => (
+                  <FieldNode
+                    key={fieldIndex}
+                    formkl={formkl}
+                    field={field}
+                    fieldIndex={fieldIndex}
+                    section={section}
+                    sectionIndex={sectionIndex}
+                    responseIndex={responseIndex}
+                    formModel={formModel}
+                    onFieldChange={handleFieldChange}
+                  />
+                ))}
+              </div>
+              <div className="section__footer">
+                <SectionBtnRemoveResponse>Remove response</SectionBtnRemoveResponse>
+              </div>
+            </div>
+          ))}
+          <div className="section__wrapper--footer">
+            <SectionBtnAddResponse>Add response</SectionBtnAddResponse>
+          </div>
+        </>
+      ) : (
+        <div className="section__response">
+          <p className="section__title">{section.title}</p>
+          <div className="section__inner">
+            {section.fields.map((field, fieldIndex) => (
+              <FieldNode
+                key={fieldIndex}
+                formkl={formkl}
+                field={field}
+                fieldIndex={fieldIndex}
+                section={section}
+                sectionIndex={sectionIndex}
+                formModel={formModel}
+                onFieldChange={handleFieldChange}
+              />
+            ))}
+          </div>
+        </div>
+      )}
+    </SectionWrapper>
   );
 }

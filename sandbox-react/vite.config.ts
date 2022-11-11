@@ -10,6 +10,7 @@ export default defineConfig({
       imports: [
         {
           react: [
+            ["useRef", "ref"], // import { useRef as ref } from 'react',
             ["createElement", "h"], // import { createElement as h } from 'react',
             "Fragment", // import { Fragment } from 'react',
           ],

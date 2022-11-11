@@ -4,16 +4,14 @@
       <formkl-editor v-model="formklSyntax" />
     </div>
     <div class="flex-1 py-2 px-8">
-      <Formkl ref="formklRef" :formkl="formklSyntax" />
+      <Formkl ref="formklRef" :formkl="formklSyntax" @change="handleChange" />
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import { Formkl } from "@formkl/adapter";
-import { defineComponent, ref } from "vue";
-
-import "@formkl/editor";
+import { defineComponent, ref, h } from "vue";
 
 export default defineComponent({
   components: {
@@ -37,10 +35,15 @@ export default defineComponent({
       formklRef.value?.submit$();
     };
 
+    const handleChange = (value: any) => {
+      console.log("handleChange", value);
+    };
+
     return {
       formklRef,
       formklSyntax,
       submit,
+      handleChange,
     };
   },
 });
