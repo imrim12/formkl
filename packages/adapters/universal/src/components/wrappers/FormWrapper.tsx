@@ -1,4 +1,4 @@
-import { Adapter } from "../core/Adapter";
+import { Adapter } from "../../core/Adapter";
 
 export const FormWrapper = (props: any, context: any) => {
   const Wrapper = Adapter.getFormWrapper()?.component;

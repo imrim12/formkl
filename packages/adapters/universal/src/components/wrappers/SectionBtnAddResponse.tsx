@@ -1,7 +1,7 @@
-import { Adapter } from "../core/Adapter";
+import { Adapter } from "../../core/Adapter";
 
-export const FieldBtnAddResponse = (props: any, context: any) => {
-  const BtnAddResponse = Adapter.getFieldBtnAddResponse()?.component;
+export const SectionBtnAddResponse = (props: any, context: any) => {
+  const BtnAddResponse = Adapter.getSectionBtnAddResponse()?.component;
 
   return BtnAddResponse ? (
     <BtnAddResponse {...props}>{props.children || context?.slots?.default?.()}</BtnAddResponse>

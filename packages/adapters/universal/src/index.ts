@@ -1,7 +1,8 @@
 import { Adapter } from "./core/Adapter";
+import { Component } from "./core/Component";
 
-import FormNode from "./components/FormNode";
+import { Formkl } from "./Formkl";
 
-export { FormNode as Formkl, Adapter };
+export { Formkl, Adapter, Component };
 
-export default { Formkl: FormNode };
+export default { Formkl };
