@@ -1,0 +1,27 @@
+{
+  "git": {
+    "commitMessage": "chore: update tags and release project to v${version}"
+  },
+  "npm": {
+    "publish": false
+  },
+  "github": {
+    "release": true
+  },
+  "plugins": {
+    "@release-it/conventional-changelog": {
+      "preset": "conventionalcommits",
+      "infile": "CHANGELOG.md",
+      "types": [
+        {"type": "feat", "section": "Features"},
+        {"type": "fix", "section": "Fixes"},
+        {"type": "chore", "section": "Minor updates"},
+        {"type": "docs", "section": "Minor updates"},
+        {"type": "style", "section": "Minor updates"},
+        {"type": "refactor", "section": "Features"},
+        {"type": "perf", "section": "Minor updates"},
+        {"type": "test", "section": "Minor updates"}
+      ]
+    }
+  }
+}
