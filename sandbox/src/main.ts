@@ -5,15 +5,22 @@ import { createApp } from "vue";
 import App from "./App.vue";
 import FormklPlugin from "@formkl/vue";
 
-import ElementPlus, { ElButton } from "element-plus";
+import ElementPlus, { ElButton, ElInput } from "element-plus";
 import "element-plus/dist/index.css";
 
 import "@formkl/editor";
 
 import "./style.css";
 
-import { Adapter } from "@formkl/adapter";
+import { Adapter, Component } from "@formkl/adapter";
 import { ElForm, ElFormItem } from "element-plus";
+
+Adapter.registerComponent(
+  new Component({
+    name: "text",
+    renderer: ElInput,
+  }),
+);
 
 Adapter.setOptions({
   FormWrapper: {

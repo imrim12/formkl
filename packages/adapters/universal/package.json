@@ -26,6 +26,7 @@
   "homepage": "https://github.com/formkl/formkl#readme",
   "dependencies": {
     "@formkl/shared": "workspace:*",
+    "async-validator": "^4.2.5",
     "formkl": "workspace:*",
     "lodash": "^4.17.21"
   },

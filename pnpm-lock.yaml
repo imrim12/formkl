@@ -105,6 +105,7 @@ importers:
       '@types/lodash': ^4.14.187
       '@types/node': ^18.11.8
       '@vitest/ui': ^0.24.5
+      async-validator: ^4.2.5
       formkl: workspace:*
       lodash: ^4.17.21
       rimraf: ^3.0.2
@@ -115,6 +116,7 @@ importers:
       vitest: ^0.24.4
     dependencies:
       '@formkl/shared': link:../../shared
+      async-validator: 4.2.5
       formkl: link:../../language
       lodash: 4.17.21
     devDependencies:

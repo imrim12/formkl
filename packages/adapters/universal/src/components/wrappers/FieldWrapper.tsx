@@ -1,4 +1,4 @@
-import { Adapter } from "../core/Adapter";
+import { Adapter } from "../../core/Adapter";
 
 export const FieldWrapper = (props: any, context: any) => {
   const Wrapper = Adapter.getFieldWrapper()?.component;

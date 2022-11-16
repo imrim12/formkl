@@ -1,4 +1,4 @@
-import { Adapter } from "../core/Adapter";
+import { Adapter } from "../../core/Adapter";
 
 export const SectionWrapper = (props: any, context: any) => {
   const Wrapper = Adapter.getSectionWrapper()?.component;
