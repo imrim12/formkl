@@ -13,7 +13,7 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/formkl/formkl.git",
-    "directory": "packages/adapters/universal"
+    "directory": "packages/adapter"
   },
   "keywords": [
     "formkl"

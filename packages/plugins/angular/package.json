@@ -1,6 +1,6 @@
 {
-  "name": "@formkl/plugin-angular",
-  "description": "A Formkl components plugin to register components that used in @formkl/angular adapter",
+  "name": "@formkl/plugin-svelte",
+  "description": "A Formkl components plugin to register components that used in @formkl/svelte adapter",
   "devDependencies": {
     "@vitest/ui": "^0.24.5",
     "rimraf": "^3.0.2",
