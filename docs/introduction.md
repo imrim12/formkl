@@ -99,13 +99,12 @@ Result:
 
 ## Techstack
 
-We are currently working on Vue 3 support. React and Angular support will be available soon.
+We are currently working on Vue 3 support. React and Svelte support will be available soon.
 
 <script setup>
   import ButtonCard from "/components/ButtonCard.vue";
   import VueLogo from '/components/icons/Vue.vue';
   import ReactLogo from '/components/icons/React.vue';
-  import AngularLogo from '/components/icons/Angular.vue';
 
   const frameworks = [
     {
@@ -117,11 +116,6 @@ We are currently working on Vue 3 support. React and Angular support will be ava
       name: "React",
       image: ReactLogo,
       link: "/installation/react",
-    },
-    {
-      name: "Angular",
-      image: AngularLogo,
-      link: "/installation/angular",
     },
   ]
 </script>

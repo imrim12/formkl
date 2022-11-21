@@ -1,3 +1,3 @@
-# Quick start with Angular
+# Quick start with Svelte
 
-🚧 **[Angular](https://angular.io)** -- *coming soon*
+🚧 **[Svelte](https://svelte.io)** -- *coming soon*

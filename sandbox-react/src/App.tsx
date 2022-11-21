@@ -1,5 +1,7 @@
 import { useState } from "react";
-import { Formkl } from "@formkl/adapter";
+import { createForm } from "@formkl/adapter";
+
+const Formkl = createForm();
 
 function App() {
   const [formklSyntax, setFormklSyntax] = useState(`formkl
@@ -28,7 +30,7 @@ function App() {
         <formkl-editor value={formklSyntax} onInput={handleInput} />
       </div>
       <div className="flex-1 py-2 px-8">
-        <Formkl formkl={formklSyntax} onChange={handleChange} />
+        <Formkl syntax={formklSyntax} onChange={handleChange} />
       </div>
     </div>
   );

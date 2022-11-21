@@ -1,6 +1,6 @@
 {
-  "name": "@formkl/angular",
-  "description": "A Angular adapter to generate usable Angular from component from Formkl syntax/schema",
+  "name": "@formkl/svelte",
+  "description": "A Svelte adapter to generate usable Svelte from component from Formkl syntax/schema",
   "devDependencies": {
     "@vitest/ui": "^0.24.5",
     "rimraf": "^3.0.2",

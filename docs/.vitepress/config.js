@@ -23,7 +23,7 @@ export default {
         items: [
           { text: "Vue 3", link: "/installation/vue" },
           { text: "React", link: "/installation/react" },
-          { text: "Angular", link: "/installation/angular" },
+          { text: "Svelte", link: "/installation/svelte" },
         ],
       },
       {
@@ -45,7 +45,7 @@ export default {
           { text: "Core language", link: "/learning/core-language" },
           { text: "Adapter (Vue)", link: "/learning/adapter-vue" },
           { text: "Adapter (React)", link: "/learning/adapter-react" },
-          { text: "Adapter (Angular)", link: "/learning/adapter-angular" },
+          { text: "Adapter (Svelte)", link: "/learning/adapter-svelte" },
           { text: "Editor", link: "/learning/editor" },
         ],
       },
