@@ -19,37 +19,42 @@ export const createFormNode = (options: FormOptions) => {
   const FormNode = (props: FormNodeProps) => {
     const { formkl, model, handler } = useForm(props);
 
-    const FormWrapper = (p: any, ctx?: any) =>
+    const FormWrapper = (p: { children: any }) =>
       Wrapper ? (
         <Wrapper {...(getWrapperProps?.(props) || props)} onSubmit={handler.onSubmit}>
-          {p.children || ctx?.slots?.default?.()}
+          {p.children}
         </Wrapper>
       ) : (
         <form className="form__wrapper" onSubmit={handler.onSubmit}>
-          {p.children || ctx?.slots?.default?.()}
+          {p.children}
         </form>
       );
 
     return formkl ? (
-      <FormWrapper>
-        {formkl.title || formkl.description ? (
-          <header className="formkl__header">
-            {formkl.title ? <h2>{formkl.title}</h2> : null}
-            {formkl.description ? <h3>{formkl.description}</h3> : null}
-          </header>
-        ) : null}
-        <div className="formkl__body">
-          {formkl.sections.map((section) => (
-            <SectionNode
-              key={section.key}
-              formkl={formkl}
-              model={model}
-              section={section}
-              onSectionChange={handler.onChange}
-            />
-          ))}
-        </div>
-      </FormWrapper>
+      <FormWrapper
+        children={
+          <>
+            {formkl.title || formkl.description ? (
+              <header className="formkl__header">
+                {formkl.title ? <h2>{formkl.title}</h2> : null}
+                {formkl.description ? <h3>{formkl.description}</h3> : null}
+              </header>
+            ) : null}
+            <div className="formkl__body">
+              {formkl.sections.map((section) => (
+                <SectionNode
+                  key={section.key}
+                  formkl={formkl}
+                  model={model}
+                  section={section}
+                  onSectionChange={handler.onChange}
+                />
+              ))}
+              {JSON.stringify(model)}
+            </div>
+          </>
+        }
+      />
     ) : null;
   };
 

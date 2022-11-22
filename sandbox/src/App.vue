@@ -30,6 +30,7 @@ export default defineComponent({
   }
   "jhk" includes {
     multiple text;
+    multiple text as "something";
   }
 }`);
 

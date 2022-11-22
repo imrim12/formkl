@@ -18,7 +18,7 @@ export default defineConfig({
     },
     rollupOptions: {
       // external modules won't be bundled into your library
-      external: ["lodash", "formkl"], // not every external has a global
+      external: ["formkl"], // not every external has a global
       output: {
         // disable warning on src/index.ts using both default and named export
         exports: "named",

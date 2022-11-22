@@ -29,7 +29,6 @@ export const createFieldNode = (options: FormOptions) => {
   const FieldNode = (props: FieldNodeProps) => {
     const {
       formkl,
-      model,
       section,
       field,
       rules,
@@ -41,16 +40,16 @@ export const createFieldNode = (options: FormOptions) => {
       computedFieldAllowMoreResponse,
     } = useField(props);
 
-    const FieldWrapper = (p: any, ctx?: any) =>
+    const FieldWrapper = (p: any) =>
       Wrapper ? (
         <Wrapper {...(getWrapperProps?.(props) || props)} rules={rules}>
-          {p.children || ctx?.slots?.default?.()}
+          {p.children}
         </Wrapper>
       ) : (
         <div className="field__wrapper">
           <label htmlFor={field.key} className="field__label">
             <span>{field.label}</span>
-            <div className="field__inner">{p.children || ctx?.slots?.default?.()}</div>
+            <div className="field__inner">{p.children}</div>
           </label>
         </div>
       );
@@ -67,16 +66,19 @@ export const createFieldNode = (options: FormOptions) => {
                 key={propPath}
                 prop={propPath}
                 rules={rules}
-              >
-                <InputNode
-                  onInput={handler.onInput}
-                  onChange={handler.onChange}
-                  {...(["checkbox", "radio", "select"].includes(field.type) ? field : {})}
-                />
-              </FieldWrapper>
+                children={
+                  <InputNode
+                    onInput={(e: any) => handler.onInput(e, fieldResponseIndex)}
+                    onChange={(e: any) => handler.onChange(e, fieldResponseIndex)}
+                    {...(["checkbox", "radio", "select"].includes(field.type) ? field : {})}
+                  />
+                }
+              />
               {(computedFieldPropPath() as string[]).length > 1 ? (
                 <div className="formkl-field_response__remover">
-                  <FieldBtnRemoveResponse onClick={handler.onRemoveResponse(fieldResponseIndex)}>
+                  <FieldBtnRemoveResponse
+                    onClick={() => handler.onRemoveResponse(fieldResponseIndex)}
+                  >
                     Remove field
                   </FieldBtnRemoveResponse>
                 </div>
@@ -89,13 +91,14 @@ export const createFieldNode = (options: FormOptions) => {
             key={computedFieldPropPath() as string}
             prop={computedFieldPropPath() as string}
             rules={rules}
-          >
-            <InputNode
-              onInput={handler.onInput}
-              onChange={handler.onChange}
-              {...(["checkbox", "radio", "select"].includes(field.type) ? field : {})}
-            />
-          </FieldWrapper>
+            children={
+              <InputNode
+                onInput={handler.onInput}
+                onChange={handler.onChange}
+                {...(["checkbox", "radio", "select"].includes(field.type) ? field : {})}
+              />
+            }
+          />
         )}
         <div className="formkl-field__footer">
           {field.multiple && computedFieldAllowMoreResponse() ? (

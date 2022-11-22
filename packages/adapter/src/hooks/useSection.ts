@@ -3,17 +3,17 @@ import type { SectionNodeProps } from "../components/SectionNode";
 import { useSectionHandler } from "./handlers/useSectionHandler";
 
 export const useSection = (props: SectionNodeProps) => {
-  const { formkl, model, section } = props;
+  const { formkl, section } = props;
 
   const computedSectionFirstResponse = () => {
     if (section.multiple) {
       switch (formkl.model) {
         case "flat":
-          const modelFlat = model as SchemaFlat;
+          const modelFlat = props.model as SchemaFlat;
           return Object.values(modelFlat[section.key])[0];
         case "base":
         default:
-          const modelBase = model as SchemaBase;
+          const modelBase = props.model as SchemaBase;
           return modelBase.data.find((i) => i.section === section.key)?.value;
       }
     } else {
@@ -30,7 +30,6 @@ export const useSection = (props: SectionNodeProps) => {
 
   return {
     formkl,
-    model,
     section,
     handler,
     computedSectionFirstResponse,
