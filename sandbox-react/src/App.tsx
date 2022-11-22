@@ -13,6 +13,7 @@ function App() {
   }
   "jhk" includes {
     multiple text;
+    multiple text as "something";
   }
 }`);
 

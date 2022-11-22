@@ -55,18 +55,18 @@ const createFieldRules = (props: FieldNodeProps) => {
 };
 
 export const useField = (props: FieldNodeProps) => {
-  const { formkl, model, section, field, sectionResponseIndex } = props;
+  const { formkl, section, field, sectionResponseIndex } = props;
 
   const computedMultiplePropPath = () => {
     switch (formkl.model) {
       case "flat":
-        const modelFlat = model as SchemaFlat;
+        const modelFlat = props.model as SchemaFlat;
 
         return modelFlat[section.key][field.key].map((_: any, fieldResponseIndex: number) =>
           [section.key, field.key, fieldResponseIndex].join("."),
         );
       case "base":
-        const modelBase: SchemaBase = model as SchemaBase;
+        const modelBase: SchemaBase = props.model as SchemaBase;
 
         const fieldIndex = modelBase.data.findIndex(
           (f) => f.field === field.key && f.section === section.key,
@@ -85,7 +85,7 @@ export const useField = (props: FieldNodeProps) => {
           .filter((i) => i !== undefined)
           .join(".");
       case "base":
-        const modelBase = model as SchemaBase;
+        const modelBase = props.model as SchemaBase;
 
         const fieldIndex = modelBase.data.findIndex(
           (f) => f.field === field.key && f.section === section.key,
@@ -97,7 +97,9 @@ export const useField = (props: FieldNodeProps) => {
   };
 
   const computedFieldPropPath = () =>
-    field.multiple ? computedMultiplePropPath() : computedSinglePropPath(sectionResponseIndex);
+    section.multiple || field.multiple
+      ? computedMultiplePropPath()
+      : computedSinglePropPath(sectionResponseIndex);
 
   const computedFieldAllowMoreResponse = () =>
     computedFieldPropPath()?.length < Number(field?.maxResponseAllowed || Infinity);
@@ -108,7 +110,6 @@ export const useField = (props: FieldNodeProps) => {
 
   return {
     formkl,
-    model,
     section,
     field,
     sectionResponseIndex,
