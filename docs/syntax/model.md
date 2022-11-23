@@ -22,18 +22,14 @@ The model structure would look like this
 {
   "data": [
     {
-      "type": "text",
-      "label": "Fullname",
-      "require": false,
-      "key": "fullname",
-      "multiple": false
+      "section": "",
+      "field": "fullname",
+      "value": ""
     },
     {
-      "type": "paragraph",
-      "label": "Bio",
-      "require": false,
-      "key": "bio",
-      "multiple": false
+      "section": "",
+      "field": "bio",
+      "value": ""
     }
   ]
 }

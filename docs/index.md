@@ -9,7 +9,7 @@ hero:
   text: Form marKup Language
   tagline: An open-source DSL (Domain-Specific Language) to define and create form schema.
   image:
-    src: /public/assets/logo.png
+    src: /public/assets/logo.svg
     alt: Formkl
   actions:
     - theme: brand

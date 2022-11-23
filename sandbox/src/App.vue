@@ -4,7 +4,7 @@
       <formkl-editor v-model="formklSyntax" />
     </div>
     <div class="flex-1 py-2 px-8">
-      <Formkl ref="formklRef" :formkl="formklSyntax" @change="handleChange" />
+      <Formkl ref="formklRef" :formkl="formklSyntax" />
     </div>
   </div>
 </template>
@@ -36,15 +36,10 @@ export default defineComponent({
       formklRef.value?.submit$();
     };
 
-    const handleChange = (value: any) => {
-      console.log("handleChange", value);
-    };
-
     return {
       formklRef,
       formklSyntax,
       submit,
-      handleChange,
     };
   },
 });

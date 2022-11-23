@@ -1,8 +1,6 @@
 # Introduction
 
-> FORMKL - Form marKup Language (WORK IN PROGRESS)
-
-*First beta version of formkl can be avaialable by October 2022.*
+> FORMKL - Form marKup Language 
 
 ## What is FORMKL?
 

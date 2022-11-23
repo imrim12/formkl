@@ -2,6 +2,10 @@
 
 This guide will walk you through the process of creating a simple form using `formkl` in your Vue 3 project.
 
+::: warning
+@formkl/vue is currently experimental and not ready for production use.
+:::
+
 ## Demo
 
 You can visit the playground here: https://sandbox.formkl.org/

@@ -5,7 +5,7 @@ export default {
 
   themeConfig: {
     siteTitle: "FORMKL",
-    logo: "public/assets/logo.png",
+    logo: "public/assets/logo.svg",
 
     nav: [{ text: "Syntax guide", link: "/syntax/form" }],
 
@@ -21,7 +21,7 @@ export default {
         text: "Installation",
         collapsible: true,
         items: [
-          { text: "Vue 3", link: "/installation/vue" },
+          { text: "Vue", link: "/installation/vue" },
           { text: "React", link: "/installation/react" },
           { text: "Svelte", link: "/installation/svelte" },
         ],
