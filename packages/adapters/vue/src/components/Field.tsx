@@ -32,7 +32,7 @@ export const FieldNode = defineComponent({
       <ElButton type="danger" />
     );
 
-    const _buildSinglePropPath = (responseIndex?: number): string => {
+    const computedSinglePropPath = (responseIndex?: number): string => {
       switch (formkl.value.model) {
         case "flat":
           return [props.section.key, props.field.key, responseIndex]
@@ -52,7 +52,7 @@ export const FieldNode = defineComponent({
       }
     };
 
-    const _buildMultiplePropPath = (): string[] => {
+    const computedMultiplePropPath = (): string[] => {
       switch (formkl.value.model) {
         case "flat":
           return input.value.map((_: any, responseIndex: number) =>
@@ -72,20 +72,20 @@ export const FieldNode = defineComponent({
       }
     };
 
-    const propPath = computed(() => {
+    const computedPropPath = computed(() => {
       return props.field.multiple
-        ? _buildMultiplePropPath()
-        : _buildSinglePropPath(sectionResponseIndex);
+        ? computedMultiplePropPath()
+        : computedSinglePropPath(sectionResponseIndex);
     });
 
-    const allowAddMoreResponse = computed(
-      () => propPath.value?.length < Number(props.field?.maxResponseAllowed || Infinity),
+    const computedAllowMoreResponse = computed(
+      () => computedPropPath.value?.length < Number(props.field?.maxResponseAllowed || Infinity),
     );
 
     return () => (
       <div class="formkl-field">
         {props.field.multiple ? (
-          (propPath.value as string[]).map((prop, responseIndex) => (
+          (computedPropPath.value as string[]).map((prop, responseIndex) => (
             <div class="formkl-field_response">
               <ElFormItem
                 label={responseIndex === 0 ? props.field.label : ""}
@@ -104,7 +104,7 @@ export const FieldNode = defineComponent({
                     : null
                 }
               </ElFormItem>
-              {(propPath.value as string[]).length > 1 ? (
+              {(computedPropPath.value as string[]).length > 1 ? (
                 <div class="formkl-field_response__remover">
                   {createElement(
                     FieldRemoveBtn,
@@ -120,8 +120,8 @@ export const FieldNode = defineComponent({
         ) : (
           <ElFormItem
             label={props.field.label}
-            key={propPath.value as string}
-            prop={propPath.value as string}
+            key={computedPropPath.value as string}
+            prop={computedPropPath.value as string}
             rules={rules}
           >
             {() =>
@@ -137,7 +137,7 @@ export const FieldNode = defineComponent({
           </ElFormItem>
         )}
         <div class="formkl-field__footer">
-          {props.field.multiple && allowAddMoreResponse.value
+          {props.field.multiple && computedAllowMoreResponse.value
             ? createElement(
                 FieldAddBtn,
                 {

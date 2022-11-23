@@ -4,16 +4,14 @@
       <formkl-editor v-model="formklSyntax" />
     </div>
     <div class="flex-1 py-2 px-8">
-      <Formkl ref="formklRef" :syntax="formklSyntax" @change="handleChange" />
+      <Formkl ref="formklRef" :formkl="formklSyntax" @change="handleChange" />
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { createForm } from "@formkl/adapter";
+import { Formkl } from "@formkl/vue";
 import { defineComponent, ref, h } from "vue";
-
-const Formkl = createForm();
 
 export default defineComponent({
   components: {
