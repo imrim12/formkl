@@ -5,20 +5,20 @@ import { useFormkl } from "../hooks/useFormkl";
 
 const SectionValueAddMap = (model: Ref<SchemaBase | SchemaFlat>, section: Section) => ({
   flat: () => {
-    const _flatModel = model.value as SchemaFlat;
+    const modelFlat = model.value as SchemaFlat;
 
-    Object.keys(_flatModel[section.key]).forEach((fieldKey) => {
+    Object.keys(modelFlat[section.key]).forEach((fieldKey) => {
       const _field = section.fields.find((f) => f.key === fieldKey);
 
       const value = DefaultValueMap[_field?.type || "text"];
 
-      _flatModel[section.key][fieldKey].push(value);
+      modelFlat[section.key][fieldKey].push(value);
     });
   },
   base: () => {
-    const _baseModel = model.value as SchemaBase;
+    const modelBase = model.value as SchemaBase;
 
-    _baseModel.data.forEach((i) => {
+    modelBase.data.forEach((i) => {
       if (i.section === section.key) {
         const _field = section.fields.find((f) => f.key === i.field);
 
@@ -31,19 +31,19 @@ const SectionValueAddMap = (model: Ref<SchemaBase | SchemaFlat>, section: Sectio
 });
 
 const SectionValueRemoveMap = (model: Ref<SchemaBase | SchemaFlat>, section: Section) => ({
-  flat: (responseIndex: number) => {
-    const _flatModel = model.value as SchemaFlat;
+  flat: (sectionResponseIndex: number) => {
+    const modelFlat = model.value as SchemaFlat;
 
-    Object.keys(_flatModel[section.key]).forEach((fieldKey) => {
-      _flatModel[section.key][fieldKey].splice(responseIndex, 1);
+    Object.keys(modelFlat[section.key]).forEach((fieldKey) => {
+      modelFlat[section.key][fieldKey].splice(sectionResponseIndex, 1);
     });
   },
-  base: (responseIndex: number) => {
-    const _baseModel = model.value as SchemaBase;
+  base: (sectionResponseIndex: number) => {
+    const modelBase = model.value as SchemaBase;
 
-    _baseModel.data.forEach((i) => {
+    modelBase.data.forEach((i) => {
       if (i.section === section.key) {
-        i.value.splice(responseIndex, 1);
+        i.value.splice(sectionResponseIndex, 1);
       }
     });
   },
@@ -63,9 +63,9 @@ export const useSectionHandler = () => {
     }
   };
 
-  const removeResponse = (responseIndex: number) => {
+  const removeResponse = (sectionResponseIndex: number) => {
     if (_section.multiple) {
-      SectionValueRemoveMap(model, _section)[formkl.value.model || "base"](responseIndex);
+      SectionValueRemoveMap(model, _section)[formkl.value.model || "base"](sectionResponseIndex);
     }
   };
 

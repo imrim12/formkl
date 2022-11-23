@@ -34,24 +34,24 @@ export const SectionNode = defineComponent({
       if (props.section.multiple) {
         switch (formkl.value.model) {
           case "flat":
-            const _flatModel = model.value as SchemaFlat;
-            return Object.values(_flatModel[props.section.key])[0];
+            const modelFlat = model.value as SchemaFlat;
+            return Object.values(modelFlat[props.section.key])[0];
           case "base":
           default:
-            const _baseModel = model.value as SchemaBase;
-            return _baseModel.data.find((i) => i.section === props.section.key)?.value;
+            const modelBase = model.value as SchemaBase;
+            return modelBase.data.find((i) => i.section === props.section.key)?.value;
         }
       } else {
         return null;
       }
     });
 
-    const allowAddMoreResponse = computed(
+    const computedAllowMoreResponse = computed(
       () =>
         firstFieldResponse.value?.length < Number(props.section?.maxResponseAllowed || Infinity),
     );
 
-    const numberOfAnswers = computed(() => firstFieldResponse.value?.length || 1);
+    const computedAnswerCount = computed(() => firstFieldResponse.value?.length || 1);
 
     return () => (
       <div
@@ -65,7 +65,7 @@ export const SectionNode = defineComponent({
         </header>
         <section class="formkl-section__body">
           {props.section.multiple ? (
-            new Array(numberOfAnswers.value).fill(null).map((_, responseIndex) => (
+            new Array(computedAnswerCount.value).fill(null).map((_, responseIndex) => (
               <div class="formkl-section_response">
                 {props.section.fields.map((field) => (
                   <FieldNode
@@ -75,7 +75,7 @@ export const SectionNode = defineComponent({
                     key={field.key}
                   />
                 ))}
-                {numberOfAnswers.value > 1 ? (
+                {computedAnswerCount.value > 1 ? (
                   <div class="formkl-section_response__remover">
                     {createElement(
                       SectionRemoveBtn,
@@ -97,7 +97,7 @@ export const SectionNode = defineComponent({
           )}
         </section>
         <footer class="formkl-section__footer">
-          {allowAddMoreResponse.value
+          {computedAllowMoreResponse.value
             ? createElement(
                 SectionAddBtn,
                 {

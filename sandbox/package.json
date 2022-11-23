@@ -8,7 +8,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@formkl/adapter": "workspace:*",
     "@formkl/editor": "workspace:*",
     "@formkl/shared": "workspace:*",
     "@formkl/vue": "workspace:*",

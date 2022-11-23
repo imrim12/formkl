@@ -17,17 +17,17 @@ const FieldValueGetterMap = (
   field: FieldDefault | FieldSelection,
 ) => ({
   flat: () => {
-    const _flatModel = model.value as SchemaFlat;
+    const modelFlat = model.value as SchemaFlat;
 
-    return _flatModel?.[section.key]?.[field.key];
+    return modelFlat?.[section.key]?.[field.key];
   },
   base: () => {
-    const _baseModel = model.value as SchemaBase;
-    const _fieldValue = _baseModel.data.find(
+    const modelBase = model.value as SchemaBase;
+    const fieldValue = modelBase.data.find(
       (m) => m.section === section.key && m.field === field.key,
     );
 
-    return _fieldValue?.value;
+    return fieldValue?.value;
   },
 });
 
@@ -37,18 +37,18 @@ const FieldValueSetterMap = (
   field: FieldDefault | FieldSelection,
 ) => ({
   flat: (value: any, responseIndex?: number) => {
-    const _flatModel = model.value as SchemaFlat;
+    const modelFlat = model.value as SchemaFlat;
 
     if ((section.multiple || field.multiple) && responseIndex !== undefined) {
-      _flatModel[section.key][field.key][responseIndex] = value;
+      modelFlat[section.key][field.key][responseIndex] = value;
     } else {
-      _flatModel[section.key][section.key] = value;
+      modelFlat[section.key][section.key] = value;
     }
   },
   base: (value: any, responseIndex?: number) => {
-    const _baseModel = model.value as SchemaBase;
+    const modelBase = model.value as SchemaBase;
 
-    const input = _baseModel.data.find((m) => m.section === section.key && m.field === field.key);
+    const input = modelBase.data.find((m) => m.section === section.key && m.field === field.key);
 
     if (input) {
       if ((section.multiple || field.multiple) && responseIndex !== undefined) {
@@ -69,7 +69,7 @@ export const useFieldHandler = () => {
   const _section = props.section as Section;
 
   const _field = props.field as FieldDefault | FieldSelection;
-  const _fieldValue = computed({
+  const fieldValue = computed({
     get: FieldValueGetterMap(model, _section, _field)[formkl.value.model || "base"],
     set: ([value, responseIndex]) =>
       FieldValueSetterMap(model, _section, _field)[formkl.value.model || "base"](
@@ -100,17 +100,17 @@ export const useFieldHandler = () => {
   };
 
   const updateResponse = (value: any, responseIndex?: number) => {
-    _fieldValue.value = [value, responseIndex];
+    fieldValue.value = [value, responseIndex];
   };
 
   const addResponse = () => {
-    updateResponse(DefaultValueMap[_field.type], _fieldValue.value.length);
+    updateResponse(DefaultValueMap[_field.type], fieldValue.value.length);
   };
 
   const removeResponse = (responseIndex: number) => {
     if (_field.multiple) {
-      _fieldValue.value[responseIndex] = undefined;
-      _fieldValue.value = [_fieldValue.value.filter((v: any) => v !== undefined)];
+      fieldValue.value[responseIndex] = undefined;
+      fieldValue.value = [fieldValue.value.filter((v: any) => v !== undefined)];
     }
   };
 
@@ -118,15 +118,14 @@ export const useFieldHandler = () => {
     const customEvents = _mapCustomEvents(responseIndex);
 
     return {
-      modelValue:
-        responseIndex !== undefined ? _fieldValue.value[responseIndex] : _fieldValue.value,
+      modelValue: responseIndex !== undefined ? fieldValue.value[responseIndex] : fieldValue.value,
       "onUpdate:modelValue": (value: any) => updateResponse.call(this, value, responseIndex),
       ...customEvents,
     };
   };
 
   const getReactiveInput = () => {
-    return readonly(_fieldValue);
+    return readonly(fieldValue);
   };
 
   return {
