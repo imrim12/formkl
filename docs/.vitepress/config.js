@@ -5,11 +5,16 @@ export default {
 
   themeConfig: {
     siteTitle: "FORMKL",
-    logo: "public/assets/logo.svg",
+    logo: "https://res.cloudinary.com/i-m-rim/image/upload/v1669218850/personal/logo_h6vt9n.svg",
 
     nav: [{ text: "Syntax guide", link: "/syntax/form" }],
 
     socialLinks: [{ icon: "github", link: "https://github.com/formkl/formkl" }],
+
+    editLink: {
+      pattern: "https://github.com/formkl/formkl/edit/main/docs/:path",
+      text: "Edit this page on GitHub",
+    },
 
     sidebar: [
       {
