@@ -78,7 +78,8 @@ StatementList
 
 ```
 
-::: info Please aware that the grammar is over-simplified for the sake of example.
+:::
+Please aware that the grammar is over-simplified for the sake of example.
 :::
 
 ## Tokenizer

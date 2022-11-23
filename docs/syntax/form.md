@@ -14,7 +14,7 @@ This is the minimal syntax for a form to be parsed. This form will have no title
 
 ```text
 formkl {
-  "" includes {
+  includes {
     text;
   }
 }
