@@ -3,7 +3,9 @@
   "description": "Form markup language",
   "packageManager": "pnpm@7.12.2",
   "scripts": {
-    "build": "nx run-many --target=build --all",
+    "nx": "nx",
+    "build": "nx build",
+    "build:all": "nx run-many --target=build --all",
     "typecheck": "nx run-many --target=typecheck --all",
     "test": "vitest run",
     "test:ui": "vitest --ui",

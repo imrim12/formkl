@@ -1,4 +1,4 @@
-import parser from "formkl";
+import parser from "../";
 
 describe("Field with multiple responses support", () => {
   it("should parse the form syntax correctly", () => {

@@ -1,4 +1,4 @@
-import parser from "formkl";
+import parser from "../";
 
 describe("Required field", () => {
   it("should parse the form syntax correctly", () => {

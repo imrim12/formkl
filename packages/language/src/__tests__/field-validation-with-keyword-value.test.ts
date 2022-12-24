@@ -1,13 +1,13 @@
 import parser from "../";
 
-describe("Field with use of validation", () => {
+describe("Field validation using keyword value like null, undefined, NaN", () => {
   it("should parse the form syntax correctly", () => {
     const result = parser.parse(`formkl {
       includes {
-        text valid(> 5);
-        "Test with OR" text valid(> 5 or == "Some value" or has "Keyword");
-        "Test with AND" text valid(> 5 and == "Some value" and has "Keyword");
-        "Test with Both" text valid(> 5 or == "Some value" and has "Keyword");
+        text valid(== null);
+        "Test with OR" text valid(> 5 or == NaN or has "Keyword");
+        "Test with AND" text valid(> 5 and == undefined and has "Keyword");
+        "Test with Both" text valid(> 5 or == null and has "Keyword");
       }
     }`);
 
@@ -22,7 +22,7 @@ describe("Field with use of validation", () => {
               key: "text",
               validation: {
                 logic: {
-                  $gt: 5,
+                  $eq: null,
                 },
               },
             },
@@ -37,7 +37,7 @@ describe("Field with use of validation", () => {
                       $gt: 5,
                     },
                     {
-                      $eq: "Some value",
+                      $eq: NaN,
                     },
                     {
                       $has: "Keyword",
@@ -57,7 +57,7 @@ describe("Field with use of validation", () => {
                       $gt: 5,
                     },
                     {
-                      $eq: "Some value",
+                      $eq: undefined,
                     },
                     {
                       $has: "Keyword",
@@ -79,7 +79,7 @@ describe("Field with use of validation", () => {
                     {
                       $and: [
                         {
-                          $eq: "Some value",
+                          $eq: null,
                         },
                         {
                           $has: "Keyword",
