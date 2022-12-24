@@ -1,6 +1,6 @@
 {
   "name": "@formkl/plugin-vue",
-  "version": "1.0.0-rc.2",
+  "version": "1.0.0-rc.3",
   "description": "A Formkl components plugin to register components that used in @formkl/vue adapter",
   "type": "module",
   "main": "dist/index.es.js",
