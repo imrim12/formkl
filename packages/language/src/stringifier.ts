@@ -8,27 +8,19 @@ import {
 } from "@formkl/shared";
 import slugify from "slugify";
 
-function s(count: number = 1) {
-  return new Array(count).fill(" ").join("");
-}
-
-function n(count: number = 1) {
-  return new Array(count).fill("\n").join("");
-}
-
 export class Stringifier {
   constructor() {}
 
   validateLogicAnd(andLogic: Validation["logic"]["$and"]): string {
     const results = andLogic.map((e) => this.validationLogic(e));
 
-    return results.join(`${s()}and${s()}`);
+    return results.join(`%(s)and%(s)`);
   }
 
   validateLogicOr(orLogic: Validation["logic"]["$or"]): string {
     const results = orLogic.map((e) => this.validationLogic(e));
 
-    return results.join(`${s()}or${s()}`);
+    return results.join(`%(s)or%(s)`);
   }
 
   validationLogic(logic: Validation["logic"]): string {
@@ -37,12 +29,12 @@ export class Stringifier {
     const val = logic[operator] as string | number;
 
     return {
-      $gt: () => `>${s()}${val}`,
-      $lt: () => `>=${s()}${val}`,
-      $gteq: () => `<${s()}${val}`,
-      $lteq: () => `<=${s()}${val}`,
-      $eq: () => `==${s()}${typeof val === "string" ? JSON.stringify(val) : val}`,
-      $has: () => `has${s()}${typeof val === "string" ? JSON.stringify(val) : val}`,
+      $gt: () => `>%(s)${val}`,
+      $lt: () => `>=%(s)${val}`,
+      $gteq: () => `<%(s)${val}`,
+      $lteq: () => `<=%(s)${val}`,
+      $eq: () => `==%(s)${typeof val === "string" ? JSON.stringify(val) : val}`,
+      $has: () => `has%(s)${typeof val === "string" ? JSON.stringify(val) : val}`,
       $and: () => logic.$and && this.validateLogicAnd(logic.$and),
       $or: () => logic.$or && this.validateLogicOr(logic.$or),
     }[operator]();
@@ -50,40 +42,69 @@ export class Stringifier {
 
   validation(validation: Validation) {
     return [
-      validation.regex && `regex(${JSON.stringify(validation.regex.source)})`,
+      validation.regex && `regex("${validation.regex.source}")`,
       validation.logic && `valid(${this.validationLogic(validation.logic)})`,
     ]
-      .filter(Boolean)
-      .join(s());
+      .filter((i) => i)
+      .join("%(s)");
   }
 
   fields(fields: Array<FieldDefault | FieldSelection>) {
-    return fields.map((field) =>
-      [
-        field.required && "require",
-        field.maxResponseAllowed && field.multiple && "multiple",
-        field.label && JSON.stringify(field.label),
-        field.type,
-        field.validation && this.validation(field.validation),
-        field.key === slugify(field.label) && `${s()}as${s()}${JSON.stringify(field.key)}`,
-      ]
-        .filter(Boolean)
-        .join(s()),
+    return (
+      "%(t)%(t)" +
+      fields
+        .map(
+          (field) =>
+            [
+              field.required && "require",
+              field.maxResponseAllowed ? field.maxResponseAllowed : field.multiple && "multiple",
+              slugify(field.label).toLowerCase() !== field.type && `"${field.label}"`,
+              field.type,
+              field.validation && this.validation(field.validation),
+              slugify(field.label).toLowerCase() !== field.key && `as%(s)"${field.key}"`,
+            ]
+              .filter((i) => i)
+              .join("%(s)") + ";",
+        )
+        .join("%(n)%(t)%(t)")
     );
   }
 
   sections(sections: Array<Section>) {
-    return sections.map(
-      (section) =>
-        `${
-          section.title ? `${JSON.stringify(section.title)}${s()}` : ""
-        }includes${s()}{${s()}${n()}${this.fields(section.fields)}${n()}}`,
-    );
+    return sections
+      .map((section) =>
+        [
+          "%(t)",
+          section.multiple && "multiple%(s)",
+          section.title && `"${section.title}"%(s)`,
+          "includes",
+          "%(s)",
+          "{",
+          "%(n)",
+          this.fields(section.fields),
+          "%(n)",
+          "%(t)",
+          "}",
+          (!section.title && section.key) ||
+          (section.title && slugify(section.title).toLowerCase() !== section.key)
+            ? `%(s)as%(s)"${section.key}"`
+            : "",
+        ].join(""),
+      )
+      .join("%(n)");
   }
 
   stringify(formkl: Formkl) {
-    return `${["formkl", formkl.title, formkl.description]
-      .filter(Boolean)
-      .join(s())}${s()}{${n()}${this.sections(formkl.sections)}${n()}}`;
+    return `${[
+      "formkl",
+      formkl.model === "flat" && "flat",
+      formkl.title && JSON.stringify(formkl.title),
+      formkl.description && JSON.stringify(formkl.description),
+    ]
+      .filter((i) => i)
+      .join("%(s)")}%(s){%(n)${this.sections(formkl.sections)}%(n)}`
+      .replace(/\%\(s\)/g, " ")
+      .replace(/\%\(t\)/g, "\t")
+      .replace(/\%\(n\)/g, "\n");
   }
 }

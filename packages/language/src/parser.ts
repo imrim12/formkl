@@ -43,10 +43,10 @@ export class Parser {
   /**
    * Stringify a Formkl object to a Formkl syntax string
    */
-  stringfify(formkl: Formkl) {
-    const stringifier = new Stringifier()
+  stringify(formkl: Formkl) {
+    const stringifier = new Stringifier();
 
-    return stringifier.stringify(formkl)
+    return stringifier.stringify(formkl);
   }
 
   /**

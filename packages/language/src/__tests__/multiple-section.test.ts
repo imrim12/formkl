@@ -11,31 +11,72 @@ describe("Multiple section in one form", () => {
       }
     }`);
 
-    expect(result).toStrictEqual(defineForm({
-      model: "base",
-      sections: [
-        {
-          title: "Personal information",
-          key: "personal-information",
-          fields: [
-            {
-              type: "text",
-              label: "Text",
-              key: "text",
-            },
-          ],
-        },
-        {
-          fields: [
-            {
-              type: "text",
-              label: "Text",
-              key: "text",
-            },
-          ],
-        },
-      ],
-    }));
+    expect(result).toStrictEqual(
+      defineForm({
+        model: "base",
+        sections: [
+          {
+            title: "Personal information",
+            key: "personal-information",
+            fields: [
+              {
+                type: "text",
+                label: "Text",
+                key: "text",
+              },
+            ],
+          },
+          {
+            fields: [
+              {
+                type: "text",
+                label: "Text",
+                key: "text",
+              },
+            ],
+          },
+        ],
+      }),
+    );
+  });
+
+  it("should stringify the form syntax correctly", () => {
+    const result = parser.stringify(
+      defineForm({
+        model: "base",
+        sections: [
+          {
+            title: "Personal information",
+            key: "personal-information",
+            fields: [
+              {
+                type: "text",
+                label: "Text",
+                key: "text",
+              },
+            ],
+          },
+          {
+            fields: [
+              {
+                type: "text",
+                label: "Text",
+                key: "text",
+              },
+            ],
+          },
+        ],
+      }),
+    );
+
+    expect(result).toBe(`formkl {
+	"Personal information" includes {
+		text;
+	}
+	includes {
+		text;
+	}
+}`);
   });
 
   it("should emit syntax error for duplicated section key", () => {

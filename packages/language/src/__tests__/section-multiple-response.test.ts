@@ -8,21 +8,49 @@ describe("Section with multiple responses support", () => {
       }
     }`);
 
-    expect(result).toStrictEqual(defineForm({
-      model: "base",
-      sections: [
-        {
-          multiple: true,
-          fields: [
-            {
-              type: "text",
-              label: "Text",
-              key: "text",
-            },
-          ],
-        },
-      ],
-    }));
+    expect(result).toStrictEqual(
+      defineForm({
+        model: "base",
+        sections: [
+          {
+            multiple: true,
+            fields: [
+              {
+                type: "text",
+                label: "Text",
+                key: "text",
+              },
+            ],
+          },
+        ],
+      }),
+    );
+  });
+
+  it("should stringify the form syntax correctly", () => {
+    const result = parser.stringify(
+      defineForm({
+        model: "base",
+        sections: [
+          {
+            multiple: true,
+            fields: [
+              {
+                type: "text",
+                label: "Text",
+                key: "text",
+              },
+            ],
+          },
+        ],
+      }),
+    );
+
+    expect(result).toBe(`formkl {
+	multiple includes {
+		text;
+	}
+}`);
   });
 
   it("should emit syntax error for multiple response field in multiple response section.", () => {

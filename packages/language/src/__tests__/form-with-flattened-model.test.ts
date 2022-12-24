@@ -8,19 +8,46 @@ describe("Form with flatten model", () => {
       }
     }`);
 
-    expect(result).toStrictEqual(defineForm({
-      model: "flat",
-      sections: [
-        {
-          fields: [
-            {
-              type: "text",
-              label: "Text",
-              key: "text",
-            },
-          ],
-        },
-      ],
-    }));
+    expect(result).toStrictEqual(
+      defineForm({
+        model: "flat",
+        sections: [
+          {
+            fields: [
+              {
+                type: "text",
+                label: "Text",
+                key: "text",
+              },
+            ],
+          },
+        ],
+      }),
+    );
+  });
+
+  it("should stringify the form syntax correctly", () => {
+    const result = parser.stringify(
+      defineForm({
+        model: "flat",
+        sections: [
+          {
+            fields: [
+              {
+                type: "text",
+                label: "Text",
+                key: "text",
+              },
+            ],
+          },
+        ],
+      }),
+    );
+
+    expect(result).toBe(`formkl flat {
+	includes {
+		text;
+	}
+}`);
   });
 });

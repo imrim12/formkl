@@ -3,5 +3,8 @@
     "Parser.ts": "i18n",
     "Tokenizer.ts": "i18n"
   },
-  "material-icon-theme.folders.associations": {}
+  "material-icon-theme.folders.associations": {},
+  "editor.insertSpaces": false,
+  "editor.detectIndentation": false,
+  "editor.trimAutoWhitespace": false
 }
