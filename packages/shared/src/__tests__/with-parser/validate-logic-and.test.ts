@@ -1,6 +1,6 @@
 import { isValueValidated } from "@formkl/shared";
 
-import parser from "formkl";
+import parser from "../../../../language";
 
 describe("Test recursive validator", () => {
   it("should return false", () => {

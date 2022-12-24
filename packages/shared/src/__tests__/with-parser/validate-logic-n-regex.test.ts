@@ -1,6 +1,6 @@
 import { isValueValidated } from "@formkl/shared";
 
-import parser from "formkl";
+import parser from "../../../../language";
 
 describe("Test logic and regex", () => {
   it("should return false", () => {
