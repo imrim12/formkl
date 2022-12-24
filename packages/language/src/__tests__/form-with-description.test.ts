@@ -1,4 +1,4 @@
-import parser from "../";
+import parser, { defineForm } from "../";
 
 describe("Form with description", () => {
   it("should parse the form syntax correctly", () => {
@@ -12,7 +12,7 @@ describe("Form with description", () => {
       }
     }`);
 
-    expect(result).toStrictEqual({
+    expect(result).toStrictEqual(defineForm({
       model: "base",
       title: "Form title (Must has)",
       description: "Form description",
@@ -27,6 +27,6 @@ describe("Form with description", () => {
           ],
         },
       ],
-    });
+    }));
   });
 });

@@ -1,4 +1,4 @@
-import parser from "../";
+import parser, { defineForm } from "../";
 
 describe("Section with multiple responses support", () => {
   it("should parse the form syntax correctly", () => {
@@ -8,7 +8,7 @@ describe("Section with multiple responses support", () => {
       }
     }`);
 
-    expect(result).toStrictEqual({
+    expect(result).toStrictEqual(defineForm({
       model: "base",
       sections: [
         {
@@ -22,7 +22,7 @@ describe("Section with multiple responses support", () => {
           ],
         },
       ],
-    });
+    }));
   });
 
   it("should emit syntax error for multiple response field in multiple response section.", () => {

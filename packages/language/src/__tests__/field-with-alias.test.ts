@@ -1,4 +1,4 @@
-import parser from "../";
+import parser, { defineForm } from "../";
 
 describe("Field with alias (Custom key)", () => {
   it("should parse the form syntax correctly", () => {
@@ -8,7 +8,7 @@ describe("Field with alias (Custom key)", () => {
       }
     }`);
 
-    expect(result).toStrictEqual({
+    expect(result).toStrictEqual(defineForm({
       model: "base",
       sections: [
         {
@@ -21,6 +21,6 @@ describe("Field with alias (Custom key)", () => {
           ],
         },
       ],
-    });
+    }));
   });
 });

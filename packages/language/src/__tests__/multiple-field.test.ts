@@ -1,4 +1,4 @@
-import parser from "../";
+import parser, { defineForm } from "../";
 
 describe("Multiple fields in a section", () => {
   it("should parse the form syntax correctly", () => {
@@ -9,7 +9,7 @@ describe("Multiple fields in a section", () => {
       }
     }`);
 
-    expect(result).toStrictEqual({
+    expect(result).toStrictEqual(defineForm({
       model: "base",
       sections: [
         {
@@ -27,7 +27,7 @@ describe("Multiple fields in a section", () => {
           ],
         },
       ],
-    });
+    }));
   });
 
   it("should emit syntax error for duplicated field key", () => {

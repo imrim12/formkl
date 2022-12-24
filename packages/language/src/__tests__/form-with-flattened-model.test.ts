@@ -1,4 +1,4 @@
-import parser from "../";
+import parser, { defineForm } from "../";
 
 describe("Form with flatten model", () => {
   it("should parse the form syntax correctly", () => {
@@ -8,7 +8,7 @@ describe("Form with flatten model", () => {
       }
     }`);
 
-    expect(result).toStrictEqual({
+    expect(result).toStrictEqual(defineForm({
       model: "flat",
       sections: [
         {
@@ -21,6 +21,6 @@ describe("Form with flatten model", () => {
           ],
         },
       ],
-    });
+    }));
   });
 });

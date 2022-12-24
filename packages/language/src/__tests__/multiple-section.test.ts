@@ -1,4 +1,4 @@
-import parser from "../";
+import parser, { defineForm } from "../";
 
 describe("Multiple section in one form", () => {
   it("should parse the form syntax correctly", () => {
@@ -11,7 +11,7 @@ describe("Multiple section in one form", () => {
       }
     }`);
 
-    expect(result).toStrictEqual({
+    expect(result).toStrictEqual(defineForm({
       model: "base",
       sections: [
         {
@@ -35,7 +35,7 @@ describe("Multiple section in one form", () => {
           ],
         },
       ],
-    });
+    }));
   });
 
   it("should emit syntax error for duplicated section key", () => {

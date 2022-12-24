@@ -1,4 +1,4 @@
-import parser from "../";
+import parser, { defineForm } from "../";
 
 describe("Section with alias", () => {
   it("should parse the form syntax correctly", () => {
@@ -11,7 +11,7 @@ describe("Section with alias", () => {
       } as "different-section"
     }`);
 
-    expect(result).toStrictEqual({
+    expect(result).toStrictEqual(defineForm({
       model: "base",
       sections: [
         {
@@ -36,7 +36,7 @@ describe("Section with alias", () => {
           ],
         },
       ],
-    });
+    }));
   });
 
   it("should emit syntax error for duplicated section key", () => {

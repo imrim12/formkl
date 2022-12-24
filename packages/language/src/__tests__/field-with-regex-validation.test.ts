@@ -1,4 +1,4 @@
-import parser from "../";
+import parser, { defineForm } from "../";
 
 describe("Field with use of validation", () => {
   it("should parse the form syntax correctly", () => {
@@ -8,7 +8,7 @@ describe("Field with use of validation", () => {
       }
     }`);
 
-    expect(result).toStrictEqual({
+    expect(result).toStrictEqual(defineForm({
       model: "base",
       sections: [
         {
@@ -24,6 +24,6 @@ describe("Field with use of validation", () => {
           ],
         },
       ],
-    });
+    }));
   });
 });

@@ -1,4 +1,4 @@
-import parser from "../";
+import parser, { defineForm } from "../";
 
 describe("Required field", () => {
   it("should parse the form syntax correctly", () => {
@@ -9,7 +9,7 @@ describe("Required field", () => {
       }
     }`);
 
-    expect(result).toStrictEqual({
+    expect(result).toStrictEqual(defineForm({
       model: "base",
       sections: [
         {
@@ -28,6 +28,6 @@ describe("Required field", () => {
           ],
         },
       ],
-    });
+    }));
   });
 });

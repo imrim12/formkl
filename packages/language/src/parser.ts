@@ -1,8 +1,9 @@
 import { Formkl, Section, FieldDefault, FieldSelection, HttpMethod } from "@formkl/shared";
-import { Tokenizer } from "./Tokenizer";
+import { Tokenizer } from "./tokenizer";
 import { Token } from "./types";
 
 import slugify from "slugify";
+import { Stringifier } from "./stringifier";
 
 export class Parser {
   private _string: string;
@@ -19,7 +20,7 @@ export class Parser {
   }
 
   /**
-   * Parses a string into an AST
+   * Parse a Formkl syntax string into Formkl object
    */
   parse(string: string): Formkl {
     this._string = "";
@@ -37,6 +38,15 @@ export class Parser {
     // Parse recursively starting from the main
     // entry point, the Program:
     return this.FormBlock();
+  }
+
+  /**
+   * Stringify a Formkl object to a Formkl syntax string
+   */
+  stringfify(formkl: Formkl) {
+    const stringifier = new Stringifier()
+
+    return stringifier.stringify(formkl)
   }
 
   /**

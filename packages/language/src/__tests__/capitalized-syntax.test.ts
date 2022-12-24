@@ -1,15 +1,15 @@
-import parser from "../";
+import parser, { defineForm } from "../";
 
 describe("Used with Capitalized syntax", () => {
   it("should parse the form syntax correctly", () => {
-    const result = parser.parse(`Formkl {
+    const syntax = `Formkl {
       Includes {
         Text;
         "Another" Text;
       }
-    }`);
+    }`
 
-    expect(result).toStrictEqual({
+    const expected = defineForm({
       model: "base",
       sections: [
         {
@@ -27,6 +27,12 @@ describe("Used with Capitalized syntax", () => {
           ],
         },
       ],
-    });
+    })
+
+    console.log(parser.stringfify(expected))
+
+    const result = parser.parse(syntax);
+
+    expect(result).toStrictEqual(expected);
   });
 });

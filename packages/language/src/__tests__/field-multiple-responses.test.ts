@@ -1,4 +1,4 @@
-import parser from "../";
+import parser, { defineForm } from "../";
 
 describe("Field with multiple responses support", () => {
   it("should parse the form syntax correctly", () => {
@@ -8,7 +8,7 @@ describe("Field with multiple responses support", () => {
       }
     }`);
 
-    expect(result).toStrictEqual({
+    expect(result).toStrictEqual(defineForm({
       model: "base",
       sections: [
         {
@@ -22,7 +22,7 @@ describe("Field with multiple responses support", () => {
           ],
         },
       ],
-    });
+    }));
   });
 
   it("should parse the form syntax correctly with multiple required fields", () => {
@@ -32,7 +32,7 @@ describe("Field with multiple responses support", () => {
       }
     }`);
 
-    expect(result).toStrictEqual({
+    expect(result).toStrictEqual(defineForm({
       model: "base",
       sections: [
         {
@@ -47,7 +47,7 @@ describe("Field with multiple responses support", () => {
           ],
         },
       ],
-    });
+    }));
   });
 
   it("should parse the form syntax correctly with multiple required fields", () => {
@@ -57,7 +57,7 @@ describe("Field with multiple responses support", () => {
       }
     }`);
 
-    expect(result).toStrictEqual({
+    expect(result).toStrictEqual(defineForm({
       model: "base",
       sections: [
         {
@@ -72,6 +72,6 @@ describe("Field with multiple responses support", () => {
           ],
         },
       ],
-    });
+    }));
   });
 });

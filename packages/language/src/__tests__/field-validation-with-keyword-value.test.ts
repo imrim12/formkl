@@ -1,4 +1,4 @@
-import parser from "../";
+import parser, { defineForm } from "../";
 
 describe("Field validation using keyword value like null, undefined, NaN", () => {
   it("should parse the form syntax correctly", () => {
@@ -11,7 +11,7 @@ describe("Field validation using keyword value like null, undefined, NaN", () =>
       }
     }`);
 
-    expect(result).toStrictEqual({
+    expect(result).toStrictEqual(defineForm({
       model: "base",
       sections: [
         {
@@ -93,6 +93,6 @@ describe("Field validation using keyword value like null, undefined, NaN", () =>
           ],
         },
       ],
-    });
+    }));
   });
 });
