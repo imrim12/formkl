@@ -17,7 +17,7 @@ hero:
       link: /introduction
     - theme: alt
       text: Star on GitHub
-      link: https://github.com/formkl/formkl
+      link: https://github.com/imrim12/formkl
 
 features:
   - icon: ⚡️

@@ -19,7 +19,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/formkl/formkl.git"
+    "url": "git+https://github.com/imrim12/formkl.git"
   },
   "keywords": [
     "form",
@@ -32,9 +32,9 @@
   "author": "thecodeorigin",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/formkl/formkl/issues"
+    "url": "https://github.com/imrim12/formkl/issues"
   },
-  "homepage": "https://github.com/formkl/formkl#readme",
+  "homepage": "https://github.com/imrim12/formkl#readme",
   "workspaces": [
     "packages/**",
     "sandbox",

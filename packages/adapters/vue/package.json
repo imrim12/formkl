@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/formkl/formkl.git",
+    "url": "git+https://github.com/imrim12/formkl.git",
     "directory": "packages/adapters/vue"
   },
   "keywords": [
@@ -21,9 +21,9 @@
   "author": "thecodeorigin",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/formkl/formkl/issues"
+    "url": "https://github.com/imrim12/formkl/issues"
   },
-  "homepage": "https://github.com/formkl/formkl#readme",
+  "homepage": "https://github.com/imrim12/formkl#readme",
   "dependencies": {
     "@formkl/plugin-vue": "workspace:*",
     "@formkl/shared": "workspace:*",

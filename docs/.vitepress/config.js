@@ -9,10 +9,10 @@ export default {
 
     nav: [{ text: "Syntax guide", link: "/syntax/form" }],
 
-    socialLinks: [{ icon: "github", link: "https://github.com/formkl/formkl" }],
+    socialLinks: [{ icon: "github", link: "https://github.com/imrim12/formkl" }],
 
     editLink: {
-      pattern: "https://github.com/formkl/formkl/edit/main/docs/:path",
+      pattern: "https://github.com/imrim12/formkl/edit/main/docs/:path",
       text: "Edit this page on GitHub",
     },
 

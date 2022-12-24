@@ -14,8 +14,8 @@ Please make sure to read the [Contributing Guide](https://formkl.org/learning/co
 
 Thank you to all the people who already contributed to the Formkl - Form Markup Language project!
 
-<a href="https://github.com/formkl/formkl/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=formkl/formkl" />
+<a href="https://github.com/imrim12/formkl/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=imrim12/formkl" />
 </a>
 
 Made with [contrib.rocks](https://contrib.rocks).
