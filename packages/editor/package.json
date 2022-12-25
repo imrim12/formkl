@@ -1,6 +1,6 @@
 {
   "name": "@formkl/editor",
-  "version": "1.0.0-rc.2",
+  "version": "1.0.0-rc.3",
   "description": "A universal Editor for Formkl using web component API",
   "type": "module",
   "exports": {
@@ -20,7 +20,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/formkl/formkl.git",
+    "url": "git+ssh://git@github.com/imrim12/formkl.git",
     "directory": "packages/editor"
   },
   "keywords": [
@@ -30,9 +30,9 @@
   "author": "thecodeorigin",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/formkl/formkl/issues"
+    "url": "https://github.com/imrim12/formkl/issues"
   },
-  "homepage": "https://github.com/formkl/formkl#readme",
+  "homepage": "https://github.com/imrim12/formkl#readme",
   "dependencies": {
     "@codemirror/autocomplete": "^6.2.0",
     "@codemirror/commands": "^6.1.0",

@@ -27,9 +27,9 @@ More about pnpm, please refer to [pnpm.io](https://pnpm.io), if you don't have i
 npm i -g pnpm
 ```
 
-Then clone the [repository](https://github.com/formkl/formkl) and open the cloned directory with your code editor or IDE.
+Then clone the [repository](https://github.com/imrim12/formkl) and open the cloned directory with your code editor or IDE.
 ```bash
-git clone git@github.com:formkl/formkl.git
+git clone git@github.com:imrim12/formkl.git
 ```
 
 Install the workspace dependencies

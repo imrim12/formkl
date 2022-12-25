@@ -1,4 +1,4 @@
-import parser from "formkl";
+import parser, { defineForm } from "../";
 
 describe("Used with UPPERCASE syntax", () => {
   it("should parse the form syntax correctly", () => {
@@ -9,7 +9,7 @@ describe("Used with UPPERCASE syntax", () => {
       }
     }`);
 
-    expect(result).toStrictEqual({
+    expect(result).toStrictEqual(defineForm({
       model: "base",
       sections: [
         {
@@ -27,6 +27,6 @@ describe("Used with UPPERCASE syntax", () => {
           ],
         },
       ],
-    });
+    }));
   });
 });

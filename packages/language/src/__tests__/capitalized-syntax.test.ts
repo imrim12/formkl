@@ -1,4 +1,4 @@
-import parser from "formkl";
+import parser, { defineForm } from "../";
 
 describe("Used with Capitalized syntax", () => {
   it("should parse the form syntax correctly", () => {
@@ -9,24 +9,26 @@ describe("Used with Capitalized syntax", () => {
       }
     }`);
 
-    expect(result).toStrictEqual({
-      model: "base",
-      sections: [
-        {
-          fields: [
-            {
-              type: "text",
-              label: "Text",
-              key: "text",
-            },
-            {
-              type: "text",
-              label: "Another",
-              key: "another",
-            },
-          ],
-        },
-      ],
-    });
+    expect(result).toStrictEqual(
+      defineForm({
+        model: "base",
+        sections: [
+          {
+            fields: [
+              {
+                type: "text",
+                label: "Text",
+                key: "text",
+              },
+              {
+                type: "text",
+                label: "Another",
+                key: "another",
+              },
+            ],
+          },
+        ],
+      }),
+    );
   });
 });

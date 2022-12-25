@@ -94,6 +94,14 @@ const Specs: Array<Spec> = [
   [/^'[^']*'/, "STRING"],
 
   // --------------------------------------
+  // Values by Keyword:
+  [createKeywordRegex("NaN"), "NAN"],
+  [createKeywordRegex("FALSE"), "FALSE"],
+  [createKeywordRegex("TRUE"), "TRUE"],
+  [createKeywordRegex("NULL"), "NULL"],
+  [createKeywordRegex("UNDEFINED"), "UNDEFINED"],
+
+  // --------------------------------------
   // Identifier
   [/^\w+/, "IDENTIFIER"],
 ];

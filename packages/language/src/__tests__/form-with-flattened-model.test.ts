@@ -1,4 +1,4 @@
-import parser from "formkl";
+import parser, { defineForm } from "../";
 
 describe("Form with flatten model", () => {
   it("should parse the form syntax correctly", () => {
@@ -8,19 +8,46 @@ describe("Form with flatten model", () => {
       }
     }`);
 
-    expect(result).toStrictEqual({
-      model: "flat",
-      sections: [
-        {
-          fields: [
-            {
-              type: "text",
-              label: "Text",
-              key: "text",
-            },
-          ],
-        },
-      ],
-    });
+    expect(result).toStrictEqual(
+      defineForm({
+        model: "flat",
+        sections: [
+          {
+            fields: [
+              {
+                type: "text",
+                label: "Text",
+                key: "text",
+              },
+            ],
+          },
+        ],
+      }),
+    );
+  });
+
+  it("should stringify the form syntax correctly", () => {
+    const result = parser.stringify(
+      defineForm({
+        model: "flat",
+        sections: [
+          {
+            fields: [
+              {
+                type: "text",
+                label: "Text",
+                key: "text",
+              },
+            ],
+          },
+        ],
+      }),
+    );
+
+    expect(result).toBe(`formkl flat {
+	includes {
+		text;
+	}
+}`);
   });
 });

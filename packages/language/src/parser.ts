@@ -1,8 +1,9 @@
 import { Formkl, Section, FieldDefault, FieldSelection, HttpMethod } from "@formkl/shared";
-import { Tokenizer } from "./Tokenizer";
+import { Tokenizer } from "./tokenizer";
 import { Token } from "./types";
 
 import slugify from "slugify";
+import { Stringifier } from "./stringifier";
 
 export class Parser {
   private _string: string;
@@ -19,7 +20,7 @@ export class Parser {
   }
 
   /**
-   * Parses a string into an AST
+   * Parse a Formkl syntax string into Formkl object
    */
   parse(string: string): Formkl {
     this._string = "";
@@ -37,6 +38,15 @@ export class Parser {
     // Parse recursively starting from the main
     // entry point, the Program:
     return this.FormBlock();
+  }
+
+  /**
+   * Stringify a Formkl object to a Formkl syntax string
+   */
+  stringify(formkl: Formkl) {
+    const stringifier = new Stringifier();
+
+    return stringifier.stringify(formkl);
   }
 
   /**
@@ -110,7 +120,7 @@ export class Parser {
    */
   private SectionBlockList(stopLookAhead = "}") {
     const sectionList = [this.SectionBlock()];
-    while (this._lookahead != null && this._lookahead.type !== stopLookAhead) {
+    while (this._lookahead != null && this._lookahead?.type !== stopLookAhead) {
       sectionList.push(this.SectionBlock());
     }
     return sectionList;
@@ -180,7 +190,7 @@ export class Parser {
    * */
   private FieldStatementList(stopLookAhead = "}") {
     const fieldStatementList = [this.FieldStatement()];
-    while (this._lookahead !== null && this._lookahead.type !== stopLookAhead) {
+    while (this._lookahead !== null && this._lookahead?.type !== stopLookAhead) {
       fieldStatementList.push(this.FieldStatement());
     }
     return fieldStatementList;
@@ -206,19 +216,15 @@ export class Parser {
     }
 
     do {
-      const expression = {
-        REQUIRE: () => {
+      switch (this._lookahead?.type) {
+        case "REQUIRE":
           this._eat("REQUIRE");
           field.required = true;
-        },
-        MULTIPLE: () => {
+          break;
+        case "MULTIPLE":
           this._eat("MULTIPLE");
           field.multiple = true;
-        },
-      }[String(this._lookahead?.type)];
-
-      if (expression) {
-        Object.assign(field, expression());
+          break;
       }
     } while (["REQUIRE", "MULTIPLE"].includes(String(this._lookahead?.type)));
 
@@ -451,43 +457,70 @@ export class Parser {
    *  ;
    */
   private RelationalExpression() {
-    if (this._lookahead?.type) {
-      const expresion = {
-        OPERATOR_RELATIONAL: () => {
-          const operator = {
-            ">": "$gt",
-            ">=": "$gte",
-            "<": "$lt",
-            "<=": "$lte",
-          }[this._eat("OPERATOR_RELATIONAL").value] as string;
+    switch (this._lookahead?.type) {
+      case "OPERATOR_RELATIONAL":
+        const relationalOperator = this._eat("OPERATOR_RELATIONAL").value;
 
-          return {
-            [operator]: this.NumericLiteral(),
-          };
-        },
-        OPERATOR_EQUALITY: () => {
-          const operator = {
-            "==": "$eq",
-            "!=": "$neq",
-          }[this._eat("OPERATOR_EQUALITY").value] as string;
+        switch (relationalOperator) {
+          case ">":
+            return { $gt: this.NumericLiteral() };
+          case ">=":
+            return { $gte: this.NumericLiteral() };
+          case "<":
+            return { $lt: this.NumericLiteral() };
+          case "<=":
+            return { $lte: this.NumericLiteral() };
+          default:
+            throw new SyntaxError(`Unknown relational operator: ${relationalOperator}`);
+        }
+      case "OPERATOR_EQUALITY":
+        const equalityOperator = this._eat("OPERATOR_EQUALITY").value;
+        const equalityOperatorKey = equalityOperator === "==" ? "$eq" : "$neq";
 
-          return {
-            [operator]: isNaN(this._lookahead?.value as number)
-              ? this.StringLiteral()
-              : this.NumericLiteral(),
-          };
-        },
-        HAS: () => {
-          this._eat("HAS");
-          return {
-            $has: isNaN(this._lookahead?.value as number)
-              ? this.StringLiteral()
-              : this.NumericLiteral(),
-          };
-        },
-      }[this._lookahead.type];
+        switch (equalityOperator) {
+          case "==":
+          case "!=":
+            switch (
+              this._lookahead?.type as
+                | "NUMBER"
+                | "NAN"
+                | "NULL"
+                | "UNDEFINED"
+                | "TRUE"
+                | "FALSE"
+                | "STRING"
+            ) {
+              case "NUMBER":
+                return { [equalityOperatorKey]: this.NumericLiteral() };
+              case "NAN":
+                return { [equalityOperatorKey]: this.NaNLiteral() };
+              case "NULL":
+                return { [equalityOperatorKey]: this.NullLiteral() };
+              case "UNDEFINED":
+                return { [equalityOperatorKey]: this.UndefinedLiteral() };
+              case "TRUE":
+              case "FALSE":
+                return {
+                  [equalityOperatorKey]: this.BooleanLiteral(
+                    this._lookahead?.type as "TRUE" | "FALSE",
+                  ),
+                };
+              case "STRING":
+                return { [equalityOperatorKey]: this.StringLiteral() };
+              default:
+                throw new SyntaxError(`Unknown equality value type: ${this._lookahead?.type}`);
+            }
+          default:
+            throw new SyntaxError(`Unknown equality operator: ${equalityOperator}`);
+        }
+      case "HAS":
+        this._eat("HAS");
 
-      if (expresion) return expresion();
+        return {
+          $has: isNaN(this._lookahead?.value as number)
+            ? this.StringLiteral()
+            : this.NumericLiteral(),
+        };
     }
   }
 
@@ -504,6 +537,16 @@ export class Parser {
     } while (this._lookahead?.type === "," && this._eat(","));
 
     return strings;
+  }
+
+  /**
+   * NaNLiteral
+   *  : 'NaN'
+   *  ;
+   */
+  private NaNLiteral() {
+    this._eat("NAN");
+    return NaN;
   }
 
   /*
@@ -532,8 +575,8 @@ export class Parser {
    *  | FALSE
    *  ;
    */
-  private BooleanLiteral(value: boolean) {
-    this._eat(value ? "true" : "false");
+  private BooleanLiteral(value: "TRUE" | "FALSE") {
+    this._eat(value ? "TRUE" : "FALSE");
     return value;
   }
 
@@ -543,8 +586,18 @@ export class Parser {
    *  ;
    */
   private NullLiteral() {
-    this._eat("null");
+    this._eat("NULL");
     return null;
+  }
+
+  /**
+   * UndefinedLiteral
+   *  : 'undefined'
+   *  ;
+   */
+  private UndefinedLiteral() {
+    this._eat("UNDEFINED");
+    return undefined;
   }
 
   /**

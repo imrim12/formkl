@@ -14,11 +14,11 @@ jobs:
       init-commands: |
         npx nx-cloud start-ci-run --agent-count=3
       parallel-commands: |
-        npx nx-cloud record -- npx nx affected --target=build
+        npx nx-cloud record -- npx nx affected --target=build:all
         npx nx-cloud record -- npx nx affected --target=typecheck
         npx nx-cloud record -- npx nx affected --target=test
       parallel-commands-on-agents: |
-        npx nx affected --target=build --parallel=3
+        npx nx affected --target=build:all --parallel=3
         npx nx affected --target=typecheck --parallel=3
         npx nx affected --target=test --parallel=3
 
