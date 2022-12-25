@@ -1,6 +1,6 @@
 {
   "type": "module",
-  "description": "Form markup language",
+  "description": "Form marKup Language",
   "packageManager": "pnpm@7.12.2",
   "scripts": {
     "nx": "nx",

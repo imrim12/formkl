@@ -2,7 +2,42 @@
 layout: home
 
 title: FORMKL
-titleTemplate: Form markup language
+titleTemplate: Form marKup Language - Speed up form development.
+
+head:
+  - - meta
+    - name: description
+      content: An open-source DSL (Domain-Specific Language) to define and create form schema.
+  - - meta
+    - name: keywords
+      content: form, form.js, formkl, form markup language, auto form
+  - - meta
+    - name: og:title
+      content: Form marKup Language - Speed up form development.
+  - - meta
+    - name: og:description
+      content: An open-source DSL (Domain-Specific Language) to define and create form schema.
+  - - meta
+    - name: og:url
+      content: https://formkl.org
+  - - meta
+    - name: og:image
+      content: https://res.cloudinary.com/i-m-rim/image/upload/v1671986246/personal/thumbnail_c23hb6.png
+  - - meta
+    - name: og:site_name
+      content: Form marKup Language.
+  - - meta
+    - name: twitter:title
+      content: Form marKup Language - Speed up form development.
+  - - meta
+    - name: twitter:description
+      content: An open-source DSL (Domain-Specific Language) to define and create form schema.
+  - - meta
+    - name: twitter:image
+      content: https://res.cloudinary.com/i-m-rim/image/upload/v1671986246/personal/thumbnail_c23hb6.png
+  - - meta
+    - name: twitter:card
+      content: summary_large_image
 
 hero:
   name: FORMKL

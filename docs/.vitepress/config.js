@@ -1,7 +1,7 @@
 export default {
   lang: "en-US",
   title: "FORMKL",
-  description: "Form markup language",
+  description: "Form marKup Language",
 
   themeConfig: {
     siteTitle: "FORMKL",

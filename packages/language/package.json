@@ -1,7 +1,7 @@
 {
   "name": "formkl",
   "version": "1.0.0-rc.3",
-  "description": "Form markup language",
+  "description": "Form marKup Language",
   "type": "module",
   "exports": {
     ".": {
