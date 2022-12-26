@@ -3,6 +3,21 @@ export default {
   title: "FORMKL",
   description: "Form marKup Language",
 
+  head: [
+    ["script", { async: true, src: "https://www.googletagmanager.com/gtag/js?id=G-2BHERVD2DR" }],
+    [
+      "script",
+      {},
+      `
+				window.dataLayer = window.dataLayer || [];
+				function gtag(){dataLayer.push(arguments);}
+				gtag('js', new Date());
+			
+				gtag('config', 'G-2BHERVD2DR');
+			`,
+    ],
+  ],
+
   themeConfig: {
     siteTitle: "FORMKL",
     logo: "https://res.cloudinary.com/i-m-rim/image/upload/v1669218850/personal/logo_h6vt9n.svg",
