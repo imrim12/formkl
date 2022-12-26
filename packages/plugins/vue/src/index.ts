@@ -16,3 +16,18 @@ export * from "./types/default-component.enum";
 
 export * from "./Adapter";
 export * from "./Plugin";
+
+import Formkl from "formkl";
+
+const formklFileLoader = () => {
+  return {
+    name: "formkl-file-loader",
+    transform(code: string, id: string) {
+      if (id.endsWith(".formkl")) {
+        return `export default ${Formkl.parse(code)}`;
+      }
+    },
+  };
+};
+
+export default formklFileLoader;

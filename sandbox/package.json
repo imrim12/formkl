@@ -10,6 +10,7 @@
   "dependencies": {
     "@formkl/editor": "workspace:*",
     "@formkl/shared": "workspace:*",
+    "@formkl/plugin-vite": "workspace:*",
     "@formkl/vue": "workspace:*",
     "element-plus": "^2.2.17",
     "vue": "^3.2.41"
