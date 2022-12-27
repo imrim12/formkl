@@ -15,6 +15,7 @@ import { defineComponent } from "vue";
 
 import FormParser from "formkl";
 
+// TODO: Pending https://github.com/microsoft/TypeScript/pull/51435
 import ExampleForm from "./example.form";
 
 export default defineComponent({
