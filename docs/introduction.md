@@ -1,6 +1,12 @@
 # Introduction
 
-> FORMKL - Form marKup Language 
+[Start quickly with the syntax](/syntax/form)
+
+[Look up the full grammar](/learning/grammar)
+
+::: warning
+🚧 🚧 🚧 `formkl` is currently experimental and not ready for production use. 🚧 🚧 🚧
+:::
 
 ## What is FORMKL?
 

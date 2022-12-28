@@ -2,6 +2,6 @@
 import type { Formkl } from "@formkl/shared";
 
 declare module "*.form" {
-  const form: Formkl;
-  export default form;
+	const form: Formkl;
+	export default form;
 }

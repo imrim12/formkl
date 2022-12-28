@@ -4,34 +4,34 @@ FORMKL is a markup language used to annotate form model, sections and fields. It
 
 ## Grammar
 
-The grammar is defined in [BNF](https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form).
+The grammar is defined in [EBNF](https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form).
 
-An simple example of BNF:
+An simple example of EBNF:
 
 ```bash
 # BNF is a set of rules that express the possible
 # valid cases of a set of keywords (tokens)
 
 Statement
-  : Indefinite Subject # a girl, a boy, the spider man
+  = Indefinite Subject # a girl, a boy, the spider man
   | Adjective Subject # beautiful girl, awesome boy
   | Indefinite Adjective Subject # a beautiful girl, the amazing spider man
   ;
 
 Subject
-  : "girl"
+  = "girl"
   | "boy"
   | "spider man"
   ;
 
 Adjective
-  : "beautiful"
+  = "beautiful"
   | "amazing"
   | "awesome"
   ;
 
 Indefinite
-  : "a"
+  = "a"
   | "an"
   | "the"
   ;
@@ -50,28 +50,28 @@ Another simple example for programming language:
 #    return c;
 # }
 FunctionDeclaration
-  : "function" Identifier "(" ParamList ")" BlockStatement
+  = "function" Identifier "(" ParamList ")" BlockStatement
   ;
 
 # Accept a list of parameters recursively or no parameter (null)
 ParamList
-  : null
+  = null
   | Param
   | ParamList "," Param
   ;
 
 Param
-  : "somethinghere"
+  = "somethinghere"
   ;
 
 # Accept multiple lines of statements and wrapped in {  }
 BlockStatement
-  : "{" StatementList "}"
+  = "{" StatementList "}"
   ;
 
 # Accept multiple lines of statements
 StatementList
-  : null
+  = null
   | Statement
   | StatementList Statement
   ;
@@ -112,14 +112,14 @@ class Parser {
    * Main entry point.
    *
    * FormBlock
-   *  : SectionBlockList
+   *  = SectionBlockList
    *  ;
    */
   private FormBlock(): Formkl {}
 
   /**
    * SectionBlockList
-   *  : (SectionBlock)*
+   *  = (SectionBlock)*
    *  ;
    */
   private SectionBlockList(): Section[] {}
@@ -129,5 +129,6 @@ class Parser {
   // ...
 }
 ```
+
 ::: info Please aware that this code is over-simplified for the sake of example.
 :::

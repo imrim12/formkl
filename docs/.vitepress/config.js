@@ -53,6 +53,7 @@ export default {
           { text: "Form", link: "/syntax/form" },
           { text: "Field", link: "/syntax/field" },
           { text: "Model", link: "/syntax/model" },
+          { text: "Submission", link: "/syntax/submission" },
           { text: "Validation", link: "/syntax/validation" },
           { text: "Multi-responses", link: "/syntax/multiple" },
         ],
@@ -63,6 +64,7 @@ export default {
         items: [
           { text: "Contribution guide", link: "/learning/contribution-guide" },
           { text: "Core language", link: "/learning/core-language" },
+          { text: "Full Grammar", link: "/learning/grammar" },
           { text: "Adapter (Vue)", link: "/learning/adapter-vue" },
           { text: "Adapter (React)", link: "/learning/adapter-react" },
           { text: "Adapter (Svelte)", link: "/learning/adapter-svelte" },

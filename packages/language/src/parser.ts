@@ -53,7 +53,7 @@ export class Parser {
    * Main entry point.
    *
    * FormBlock
-   *  : SectionBlockList
+   *  = SectionBlockList
    *  ;
    */
   private FormBlock(): Formkl {
@@ -63,14 +63,6 @@ export class Parser {
     };
 
     this._eat("FORMKL");
-
-    if (this._lookahead?.type === "STRING") {
-      form.title = this.StringLiteral();
-    }
-
-    if (this._lookahead?.type === "STRING") {
-      form.description = this.StringLiteral();
-    }
 
     if (this._lookahead?.type === "FLAT") {
       this._eat("FLAT");
@@ -87,6 +79,14 @@ export class Parser {
       this._eat("(");
       form.endpoint = this.StringLiteral();
       this._eat(")");
+    }
+
+    if (this._lookahead?.type === "STRING") {
+      form.title = this.StringLiteral();
+    }
+
+    if (this._lookahead?.type === "STRING") {
+      form.description = this.StringLiteral();
     }
 
     this._eat("{");
@@ -115,7 +115,7 @@ export class Parser {
 
   /**
    * SectionBlockList
-   *  : (SectionBlock)*
+   *  = (SectionBlock)*
    *  ;
    */
   private SectionBlockList(stopLookAhead = "}") {
@@ -127,8 +127,8 @@ export class Parser {
   }
 
   /**
-   * Section
-   *  : FieldStatementList
+   * SectionBlock
+   *  = FieldStatementList
    *  ;
    */
   private SectionBlock(): Section {
@@ -198,7 +198,7 @@ export class Parser {
 
   /**
    * FieldStatement
-   *  : (NUMBER) (REQUIRE) (StringLiteral) FieldExpression (as StringLiteral) ';'
+   *  = (NUMBER) (REQUIRE) (StringLiteral) FieldExpression (as StringLiteral) ';'
    *  | (MULTIPLE) (REQUIRE) (StringLiteral) FieldExpression (as StringLiteral) ';'
    *  | (REQUIRE) (MULTIPLE) (StringLiteral) FieldExpression (as StringLiteral) ';'
    *  ;
@@ -252,7 +252,7 @@ export class Parser {
 
   /**
    * FieldExpression
-   *  : 'FIELD'
+   *  = 'FIELD'
    *  | 'FIELDSELECTION'
    *  | 'FIELDVALIDATED'
    *  | 'FIELDDATETIME'
@@ -294,7 +294,7 @@ export class Parser {
 
   /**
    * FieldSelectionExpression
-   *  : 'FIELDSELECTION' StringLiteral '(' StringList ')'
+   *  = 'FIELDSELECTION' StringLiteral '(' StringList ')'
    *  | 'FIELDSELECTION' StringLiteral 'URL' '(' StringList ')'
    *  | 'FIELDSELECTION' 'URL' '(' StringList ')'
    *  | 'FIELDSELECTION' '(' StringList ')'
@@ -372,7 +372,7 @@ export class Parser {
 
   /**
    * ValidationExpression
-   *  : 'VALID' '(' LogicalORExpression ')'
+   *  = 'VALID' '(' LogicalORExpression ')'
    *  | 'VALID' '(' LogicalORExpression ')' 'REGEX' '(' StringLiteral ')'
    *  | 'REGEX' '(' StringLiteral ')'
    *  | 'REGEX' '(' StringLiteral ')' 'VALID' '(' LogicalORExpression ')'
@@ -411,7 +411,7 @@ export class Parser {
 
   /**
    * LogicalORExpression
-   *  : LogicalANDExpression
+   *  = LogicalANDExpression
    *  | LogicalANDExpression OR LogicalANDExpression
    *  ;
    */
@@ -430,7 +430,7 @@ export class Parser {
 
   /**
    * LogicalANDExpression
-   *  : RelationalExpression
+   *  = RelationalExpression
    *  | RelationalExpression AND RelationalExpression
    *  ;
    */
@@ -449,7 +449,7 @@ export class Parser {
 
   /**
    * RelationalExpression
-   *  : OPERATOR_RELATIONAL NumericLiteral
+   *  = OPERATOR_RELATIONAL NumericLiteral
    *  | OPERATOR_EQUALITY StringLiteral
    *  | OPERATOR_EQUALITY NumericLiteral
    *  | HAS StringLiteral
@@ -526,7 +526,7 @@ export class Parser {
 
   /**
    * StringList
-   *  : StringLiteral
+   *  = StringLiteral
    *  | StringList ',' StringLiteral
    *  ;
    */
@@ -541,7 +541,7 @@ export class Parser {
 
   /**
    * NaNLiteral
-   *  : 'NaN'
+   *  = 'NaN'
    *  ;
    */
   private NaNLiteral() {
@@ -551,7 +551,7 @@ export class Parser {
 
   /*
    * NumericLiteral
-   *  : NUMBER
+   *  = NUMBER
    *  ;
    */
   private NumericLiteral() {
@@ -571,7 +571,7 @@ export class Parser {
 
   /**
    * BooleanLiteral
-   *  : TRUE
+   *  = TRUE
    *  | FALSE
    *  ;
    */
@@ -582,7 +582,7 @@ export class Parser {
 
   /**
    * NullLiteral
-   *  : 'null'
+   *  = 'null'
    *  ;
    */
   private NullLiteral() {
@@ -592,7 +592,7 @@ export class Parser {
 
   /**
    * UndefinedLiteral
-   *  : 'undefined'
+   *  = 'undefined'
    *  ;
    */
   private UndefinedLiteral() {

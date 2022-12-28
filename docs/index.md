@@ -10,7 +10,7 @@ head:
       content: An open-source DSL (Domain-Specific Language) to define and create form schema.
   - - meta
     - name: keywords
-      content: form, form.js, formkl, form markup language, auto form
+      content: formkl, form markup language, markup language, fast form, form, form.js, formkl, auto form
   - - meta
     - name: og:title
       content: Form marKup Language - Speed up form development.
