@@ -4,6 +4,7 @@ import { Token } from "./types";
 
 import slugify from "slugify";
 import { Stringifier } from "./stringifier";
+import { capitalize } from "./utils/capitalize";
 
 export class Parser {
   private _string: string;
@@ -199,7 +200,6 @@ export class Parser {
   /**
    * FieldStatement
    *  = (NUMBER) (REQUIRE) (StringLiteral) FieldExpression (as StringLiteral) ';'
-   *  | (MULTIPLE) (REQUIRE) (StringLiteral) FieldExpression (as StringLiteral) ';'
    *  | (REQUIRE) (MULTIPLE) (StringLiteral) FieldExpression (as StringLiteral) ';'
    *  ;
    */
@@ -215,25 +215,20 @@ export class Parser {
       field.multiple = true;
     }
 
-    do {
-      switch (this._lookahead?.type) {
-        case "REQUIRE":
-          this._eat("REQUIRE");
-          field.required = true;
-          break;
-        case "MULTIPLE":
-          this._eat("MULTIPLE");
-          field.multiple = true;
-          break;
-      }
-    } while (["REQUIRE", "MULTIPLE"].includes(String(this._lookahead?.type)));
+    if (this._lookahead?.type === "REQUIRE") {
+      this._eat("REQUIRE");
+      field.required = true;
+    }
+
+    if (this._lookahead?.type === "MULTIPLE") {
+      this._eat("MULTIPLE");
+      field.multiple = true;
+    }
 
     if (this._lookahead?.type === "STRING") {
       field.label = this.StringLiteral();
     } else {
-      field.label =
-        String(this._lookahead?.value).toLowerCase().charAt(0).toUpperCase() +
-        String(this._lookahead?.value).toLowerCase().slice(1);
+      field.label = capitalize(String(this._lookahead?.value).replace(/^\$/g, ""));
     }
 
     field.key = slugify(field.label).toLowerCase();
@@ -271,7 +266,7 @@ export class Parser {
     }[String(this._lookahead?.type)];
 
     if (expression) {
-      Object.assign(field, { type: String(this._lookahead?.value).toLowerCase() }, expression());
+      Object.assign(field, expression());
 
       const validation = this.ValidationExpression();
 
@@ -289,8 +284,10 @@ export class Parser {
     };
 
     if (this._lookahead?.type === "FIELD") {
+      const fieldType = this._eat("FIELD").value;
+
       Object.assign(expression, {
-        type: (this._eat("FIELD").value as string).toLowerCase(),
+        type: (fieldType as string).toLowerCase(),
       });
     }
 
@@ -303,8 +300,10 @@ export class Parser {
     };
 
     if (this._lookahead?.type === "FIELDCUSTOM") {
+      const fieldType = this._eat("FIELDCUSTOM").value;
+
       Object.assign(expression, {
-        type: (this._eat("FIELDCUSTOM").value as string).toLowerCase(),
+        type: (fieldType as string).toLowerCase(),
       });
     }
 
@@ -328,8 +327,10 @@ export class Parser {
     };
 
     if (this._lookahead?.type === "FIELDSELECTION") {
+      const fieldType = this._eat("FIELDSELECTION").value;
+
       Object.assign(expression, {
-        type: (this._eat("FIELDSELECTION").value as string).toLowerCase(),
+        type: (fieldType as string).toLowerCase(),
       });
     }
 
@@ -377,8 +378,10 @@ export class Parser {
     };
 
     if (this._lookahead?.type === "FIELDVALIDATED") {
+      const fieldType = this._eat("FIELDVALIDATED").value;
+
       Object.assign(expression, {
-        type: (this._eat("FIELDVALIDATED").value as string).toLowerCase(),
+        type: (fieldType as string).toLowerCase(),
       });
     }
 
@@ -391,8 +394,10 @@ export class Parser {
     };
 
     if (this._lookahead?.type === "FIELDDATETIME") {
+      const fieldType = this._eat("FIELDDATETIME").value;
+
       Object.assign(expression, {
-        type: (this._eat("FIELDDATETIME").value as string).toLowerCase(),
+        type: (fieldType as string).toLowerCase(),
       });
     }
 
