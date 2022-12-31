@@ -2,9 +2,9 @@ import { Formkl, Section, FieldDefault, FieldSelection, HttpMethod } from "@form
 import { Tokenizer } from "./tokenizer";
 import { Token } from "./types";
 
-import slugify from "slugify";
 import { Stringifier } from "./stringifier";
 import { capitalize } from "./utils/capitalize";
+import { kebabCase } from "./utils/kebabCase";
 
 export class Parser {
   private _string: string;
@@ -147,7 +147,7 @@ export class Parser {
 
     if (this._lookahead?.type === "STRING") {
       section.title = this.StringLiteral();
-      section.key = slugify(section.title).toLowerCase();
+      section.key = kebabCase(section.title).toLowerCase();
     }
 
     this._eat("INCLUDES");
@@ -231,7 +231,7 @@ export class Parser {
       field.label = capitalize(String(this._lookahead?.value).replace(/^\$/g, ""));
     }
 
-    field.key = slugify(field.label).toLowerCase();
+    field.key = kebabCase(field.label).toLowerCase();
 
     Object.assign(field, this.FieldExpression());
 

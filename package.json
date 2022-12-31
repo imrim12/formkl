@@ -42,6 +42,8 @@
   ],
   "dependencies": {
     "@formkl/shared": "workspace:*",
+    "@formkl/plugin-vite": "workspace:*",
+    "@formkl/plugin-webpack": "workspace:*",
     "@formkl/vue": "workspace:*",
     "formkl": "workspace:*",
     "vitepress": "1.0.0-alpha.20"

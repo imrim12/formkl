@@ -54,9 +54,8 @@ export default {
         text: "Installation",
         collapsible: true,
         items: [
-          { text: "Vue", link: "/installation/vue" },
-          { text: "React", link: "/installation/react" },
-          { text: "Svelte", link: "/installation/svelte" },
+          { text: "Vite", link: "/installation/vite" },
+          { text: "Webpack", link: "/installation/webpack" },
         ],
       },
       {
@@ -69,6 +68,15 @@ export default {
           { text: "Submission", link: "/syntax/submission" },
           { text: "Validation", link: "/syntax/validation" },
           { text: "Multi-responses", link: "/syntax/multiple" },
+        ],
+      },
+      {
+        text: "Adapters",
+        collapsible: true,
+        items: [
+          { text: "Vue", link: "/adapters/vue" },
+          { text: "React", link: "/adapters/react" },
+          { text: "Svelte", link: "/adapters/svelte" },
         ],
       },
       {

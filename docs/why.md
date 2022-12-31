@@ -9,6 +9,7 @@ Form is an essential module in any web application. It is used to collect data f
 ## The solution
 The Form Markup Language (Formkl) ecosystem is creating a new way that is fast, consistent, and easy way to create forms.
 
-- Extremely lightweight and provided alongside with a strong ecosystem, including renderers that suits your favourite UI frameworks.
-- Formkl adapters allow you to have customizable themes, validation, and other features. You can add them once, and create forms across your application with just a few lines of code.
-- Formkl is designed to be easy to learn and use, and to be consistent and highly readable as natural language.
+- Extremely lightweight, no dependencies.
+- Provided a strong ecosystem, including renderers that suits your favourite UI frameworks.
+- Customizable themes, validation, and other features. You can add them once, and create forms across your application with just a few lines of code.
+- Easy to learn and use, and to be consistent and highly readable as natural language.
