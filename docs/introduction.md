@@ -146,5 +146,3 @@ We are currently working on Vue 3 support. React and Svelte support will be avai
 </style>
 
 ❤️ If you want to help us, please contact us. We are looking for contributors.
-
-☕️ You can also support us by buying us a coffee.

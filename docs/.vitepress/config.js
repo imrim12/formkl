@@ -2,9 +2,19 @@ export default {
   lang: "en-US",
   title: "FORMKL",
   description: "Form marKup Language",
-
   head: [
     ["script", { async: true, src: "https://www.googletagmanager.com/gtag/js?id=G-2BHERVD2DR" }],
+    [
+      "script",
+      {},
+      `
+				window.dataLayer = window.dataLayer || [];
+				function gtag(){dataLayer.push(arguments);}
+				gtag('js', new Date());
+			
+				gtag('config', 'G-2BHERVD2DR');
+			`,
+    ],
     [
       "script",
       {},
@@ -35,7 +45,10 @@ export default {
       {
         text: "Getting started",
         collapsible: true,
-        items: [{ text: "Introduction", link: "/introduction" }],
+        items: [
+          { text: "Why Formkl?", link: "/why" },
+          { text: "Introduction", link: "/introduction" },
+        ],
       },
       {
         text: "Installation",
