@@ -264,6 +264,7 @@ export class Parser {
 
     const expression = {
       FIELD: this.FieldDefaultExpression.bind(this),
+      FIELDCUSTOM: this.FieldCustomExpression.bind(this),
       FIELDSELECTION: this.FieldSelectionExpression.bind(this),
       FIELDVALIDATED: this.FieldValidatedExpression.bind(this),
       FIELDDATETIME: this.FieldDatetimeExpression.bind(this),
@@ -287,7 +288,25 @@ export class Parser {
       type: "text",
     };
 
-    if (this._lookahead?.type === "FIELD") this._eat("FIELD");
+    if (this._lookahead?.type === "FIELD") {
+      Object.assign(expression, {
+        type: (this._eat("FIELD").value as string).toLowerCase(),
+      });
+    }
+
+    return expression;
+  }
+
+  private FieldCustomExpression() {
+    const expression: Pick<FieldDefault, "type"> = {
+      type: "text",
+    };
+
+    if (this._lookahead?.type === "FIELDCUSTOM") {
+      Object.assign(expression, {
+        type: (this._eat("FIELDCUSTOM").value as string).toLowerCase(),
+      });
+    }
 
     return expression;
   }
@@ -309,7 +328,9 @@ export class Parser {
     };
 
     if (this._lookahead?.type === "FIELDSELECTION") {
-      this._eat("FIELDSELECTION");
+      Object.assign(expression, {
+        type: (this._eat("FIELDSELECTION").value as string).toLowerCase(),
+      });
     }
 
     if (this._lookahead?.type === "STRING") {
@@ -355,7 +376,11 @@ export class Parser {
       type: "text",
     };
 
-    if (this._lookahead?.type === "FIELDVALIDATED") this._eat("FIELDVALIDATED");
+    if (this._lookahead?.type === "FIELDVALIDATED") {
+      Object.assign(expression, {
+        type: (this._eat("FIELDVALIDATED").value as string).toLowerCase(),
+      });
+    }
 
     return expression;
   }
@@ -365,7 +390,11 @@ export class Parser {
       type: "datetime",
     };
 
-    if (this._lookahead?.type === "FIELDDATETIME") this._eat("FIELDDATETIME");
+    if (this._lookahead?.type === "FIELDDATETIME") {
+      Object.assign(expression, {
+        type: (this._eat("FIELDDATETIME").value as string).toLowerCase(),
+      });
+    }
 
     return expression;
   }

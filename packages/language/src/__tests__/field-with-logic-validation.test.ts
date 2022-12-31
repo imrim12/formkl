@@ -6,7 +6,7 @@ describe("Field with use of validation", () => {
       includes {
         text valid(> 5);
         "Test with OR" text valid(> 5 or == "Some value" or has "Keyword");
-        "Test with AND" text valid(> 5 and == "Some value" and has "Keyword");
+        "Test with AND" paragraph valid(> 5 and == "Some value" and has "Keyword");
         "Test with Both" text valid(> 5 or == "Some value" and has "Keyword");
       }
     }`);
@@ -48,7 +48,7 @@ describe("Field with use of validation", () => {
                 },
               },
               {
-                type: "text",
+                type: "paragraph",
                 label: "Test with AND",
                 key: "test-with-and",
                 validation: {

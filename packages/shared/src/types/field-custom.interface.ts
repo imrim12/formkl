@@ -1,8 +1,7 @@
-import { FieldTypeDefault } from "./field-default.type";
 import { Validation } from "./validation.interface";
 
-export interface FieldDefault {
-  type: FieldTypeDefault;
+export interface FieldCustom {
+  type: string;
   label: string;
   key: string;
   required?: boolean;

@@ -4,7 +4,7 @@ describe("Required field", () => {
   it("should parse the form syntax correctly", () => {
     const result = parser.parse(`formkl {
       includes {
-        require text;
+        require paragraph;
         "Not required" text;
       }
     }`);
@@ -16,9 +16,9 @@ describe("Required field", () => {
           {
             fields: [
               {
-                type: "text",
-                label: "Text",
-                key: "text",
+                type: "paragraph",
+                label: "Paragraph",
+                key: "paragraph",
                 required: true,
               },
               {

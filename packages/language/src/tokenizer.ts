@@ -80,6 +80,9 @@ const Specs: Array<Spec> = [
   ...["datetimerange", "datetime", "daterange", "timerange", "time", "date"].map(
     (field) => [createKeywordRegex(field), "FIELDDATETIME"] as Spec,
   ),
+  // --------------------------------------
+  // Identifier
+  [/^\$\w+/, "FIELDCUSTOM"],
 
   // --------------------------------------
   // Numbers:
@@ -100,10 +103,6 @@ const Specs: Array<Spec> = [
   [createKeywordRegex("TRUE"), "TRUE"],
   [createKeywordRegex("NULL"), "NULL"],
   [createKeywordRegex("UNDEFINED"), "UNDEFINED"],
-
-  // --------------------------------------
-  // Identifier
-  [/^\w+/, "IDENTIFIER"],
 ];
 
 /**

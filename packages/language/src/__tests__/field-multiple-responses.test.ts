@@ -57,7 +57,7 @@ describe("Field with multiple responses support", () => {
   it("should parse the form syntax correctly with multiple required fields", () => {
     const result = parser.parse(`formkl {
       includes {
-        require multiple text;
+        require multiple number;
       }
     }`);
 
@@ -68,9 +68,9 @@ describe("Field with multiple responses support", () => {
           {
             fields: [
               {
-                type: "text",
-                label: "Text",
-                key: "text",
+                type: "number",
+                label: "Number",
+                key: "number",
                 required: true,
                 multiple: true,
               },

@@ -7,7 +7,7 @@ describe("Multiple section in one form", () => {
         text;
       }
       includes {
-        text;
+        switch;
       }
     }`);
 
@@ -29,9 +29,9 @@ describe("Multiple section in one form", () => {
           {
             fields: [
               {
-                type: "text",
-                label: "Text",
-                key: "text",
+                type: "switch",
+                label: "Switch",
+                key: "switch",
               },
             ],
           },
