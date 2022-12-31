@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+
+
+<url>
+  <loc>https://formkl.org/</loc>
+  <lastmod>2022-12-31T04:16:54+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>https://formkl.org/syntax/form.html</loc>
+  <lastmod>2022-12-31T04:16:54+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://formkl.org/introduction.html</loc>
+  <lastmod>2022-12-31T04:16:54+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://formkl.org/installation/vue.html</loc>
+  <lastmod>2022-12-31T04:16:54+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://formkl.org/installation/react.html</loc>
+  <lastmod>2022-12-31T04:16:54+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://formkl.org/installation/svelte.html</loc>
+  <lastmod>2022-12-31T04:16:54+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://formkl.org/syntax/field.html</loc>
+  <lastmod>2022-12-31T04:16:54+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://formkl.org/syntax/model.html</loc>
+  <lastmod>2022-12-31T04:16:54+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://formkl.org/syntax/validation.html</loc>
+  <lastmod>2022-12-31T04:16:54+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://formkl.org/syntax/multiple.html</loc>
+  <lastmod>2022-12-31T04:16:54+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://formkl.org/learning/contribution-guide.html</loc>
+  <lastmod>2022-12-31T04:16:54+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://formkl.org/learning/core-language.html</loc>
+  <lastmod>2022-12-31T04:16:54+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://formkl.org/learning/adapter-vue.html</loc>
+  <lastmod>2022-12-31T04:16:54+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://formkl.org/learning/adapter-react.html</loc>
+  <lastmod>2022-12-31T04:16:54+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://formkl.org/learning/adapter-svelte.html</loc>
+  <lastmod>2022-12-31T04:16:54+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://formkl.org/learning/editor.html</loc>
+  <lastmod>2022-12-31T04:16:54+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+
+
+</urlset>
