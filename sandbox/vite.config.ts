@@ -9,15 +9,7 @@ import FormklPlugin from "@formkl/plugin-vite";
 export default defineConfig({
   plugins: [
     AutoImport({
-      imports: [
-        {
-          vue: [
-            "ref", // import { ref } from 'vue',
-            "h", // import { h } from 'vue',
-            "Fragment", // import { Fragment } from 'vue',
-          ],
-        },
-      ],
+      imports: ["vue"],
     }),
     vue({
       template: {

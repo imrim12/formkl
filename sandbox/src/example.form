@@ -6,7 +6,8 @@ formkl
     require text;
   }
   "jhk" includes {
-    multiple text;
+    text;
+    multiple paragraph;
     multiple text as "something";
   }
 }
