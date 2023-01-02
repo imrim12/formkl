@@ -1,71 +1,20 @@
-import type { App } from "vue-demi";
-import type { FormOptions } from "./types/form-option.type";
+import { Plugin } from "vue";
 
-import {
-  Adapter,
-  Plugin,
-  DefaultComponent,
-  PluginCheckbox,
-  PluginDate,
-  PluginDateRange,
-  PluginDatetime,
-  PluginDatetimeRange,
-  PluginNumber,
-  PluginParagraph,
-  PluginRadio,
-  PluginSelect,
-  PluginSwitch,
-  PluginText,
-  PluginTime,
-  PluginTimeRange,
-} from "@formkl/plugin-vue";
+import Formkl from "./main.vue";
 
-import Formkl from "./Main";
-
-import FormklParser from "formkl";
-
-import "./assets/main.scss";
-
-interface PluginOptions {
-  globallyRegister?: boolean;
-  useDefaultPlugins?: boolean;
-  plugins?: Plugin[];
-}
-
-function install(app: App, options: PluginOptions = {}) {
-  const { globallyRegister = false, useDefaultPlugins = true, plugins = [] } = options;
-
-  // Default plugins
-  if (useDefaultPlugins) {
-    Adapter.registerPlugin(
-      PluginCheckbox,
-      PluginDate,
-      PluginDateRange,
-      PluginDatetime,
-      PluginDatetimeRange,
-      PluginNumber,
-      PluginParagraph,
-      PluginRadio,
-      PluginSelect,
-      PluginSwitch,
-      PluginText,
-      PluginTime,
-      PluginTimeRange,
-    );
-  }
-
-  // Overide default plugins
-  Adapter.registerPlugin(...plugins);
-
-  if (globallyRegister) {
+const plugin: Plugin = {
+  install(app, options) {
     app.component("formkl", Formkl);
 
-    app.config.globalProperties.$formkl = FormklParser;
-  }
-}
+    app.config.globalProperties.$formkl = Object.assign(
+      {
+        theme: {},
+      },
+      options,
+    );
+  },
+};
 
-export { Formkl, FormklParser, Adapter, Plugin, DefaultComponent };
+export { Formkl };
 
-export type { FormOptions };
-
-export default { install };
+export default plugin;

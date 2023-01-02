@@ -9,11 +9,12 @@
   },
   "dependencies": {
     "@formkl/editor": "workspace:*",
-    "@formkl/shared": "workspace:*",
     "@formkl/plugin-vite": "workspace:*",
+    "@formkl/shared": "workspace:*",
     "@formkl/vue": "workspace:*",
-    "formkl": "workspace:*",
     "element-plus": "^2.2.17",
+    "formkl": "workspace:*",
+    "lodash": "^4.17.21",
     "vue": "^3.2.41"
   },
   "devDependencies": {

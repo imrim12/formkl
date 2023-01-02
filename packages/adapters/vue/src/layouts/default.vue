@@ -12,7 +12,7 @@
 import { PropType } from "vue";
 import { Formkl } from "@formkl/shared";
 
-const props = defineProps({
+defineProps({
   form: {
     type: Object as PropType<Formkl>,
     required: false,

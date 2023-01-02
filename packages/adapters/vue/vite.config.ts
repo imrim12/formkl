@@ -10,8 +10,8 @@ export default defineConfig({
     lib: {
       name: "@formkl/vue",
       entry: path.resolve(__dirname, "./src/index.ts"),
-      formats: ["es"], // adding 'umd' requires globals set to every external module
-      fileName: (format: string) => `index.${format}.js`,
+      formats: ["es", "cjs"],
+      fileName: (format: string) => (format === "es" ? "index.mjs" : "index.cjs"),
     },
     rollupOptions: {
       // external modules won't be bundled into your library

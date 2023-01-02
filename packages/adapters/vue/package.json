@@ -3,9 +3,18 @@
   "version": "1.0.0-rc.3",
   "description": "A Vue adapter to generate usable Vue from component from Formkl syntax/schema",
   "type": "module",
-  "main": "dist/index.es.js",
   "style": "dist/style.css",
-  "types": "dist/types",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "main": "./dist/index.cjs",
+  "types": "./dist/types/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "typecheck": "vue-tsc --noEmit",
     "build": "rimraf ./dist && vite build"

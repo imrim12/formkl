@@ -1,8 +1,9 @@
 export interface Theme<GenericNode = any, GenericRule = any> {
+  vNodeLayout?: GenericNode;
   vNodeFields: {
     [key: string]: GenericNode;
   };
-  VNodeComponents: {
+  VNodeComponents?: {
     [key: string]: GenericNode;
   };
   validator: (
