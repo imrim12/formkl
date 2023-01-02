@@ -34,7 +34,6 @@
   },
   "homepage": "https://github.com/imrim12/formkl#readme",
   "dependencies": {
-    "@formkl/plugin-vue": "workspace:*",
     "@formkl/shared": "workspace:*",
     "element-plus": "^2.2.16",
     "formkl": "workspace:*",
