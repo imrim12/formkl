@@ -4,12 +4,22 @@
     <div class="formkl-field__container">
       <template v-if="field.multiple">
         <template v-for="(modelValueEach, index) in modelValue" :key="index">
-          <component
-            :is="VNodeField"
-            :model-value="modelValueEach"
-            @update:model-value="handleUpdateFieldMultiple($event, index)"
-          />
+          <div class="formkl-field__inner">
+            <component
+              :is="VNodeField"
+              :model-value="modelValueEach"
+              @update:model-value="handleUpdateFieldMultiple($event, index)"
+            />
+            <component
+              v-if="modelValue.length > 1"
+              :is="VNodeBtnRemoveField"
+              @click="handleRemoveValueFieldMultiple(index)"
+            />
+          </div>
         </template>
+        <div class="formkl-field__footer">
+          <component :is="VNodeBtnAddField" @click="handleAddValueFieldMultiple" />
+        </div>
       </template>
       <template v-else>
         <component
@@ -52,9 +62,33 @@ const handleUpdateFieldSingle = (value: any) => {
   emit("update:modelValue", value);
 };
 
+const handleAddValueFieldMultiple = () => {
+  const currentValue = _cloneDeep(props.modelValue) as Array<any>;
+  currentValue.push(null);
+  emit("update:modelValue", currentValue);
+};
+
+const handleRemoveValueFieldMultiple = (index: number) => {
+  const currentValue = _cloneDeep(props.modelValue) as Array<any>;
+  currentValue.splice(index, 1);
+  emit("update:modelValue", currentValue);
+};
+
 const currentTheme = inject(themeInjectionKey);
 
 const VNodeField = computed(() =>
   h(currentTheme.value?.vNodeFields?.[props.field.type] || "input"),
+);
+
+const VNodeBtnAddField = computed(() =>
+  currentTheme.value?.vNodeComponents?.addField
+    ? h(currentTheme.value?.vNodeComponents?.addField)
+    : h("button", "Add field"),
+);
+
+const VNodeBtnRemoveField = computed(() =>
+  currentTheme.value?.vNodeComponents?.addField
+    ? h(currentTheme.value?.vNodeComponents?.removeField)
+    : h("button", "Remove field"),
 );
 </script>

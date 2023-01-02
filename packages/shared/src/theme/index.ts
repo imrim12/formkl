@@ -3,10 +3,10 @@ export interface Theme<GenericNode = any, GenericRule = any> {
   vNodeFields: {
     [key: string]: GenericNode;
   };
-  VNodeComponents?: {
+  vNodeComponents?: {
     [key: string]: GenericNode;
   };
-  validator: (
+  validator?: (
     state: {
       fieldValue: any;
       fieldPath: string;
