@@ -150,7 +150,7 @@ export class Parser {
       section.key = kebabCase(section.title).toLowerCase();
     }
 
-    this._eat("INCLUDES");
+    this._eat("HAS");
     this._eat("{");
     const fields = this.FieldStatementList();
     this._eat("}");

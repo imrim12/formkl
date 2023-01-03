@@ -8,23 +8,23 @@ export default {
       "script",
       {},
       `
-				window.dataLayer = window.dataLayer || [];
-				function gtag(){dataLayer.push(arguments);}
-				gtag('js', new Date());
-			
-				gtag('config', 'G-2BHERVD2DR');
-			`,
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+      
+        gtag('config', 'G-2BHERVD2DR');
+      `,
     ],
     [
       "script",
       {},
       `
-				window.dataLayer = window.dataLayer || [];
-				function gtag(){dataLayer.push(arguments);}
-				gtag('js', new Date());
-			
-				gtag('config', 'G-2BHERVD2DR');
-			`,
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+      
+        gtag('config', 'G-2BHERVD2DR');
+      `,
     ],
   ],
 
@@ -59,6 +59,15 @@ export default {
         ],
       },
       {
+        text: "Adapters",
+        collapsible: true,
+        items: [
+          { text: "Vue", link: "/adapters/vue" },
+          { text: "React", link: "/adapters/react" },
+          { text: "Svelte", link: "/adapters/svelte" },
+        ],
+      },
+      {
         text: "Syntax",
         collapsible: true,
         items: [
@@ -68,15 +77,6 @@ export default {
           { text: "Submission", link: "/syntax/submission" },
           { text: "Validation", link: "/syntax/validation" },
           { text: "Multi-responses", link: "/syntax/multiple" },
-        ],
-      },
-      {
-        text: "Adapters",
-        collapsible: true,
-        items: [
-          { text: "Vue", link: "/adapters/vue" },
-          { text: "React", link: "/adapters/react" },
-          { text: "Svelte", link: "/adapters/svelte" },
         ],
       },
       {

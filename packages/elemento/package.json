@@ -9,6 +9,7 @@
     }
   },
   "main": "./dist/index.cjs",
+  "style": "./dist/style.css",
   "types": "./dist/types/index.d.ts",
   "files": [
     "dist"

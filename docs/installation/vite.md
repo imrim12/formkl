@@ -1,6 +1,11 @@
 # Quick start with Vite
 
-`@formkl/plugin-vite` allows you to load .form files directly in your Vite project. Which also mean you can use it with your Vue, React or any other framework as long as it uses Vite as bundler.
+`@formkl/plugin-vite` allows you to load `.form` files directly in your Vite project. Which also mean you can use it with your Vue, React or any other framework as long as it uses Vite as bundler.
+
+Checkout guides for frameworks:
+- [Vue 3](/adapters/vue)
+- [React](/adapters/react)
+- [Svelte](/adapters/svelte)
 
 ## Configuration
 

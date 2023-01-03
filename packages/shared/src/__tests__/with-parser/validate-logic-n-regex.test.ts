@@ -5,7 +5,7 @@ import parser from "../../../../language";
 describe("Test logic and regex", () => {
   it("should return false", () => {
     const form = parser.parse(`formkl {
-      includes {
+      has {
         text regex("test") valid(< 5);
       }
     }`);
@@ -17,7 +17,7 @@ describe("Test logic and regex", () => {
 
   it("should return false", () => {
     const form = parser.parse(`formkl {
-      includes {
+      has {
         text valid(< 5) regex("test");
       }
     }`);

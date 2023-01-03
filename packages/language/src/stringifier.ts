@@ -78,7 +78,7 @@ export class Stringifier {
           "%(t)",
           section.multiple && "multiple%(s)",
           section.title && `"${section.title}"%(s)`,
-          "includes",
+          "has",
           "%(s)",
           "{",
           "%(n)",

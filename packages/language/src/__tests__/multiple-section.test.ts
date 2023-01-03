@@ -3,10 +3,10 @@ import parser, { defineForm } from "../";
 describe("Multiple section in one form", () => {
   it("should parse the form syntax correctly", () => {
     const result = parser.parse(`formkl {
-      "Personal information" includes {
+      "Personal information" has {
         text;
       }
-      includes {
+      has {
         switch;
       }
     }`);
@@ -70,10 +70,10 @@ describe("Multiple section in one form", () => {
     );
 
     expect(result).toBe(`formkl {
-	"Personal information" includes {
+	"Personal information" has {
 		text;
 	}
-	includes {
+	has {
 		text;
 	}
 }`);
@@ -82,10 +82,10 @@ describe("Multiple section in one form", () => {
   it("should emit syntax error for duplicated section key", () => {
     expect(() =>
       parser.parse(`formkl {
-        includes {
+        has {
           text;
         }
-        includes {
+        has {
           text;
         }
       }`),

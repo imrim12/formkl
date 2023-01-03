@@ -10,71 +10,100 @@ You can visit the playground here: https://sandbox.formkl.org/
 
 To begin, install the `formkl` adapter as a dependency in your project:
 
+Use your favorite package manager to install the packages, like `npm`, `yarn`, or `pnpm`
+
 ```cmd
-npm i @formkl/vue
+pnpm add @formkl/vue @formkl/elemento
+pnpm add -D @formkl/plugin-vite
 ```
 
-or with yarn
+### Setup loader
 
-```cmd
-yarn add @formkl/vue
+Setup `.form` file loader for your bundler ([Vite](https://vitejs.dev)/[Webpack](https://webpack.js.org/)) so you can import `.form` files directly in Vue file or JavaScript module.
+
+You can checkout the installation guide for [Vite](/installation/vite) or [Webpack](/installation/webpack).
+
+```typescript
+// vite.config.ts
+import FormklPlugin from "@formkl/plugin-vite";
+
+export default {
+  plugins: [
+    // Your other plugins
+    FormklPlugin(),
+  ],
+};
 ```
 
-or with pnpm
+### Setup plugin
 
-```cmd
-pnpm add @formkl/vue
+Setup `@formkl/vue` using the default theme `@formkl/elemento` or your own theme
+
+```typescript
+// main.ts
+import { createApp } from "vue";
+import FormklPlugin from "@formkl/vue";
+import formklTheme from "@formkl/elemento";
+import App from "./App.vue";
+
+import "./style.css";
+
+createApp(App)
+  .use(FormklPlugin, {
+    theme: formklTheme,
+  })
+  .mount("#app");
+
+```
+
+```css
+/* style.css */
+@import url(@formkl/elemento);
 ```
 
 ⚡️ That's all! You're ready to start building forms.
 
 ## Basic Usage
 
-Use the `Formkl` adapter component to digest the formkl syntax and render the form.
+Use the `Formkl` component to render the form.
 
-This is an example `MyFormPage.vue` file that uses the `Formkl` component.
+```text
+// example.form
+formkl {
+  "Personal Information" has {
+    "Fullname" text;
+    "Bio" paragraph;
+  }
+}
+```
 
 ```html
+<!-- YourForm.vue -->
 <template>
-  <Formkl ref="formklRef" :formkl="formklSyntax" />
-  <!-- Use with Element Plus el-button -->
-  <el-button type="primary" @click="submit">
-    Submit
-  </el-button>
+  <formkl v-model="exampleModel" :form="ExampleForm" />
 </template>
 
-<script>
-  import { defineComponent, ref } from "vue";
-  import { Formkl } from "@formkl/vue";
+<script lang="ts">
+import ExampleForm from "./example.form";
 
-  export default defineComponent({
-    name: "MyFormPage",
-    components: { Formkl },
-    setup() {
-      const formklRef = ref();
-      const formklSyntax = ref(`
-        formkl post("https://yoursite.com/api/personal-info") {
-          "Personal information" includes {
-            "Full name" text;
-            "Age" number;
-          }
-        }
-      `);
+export default {
+  setup() {
+    const exampleModel = ref({});
 
-      const submit = () => {
-        formklRef.value?.submit();
-      };
-
-      return {
-        formklRef,
-        formklSyntax,
-        formklOptions,
-        submit,
-      };
-    },
-  });
+    return {
+      ExampleForm,
+      exampleModel,
+    };
+  },
+};
 </script>
 ```
+
+Result:
+
+<div>
+  <formkl syntax="formkl {'Personal Information' has {'Fullname' text;'Bio' paragraph;}}"></formkl>
+</div>
 
 ::: info Don't know the syntax in this example?
 You'll learn about the syntax in the [Syntax guide](/syntax/form).

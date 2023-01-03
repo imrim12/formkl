@@ -55,7 +55,6 @@ const Specs: Array<Spec> = [
   // --------------------------------------
   // Keywords
   [createKeywordRegex("FORMKL"), "FORMKL"],
-  [createKeywordRegex("INCLUDES"), "INCLUDES"],
   [createKeywordRegex("MULTIPLE"), "MULTIPLE"],
   [createKeywordRegex("BASE"), "BASE"],
   [createKeywordRegex("FLAT"), "FLAT"],

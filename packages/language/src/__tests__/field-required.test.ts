@@ -3,7 +3,7 @@ import parser, { defineForm } from "../";
 describe("Required field", () => {
   it("should parse the form syntax correctly", () => {
     const result = parser.parse(`formkl {
-      includes {
+      has {
         require paragraph;
         "Not required" text;
       }
@@ -58,7 +58,7 @@ describe("Required field", () => {
     );
 
     expect(result).toBe(`formkl {
-	includes {
+	has {
 		require text;
 		"Not required" text;
 	}

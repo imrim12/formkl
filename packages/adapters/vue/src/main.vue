@@ -11,21 +11,30 @@
   </div>
 </template>
 
+<script lang="ts">
+export default defineComponent({
+  name: "Formkl",
+});
+</script>
+
 <script lang="ts" setup>
-import { computed, getCurrentInstance, h, onMounted, PropType, provide } from "vue";
 import {
-  Formkl,
-  SchemaFlat,
-  SchemaFlatFieldMultiple,
-  SchemaFlatSectionMultiple,
-} from "@formkl/shared";
+  computed,
+  defineComponent,
+  getCurrentInstance,
+  h,
+  onMounted,
+  PropType,
+  provide,
+} from "vue";
+import { Formkl, Schema } from "@formkl/shared";
 
 import { themeInjectionKey } from "./keys/theme";
 
 import _set from "lodash/set";
 
 import FormParser from "formkl";
-import FormLayout from "./layouts/default.vue";
+import LayoutDefault from "./layouts/default.vue";
 import FormNode from "./components/form-node.vue";
 
 const props = defineProps({
@@ -38,7 +47,7 @@ const props = defineProps({
     required: false,
   },
   modelValue: {
-    type: Object as PropType<SchemaFlat | SchemaFlatFieldMultiple | SchemaFlatSectionMultiple>,
+    type: Object as PropType<Schema>,
     default: () => ({}),
   },
 });
@@ -88,7 +97,7 @@ const _buildSchema = () => {
 };
 _buildSchema();
 
-const VNodeLayout = computed(() => h(currentTheme.value?.vNodeLayout || FormLayout));
+const VNodeLayout = computed(() => h(currentTheme.value?.vNodeLayout || LayoutDefault));
 
 onMounted(() => {
   if (!props.syntax && !props.form) {

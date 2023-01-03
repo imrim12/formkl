@@ -3,7 +3,7 @@ import parser, { defineForm } from "../";
 describe("Section with title", () => {
   it("should parse the form syntax correctly", () => {
     const result = parser.parse(`formkl {
-      "Personal Information" includes {
+      "Personal Information" has {
         "Fullname" text;
       }
     }`);
@@ -49,7 +49,7 @@ describe("Section with title", () => {
     );
 
     expect(result).toBe(`formkl {
-	"Personal Information" includes {
+	"Personal Information" has {
 		"Fullname" text;
 	}
 }`);

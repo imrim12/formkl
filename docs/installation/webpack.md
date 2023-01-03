@@ -1,6 +1,11 @@
 # Quick start with Webpack
 
-`@formkl/plugin-webpack` allows you to load .form files directly in your Webpack project. Which also mean you can use it with your Vue, React or any other framework as long as it uses Webpack as bundler.
+`@formkl/plugin-webpack` allows you to load `.form` files directly in your Webpack project. Which also mean you can use it with your Vue, React or any other framework as long as it uses Webpack as bundler.
+
+Checkout guides for frameworks:
+- [Vue 3](/adapters/vue)
+- [React](/adapters/react)
+- [Svelte](/adapters/svelte)
 
 ## Configuration
 

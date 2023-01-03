@@ -3,7 +3,7 @@ import parser, { defineForm } from "../";
 describe("Section with multiple responses support", () => {
   it("should parse the form syntax correctly", () => {
     const result = parser.parse(`formkl {
-      multiple includes {
+      multiple has {
         text;
       }
     }`);
@@ -47,7 +47,7 @@ describe("Section with multiple responses support", () => {
     );
 
     expect(result).toBe(`formkl {
-	multiple includes {
+	multiple has {
 		text;
 	}
 }`);
@@ -56,7 +56,7 @@ describe("Section with multiple responses support", () => {
   it("should emit syntax error for multiple response field in multiple response section.", () => {
     expect(() =>
       parser.parse(`formkl {
-        multiple includes {
+        multiple has {
           multiple text;
           "Test" text;
         }

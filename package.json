@@ -41,6 +41,7 @@
     "sandbox-react"
   ],
   "dependencies": {
+    "@formkl/elemento": "workspace:*",
     "@formkl/shared": "workspace:*",
     "@formkl/plugin-vite": "workspace:*",
     "@formkl/plugin-webpack": "workspace:*",

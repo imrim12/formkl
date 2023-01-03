@@ -4,44 +4,42 @@
     <div class="formkl-section__container">
       <template v-for="field in section.fields">
         <template v-if="section.multiple">
-          <template
+          <div
             v-for="(modelValueEach, index) in (modelValue as Array<any>)"
             :key="field.key + '-' + index"
+            class="formkl-section__inner"
           >
-            <div class="formkl-section__inner">
-              <FieldNode
-                :section="section"
-                :field="field"
-                :model-value="modelValueEach[field.key]"
-                @update:model-value="handleUpdateFieldMultiple($event, field, index)"
-              />
-              <component
-                v-if="modelValue.length > 1"
-                :is="VNodeBtnRemoveSection"
-                @click="handleRemoveValueSectionMultiple(index)"
-              />
-            </div>
-          </template>
+            <FieldNode
+              :section="section"
+              :field="field"
+              :model-value="modelValueEach[field.key]"
+              @update:model-value="handleUpdateFieldMultiple($event, field, index)"
+            />
+            <component
+              v-if="modelValue.length > 1"
+              :is="VNodeBtnRemoveSection"
+              @click="handleRemoveValueSectionMultiple(index)"
+            />
+          </div>
           <div class="formkl-section__footer">
             <component :is="VNodeBtnAddSection" @click="handleAddValueSectionMultiple" />
           </div>
         </template>
-        <template v-else>
-          <FieldNode
-            :key="field.key"
-            :section="section"
-            :field="field"
-            :model-value="modelValue?.[field.key]"
-            @update:model-value="handleUpdateFieldSingle($event, field)"
-          />
-        </template>
+        <FieldNode
+          v-else
+          :key="field.key"
+          :section="section"
+          :field="field"
+          :model-value="modelValue?.[field.key]"
+          @update:model-value="handleUpdateFieldSingle($event, field)"
+        />
       </template>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { computed, h, inject, PropType } from "vue";
+import { h, inject, PropType } from "vue";
 import { FieldCustom, FieldDefault, FieldSelection, Formkl, Section } from "@formkl/shared";
 
 import _cloneDeep from "lodash/cloneDeep";
@@ -100,15 +98,13 @@ const handleRemoveValueSectionMultiple = (index: number) => {
 
 const currentTheme = inject(themeInjectionKey);
 
-const VNodeBtnAddSection = computed(() =>
+const VNodeBtnAddSection = () =>
   currentTheme.value?.vNodeComponents?.addSection
     ? h(currentTheme.value?.vNodeComponents?.addSection)
-    : h("button", "Add section"),
-);
+    : h("button", () => "Add section");
 
-const VNodeBtnRemoveSection = computed(() =>
+const VNodeBtnRemoveSection = () =>
   currentTheme.value?.vNodeComponents?.removeSection
     ? h(currentTheme.value?.vNodeComponents?.removeSection)
-    : h("button", "Remove section"),
-);
+    : h("button", () => "Remove section");
 </script>

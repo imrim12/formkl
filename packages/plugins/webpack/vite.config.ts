@@ -19,7 +19,6 @@ export default defineConfig({
       },
     },
   },
-  // https://github.com/vitejs/vite/issues/7843
   plugins: [
     dts({
       root: ".",

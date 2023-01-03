@@ -4,9 +4,6 @@
       <formkl-editor v-model="formklSyntax" />
     </div>
     <div class="flex-1 py-2 px-8">
-      <div class="text-lg text-gray-500 font-bold">From bundled file</div>
-      <formkl v-model="exampleModel" :form="exampleForm" />
-      <div class="text-lg text-gray-500 font-bold">From editor</div>
       <formkl v-model="exampleModel" :syntax="formklSyntax" />
     </div>
   </div>

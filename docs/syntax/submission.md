@@ -6,7 +6,7 @@ Formkl submission is declared with the function-like syntax `<HttpMethod> "(" <u
 
 ```text
 formkl post("/subscribe") {
-  includes {
+  has {
     "Your Email" text;
   }
 }
@@ -19,7 +19,7 @@ formkl post("/subscribe")
 	"Subscribe to our newsletter"
 	"Get the latest news and updates from us"
 {
-  includes {
+  has {
     "Your Email" text;
   }
 }

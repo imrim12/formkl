@@ -3,7 +3,7 @@ import parser, { defineForm } from "../";
 describe("Field validation using keyword value like null, undefined, NaN", () => {
   it("should parse the form syntax correctly", () => {
     const result = parser.parse(`formkl {
-			includes {
+			has {
 				text valid(== null);
 				"Test with OR" text valid(> 5 or == NaN or has "Keyword");
 				"Test with AND" text valid(> 5 and == undefined and has "Keyword");
@@ -186,7 +186,7 @@ describe("Field validation using keyword value like null, undefined, NaN", () =>
     );
 
     expect(result).toBe(`formkl {
-	includes {
+	has {
 		text valid(== null);
 		"Test with OR" text valid(> 5 or == NaN or has "Keyword");
 		"Test with AND" text valid(> 5 and == undefined and has "Keyword");

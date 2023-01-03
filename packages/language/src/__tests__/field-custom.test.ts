@@ -3,7 +3,7 @@ import parser, { defineForm } from "..";
 describe("Required field", () => {
   it("should parse the form syntax correctly", () => {
     const result = parser.parse(`formkl {
-      includes {
+      has {
         require $something;
         require multiple $other;
         "Not required" $another;
@@ -44,7 +44,7 @@ describe("Required field", () => {
   it("should throw syntax error for unsupported field", () => {
     expect(() => {
       parser.parse(`formkl {
-				includes {
+				has {
 					require something;
 				}
 			}`);
@@ -83,7 +83,7 @@ describe("Required field", () => {
     );
 
     expect(result).toBe(`formkl {
-	includes {
+	has {
 		require "Something" $something;
 		require multiple "Other" $other;
 		"Not required" $another;

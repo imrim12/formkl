@@ -6,6 +6,7 @@ importers:
     specifiers:
       '@commitlint/cli': ^17.2.0
       '@commitlint/config-conventional': ^17.2.0
+      '@formkl/elemento': workspace:*
       '@formkl/plugin-vite': workspace:*
       '@formkl/plugin-webpack': workspace:*
       '@formkl/shared': workspace:*
@@ -35,6 +36,7 @@ importers:
       vue: ^3.2.41
       vue-tsc: ^1.0.9
     dependencies:
+      '@formkl/elemento': link:packages/elemento
       '@formkl/plugin-vite': link:packages/plugins/vite
       '@formkl/plugin-webpack': link:packages/plugins/webpack
       '@formkl/shared': link:packages/shared

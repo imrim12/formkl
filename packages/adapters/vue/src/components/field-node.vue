@@ -33,7 +33,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, h, inject, PropType } from "vue";
+import { h, inject, PropType } from "vue";
 import { FieldCustom, FieldDefault, FieldSelection, Formkl, Section } from "@formkl/shared";
 import { themeInjectionKey } from "../keys/theme";
 
@@ -76,19 +76,15 @@ const handleRemoveValueFieldMultiple = (index: number) => {
 
 const currentTheme = inject(themeInjectionKey);
 
-const VNodeField = computed(() =>
-  h(currentTheme.value?.vNodeFields?.[props.field.type] || "input"),
-);
+const VNodeField = () => h(currentTheme.value?.vNodeFields?.[props.field.type] || "input");
 
-const VNodeBtnAddField = computed(() =>
+const VNodeBtnAddField = () =>
   currentTheme.value?.vNodeComponents?.addField
     ? h(currentTheme.value?.vNodeComponents?.addField)
-    : h("button", "Add field"),
-);
+    : h("button", () => "Add field");
 
-const VNodeBtnRemoveField = computed(() =>
+const VNodeBtnRemoveField = () =>
   currentTheme.value?.vNodeComponents?.addField
     ? h(currentTheme.value?.vNodeComponents?.removeField)
-    : h("button", "Remove field"),
-);
+    : h("button", () => "Remove field");
 </script>

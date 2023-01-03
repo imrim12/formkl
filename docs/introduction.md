@@ -1,3 +1,22 @@
+<script setup>
+import ButtonCard from "/components/ButtonCard.vue";
+import VueLogo from '/components/icons/Vue.vue';
+import ReactLogo from '/components/icons/React.vue';
+
+const frameworks = [
+  {
+    name: "Vue 3",
+    image: VueLogo,
+    link: "/installation/vue",
+  },
+  {
+    name: "React",
+    image: ReactLogo,
+    link: "/installation/react",
+  },
+]
+</script>
+
 # Introduction
 
 [Start quickly with the syntax](/syntax/form)
@@ -26,9 +45,24 @@ FORMKL is a markup language for creating forms, an open-source DSL (Domain Speci
 
 ## Demo
 
-You can visit the playground here: https://sandbox.formkl.org/
+You can visit the playground here: https://sandbox.formkl.org
 
-## Basic example
+The following syntax will be loaded to JavaScript object and can be rendered into UI using our [Formkl Adapter](/adapters/vue).
+
+```text
+formkl {
+  "Personal Information" has {
+    "Fullname" text;
+    "Bio" paragraph;
+  }
+}
+```
+
+<div>
+  <formkl syntax="formkl {'Personal Information' has {'Fullname' text;'Bio' paragraph;}}"></formkl>
+</div>
+
+## "Just the parser" example
 
 Install the parser
 
@@ -48,7 +82,7 @@ import FormklParser from "formkl";
 
 const yourFormklSyntax = `
   formkl {
-    "Personal Information"includes {
+    "Personal Information" has {
       "Fullname" text;
       "Bio" paragraph;
     }
@@ -62,11 +96,6 @@ The above formkl will be parsed into
 
 ```json
 {
-  "model": "flat",
-  "method": "",
-  "endpoint": "",
-  "title": "",
-  "description": "",
   "sections": [
     {
       "title": "Personal Information",
@@ -98,31 +127,14 @@ Or you can just use this to implement your own render logic.
 
 Result:
 
-![](/screenshots/minimal-example.png)
+<div>
+  <formkl syntax="formkl {'Personal Information' has {'Fullname' text;'Bio' paragraph;}}"></formkl>
+</div>
 
 
 ## Techstack
 
 We are currently working on Vue 3 support. React and Svelte support will be available soon.
-
-<script setup>
-  import ButtonCard from "/components/ButtonCard.vue";
-  import VueLogo from '/components/icons/Vue.vue';
-  import ReactLogo from '/components/icons/React.vue';
-
-  const frameworks = [
-    {
-      name: "Vue 3",
-      image: VueLogo,
-      link: "/installation/vue",
-    },
-    {
-      name: "React",
-      image: ReactLogo,
-      link: "/installation/react",
-    },
-  ]
-</script>
 
 <div class="frameworks-container">
   <a :href="framework.link" v-for="framework in frameworks">
