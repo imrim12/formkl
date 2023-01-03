@@ -10,11 +10,13 @@
               :model-value="modelValueEach"
               @update:model-value="handleUpdateFieldMultiple($event, index)"
             />
-            <component
-              v-if="modelValue.length > 1"
-              :is="VNodeBtnRemoveField"
-              @click="handleRemoveValueFieldMultiple(index)"
-            />
+            <div class="formkl-field__remover">
+              <component
+                v-if="modelValue.length > 1"
+                :is="VNodeBtnRemoveField"
+                @click="handleRemoveValueFieldMultiple(index)"
+              />
+            </div>
           </div>
         </template>
         <div class="formkl-field__footer">

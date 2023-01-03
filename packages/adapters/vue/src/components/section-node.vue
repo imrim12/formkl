@@ -15,11 +15,13 @@
               :model-value="modelValueEach[field.key]"
               @update:model-value="handleUpdateFieldMultiple($event, field, index)"
             />
-            <component
-              v-if="modelValue.length > 1"
-              :is="VNodeBtnRemoveSection"
-              @click="handleRemoveValueSectionMultiple(index)"
-            />
+            <div class="formkl-section__remover">
+              <component
+                v-if="modelValue.length > 1"
+                :is="VNodeBtnRemoveSection"
+                @click="handleRemoveValueSectionMultiple(index)"
+              />
+            </div>
           </div>
           <div class="formkl-section__footer">
             <component :is="VNodeBtnAddSection" @click="handleAddValueSectionMultiple" />

@@ -4,6 +4,8 @@ import { ElInput, ElButton } from "element-plus";
 
 import "element-plus/dist/index.css";
 
+import "./style.css";
+
 const themeConfig: Theme = {
   vNodeFields: {
     text: h(ElInput),
