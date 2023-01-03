@@ -3,7 +3,7 @@ import parser, { defineForm } from "../";
 describe("Minimal test", () => {
   it("should parse the form syntax correctly", () => {
     const result = parser.parse(`formkl {
-      includes {
+      has {
         text;
       }
     }`);
@@ -45,7 +45,7 @@ describe("Minimal test", () => {
     );
 
     expect(result).toBe(`formkl {
-	includes {
+	has {
 		text;
 	}
 }`);

@@ -1,13 +1,12 @@
-export type SchemaFlat = {
-  [section: string]: {
-    [field: string]: any;
-  };
-};
-
-export type SchemaBase = {
-  data: Array<{
-    section: string;
-    field: string;
-    value: any;
-  }>;
+export type Schema = {
+  [section: string]:
+    | {
+        [field: string]: any;
+      }
+    | Array<{
+        [field: string]: any;
+      }>
+    | {
+        [field: string]: Array<any>;
+      };
 };

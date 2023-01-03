@@ -14,7 +14,7 @@ This is the minimal syntax for a form to be parsed. This form will have no title
 
 ```text
 formkl {
-  includes {
+  has {
     text;
   }
 }
@@ -26,10 +26,10 @@ Or you can specify title, description, section title and field label. **The pars
 formkl
   "Your form title"
   "Your form description" {
-  "Your section title" includes {
+  "Your section title" has {
     "Your field label" text;
   }
-  "Your 2nd section title" includes {
+  "Your 2nd section title" has {
     "Another field label" paragraph;
   }
 }

@@ -1,11 +1,4 @@
-import {
-  FieldDefault,
-  FieldSelection,
-  Formkl,
-  SchemaBase,
-  SchemaFlat,
-  Section,
-} from "@formkl/shared";
+import { FieldDefault, FieldSelection, Formkl, Schema, Section } from "@formkl/shared";
 
 export function defineForm(form: Formkl) {
   return form;
@@ -19,6 +12,6 @@ export function defineField(field: FieldDefault | FieldSelection) {
   return field;
 }
 
-export function defineModel(model: SchemaBase | SchemaFlat) {
+export function defineModel(model: Schema) {
   return model;
 }

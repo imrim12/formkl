@@ -2,8 +2,9 @@ import { Formkl, Section, FieldDefault, FieldSelection, HttpMethod } from "@form
 import { Tokenizer } from "./tokenizer";
 import { Token } from "./types";
 
-import slugify from "slugify";
 import { Stringifier } from "./stringifier";
+import { capitalize } from "./utils/capitalize";
+import { kebabCase } from "./utils/kebabCase";
 
 export class Parser {
   private _string: string;
@@ -53,7 +54,7 @@ export class Parser {
    * Main entry point.
    *
    * FormBlock
-   *  : SectionBlockList
+   *  = SectionBlockList
    *  ;
    */
   private FormBlock(): Formkl {
@@ -63,14 +64,6 @@ export class Parser {
     };
 
     this._eat("FORMKL");
-
-    if (this._lookahead?.type === "STRING") {
-      form.title = this.StringLiteral();
-    }
-
-    if (this._lookahead?.type === "STRING") {
-      form.description = this.StringLiteral();
-    }
 
     if (this._lookahead?.type === "FLAT") {
       this._eat("FLAT");
@@ -87,6 +80,14 @@ export class Parser {
       this._eat("(");
       form.endpoint = this.StringLiteral();
       this._eat(")");
+    }
+
+    if (this._lookahead?.type === "STRING") {
+      form.title = this.StringLiteral();
+    }
+
+    if (this._lookahead?.type === "STRING") {
+      form.description = this.StringLiteral();
     }
 
     this._eat("{");
@@ -115,7 +116,7 @@ export class Parser {
 
   /**
    * SectionBlockList
-   *  : (SectionBlock)*
+   *  = (SectionBlock)*
    *  ;
    */
   private SectionBlockList(stopLookAhead = "}") {
@@ -127,8 +128,8 @@ export class Parser {
   }
 
   /**
-   * Section
-   *  : FieldStatementList
+   * SectionBlock
+   *  = FieldStatementList
    *  ;
    */
   private SectionBlock(): Section {
@@ -146,10 +147,10 @@ export class Parser {
 
     if (this._lookahead?.type === "STRING") {
       section.title = this.StringLiteral();
-      section.key = slugify(section.title).toLowerCase();
+      section.key = kebabCase(section.title).toLowerCase();
     }
 
-    this._eat("INCLUDES");
+    this._eat("HAS");
     this._eat("{");
     const fields = this.FieldStatementList();
     this._eat("}");
@@ -198,8 +199,7 @@ export class Parser {
 
   /**
    * FieldStatement
-   *  : (NUMBER) (REQUIRE) (StringLiteral) FieldExpression (as StringLiteral) ';'
-   *  | (MULTIPLE) (REQUIRE) (StringLiteral) FieldExpression (as StringLiteral) ';'
+   *  = (NUMBER) (REQUIRE) (StringLiteral) FieldExpression (as StringLiteral) ';'
    *  | (REQUIRE) (MULTIPLE) (StringLiteral) FieldExpression (as StringLiteral) ';'
    *  ;
    */
@@ -215,28 +215,23 @@ export class Parser {
       field.multiple = true;
     }
 
-    do {
-      switch (this._lookahead?.type) {
-        case "REQUIRE":
-          this._eat("REQUIRE");
-          field.required = true;
-          break;
-        case "MULTIPLE":
-          this._eat("MULTIPLE");
-          field.multiple = true;
-          break;
-      }
-    } while (["REQUIRE", "MULTIPLE"].includes(String(this._lookahead?.type)));
+    if (this._lookahead?.type === "REQUIRE") {
+      this._eat("REQUIRE");
+      field.required = true;
+    }
+
+    if (this._lookahead?.type === "MULTIPLE") {
+      this._eat("MULTIPLE");
+      field.multiple = true;
+    }
 
     if (this._lookahead?.type === "STRING") {
       field.label = this.StringLiteral();
     } else {
-      field.label =
-        String(this._lookahead?.value).toLowerCase().charAt(0).toUpperCase() +
-        String(this._lookahead?.value).toLowerCase().slice(1);
+      field.label = capitalize(String(this._lookahead?.value).replace(/^\$/g, ""));
     }
 
-    field.key = slugify(field.label).toLowerCase();
+    field.key = kebabCase(field.label).toLowerCase();
 
     Object.assign(field, this.FieldExpression());
 
@@ -252,7 +247,7 @@ export class Parser {
 
   /**
    * FieldExpression
-   *  : 'FIELD'
+   *  = 'FIELD'
    *  | 'FIELDSELECTION'
    *  | 'FIELDVALIDATED'
    *  | 'FIELDDATETIME'
@@ -264,13 +259,14 @@ export class Parser {
 
     const expression = {
       FIELD: this.FieldDefaultExpression.bind(this),
+      FIELDCUSTOM: this.FieldCustomExpression.bind(this),
       FIELDSELECTION: this.FieldSelectionExpression.bind(this),
       FIELDVALIDATED: this.FieldValidatedExpression.bind(this),
       FIELDDATETIME: this.FieldDatetimeExpression.bind(this),
     }[String(this._lookahead?.type)];
 
     if (expression) {
-      Object.assign(field, { type: String(this._lookahead?.value).toLowerCase() }, expression());
+      Object.assign(field, expression());
 
       const validation = this.ValidationExpression();
 
@@ -287,14 +283,36 @@ export class Parser {
       type: "text",
     };
 
-    if (this._lookahead?.type === "FIELD") this._eat("FIELD");
+    if (this._lookahead?.type === "FIELD") {
+      const fieldType = this._eat("FIELD").value;
+
+      Object.assign(expression, {
+        type: (fieldType as string).toLowerCase(),
+      });
+    }
+
+    return expression;
+  }
+
+  private FieldCustomExpression() {
+    const expression: Pick<FieldDefault, "type"> = {
+      type: "text",
+    };
+
+    if (this._lookahead?.type === "FIELDCUSTOM") {
+      const fieldType = this._eat("FIELDCUSTOM").value;
+
+      Object.assign(expression, {
+        type: (fieldType as string).toLowerCase(),
+      });
+    }
 
     return expression;
   }
 
   /**
    * FieldSelectionExpression
-   *  : 'FIELDSELECTION' StringLiteral '(' StringList ')'
+   *  = 'FIELDSELECTION' StringLiteral '(' StringList ')'
    *  | 'FIELDSELECTION' StringLiteral 'URL' '(' StringList ')'
    *  | 'FIELDSELECTION' 'URL' '(' StringList ')'
    *  | 'FIELDSELECTION' '(' StringList ')'
@@ -309,7 +327,11 @@ export class Parser {
     };
 
     if (this._lookahead?.type === "FIELDSELECTION") {
-      this._eat("FIELDSELECTION");
+      const fieldType = this._eat("FIELDSELECTION").value;
+
+      Object.assign(expression, {
+        type: (fieldType as string).toLowerCase(),
+      });
     }
 
     if (this._lookahead?.type === "STRING") {
@@ -355,7 +377,13 @@ export class Parser {
       type: "text",
     };
 
-    if (this._lookahead?.type === "FIELDVALIDATED") this._eat("FIELDVALIDATED");
+    if (this._lookahead?.type === "FIELDVALIDATED") {
+      const fieldType = this._eat("FIELDVALIDATED").value;
+
+      Object.assign(expression, {
+        type: (fieldType as string).toLowerCase(),
+      });
+    }
 
     return expression;
   }
@@ -365,14 +393,20 @@ export class Parser {
       type: "datetime",
     };
 
-    if (this._lookahead?.type === "FIELDDATETIME") this._eat("FIELDDATETIME");
+    if (this._lookahead?.type === "FIELDDATETIME") {
+      const fieldType = this._eat("FIELDDATETIME").value;
+
+      Object.assign(expression, {
+        type: (fieldType as string).toLowerCase(),
+      });
+    }
 
     return expression;
   }
 
   /**
    * ValidationExpression
-   *  : 'VALID' '(' LogicalORExpression ')'
+   *  = 'VALID' '(' LogicalORExpression ')'
    *  | 'VALID' '(' LogicalORExpression ')' 'REGEX' '(' StringLiteral ')'
    *  | 'REGEX' '(' StringLiteral ')'
    *  | 'REGEX' '(' StringLiteral ')' 'VALID' '(' LogicalORExpression ')'
@@ -411,7 +445,7 @@ export class Parser {
 
   /**
    * LogicalORExpression
-   *  : LogicalANDExpression
+   *  = LogicalANDExpression
    *  | LogicalANDExpression OR LogicalANDExpression
    *  ;
    */
@@ -430,7 +464,7 @@ export class Parser {
 
   /**
    * LogicalANDExpression
-   *  : RelationalExpression
+   *  = RelationalExpression
    *  | RelationalExpression AND RelationalExpression
    *  ;
    */
@@ -449,7 +483,7 @@ export class Parser {
 
   /**
    * RelationalExpression
-   *  : OPERATOR_RELATIONAL NumericLiteral
+   *  = OPERATOR_RELATIONAL NumericLiteral
    *  | OPERATOR_EQUALITY StringLiteral
    *  | OPERATOR_EQUALITY NumericLiteral
    *  | HAS StringLiteral
@@ -526,7 +560,7 @@ export class Parser {
 
   /**
    * StringList
-   *  : StringLiteral
+   *  = StringLiteral
    *  | StringList ',' StringLiteral
    *  ;
    */
@@ -541,7 +575,7 @@ export class Parser {
 
   /**
    * NaNLiteral
-   *  : 'NaN'
+   *  = 'NaN'
    *  ;
    */
   private NaNLiteral() {
@@ -551,7 +585,7 @@ export class Parser {
 
   /*
    * NumericLiteral
-   *  : NUMBER
+   *  = NUMBER
    *  ;
    */
   private NumericLiteral() {
@@ -571,7 +605,7 @@ export class Parser {
 
   /**
    * BooleanLiteral
-   *  : TRUE
+   *  = TRUE
    *  | FALSE
    *  ;
    */
@@ -582,7 +616,7 @@ export class Parser {
 
   /**
    * NullLiteral
-   *  : 'null'
+   *  = 'null'
    *  ;
    */
   private NullLiteral() {
@@ -592,7 +626,7 @@ export class Parser {
 
   /**
    * UndefinedLiteral
-   *  : 'undefined'
+   *  = 'undefined'
    *  ;
    */
   private UndefinedLiteral() {

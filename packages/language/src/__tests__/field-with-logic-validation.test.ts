@@ -3,10 +3,10 @@ import parser, { defineForm } from "../";
 describe("Field with use of validation", () => {
   it("should parse the form syntax correctly", () => {
     const result = parser.parse(`formkl {
-      includes {
+      has {
         text valid(> 5);
         "Test with OR" text valid(> 5 or == "Some value" or has "Keyword");
-        "Test with AND" text valid(> 5 and == "Some value" and has "Keyword");
+        "Test with AND" paragraph valid(> 5 and == "Some value" and has "Keyword");
         "Test with Both" text valid(> 5 or == "Some value" and has "Keyword");
       }
     }`);
@@ -48,7 +48,7 @@ describe("Field with use of validation", () => {
                 },
               },
               {
-                type: "text",
+                type: "paragraph",
                 label: "Test with AND",
                 key: "test-with-and",
                 validation: {
@@ -186,7 +186,7 @@ describe("Field with use of validation", () => {
     );
 
     expect(result).toBe(`formkl {
-	includes {
+	has {
 		text valid(> 5);
 		"Test with OR" text valid(> 5 or == "Some value" or has "Keyword");
 		"Test with AND" text valid(> 5 and == "Some value" and has "Keyword");

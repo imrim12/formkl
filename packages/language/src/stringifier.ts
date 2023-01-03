@@ -1,4 +1,5 @@
 import {
+  FieldCustom,
   FieldDefault,
   FieldSelection,
   Formkl,
@@ -6,7 +7,7 @@ import {
   Validation,
   ValidationLogic,
 } from "@formkl/shared";
-import slugify from "slugify";
+import { kebabCase } from "./utils/kebabCase";
 
 export class Stringifier {
   constructor() {}
@@ -49,7 +50,7 @@ export class Stringifier {
       .join("%(s)");
   }
 
-  fields(fields: Array<FieldDefault | FieldSelection>) {
+  fields(fields: Array<FieldDefault | FieldSelection | FieldCustom>) {
     return (
       "%(t)%(t)" +
       fields
@@ -58,10 +59,10 @@ export class Stringifier {
             [
               field.required && "require",
               field.maxResponseAllowed ? field.maxResponseAllowed : field.multiple && "multiple",
-              slugify(field.label).toLowerCase() !== field.type && `"${field.label}"`,
+              kebabCase(field.label).toLowerCase() !== field.type && `"${field.label}"`,
               field.type,
               field.validation && this.validation(field.validation),
-              slugify(field.label).toLowerCase() !== field.key && `as%(s)"${field.key}"`,
+              kebabCase(field.label).toLowerCase() !== field.key && `as%(s)"${field.key}"`,
             ]
               .filter((i) => i)
               .join("%(s)") + ";",
@@ -77,7 +78,7 @@ export class Stringifier {
           "%(t)",
           section.multiple && "multiple%(s)",
           section.title && `"${section.title}"%(s)`,
-          "includes",
+          "has",
           "%(s)",
           "{",
           "%(n)",
@@ -86,7 +87,7 @@ export class Stringifier {
           "%(t)",
           "}",
           (!section.title && section.key) ||
-          (section.title && slugify(section.title).toLowerCase() !== section.key)
+          (section.title && kebabCase(section.title).toLowerCase() !== section.key)
             ? `%(s)as%(s)"${section.key}"`
             : "",
         ].join(""),

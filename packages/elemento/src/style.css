@@ -1,0 +1,22 @@
+.el-input + .el-input,
+.el-textarea + .el-textarea,
+.formkl-section_container + .formkl-section_container,
+.formkl-field_container + .formkl-field_container {
+  margin-top: 0.5rem;
+}
+
+.formkl-section__remover,
+.formkl-field__remover {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
+.formkl-section__footer,
+.formkl-field__footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}

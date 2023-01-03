@@ -3,7 +3,7 @@ import parser, { defineForm } from "../";
 describe("Field with multiple responses support", () => {
   it("should parse the form syntax correctly", () => {
     const result = parser.parse(`formkl {
-      includes {
+      has {
         multiple text;
       }
     }`);
@@ -29,8 +29,8 @@ describe("Field with multiple responses support", () => {
 
   it("should parse the form syntax correctly with multiple required fields", () => {
     const result = parser.parse(`formkl {
-      includes {
-        multiple require text;
+      has {
+        require multiple text;
       }
     }`);
 
@@ -56,8 +56,8 @@ describe("Field with multiple responses support", () => {
 
   it("should parse the form syntax correctly with multiple required fields", () => {
     const result = parser.parse(`formkl {
-      includes {
-        require multiple text;
+      has {
+        require multiple number;
       }
     }`);
 
@@ -68,9 +68,9 @@ describe("Field with multiple responses support", () => {
           {
             fields: [
               {
-                type: "text",
-                label: "Text",
-                key: "text",
+                type: "number",
+                label: "Number",
+                key: "number",
                 required: true,
                 multiple: true,
               },
@@ -103,7 +103,7 @@ describe("Field with multiple responses support", () => {
 
     expect(result).toBe(
       `formkl {
-	includes {
+	has {
 		require multiple text;
 	}
 }`,

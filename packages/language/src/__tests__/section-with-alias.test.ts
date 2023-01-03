@@ -3,10 +3,10 @@ import parser, { defineForm } from "../";
 describe("Section with alias", () => {
   it("should parse the form syntax correctly", () => {
     const result = parser.parse(`formkl {
-      "Personal information" includes {
+      "Personal information" has {
         text;
       }
-      includes {
+      has {
         text;
       } as "different-section"
     }`);
@@ -72,10 +72,10 @@ describe("Section with alias", () => {
     );
 
     expect(result).toBe(`formkl {
-	"Personal information" includes {
+	"Personal information" has {
 		text;
 	}
-	includes {
+	has {
 		text;
 	} as "different-section"
 }`);
@@ -84,10 +84,10 @@ describe("Section with alias", () => {
   it("should emit syntax error for duplicated section key", () => {
     expect(() =>
       parser.parse(`formkl {
-				includes {
+				has {
 					text;
 				} as "duplicated-section"
-				includes {
+				has {
 					text;
 				} as "duplicated-section"
 			}`),

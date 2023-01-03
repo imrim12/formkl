@@ -1,4 +1,4 @@
-import { FieldTypeDefault } from "./field-default-type";
+import { FieldTypeDefault } from "./field-default.type";
 import { Validation } from "./validation.interface";
 
 export interface FieldDefault {

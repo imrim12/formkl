@@ -1,5 +1,7 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
+    "rootDir": ".",
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
     "jsx": "preserve",
@@ -17,6 +19,6 @@
     "types": ["vitest/globals"],
     "outDir": "./dist"
   },
-  "include": ["./**/*.ts", "./**/*.test.ts"],
+  "include": ["./**/*.ts", "./**/*.d.ts", "./**/*.test.ts"],
   "exclude": ["./node_modules", "./dist"]
 }

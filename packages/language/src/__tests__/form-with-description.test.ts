@@ -7,7 +7,7 @@ describe("Form with description", () => {
       "Form title (Must has)"
       "Form description"
     {
-      includes {
+      has {
         text;
       }
     }`);
@@ -53,7 +53,7 @@ describe("Form with description", () => {
     );
 
     expect(result).toBe(`formkl "Form title (Must has)" "Form description" {
-	includes {
+	has {
 		text;
 	}
 }`);

@@ -3,7 +3,7 @@ import parser, { defineForm } from "../";
 describe("Form with title", () => {
   it("should parse the form syntax correctly", () => {
     const result = parser.parse(`formkl "Form title" {
-      includes {
+      has {
         text;
       }
     }`);
@@ -47,7 +47,7 @@ describe("Form with title", () => {
     );
 
     expect(result).toBe(`formkl "Form title" {
-	includes {
+	has {
 		text;
 	}
 }`);

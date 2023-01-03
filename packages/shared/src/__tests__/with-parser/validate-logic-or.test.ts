@@ -5,7 +5,7 @@ import parser from "../../../../language";
 describe("Test recursive validator", () => {
   it("should return true", () => {
     const form = parser.parse(`formkl {
-      includes {
+      has {
         text valid(> 10 or has "something");
       }
     }`);

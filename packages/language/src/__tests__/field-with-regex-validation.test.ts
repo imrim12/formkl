@@ -3,7 +3,7 @@ import parser, { defineForm } from "../";
 describe("Field with use of validation", () => {
   it("should parse the form syntax correctly", () => {
     const result = parser.parse(`formkl {
-      includes {
+      has {
         "Test with regex" text regex("^[0-9]+$");
       }
     }`);
@@ -51,7 +51,7 @@ describe("Field with use of validation", () => {
     );
 
     expect(result).toBe(`formkl {
-	includes {
+	has {
 		"Test with regex" text regex("^[0-9]+$");
 	}
 }`);

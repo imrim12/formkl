@@ -3,7 +3,7 @@ import parser, { defineForm } from "../";
 describe("Multiple fields in a section", () => {
   it("should parse the form syntax correctly", () => {
     const result = parser.parse(`formkl {
-      includes {
+      has {
         text;
         "Another text" text;
       }
@@ -56,7 +56,7 @@ describe("Multiple fields in a section", () => {
     );
 
     expect(result).toBe(`formkl {
-	includes {
+	has {
 		text;
 		"Another text" text;
 	}
@@ -66,7 +66,7 @@ describe("Multiple fields in a section", () => {
   it("should emit syntax error for duplicated field key", () => {
     expect(() =>
       parser.parse(`formkl {
-        includes {
+        has {
           text;
           text;
         }

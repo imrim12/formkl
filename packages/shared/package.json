@@ -1,6 +1,6 @@
 {
   "name": "@formkl/shared",
-  "version": "1.0.0-rc.3",
+  "version": "1.0.0-rc.4",
   "type": "module",
   "main": "./src/index.ts",
   "scripts": {
@@ -8,7 +8,7 @@
   },
   "devDependencies": {
     "@vitest/ui": "^0.24.5",
-    "typescript": "^4.8.4",
+    "typescript": "^4.9.4",
     "vitest": "^0.24.4"
   }
 }

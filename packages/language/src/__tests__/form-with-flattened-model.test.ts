@@ -3,7 +3,7 @@ import parser, { defineForm } from "../";
 describe("Form with flatten model", () => {
   it("should parse the form syntax correctly", () => {
     const result = parser.parse(`formkl flat {
-      includes {
+      has {
         text;
       }
     }`);
@@ -45,7 +45,7 @@ describe("Form with flatten model", () => {
     );
 
     expect(result).toBe(`formkl flat {
-	includes {
+	has {
 		text;
 	}
 }`);

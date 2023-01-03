@@ -3,7 +3,7 @@ import parser, { defineForm } from "../";
 describe("Field with alias (Custom key)", () => {
   it("should parse the form syntax correctly", () => {
     const result = parser.parse(`formkl {
-      includes {
+      has {
         text as "custom-key";
       }
     }`);
@@ -45,7 +45,7 @@ describe("Field with alias (Custom key)", () => {
     );
 
     expect(result).toBe(`formkl {
-	includes {
+	has {
 		text as "custom-key";
 	}
 }`);

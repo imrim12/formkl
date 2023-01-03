@@ -1,11 +1,29 @@
 {
   "name": "@formkl/plugin-vite",
-  "description": "A Formkl plugin to include .formkl file into Vite build",
+  "description": "A Formkl Vite plugin to load .form files.",
+  "version": "1.0.0-rc.4",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "main": "./dist/index.cjs",
+  "types": "./dist/types/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "build": "rimraf ./dist && vite build"
+  },
   "devDependencies": {
     "@vitest/ui": "^0.24.5",
     "rimraf": "^3.0.2",
-    "typescript": "^4.8.4",
+    "typescript": "^4.9.4",
     "vite": "^3.1.3",
+    "vite-plugin-dts": "^1.6.6",
     "vitest": "^0.24.4"
   },
   "dependencies": {

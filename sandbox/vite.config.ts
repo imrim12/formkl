@@ -3,20 +3,13 @@ import AutoImport from "unplugin-auto-import/vite";
 import vue from "@vitejs/plugin-vue";
 import vueJsx from "@vitejs/plugin-vue-jsx";
 import WindiCSS from "vite-plugin-windicss";
+import FormklPlugin from "@formkl/plugin-vite";
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
     AutoImport({
-      imports: [
-        {
-          vue: [
-            "ref", // import { ref } from 'vue',
-            "h", // import { h } from 'vue',
-            "Fragment", // import { Fragment } from 'vue',
-          ],
-        },
-      ],
+      imports: ["vue"],
     }),
     vue({
       template: {
@@ -28,5 +21,6 @@ export default defineConfig({
     }),
     vueJsx(),
     WindiCSS(),
+    FormklPlugin(),
   ],
 });

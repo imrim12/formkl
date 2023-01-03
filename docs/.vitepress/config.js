@@ -2,19 +2,29 @@ export default {
   lang: "en-US",
   title: "FORMKL",
   description: "Form marKup Language",
-
   head: [
     ["script", { async: true, src: "https://www.googletagmanager.com/gtag/js?id=G-2BHERVD2DR" }],
     [
       "script",
       {},
       `
-				window.dataLayer = window.dataLayer || [];
-				function gtag(){dataLayer.push(arguments);}
-				gtag('js', new Date());
-			
-				gtag('config', 'G-2BHERVD2DR');
-			`,
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+      
+        gtag('config', 'G-2BHERVD2DR');
+      `,
+    ],
+    [
+      "script",
+      {},
+      `
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+      
+        gtag('config', 'G-2BHERVD2DR');
+      `,
     ],
   ],
 
@@ -35,15 +45,26 @@ export default {
       {
         text: "Getting started",
         collapsible: true,
-        items: [{ text: "Introduction", link: "/introduction" }],
+        items: [
+          { text: "Why Formkl?", link: "/why" },
+          { text: "Introduction", link: "/introduction" },
+        ],
       },
       {
         text: "Installation",
         collapsible: true,
         items: [
-          { text: "Vue", link: "/installation/vue" },
-          { text: "React", link: "/installation/react" },
-          { text: "Svelte", link: "/installation/svelte" },
+          { text: "Vite", link: "/installation/vite" },
+          { text: "Webpack", link: "/installation/webpack" },
+        ],
+      },
+      {
+        text: "Adapters",
+        collapsible: true,
+        items: [
+          { text: "Vue", link: "/adapters/vue" },
+          { text: "React", link: "/adapters/react" },
+          { text: "Svelte", link: "/adapters/svelte" },
         ],
       },
       {
@@ -53,6 +74,7 @@ export default {
           { text: "Form", link: "/syntax/form" },
           { text: "Field", link: "/syntax/field" },
           { text: "Model", link: "/syntax/model" },
+          { text: "Submission", link: "/syntax/submission" },
           { text: "Validation", link: "/syntax/validation" },
           { text: "Multi-responses", link: "/syntax/multiple" },
         ],
@@ -63,6 +85,7 @@ export default {
         items: [
           { text: "Contribution guide", link: "/learning/contribution-guide" },
           { text: "Core language", link: "/learning/core-language" },
+          { text: "Full Grammar", link: "/learning/grammar" },
           { text: "Adapter (Vue)", link: "/learning/adapter-vue" },
           { text: "Adapter (React)", link: "/learning/adapter-react" },
           { text: "Adapter (Svelte)", link: "/learning/adapter-svelte" },

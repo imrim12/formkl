@@ -3,7 +3,7 @@ import parser, { defineForm } from "../";
 describe("Field with label", () => {
   it("should parse the form syntax correctly", () => {
     const result = parser.parse(`formkl {
-      includes {
+      has {
         "Some field" text;
       }
     }`);
@@ -45,7 +45,7 @@ describe("Field with label", () => {
     );
 
     expect(result).toBe(`formkl {
-	includes {
+	has {
 		"Some field" text;
 	}
 }`);

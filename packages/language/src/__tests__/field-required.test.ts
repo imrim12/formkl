@@ -3,8 +3,8 @@ import parser, { defineForm } from "../";
 describe("Required field", () => {
   it("should parse the form syntax correctly", () => {
     const result = parser.parse(`formkl {
-      includes {
-        require text;
+      has {
+        require paragraph;
         "Not required" text;
       }
     }`);
@@ -16,9 +16,9 @@ describe("Required field", () => {
           {
             fields: [
               {
-                type: "text",
-                label: "Text",
-                key: "text",
+                type: "paragraph",
+                label: "Paragraph",
+                key: "paragraph",
                 required: true,
               },
               {
@@ -58,7 +58,7 @@ describe("Required field", () => {
     );
 
     expect(result).toBe(`formkl {
-	includes {
+	has {
 		require text;
 		"Not required" text;
 	}
