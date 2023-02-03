@@ -1,6 +1,6 @@
 import { h } from "vue";
 import { Theme } from "@formkl/shared";
-import { ElInput, ElButton } from "element-plus";
+import { ElInput, ElButton, ElSelectV2 } from "element-plus";
 
 import "element-plus/dist/index.css";
 
@@ -10,6 +10,7 @@ const themeConfig: Theme = {
   vNodeFields: {
     text: h(ElInput),
     paragraph: h(ElInput, { type: "textarea" }),
+    select: h(ElSelectV2),
   },
   vNodeComponents: {
     addSection: h(ElButton, () => "Add section"),

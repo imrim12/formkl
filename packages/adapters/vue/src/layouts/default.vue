@@ -8,6 +8,12 @@
   </div>
 </template>
 
+<script lang="ts">
+export default {
+  name: "FormLayoutNode",
+};
+</script>
+
 <script lang="ts" setup>
 import { PropType } from "vue";
 import { Formkl } from "@formkl/shared";

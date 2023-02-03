@@ -3,13 +3,7 @@
   "version": "1.0.0-rc.5",
   "description": "A Vue adapter to generate usable Vue from component from Formkl syntax/schema",
   "type": "module",
-  "exports": {
-    ".": {
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.cjs"
-    }
-  },
-  "main": "./dist/index.cjs",
+  "main": "./src/index.ts",
   "types": "./dist/types/index.d.ts",
   "files": [
     "dist"
