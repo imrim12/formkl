@@ -1,4 +1,5 @@
 {
+  "name": "@formkl/sandbox",
   "private": true,
   "type": "module",
   "scripts": {
