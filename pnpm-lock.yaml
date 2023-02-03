@@ -309,16 +309,16 @@ importers:
 
   sandbox:
     specifiers:
-      '@formkl/editor': 1.0.0-rc.4
-      '@formkl/elemento': 1.0.0-rc.4
-      '@formkl/plugin-vite': 1.0.0-rc.4
-      '@formkl/shared': 1.0.0-rc.4
-      '@formkl/vue': 1.0.0-rc.4
+      '@formkl/editor': 1.0.0-rc.5
+      '@formkl/elemento': 1.0.0-rc.5
+      '@formkl/plugin-vite': 1.0.0-rc.5
+      '@formkl/shared': 1.0.0-rc.5
+      '@formkl/vue': 1.0.0-rc.5
       '@vitejs/plugin-vue': ^3.1.2
       '@vitejs/plugin-vue-jsx': ^2.0.1
       '@vitest/ui': ^0.24.5
       element-plus: ^2.2.17
-      formkl: 1.0.0-rc.4
+      formkl: 1.0.0-rc.5
       lodash: ^4.17.21
       rimraf: ^3.0.2
       typescript: ^4.9.4
@@ -609,24 +609,6 @@ packages:
       - supports-color
     dev: true
 
-  /@babel/helper-create-class-features-plugin/7.19.0_@babel+core@7.20.2:
-    resolution: {integrity: sha512-NRz8DwF4jT3UfrmUoZjd0Uph9HQnP30t7Ash+weACcyNkiYTywpIjDBgReJMKgr+n86sn2nPVVmJ28Dm053Kqw==}
-    engines: {node: '>=6.9.0'}
-    peerDependencies:
-      '@babel/core': ^7.0.0
-    dependencies:
-      '@babel/core': 7.20.2
-      '@babel/helper-annotate-as-pure': 7.18.6
-      '@babel/helper-environment-visitor': 7.18.9
-      '@babel/helper-function-name': 7.19.0
-      '@babel/helper-member-expression-to-functions': 7.18.9
-      '@babel/helper-optimise-call-expression': 7.18.6
-      '@babel/helper-replace-supers': 7.19.1
-      '@babel/helper-split-export-declaration': 7.18.6
-    transitivePeerDependencies:
-      - supports-color
-    dev: true
-
   /@babel/helper-environment-visitor/7.18.9:
     resolution: {integrity: sha512-3r/aACDJ3fhQ/EVgFy0hpj8oHyHpQc+LPtJoY9SzTThAsStm4Ptegq92vqKoE3vD706ZVFWITnMnxucw+S9Ipg==}
     engines: {node: '>=6.9.0'}
@@ -855,16 +837,6 @@ packages:
       '@babel/helper-plugin-utils': 7.19.0
     dev: true
 
-  /@babel/plugin-syntax-jsx/7.18.6_@babel+core@7.20.2:
-    resolution: {integrity: sha512-6mmljtAedFGTWu2p/8WIORGwy+61PLgOMPOdazc7YoJ9ZCWUyFy3A6CpPkRKLKD1ToAesxX8KGEViAiLo9N+7Q==}
-    engines: {node: '>=6.9.0'}
-    peerDependencies:
-      '@babel/core': ^7.0.0-0
-    dependencies:
-      '@babel/core': 7.20.2
-      '@babel/helper-plugin-utils': 7.19.0
-    dev: true
-
   /@babel/plugin-syntax-logical-assignment-operators/7.10.4_@babel+core@7.20.2:
     resolution: {integrity: sha512-d8waShlpFDinQ5MtvGU9xDAOzKH47+FFoney2baFIoMr952hKOLp1HR7VszoZvOsV/4+RRszNY7D17ba0te0ig==}
     peerDependencies:
@@ -959,20 +931,6 @@ packages:
       '@babel/helper-create-class-features-plugin': 7.19.0_@babel+core@7.19.1
       '@babel/helper-plugin-utils': 7.19.0
       '@babel/plugin-syntax-typescript': 7.18.6_@babel+core@7.19.1
-    transitivePeerDependencies:
-      - supports-color
-    dev: true
-
-  /@babel/plugin-transform-typescript/7.19.1_@babel+core@7.20.2:
-    resolution: {integrity: sha512-+ILcOU+6mWLlvCwnL920m2Ow3wWx3Wo8n2t5aROQmV55GZt+hOiLvBaa3DNzRjSEHa1aauRs4/YLmkCfFkhhRQ==}
-    engines: {node: '>=6.9.0'}
-    peerDependencies:
-      '@babel/core': ^7.0.0-0
-    dependencies:
-      '@babel/core': 7.20.2
-      '@babel/helper-create-class-features-plugin': 7.19.0_@babel+core@7.20.2
-      '@babel/helper-plugin-utils': 7.19.0
-      '@babel/plugin-syntax-typescript': 7.18.6_@babel+core@7.20.2
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -2621,10 +2579,10 @@ packages:
       vite: ^3.0.0
       vue: ^3.0.0
     dependencies:
-      '@babel/core': 7.20.2
-      '@babel/plugin-syntax-import-meta': 7.10.4_@babel+core@7.20.2
-      '@babel/plugin-transform-typescript': 7.19.1_@babel+core@7.20.2
-      '@vue/babel-plugin-jsx': 1.1.1_@babel+core@7.20.2
+      '@babel/core': 7.19.1
+      '@babel/plugin-syntax-import-meta': 7.10.4_@babel+core@7.19.1
+      '@babel/plugin-transform-typescript': 7.19.1_@babel+core@7.19.1
+      '@vue/babel-plugin-jsx': 1.1.1_@babel+core@7.19.1
       vite: 3.2.3
       vue: 3.2.41
     transitivePeerDependencies:
@@ -2745,23 +2703,6 @@ packages:
     dependencies:
       '@babel/helper-module-imports': 7.18.6
       '@babel/plugin-syntax-jsx': 7.18.6_@babel+core@7.19.1
-      '@babel/template': 7.18.10
-      '@babel/traverse': 7.19.1
-      '@babel/types': 7.19.0
-      '@vue/babel-helper-vue-transform-on': 1.0.2
-      camelcase: 6.3.0
-      html-tags: 3.2.0
-      svg-tags: 1.0.0
-    transitivePeerDependencies:
-      - '@babel/core'
-      - supports-color
-    dev: true
-
-  /@vue/babel-plugin-jsx/1.1.1_@babel+core@7.20.2:
-    resolution: {integrity: sha512-j2uVfZjnB5+zkcbc/zsOc0fSNGCMMjaEXP52wdwdIfn0qjFfEYpYZBFKFg+HHnQeJCVrjOeO0YxgaL7DMrym9w==}
-    dependencies:
-      '@babel/helper-module-imports': 7.18.6
-      '@babel/plugin-syntax-jsx': 7.18.6_@babel+core@7.20.2
       '@babel/template': 7.18.10
       '@babel/traverse': 7.19.1
       '@babel/types': 7.19.0

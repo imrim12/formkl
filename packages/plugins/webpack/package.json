@@ -1,7 +1,7 @@
 {
   "name": "@formkl/plugin-webpack",
-  "version": "1.0.0-rc.4",
-  "description": "A Formkl plugin to include .formkl file into Webpack build",
+  "version": "1.0.0-rc.5",
+  "description": "A Formkl plugin to include .form file into Webpack build",
   "type": "module",
   "exports": {
     ".": {
