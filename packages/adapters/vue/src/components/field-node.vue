@@ -3,22 +3,20 @@
     <p v-if="field.label" class="formkl-field__title">{{ field.label }}</p>
     <div class="formkl-field__container">
       <template v-if="field.multiple">
-        <template v-for="(modelValueEach, index) in modelValue" :key="index">
-          <div class="formkl-field__inner">
+        <div class="formkl-field__inner" v-for="(modelValueEach, index) in modelValue" :key="index">
+          <component
+            :is="VNodeField"
+            :model-value="modelValueEach"
+            @update:model-value="handleUpdateFieldMultiple($event, index)"
+          />
+          <div class="formkl-field__remover">
             <component
-              :is="VNodeField"
-              :model-value="modelValueEach"
-              @update:model-value="handleUpdateFieldMultiple($event, index)"
+              v-if="modelValue.length > 1"
+              :is="VNodeBtnRemoveField"
+              @click="handleRemoveValueFieldMultiple(index)"
             />
-            <div class="formkl-field__remover">
-              <component
-                v-if="modelValue.length > 1"
-                :is="VNodeBtnRemoveField"
-                @click="handleRemoveValueFieldMultiple(index)"
-              />
-            </div>
           </div>
-        </template>
+        </div>
         <div class="formkl-field__footer">
           <component :is="VNodeBtnAddField" @click="handleAddValueFieldMultiple" />
         </div>
@@ -35,7 +33,7 @@
 </template>
 
 <script lang="ts" setup>
-import { h, inject, PropType } from "vue";
+import { defineComponent, h, inject, PropType } from "vue";
 import { FieldCustom, FieldDefault, FieldSelection, Formkl, Section } from "@formkl/shared";
 import { themeInjectionKey } from "../keys/theme";
 
@@ -78,15 +76,30 @@ const handleRemoveValueFieldMultiple = (index: number) => {
 
 const currentTheme = inject(themeInjectionKey);
 
-const VNodeField = () => h(currentTheme.value?.vNodeFields?.[props.field.type] || "input");
+const VNodeField = defineComponent({
+  name: "FieldWrapper",
+  setup() {
+    return () => currentTheme.value?.vNodeFields?.[props.field.type] || h("input");
+  },
+});
 
-const VNodeBtnAddField = () =>
-  currentTheme.value?.vNodeComponents?.addField
-    ? h(currentTheme.value?.vNodeComponents?.addField)
-    : h("button", () => "Add field");
+const VNodeBtnAddField = defineComponent({
+  name: "BtnAddField",
+  setup() {
+    return () =>
+      currentTheme.value?.vNodeComponents?.addField
+        ? h(currentTheme.value?.vNodeComponents?.addField)
+        : h("button", () => "Add field");
+  },
+});
 
-const VNodeBtnRemoveField = () =>
-  currentTheme.value?.vNodeComponents?.addField
-    ? h(currentTheme.value?.vNodeComponents?.removeField)
-    : h("button", () => "Remove field");
+const VNodeBtnRemoveField = defineComponent({
+  name: "BtnRemoveField",
+  setup() {
+    return () =>
+      currentTheme.value?.vNodeComponents?.addField
+        ? h(currentTheme.value?.vNodeComponents?.removeField)
+        : h("button", () => "Remove field");
+  },
+});
 </script>

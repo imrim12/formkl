@@ -1,5 +1,10 @@
 
 
+## [1.0.0-rc.5](https://github.com/imrim12/formkl/compare/1.0.0-rc.4...1.0.0-rc.5) (2022-02-03)
+### Bug Fixes
+
+* fix: change VNodeField to stateful component ([e7fed1f](https://github.com/imrim12/formkl/commit/e7fed1f9eb4e79533faca8d1db819d9662d0dd1b))
+
 ## [1.0.0-rc.4](https://github.com/imrim12/formkl/compare/1.0.0-rc.3...1.0.0-rc.4) (2022-01-15)
 
 ## [1.0.0-rc.3](https://github.com/imrim12/formkl/compare/1.0.0-rc.2...1.0.0-rc.3) (2022-12-25)
