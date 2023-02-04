@@ -1,7 +1,7 @@
 {
   "name": "@formkl/plugin-vite",
   "description": "A Formkl Vite plugin to load .form files.",
-  "version": "1.0.0-rc.5",
+  "version": "0.1.0",
   "type": "module",
   "exports": {
     ".": {

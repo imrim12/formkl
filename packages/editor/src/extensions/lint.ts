@@ -14,11 +14,11 @@ function lintSyntax(view: EditorView): readonly Diagnostic[] {
   try {
     FormklParser.parse(content);
   } catch (err: any) {
-    const errorIndex: Array<number> | undefined = err.message
-      .match(/at\s.*\./g)?.[0]
-      .replace(/at\s|\./g, "")
-      .split(":")
-      .map((n: string) => +n);
+    const errorIndex: Array<number> | undefined = /at \d+\:\d+/
+      .exec(err.message)[0] // Get "at lineNumber:columnNumber"
+      .replace(/at /g, "") // Remove "at "
+      .split(":") // Get ["lineNumber", "columnNumber"]
+      .map(Number);
 
     diagnostics.push({
       from: errorIndex ? view.state.doc.line(errorIndex[0]).from : view.state.doc.length,

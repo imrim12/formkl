@@ -7,6 +7,8 @@ import { createKeywordRegex } from "./utils/createKeywordRegex";
 const Specs: Array<Spec> = [
   // --------------------------------------
   // Whitespace:
+  [/^\n/, null],
+
   [/^\s+/, null],
 
   // --------------------------------------
@@ -109,27 +111,32 @@ const Specs: Array<Spec> = [
  * Lazily pulls a token from a stream.
  */
 export class Tokenizer {
-  private _string: string;
-  private _cursor: number;
+  public syntax: string;
+  public cursor: number;
+
+  public currentLine: number;
+  public currentColumn: number;
 
   /**
    * Initializes the string.
    */
   constructor(string: string) {
-    this._string = string;
-    this._cursor = 0; // track the position of each character
+    this.syntax = string;
+    this.cursor = 0; // track the position of each character
+    this.currentLine = 1;
+    this.currentColumn = 0;
   }
   /**
    * Whether the tokenizer reached EOF.
    */
   isEOF() {
-    return this._cursor === this._string.length;
+    return this.cursor === this.syntax.length;
   }
   /**
    * Whether we still have more tokens.
    */
   hasMoreTokens() {
-    return this._cursor < this._string.length;
+    return this.cursor < this.syntax.length;
   }
   /**
    * Obtains next token.
@@ -138,7 +145,7 @@ export class Tokenizer {
     if (!this.hasMoreTokens()) {
       return null;
     }
-    const string = this._string.slice(this._cursor);
+    const string = this.syntax.slice(this.cursor);
 
     for (const [regexp, tokenType] of Specs) {
       const tokenValue = this._match(regexp, string);
@@ -160,7 +167,9 @@ export class Tokenizer {
       };
     }
 
-    throw new SyntaxError(`Unexpected token: "${string[0]}"`);
+    throw new SyntaxError(
+      `Unexpected token: "${string[0]}" at ${this.currentLine}:${this.currentColumn}`,
+    );
   }
 
   /**
@@ -168,10 +177,20 @@ export class Tokenizer {
    */
   _match(regexp: RegExp, string: string) {
     const matched = regexp.exec(string);
+
     if (matched === null) {
       return null;
     }
-    this._cursor += matched[0].length;
+
+    this.cursor += matched[0].length;
+
+    if (regexp.source === "^\\n" && matched !== null) {
+      this.currentLine++;
+      this.currentColumn = 0;
+    }
+
+    this.currentColumn += matched[0].length;
+
     return matched[0];
   }
 }

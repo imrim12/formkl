@@ -7,16 +7,18 @@ import { capitalize } from "./utils/capitalize";
 import { kebabCase } from "./utils/kebabCase";
 
 export class Parser {
-  private _string: string;
-  private _tokenizer: Tokenizer;
+  public syntax: string;
+  public tokenizer: Tokenizer;
+
   private _lookahead: Token | null;
 
   /**
    * Initializes the parser.
    */
   constructor() {
-    this._string = "";
-    this._tokenizer = new Tokenizer("");
+    this.syntax = "";
+    this.tokenizer = new Tokenizer("");
+
     this._lookahead = null;
   }
 
@@ -24,17 +26,17 @@ export class Parser {
    * Parse a Formkl syntax string into Formkl object
    */
   parse(string: string): Formkl {
-    this._string = "";
+    this.syntax = "";
     this._lookahead = null;
 
-    this._string = string;
-    this._tokenizer = new Tokenizer(this._string);
+    this.syntax = string;
+    this.tokenizer = new Tokenizer(this.syntax);
 
     // Prime the tokenizer to obtain the first
     // token which is our lookahead. The lookahead is
     // used for predective parsing.
 
-    this._lookahead = this._tokenizer.getNextToken();
+    this._lookahead = this.tokenizer.getNextToken();
 
     // Parse recursively starting from the main
     // entry point, the Program:
@@ -646,11 +648,13 @@ export class Parser {
     }
 
     if (token.type !== tokenType) {
-      throw new SyntaxError(`Unexpected token: "${token.value}", expected: "${tokenType}"`);
+      throw new SyntaxError(
+        `Unexpected token: "${token.value}" at ${this.tokenizer.currentLine}:${this.tokenizer.currentColumn}, expected: "${tokenType}"`,
+      );
     }
 
     // Advance to next token.
-    this._lookahead = this._tokenizer.getNextToken();
+    this._lookahead = this.tokenizer.getNextToken();
 
     return token;
   }
