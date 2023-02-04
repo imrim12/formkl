@@ -1,5 +1,10 @@
 
 
+## [0.1.0](https://github.com/imrim12/formkl/compare/1.0.0-rc.5...0.1.0) (2022-02-05)
+### Bug Fixes
+
+* fix: count line and column in syntax error ([c0976d5](https://github.com/imrim12/formkl/commit/c0976d512e5a3637fd904f949672b08008abd753))
+
 ## [1.0.0-rc.5](https://github.com/imrim12/formkl/compare/1.0.0-rc.4...1.0.0-rc.5) (2022-02-03)
 ### Bug Fixes
 
