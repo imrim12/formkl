@@ -1,0 +1,23 @@
+{
+  "name": "formkl-lsp",
+  "description": "An implementation of a FormKL language client in node.",
+  "version": "1.0.0",
+  "author": "FormKL",
+  "license": "MIT",
+  "publisher": "FormKL",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/imrim12/formkl.git"
+  },
+  "engines": {
+    "vscode": "^1.54.0"
+  },
+  "dependencies": {
+    "vscode-languageclient": "^7.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^18.11.18",
+    "@types/vscode": "^1.63.0",
+    "@vscode/test-electron": "^2.1.2"
+  }
+}
