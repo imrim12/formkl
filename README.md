@@ -23,6 +23,7 @@ Thank you to all the people who already contributed to the Formkl - Form Markup 
 <table>
   <tbody>
     <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://www.linkedin.com/in/tai-le-05124a187/"><img src="https://avatars.githubusercontent.com/u/44340263?v=4?s=100" width="100px;" alt="Tai Le"/><br /><sub><b>Tai Le</b></sub></a><br /><a href="#plugin-tailtq" title="Plugin/utility libraries">🔌</a></td>
       <td align="center" valign="top" width="14.28%"><a href="http://nguyenhuunguyeny.com"><img src="https://avatars.githubusercontent.com/u/46400321?v=4?s=100" width="100px;" alt="Rim (Y Nguyen)"/><br /><sub><b>Rim (Y Nguyen)</b></sub></a><br /><a href="#maintenance-imrim12" title="Maintenance">🚧</a></td>
     </tr>
   </tbody>

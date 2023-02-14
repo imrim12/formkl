@@ -7,6 +7,15 @@
   "commitConvention": "angular",
   "contributors": [
     {
+      "login": "tailtq",
+      "name": "Tai Le",
+      "avatar_url": "https://avatars.githubusercontent.com/u/44340263?v=4",
+      "profile": "https://www.linkedin.com/in/tai-le-05124a187/",
+      "contributions": [
+        "plugin"
+      ]
+    },
+    {
       "login": "imrim12",
       "name": "Rim (Y Nguyen)",
       "avatar_url": "https://avatars.githubusercontent.com/u/46400321?v=4",
