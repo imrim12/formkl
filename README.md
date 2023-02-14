@@ -14,11 +14,14 @@ Please make sure to read the [Contributing Guide](https://formkl.org/learning/co
 
 Thank you to all the people who already contributed to the Formkl - Form Markup Language project!
 
-<a href="https://github.com/imrim12/formkl/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=imrim12/formkl" />
-</a>
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
 
-Made with [contrib.rocks](https://contrib.rocks).
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
 
 ## License
 
