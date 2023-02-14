@@ -7,6 +7,15 @@
   "commitConvention": "angular",
   "contributors": [
     {
+      "login": "bongudth",
+      "name": "Huynh Thi Khanh Linh",
+      "avatar_url": "https://avatars.githubusercontent.com/u/73637868?v=4",
+      "profile": "http://bongudth.me",
+      "contributions": [
+        "doc"
+      ]
+    },
+    {
       "login": "tailtq",
       "name": "Tai Le",
       "avatar_url": "https://avatars.githubusercontent.com/u/44340263?v=4",
