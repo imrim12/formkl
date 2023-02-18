@@ -53,6 +53,10 @@ const Specs: Array<Spec> = [
   [createKeywordRegex("OR"), "OR"],
   [createKeywordRegex("AND"), "AND"],
   [createKeywordRegex("HAS"), "HAS"],
+  /**
+   * @deprecated
+   */
+  [createKeywordRegex("INCLUDES"), "HAS"],
 
   // --------------------------------------
   // Keywords

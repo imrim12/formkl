@@ -1,5 +1,6 @@
 export interface Theme<GenericNode = any, GenericRule = any> {
   vNodeLayout?: GenericNode;
+  vNodeFieldWrapper?: GenericNode;
   vNodeFields: {
     [key: string]: GenericNode;
   };

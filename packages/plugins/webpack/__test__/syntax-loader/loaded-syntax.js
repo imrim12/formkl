@@ -1,0 +1,1 @@
+var e={d:(t,o)=>{for(var r in o)e.o(o,r)&&!e.o(t,r)&&Object.defineProperty(t,r,{enumerable:!0,get:o[r]})},o:(e,t)=>Object.prototype.hasOwnProperty.call(e,t)},t={};e.d(t,{Z:()=>o});const o={model:"base",sections:[{fields:[{type:"text",label:"Text",key:"text"}]}]};var r=t.Z;export{r as default};
