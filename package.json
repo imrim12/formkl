@@ -16,7 +16,8 @@
     "prepare-husky": "husky install",
     "release": "release-it",
     "dev:vue": "pnpm -F ./sandbox dev",
-    "dev:react": "pnpm -F ./sandbox-react dev"
+    "dev:react": "pnpm -F ./sandbox-react dev",
+    "postinstall": "pnpm build:all"
   },
   "repository": {
     "type": "git",
