@@ -12,6 +12,8 @@ import {
   ElCheckbox,
   ElRadioGroup,
   ElRadio,
+  ElForm,
+  ElFormItem,
 } from "element-plus";
 
 import "element-plus/dist/index.css";
@@ -19,6 +21,8 @@ import "element-plus/dist/index.css";
 import "./style.css";
 
 const themeConfig: Theme = {
+  VNodeFormWrapper: h(ElForm),
+  vNodeFieldWrapper: h(ElFormItem),
   vNodeFields: {
     text: h(ElInput),
     paragraph: h(ElInput, { type: "textarea" }),
