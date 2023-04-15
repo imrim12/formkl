@@ -1,9 +1,14 @@
-import { mount, config } from "@vue/test-utils";
+import { mount } from "@vue/test-utils";
 
 import formklTheme from "@formkl/elemento";
 
 import FormklPlugin, { Formkl } from "..";
-import form from "./syntax.form";
+import { Formkl as FormklType } from "@formkl/shared";
+
+// @ts-ignore
+import formSyntax from "./syntax.form";
+
+let form: FormklType = formSyntax;
 
 const mountOptions = {
   global: {
@@ -12,7 +17,7 @@ const mountOptions = {
   propsData: {
     form,
   },
-};
+} as any;
 
 describe("Basic rendering usage including vite plugin.", () => {
   it("should mount the Formkl component correctly", () => {

@@ -91,7 +91,7 @@ const VNodeFieldWrapper = defineComponent({
 
 const VNodeField = defineComponent({
   name: "Field",
-  setup: () => () => h(currentTheme.value?.vNodeFields?.[props.field.type] || "div"),
+  setup: () => () => h(currentTheme.value?.vNodeFields?.[props.field.type] || "div", props.field),
 });
 
 const VNodeBtnAddField = defineComponent({

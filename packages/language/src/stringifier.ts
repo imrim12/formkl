@@ -50,6 +50,20 @@ export class Stringifier {
       .join("%(s)");
   }
 
+  selectionField(field: FieldSelection) {
+    return `${field.type}${
+      field.fetchUrl
+        ? `${field.fetchDataPath ? `%(s)${field.fetchDataPath}` : ""}%(s)url("${[
+            field.fetchUrl,
+            field.valueKey,
+            field.labelKey,
+          ]
+            .map((o) => JSON.stringify(o))
+            .join(", ")}")`
+        : `%(s)(${field.options.map((o) => JSON.stringify(o)).join(", ")})`
+    }`;
+  }
+
   fields(fields: Array<FieldDefault | FieldSelection | FieldCustom>) {
     return (
       "%(t)%(t)" +
@@ -60,7 +74,9 @@ export class Stringifier {
               field.required && "require",
               field.maxResponseAllowed ? field.maxResponseAllowed : field.multiple && "multiple",
               kebabCase(field.label).toLowerCase() !== field.type && `"${field.label}"`,
-              field.type,
+              ["select", "radio", "checkbox"].includes(field.type)
+                ? this.selectionField(field as FieldSelection)
+                : field.type,
               field.validation && this.validation(field.validation),
               kebabCase(field.label).toLowerCase() !== field.key && `as%(s)"${field.key}"`,
             ]

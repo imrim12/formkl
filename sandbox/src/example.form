@@ -7,6 +7,11 @@ formkl
   }
   "Personal Information" has {
     text;
+		select("A", "B", "C");
+    multiple text as "something-elsse";
+    multiple date;
+    multiple datetime;
+    multiple time;
     multiple paragraph;
     multiple text as "something";
   }
