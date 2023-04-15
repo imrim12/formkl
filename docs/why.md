@@ -7,7 +7,7 @@ Form is an essential module in any web application. It is used to collect data f
 **Management applications** tend to have a lot of forms for CRUD operations. The more forms you have, the more time you spend on creating them. And the more time you spend on creating them, the less time you spend on developing the core features of your application.
 
 ## The solution
-The Form Markup Language (Formkl) ecosystem is creating a new way that is fast, consistent, and easy way to create forms.
+The Form marKup Language (Formkl) ecosystem is creating a new way that is fast, consistent, and easy way to create forms.
 
 - Extremely lightweight, no dependencies.
 - Provided a strong ecosystem, including renderers that suits your favourite UI frameworks.

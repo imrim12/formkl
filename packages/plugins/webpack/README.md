@@ -12,7 +12,7 @@ View sandbox: [sandbox.formkl.org](https://sandbox.formkl.org)
 
 Please make sure to read the [Contributing Guide](https://formkl.org/learning/contribution-guide.html) before making a pull request.
 
-Thank you to all the people who already contributed to the Formkl - Form Markup Language project!
+Thank you to all the people who already contributed to the Formkl - Form marKup Language project!
 
 <a href="https://github.com/imrim12/formkl/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=imrim12/formkl" />
