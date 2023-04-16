@@ -1,53 +1,53 @@
 {
-  "name": "@formkl/editor",
-  "version": "0.1.0",
-  "description": "A universal Editor for Formkl using web component API",
-  "type": "module",
-  "exports": {
-    ".": {
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.cjs"
-    }
-  },
-  "main": "./dist/index.cjs",
-  "types": "./dist/index.d.ts",
-  "files": [
-    "dist"
-  ],
-  "scripts": {
-    "typecheck": "tsc --noEmit",
-    "build": "npx unbuild"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@github.com/imrim12/formkl.git",
-    "directory": "packages/editor"
-  },
-  "keywords": [
-    "formkl",
-    "editor"
-  ],
-  "author": "thecodeorigin",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/imrim12/formkl/issues"
-  },
-  "homepage": "https://github.com/imrim12/formkl#readme",
-  "dependencies": {
-    "@codemirror/autocomplete": "^6.2.0",
-    "@codemirror/commands": "^6.1.0",
-    "@codemirror/lint": "^6.0.0",
-    "@codemirror/state": "^6.1.2",
-    "@codemirror/view": "^6.2.4",
-    "@formkl/shared": "workspace:*",
-    "codemirror": "^6.0.1",
-    "formkl": "workspace:*"
-  },
-  "devDependencies": {
-    "@vitest/ui": "^0.24.5",
-    "rimraf": "^3.0.2",
-    "typescript": "^4.9.4",
-    "unbuild": "^0.9.4",
-    "vitest": "^0.24.4"
-  }
+	"name": "@formkl/editor",
+	"version": "0.2.0",
+	"description": "A universal Editor for Formkl using web component API",
+	"type": "module",
+	"exports": {
+		".": {
+			"import": "./dist/index.mjs",
+			"require": "./dist/index.cjs"
+		}
+	},
+	"main": "./dist/index.cjs",
+	"types": "./dist/index.d.ts",
+	"files": [
+		"dist"
+	],
+	"scripts": {
+		"typecheck": "tsc --noEmit",
+		"build": "npx unbuild"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+ssh://git@github.com/imrim12/formkl.git",
+		"directory": "packages/editor"
+	},
+	"keywords": [
+		"formkl",
+		"editor"
+	],
+	"author": "thecodeorigin",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/imrim12/formkl/issues"
+	},
+	"homepage": "https://github.com/imrim12/formkl#readme",
+	"dependencies": {
+		"@codemirror/autocomplete": "^6.2.0",
+		"@codemirror/commands": "^6.1.0",
+		"@codemirror/lint": "^6.0.0",
+		"@codemirror/state": "^6.1.2",
+		"@codemirror/view": "^6.2.4",
+		"@formkl/shared": "workspace:*",
+		"codemirror": "^6.0.1",
+		"formkl": "workspace:*"
+	},
+	"devDependencies": {
+		"@vitest/ui": "^0.24.5",
+		"rimraf": "^3.0.2",
+		"typescript": "^4.9.4",
+		"unbuild": "^0.9.4",
+		"vitest": "^0.24.4"
+	}
 }
