@@ -1,62 +1,45 @@
-import { defineComponent, h } from "vue";
+import { h } from "vue";
 import { Theme } from "@formkl/shared";
 import {
   ElInput,
   ElButton,
-  ElSelectV2,
   ElSwitch,
   ElInputNumber,
   ElDatePicker,
   ElTimePicker,
-  ElCheckboxGroup,
-  ElCheckbox,
-  ElRadioGroup,
-  ElRadio,
+  ElForm,
+  ElFormItem,
 } from "element-plus";
+
+import RadioComponent from "./components/radio.component";
+import CheckboxComponent from "./components/checkbox.component";
+import SelectComponent from "./components/select.component";
 
 import "element-plus/dist/index.css";
 
 import "./style.css";
 
 const themeConfig: Theme = {
+  VNodeFormWrapper: h(ElForm),
+  vNodeFieldWrapper: h(ElFormItem),
   vNodeFields: {
     text: h(ElInput),
     paragraph: h(ElInput, { type: "textarea" }),
     switch: h(ElSwitch),
     number: h(ElInputNumber),
-    date: h(ElDatePicker),
-    time: h(ElTimePicker),
-    datetime: h(ElDatePicker, { type: "datetime" }),
-    daterange: h(ElDatePicker, { isRange: true }),
-    timerange: h(ElTimePicker, { isRange: true }),
-    datetimerange: h(ElDatePicker, { type: "datetime", isRange: true }),
-    select: h(ElSelectV2),
-    checkbox: defineComponent({
-      props: {
-        options: Array,
-      },
-      setup(props, { attrs }) {
-        return () =>
-          h(
-            ElCheckboxGroup,
-            Object.assign({}, props, attrs),
-            props.options.map((option: any) => h(ElCheckbox, { label: option }, option)),
-          );
-      },
+    date: h(ElDatePicker, { valueFormat: "YYYY-MM-DD" }),
+    time: h(ElTimePicker, { valueFormat: "HH:mm:ss" }),
+    datetime: h(ElDatePicker, { type: "datetime", valueFormat: "YYYY-MM-DD HH:mm:ss" }),
+    daterange: h(ElDatePicker, { isRange: true, valueFormat: "YYYY-MM-DD" }),
+    timerange: h(ElTimePicker, { isRange: true, valueFormat: "HH:mm:ss" }),
+    datetimerange: h(ElDatePicker, {
+      type: "datetime",
+      isRange: true,
+      valueFormat: "YYYY-MM-DD HH:mm:ss",
     }),
-    radio: defineComponent({
-      props: {
-        options: Array,
-      },
-      setup(props, { attrs }) {
-        return () =>
-          h(
-            ElRadioGroup,
-            Object.assign({}, props, attrs),
-            props.options.map((option: any) => h(ElRadio, { label: option }, option)),
-          );
-      },
-    }),
+    select: SelectComponent,
+    checkbox: CheckboxComponent,
+    radio: RadioComponent,
   },
   vNodeComponents: {
     addSection: h(ElButton, () => "Add section"),

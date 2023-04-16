@@ -32,15 +32,35 @@ describe("Used with Capitalized syntax", () => {
     );
   });
 
-  it("should show syntax error correctly", () => {
-    expect(() => {
-      parser.parse(`Formkl {
+  it("should parse the form syntax correctly", () => {
+    const result = parser.parse(`Formkl {
       Includes {
         Text;
         "Another" Text;
       }
-			}`);
-    }).toThrowError(/Unexpected token: "I" at 2:7/);
+    }`);
+
+    expect(result).toStrictEqual(
+      defineForm({
+        model: "base",
+        sections: [
+          {
+            fields: [
+              {
+                type: "text",
+                label: "Text",
+                key: "text",
+              },
+              {
+                type: "text",
+                label: "Another",
+                key: "another",
+              },
+            ],
+          },
+        ],
+      }),
+    );
   });
 
   it("should show syntax error correctly", () => {

@@ -41,7 +41,7 @@
 </template>
 
 <script lang="ts" setup>
-import { h, inject, PropType } from "vue";
+import { defineComponent, h, inject, PropType } from "vue";
 import { FieldCustom, FieldDefault, FieldSelection, Formkl, Section } from "@formkl/shared";
 
 import _cloneDeep from "lodash/cloneDeep";
@@ -100,13 +100,19 @@ const handleRemoveValueSectionMultiple = (index: number) => {
 
 const currentTheme = inject(themeInjectionKey);
 
-const VNodeBtnAddSection = () =>
-  currentTheme.value?.vNodeComponents?.addSection
-    ? h(currentTheme.value?.vNodeComponents?.addSection)
-    : h("button", () => "Add section");
+const VNodeBtnAddSection = defineComponent({
+  name: "BtnAddSection",
+  setup: () => () =>
+    currentTheme.value?.vNodeComponents?.addSection
+      ? h(currentTheme.value?.vNodeComponents?.addSection)
+      : h("button", () => "Add section"),
+});
 
-const VNodeBtnRemoveSection = () =>
-  currentTheme.value?.vNodeComponents?.removeSection
-    ? h(currentTheme.value?.vNodeComponents?.removeSection)
-    : h("button", () => "Remove section");
+const VNodeBtnRemoveSection = defineComponent({
+  name: "BtnRemoveSection",
+  setup: () => () =>
+    currentTheme.value?.vNodeComponents?.removeSection
+      ? h(currentTheme.value?.vNodeComponents?.removeSection)
+      : h("button", () => "Remove section"),
+});
 </script>

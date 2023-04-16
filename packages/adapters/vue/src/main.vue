@@ -1,6 +1,6 @@
 <template>
-  <div class="formkl__wrapper">
-    <component v-if="formComputed" :is="VNodeLayout" :form="formComputed">
+  <component :is="VNodeFormWrapper" class="formkl__wrapper">
+    <component v-if="formComputed" :is="VNodeLayout">
       <FormNode
         :form="formComputed"
         :model-value="modelValue"
@@ -8,7 +8,7 @@
       />
     </component>
     <div v-else class="formkl__error">Failed to load form</div>
-  </div>
+  </component>
 </template>
 
 <script lang="ts">
@@ -26,6 +26,7 @@ import {
   onMounted,
   PropType,
   provide,
+  useAttrs,
 } from "vue";
 import { Formkl, Schema } from "@formkl/shared";
 
@@ -75,6 +76,20 @@ const formComputed = computed<Formkl | null>(() => {
   return props.form;
 });
 
+const attrs = useAttrs();
+
+// Attributes that start in "on"
+const listerers$ = computed(() => {
+  const listeners = {};
+  Object.keys(attrs).forEach((key) => {
+    if (key.startsWith("on")) {
+      listeners[key] = attrs[key];
+    }
+  });
+
+  return listeners;
+});
+
 const _buildSchema = () => {
   const schema = {};
   formComputed.value?.sections.forEach((section) => {
@@ -97,7 +112,29 @@ const _buildSchema = () => {
 };
 _buildSchema();
 
-const VNodeLayout = computed(() => h(currentTheme.value?.vNodeLayout || LayoutDefault));
+const VNodeLayout = defineComponent({
+  name: "FormLayout",
+  setup:
+    (props, { slots }) =>
+    () =>
+      h(
+        currentTheme.value.vNodeLayout || LayoutDefault,
+        { form: formComputed.value },
+        {
+          default: () => slots.default(),
+        },
+      ),
+});
+
+const VNodeFormWrapper = defineComponent({
+  name: "FormWrapper",
+  setup:
+    (props, { slots }) =>
+    () =>
+      h(currentTheme.value?.VNodeFormWrapper || "form", listerers$, {
+        default: () => slots.default(),
+      }),
+});
 
 onMounted(() => {
   if (!props.syntax && !props.form) {
