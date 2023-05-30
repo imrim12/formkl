@@ -1,24 +1,37 @@
 {
-  "compilerOptions": {
-    "baseUrl": ".",
-    "rootDir": ".",
-    "allowJs": true,
-    "allowSyntheticDefaultImports": true,
-    "jsx": "preserve",
-    "module": "ESNext",
-    "moduleResolution": "Node",
-    "target": "ESNext",
-    "declaration": false,
-    "sourceMap": true,
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "useDefineForClassFields": true,
-    "lib": ["ESNext", "DOM"],
-    "types": ["vitest/globals"],
-    "outDir": "./dist"
-  },
-  "include": ["./**/*.ts", "./**/*.d.ts", "./**/*.test.ts"],
-  "exclude": ["./node_modules", "./dist"]
+	"compilerOptions": {
+		"baseUrl": ".",
+		"rootDir": ".",
+		"allowJs": true,
+		"allowSyntheticDefaultImports": true,
+		"jsx": "preserve",
+		"module": "ESNext",
+		"moduleResolution": "Node",
+		"target": "ESNext",
+		"declaration": false,
+		"sourceMap": true,
+		"resolveJsonModule": true,
+		"isolatedModules": true,
+		"esModuleInterop": true,
+		"skipLibCheck": true,
+		"useDefineForClassFields": true,
+		"lib": [
+			"ESNext",
+			"DOM"
+		],
+		"types": [
+			"vite/client",
+			"vitest/globals"
+		],
+		"outDir": "./dist"
+	},
+	"include": [
+		"./**/*.ts",
+		"./**/*.d.ts",
+		"./**/*.test.ts"
+	],
+	"exclude": [
+		"./node_modules",
+		"./dist"
+	]
 }

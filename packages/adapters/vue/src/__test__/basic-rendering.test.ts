@@ -1,6 +1,6 @@
-import { mount } from "@vue/test-utils";
+import { mount, renderToString } from "@vue/test-utils";
 
-import formklTheme from "@formkl/elemento";
+import formklElemento from "@formkl/elemento";
 
 import FormklPlugin, { Formkl } from "..";
 import { Formkl as FormklType } from "@formkl/shared";
@@ -12,7 +12,7 @@ let form: FormklType = formSyntax;
 
 const mountOptions = {
   global: {
-    plugins: [[FormklPlugin, { theme: formklTheme }]],
+    plugins: [[FormklPlugin, { theme: formklElemento }]],
   },
   propsData: {
     form,
@@ -54,5 +54,12 @@ describe("Basic rendering usage including vite plugin.", () => {
         expect(wrapper.element.innerHTML).toContain(field.label);
       });
     });
+  });
+
+	it("should render the fields correctly", async () => {
+    const wrapper = await renderToString(Formkl, mountOptions);
+
+		expect(wrapper.match(/el-input__inner/g).length)
+			.toBe(form.sections.reduce((acc, section) => acc + section.fields.length, 0))
   });
 });

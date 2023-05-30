@@ -86,7 +86,7 @@ const VNodeFieldWrapper = defineComponent({
   setup:
     (props, { slots }) =>
     () =>
-      h(currentTheme.value?.vNodeFieldWrapper || "div", slots.default()),
+      h(currentTheme.value?.vNodeFieldWrapper || "div", () => slots.default()),
 });
 
 const VNodeField = defineComponent({
