@@ -40,5 +40,9 @@
 	"dependencies": {
 		"@formkl/shared": "workspace:*",
 		"formkl": "workspace:*"
+	},
+	"devDependencies": {
+		"@vitejs/plugin-vue": "catalog:",
+		"@vitejs/plugin-vue-jsx": "catalog:"
 	}
 }

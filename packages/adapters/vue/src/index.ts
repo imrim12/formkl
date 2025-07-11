@@ -1,4 +1,4 @@
-import { Plugin } from "vue";
+import type { Plugin } from "vue";
 
 import Formkl from "./main.vue";
 

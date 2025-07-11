@@ -19,6 +19,7 @@ catalog:
   "@vitejs/plugin-vue-jsx": "^5.0.1"
   "@vitest/ui": "^3.2.4"
   "@vue/test-utils": "^2.4.6"
+  "@vue/tsconfig": "^0.7.0"
   "codemirror": "^6.0.2"
   "eslint": "^9.30.1"
   "es-toolkit": "^1.39.7"

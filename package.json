@@ -60,6 +60,7 @@
 		"@vitejs/plugin-vue-jsx": "catalog:",
 		"@vitest/ui": "catalog:",
 		"@vue/test-utils": "catalog:",
+		"@vue/tsconfig": "catalog:",
 		"eslint": "catalog:",
 		"husky": "catalog:",
 		"jsdom": "catalog:",

@@ -24,11 +24,11 @@ import {
   getCurrentInstance,
   h,
   onMounted,
-  PropType,
   provide,
   useAttrs,
 } from "vue";
-import { Formkl, Schema } from "@formkl/shared";
+import type { PropType } from "vue";
+import type { Formkl, Schema } from "@formkl/shared";
 
 import { themeInjectionKey } from "./keys/theme";
 
@@ -59,7 +59,7 @@ const emit = defineEmits<{
 
 const vm = getCurrentInstance()?.proxy;
 
-const currentTheme = computed(() => vm.$formkl.theme);
+const currentTheme = computed(() => vm?.$formkl.theme);
 provide(themeInjectionKey, currentTheme);
 
 const formComputed = computed<Formkl | null>(() => {
