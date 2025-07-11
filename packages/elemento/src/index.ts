@@ -15,10 +15,6 @@ import RadioComponent from "./components/radio.component";
 import CheckboxComponent from "./components/checkbox.component";
 import SelectComponent from "./components/select.component";
 
-import "element-plus/dist/index.css";
-
-import "./style.css";
-
 const themeConfig: Theme = {
   VNodeFormWrapper: h(ElForm),
   vNodeFieldWrapper: h(ElFormItem),

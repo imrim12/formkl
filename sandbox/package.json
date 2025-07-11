@@ -16,5 +16,9 @@
     "@formkl/vue": "workspace:*",
 		"element-plus": "catalog:",
     "formkl": "workspace:*"
+	},
+	"devDependencies": {
+		"@vitejs/plugin-vue": "catalog:",
+		"@vitejs/plugin-vue-jsx": "catalog:"
 	}
 }

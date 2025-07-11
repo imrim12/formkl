@@ -6,10 +6,10 @@
 		".": {
 			"import": "./dist/index.mjs",
 			"require": "./dist/index.cjs"
-		}
+		},
+		"./style.css": "./src/style.css"
 	},
 	"main": "./dist/index.cjs",
-	"style": "./dist/style.css",
 	"types": "./dist/types/index.d.ts",
 	"files": [
 		"dist"
@@ -19,9 +19,9 @@
 		"build": "vite build"
 	},
 	"peerDependencies": {
-		"element-plus": "^2.10.3",
-		"es-toolkit": "^1.39.7",
-		"vue": "^3.5.17"
+		"element-plus": "catalog:",
+		"es-toolkit": "catalog:",
+		"vue": "catalog:"
 	},
 	"dependencies": {
 		"@formkl/shared": "workspace:*",

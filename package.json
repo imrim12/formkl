@@ -70,6 +70,7 @@
 		"typescript": "catalog:",
 		"unocss": "catalog:",
 		"unbuild": "catalog:",
+		"unplugin-auto-import": "catalog:",
 		"vite": "catalog:",
 		"vite-plugin-dts": "catalog:",
 		"vitest": "catalog:",

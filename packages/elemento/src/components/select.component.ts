@@ -57,7 +57,7 @@ export default defineComponent({
           loading: isLoading.value,
           options: computedOptions.value,
           onChange: handleSelectionChange,
-          onClear: handleSelectionChange,
+          onClear: handleSelectionChange as any,
         },
         {
           default: ({ item }) => h("span", { class: "text-sm" }, item.label),

@@ -25,7 +25,7 @@ export default defineConfig({
     dts({
       root: ".",
       entryRoot: "./src",
-      outputDir: "./dist/types",
+      outDir: "./dist/types",
     }),
   ],
 });

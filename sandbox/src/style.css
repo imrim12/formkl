@@ -1,4 +1,4 @@
-@import url(@formkl/elemento);
+@import url(@formkl/elemento/style.css);
 
 body {
   margin: 0;
