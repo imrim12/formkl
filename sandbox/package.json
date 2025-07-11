@@ -7,5 +7,14 @@
     "typecheck": "vue-tsc --noEmit",
     "build": "vite build",
     "preview": "vite preview"
-  }
+  },
+	"dependencies": {
+		"@formkl/editor": "workspace:*",
+    "@formkl/plugin-vite": "workspace:*",
+    "@formkl/shared": "workspace:*",
+    "@formkl/elemento": "workspace:*",
+    "@formkl/vue": "workspace:*",
+		"element-plus": "catalog:",
+    "formkl": "workspace:*"
+	}
 }
