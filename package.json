@@ -2,7 +2,6 @@
 	"type": "module",
 	"version": "0.2.0",
 	"description": "Form marKup Language",
-	"packageManager": "pnpm@7.12.2",
 	"scripts": {
 		"nx": "nx",
 		"build": "nx build",
@@ -15,8 +14,7 @@
 		"build:docs": "vitepress build docs",
 		"prepare-husky": "husky install",
 		"release": "release-it",
-		"dev:vue": "pnpm -F ./sandbox dev",
-		"dev:react": "pnpm -F ./sandbox-react dev"
+		"dev:vue": "pnpm -F ./sandbox dev"
 	},
 	"repository": {
 		"type": "git",
@@ -44,7 +42,6 @@
 		"@formkl/elemento": "workspace:*",
 		"@formkl/shared": "workspace:*",
 		"@formkl/plugin-vite": "workspace:*",
-		"@formkl/plugin-webpack": "workspace:*",
 		"@formkl/vue": "workspace:*",
 		"formkl": "workspace:*",
 		"vitepress": "1.0.0-alpha.20"

@@ -55,7 +55,6 @@ export default {
         collapsible: true,
         items: [
           { text: "Vite", link: "/installation/vite" },
-          { text: "Webpack", link: "/installation/webpack" },
         ],
       },
       {
@@ -63,8 +62,6 @@ export default {
         collapsible: true,
         items: [
           { text: "Vue", link: "/adapters/vue" },
-          { text: "React", link: "/adapters/react" },
-          { text: "Svelte", link: "/adapters/svelte" },
         ],
       },
       {
