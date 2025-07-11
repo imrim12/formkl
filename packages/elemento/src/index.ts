@@ -16,13 +16,13 @@ import CheckboxComponent from "./components/checkbox.component";
 import SelectComponent from "./components/select.component";
 
 const themeConfig: Theme = {
-  VNodeFormWrapper: h(ElForm),
-  vNodeFieldWrapper: h(ElFormItem),
+  VNodeFormWrapper: ElForm,
+  vNodeFieldWrapper: ElFormItem,
   vNodeFields: {
-    text: h(ElInput),
+    text: ElInput,
     paragraph: h(ElInput, { type: "textarea" }),
-    switch: h(ElSwitch),
-    number: h(ElInputNumber),
+    switch: ElSwitch,
+    number: ElInputNumber,
     date: h(ElDatePicker, { valueFormat: "YYYY-MM-DD" }),
     time: h(ElTimePicker, { valueFormat: "HH:mm:ss" }),
     datetime: h(ElDatePicker, { type: "datetime", valueFormat: "YYYY-MM-DD HH:mm:ss" }),

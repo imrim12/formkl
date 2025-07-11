@@ -21,10 +21,10 @@ export default defineComponent({
 import {
   computed,
   defineComponent,
-  getCurrentInstance,
   h,
+  inject,
   onMounted,
-  provide,
+  toValue,
   useAttrs,
 } from "vue";
 import type { PropType } from "vue";
@@ -57,12 +57,13 @@ const emit = defineEmits<{
   (event: "update:modelValue", model: any): void;
 }>();
 
-const vm = getCurrentInstance()?.proxy;
+const currentTheme = inject(themeInjectionKey)
 
-const currentTheme = computed(() => vm?.$formkl.theme);
-provide(themeInjectionKey, currentTheme);
+if (!currentTheme) {
+	throw new Error("[formkl] Theme is not provided. Please make sure to install the Formkl plugin with a theme.");
+}
 
-const formComputed = computed<Formkl | null>(() => {
+const formComputed = computed<Formkl | null | undefined>(() => {
   if (props.syntax) {
     try {
       return FormParser.parse(props.syntax);
@@ -80,7 +81,7 @@ const attrs = useAttrs();
 
 // Attributes that start in "on"
 const listerers$ = computed(() => {
-  const listeners = {};
+  const listeners: any = {};
   Object.keys(attrs).forEach((key) => {
     if (key.startsWith("on")) {
       listeners[key] = attrs[key];
@@ -93,19 +94,21 @@ const listerers$ = computed(() => {
 const _buildSchema = () => {
   const schema = {};
   formComputed.value?.sections.forEach((section) => {
-    section.fields.forEach((field) => {
-      if (section.multiple) {
-        _set(schema, section.key, [
-          {
-            [field.key]: null,
-          },
-        ]);
-      } else if (field.multiple) {
-        _set(schema, `${section.key}.${field.key}`, [null]);
-      } else {
-        _set(schema, `${section.key}.${field.key}`, null);
-      }
-    });
+		section.fields.forEach((field) => {
+				if (section.key) {
+					if (section.multiple) {
+						_set(schema, section.key, [
+							{
+								[field.key]: null,
+							},
+						]);
+					} else if (field.multiple) {
+						_set(schema, `${section.key}.${field.key}`, [null]);
+					} else {
+						_set(schema, `${section.key}.${field.key}`, null);
+					}
+				}
+			});
   });
 
   emit("update:modelValue", schema);
@@ -118,10 +121,10 @@ const VNodeLayout = defineComponent({
     (props, { slots }) =>
     () =>
       h(
-        currentTheme.value.vNodeLayout || LayoutDefault,
+        toValue(currentTheme).vNodeLayout || LayoutDefault,
         { form: formComputed.value },
         {
-          default: () => slots.default(),
+          default: () => slots.default?.(),
         },
       ),
 });
@@ -131,8 +134,8 @@ const VNodeFormWrapper = defineComponent({
   setup:
     (props, { slots }) =>
     () =>
-      h(currentTheme.value?.VNodeFormWrapper || "form", listerers$, {
-        default: () => slots.default(),
+      h(toValue(currentTheme).VNodeFormWrapper || "form", listerers$, {
+        default: () => slots.default?.(),
       }),
 });
 

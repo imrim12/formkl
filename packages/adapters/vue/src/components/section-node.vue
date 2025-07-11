@@ -1,5 +1,5 @@
 <template>
-  <div class="formkl-section__wrapper">
+  <div v-if="section" class="formkl-section__wrapper">
     <p v-if="section.title" class="formkl-section__title">{{ section.title }}</p>
     <div class="formkl-section__container">
       <template v-for="field in section.fields">
@@ -41,8 +41,9 @@
 </template>
 
 <script lang="ts" setup>
-import { defineComponent, h, inject, PropType } from "vue";
-import { FieldCustom, FieldDefault, FieldSelection, Formkl, Section } from "@formkl/shared";
+import { defineComponent, h, inject, toValue } from "vue";
+import type { PropType } from "vue";
+import type { FieldCustom, FieldDefault, FieldSelection, Formkl, Section } from "@formkl/shared";
 
 import { cloneDeep as _cloneDeep } from 'es-toolkit/compat'
 
@@ -83,13 +84,15 @@ const handleUpdateFieldSingle = (
 };
 
 const handleAddValueSectionMultiple = () => {
-  const newModelValue = _cloneDeep(props.modelValue) as Array<any>;
-  const sectionModel = props.section.fields.reduce(
-    (a, b) => Object.assign({}, a, { [b.key]: null }),
-    {},
-  );
-  newModelValue.push(sectionModel);
-  emit("update:modelValue", newModelValue);
+	if ( props.section) {
+		const newModelValue = _cloneDeep(props.modelValue) as Array<any>;
+		const sectionModel = props.section.fields.reduce(
+			(a, b) => Object.assign({}, a, { [b.key]: null }),
+			{},
+		);
+		newModelValue.push(sectionModel);
+		emit("update:modelValue", newModelValue);
+	}
 };
 
 const handleRemoveValueSectionMultiple = (index: number) => {
@@ -100,19 +103,23 @@ const handleRemoveValueSectionMultiple = (index: number) => {
 
 const currentTheme = inject(themeInjectionKey);
 
+if (!currentTheme) {
+	throw new Error("[formkl] Theme is not provided. Please make sure to install the Formkl plugin with a theme.");
+}
+
 const VNodeBtnAddSection = defineComponent({
   name: "BtnAddSection",
   setup: () => () =>
-    currentTheme.value?.vNodeComponents?.addSection
-      ? h(currentTheme.value?.vNodeComponents?.addSection)
+    toValue(currentTheme).vNodeComponents?.addSection
+      ? h(toValue(currentTheme).vNodeComponents?.addSection)
       : h("button", () => "Add section"),
 });
 
 const VNodeBtnRemoveSection = defineComponent({
   name: "BtnRemoveSection",
   setup: () => () =>
-    currentTheme.value?.vNodeComponents?.removeSection
-      ? h(currentTheme.value?.vNodeComponents?.removeSection)
+    toValue(currentTheme).vNodeComponents?.removeSection
+      ? h(toValue(currentTheme).vNodeComponents?.removeSection)
       : h("button", () => "Remove section"),
 });
 </script>

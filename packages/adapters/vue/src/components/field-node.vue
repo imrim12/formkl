@@ -1,5 +1,5 @@
 <template>
-  <div class="formkl-field__wrapper">
+  <div v-if="field" class="formkl-field__wrapper">
     <p v-if="field.label" class="formkl-field__title">{{ field.label }}</p>
     <div class="formkl-field__container">
       <template v-if="field.multiple">
@@ -38,8 +38,9 @@
 </template>
 
 <script lang="ts" setup>
-import { defineComponent, h, inject, PropType } from "vue";
-import { FieldCustom, FieldDefault, FieldSelection, Formkl, Section } from "@formkl/shared";
+import { defineComponent, h, inject, toValue } from "vue";
+import type { PropType } from "vue";
+import type { FieldCustom, FieldDefault, FieldSelection, Formkl, Section } from "@formkl/shared";
 import { themeInjectionKey } from "../keys/theme";
 
 import { set as _set, cloneDeep as _cloneDeep } from 'es-toolkit/compat'
@@ -80,32 +81,38 @@ const handleRemoveValueFieldMultiple = (index: number) => {
 
 const currentTheme = inject(themeInjectionKey);
 
+if (!currentTheme) {
+	throw new Error("[formkl] Theme is not provided. Please make sure to install the Formkl plugin with a theme.");
+}
+
 const VNodeFieldWrapper = defineComponent({
   name: "FieldWrapper",
   setup:
     (props, { slots }) =>
     () =>
-      h(currentTheme.value?.vNodeFieldWrapper || "div", slots.default()),
+      h(toValue(currentTheme).vNodeFieldWrapper || "div", slots.default?.()),
 });
 
 const VNodeField = defineComponent({
   name: "Field",
-  setup: () => () => h(currentTheme.value?.vNodeFields?.[props.field.type] || "div", props.field),
+  setup: () => () => props.field
+		? h(toValue(currentTheme).vNodeFields?.[props.field.type] || "div", props.field)
+		: null,
 });
 
 const VNodeBtnAddField = defineComponent({
   name: "BtnAddField",
   setup: () => () =>
-    currentTheme.value?.vNodeComponents?.addField
-      ? h(currentTheme.value?.vNodeComponents?.addField)
+    toValue(currentTheme).vNodeComponents?.addField
+      ? h(toValue(currentTheme).vNodeComponents?.addField)
       : h("button", () => "Add field"),
 });
 
 const VNodeBtnRemoveField = defineComponent({
   name: "BtnRemoveField",
   setup: () => () =>
-    currentTheme.value?.vNodeComponents?.addField
-      ? h(currentTheme.value?.vNodeComponents?.removeField)
+    toValue(currentTheme).vNodeComponents?.addField
+      ? h(toValue(currentTheme).vNodeComponents?.removeField)
       : h("button", () => "Remove field"),
 });
 </script>
