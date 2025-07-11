@@ -1,4 +1,4 @@
-import "virtual:windi.css";
+import 'virtual:uno.css'
 
 import { createApp } from "vue";
 

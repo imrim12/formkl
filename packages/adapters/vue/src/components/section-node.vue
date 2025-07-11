@@ -44,7 +44,7 @@
 import { defineComponent, h, inject, PropType } from "vue";
 import { FieldCustom, FieldDefault, FieldSelection, Formkl, Section } from "@formkl/shared";
 
-import _cloneDeep from "lodash/cloneDeep";
+import { cloneDeep as _cloneDeep } from 'es-toolkit/compat'
 
 import FieldNode from "./field-node.vue";
 import { themeInjectionKey } from "../keys/theme";

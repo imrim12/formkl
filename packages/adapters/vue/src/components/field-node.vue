@@ -42,8 +42,7 @@ import { defineComponent, h, inject, PropType } from "vue";
 import { FieldCustom, FieldDefault, FieldSelection, Formkl, Section } from "@formkl/shared";
 import { themeInjectionKey } from "../keys/theme";
 
-import _cloneDeep from "lodash/cloneDeep";
-import _set from "lodash/set";
+import { set as _set, cloneDeep as _cloneDeep } from 'es-toolkit/compat'
 
 const props = defineProps({
   form: Object as PropType<Formkl>,

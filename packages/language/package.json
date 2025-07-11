@@ -39,13 +39,5 @@
 	"homepage": "https://github.com/imrim12/formkl#readme",
 	"dependencies": {
 		"@formkl/shared": "workspace:*"
-	},
-	"devDependencies": {
-		"@vitest/ui": "^0.34.6",
-		"rimraf": "^5.0.5",
-		"typescript": "^5.2.2",
-		"vite": "^4.5.0",
-		"vite-plugin-dts": "^3.6.3",
-		"vitest": "^0.34.6"
 	}
 }

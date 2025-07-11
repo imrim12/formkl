@@ -14,7 +14,7 @@ export default defineConfig({
       fileName: (format: string) => (format === "es" ? "index.mjs" : "index.cjs"),
     },
     rollupOptions: {
-      external: ["vue", "element-plus", "lodash", "formkl"],
+      external: ["vue", "element-plus", "es-toolkit", "formkl"],
       output: {
         exports: "named",
         globals: {},

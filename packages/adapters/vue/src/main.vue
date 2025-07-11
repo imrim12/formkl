@@ -32,7 +32,7 @@ import { Formkl, Schema } from "@formkl/shared";
 
 import { themeInjectionKey } from "./keys/theme";
 
-import _set from "lodash/set";
+import { set as _set } from 'es-toolkit/compat'
 
 import FormParser from "formkl";
 import LayoutDefault from "./layouts/default.vue";

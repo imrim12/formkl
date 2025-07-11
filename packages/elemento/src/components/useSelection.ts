@@ -1,5 +1,6 @@
 import { computed, getCurrentInstance, onBeforeMount, ref } from "vue";
-import { get, uniqBy, isNaNStrict } from "@formkl/shared";
+import { uniqBy, isNaNStrict } from "@formkl/shared";
+import { get } from "es-toolkit/compat";
 import axios from "axios";
 
 export const useSelection = () => {
