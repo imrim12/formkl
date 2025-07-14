@@ -1,25 +1,24 @@
-<script lang="ts">
+<script lang="ts" setup>
+import { ElButton } from 'element-plus'
+
 import FormParser from 'formkl'
-
-import { defineComponent } from 'vue'
-
 // TODO: Pending https://github.com/microsoft/TypeScript/pull/51435
-// @ts-ignore
+// @ts-expect-error: ExampleForm uses non-standard export until TypeScript PR 51435 is merged
 import ExampleForm from './example.form'
 
-export default defineComponent({
-  setup() {
-    const formklSyntax = ref(FormParser.stringify(ExampleForm))
+const formklSyntax = ref(FormParser.stringify(ExampleForm))
 
-    const exampleModel = ref({})
+const exampleModel = ref({})
 
-    return {
-      formklSyntax,
-      exampleForm: ExampleForm,
-      exampleModel,
-    }
-  },
-})
+const formklTemplate = useTemplateRef('formklRef')
+
+function handleSubmit() {
+  if (formklTemplate.value) {
+    const formkl = formklTemplate.value as any
+
+    formkl.formRef.validate()
+  }
+}
 </script>
 
 <template>
@@ -28,7 +27,13 @@ export default defineComponent({
       <formkl-editor v-model="formklSyntax" />
     </div>
     <div class="flex-1 py-2 px-8">
-      <formkl v-model="exampleModel" :syntax="formklSyntax" />
+      <formkl ref="formklRef" v-model="exampleModel" :syntax="formklSyntax" :model="exampleModel" />
+
+      <div>
+        <ElButton @click="handleSubmit">
+          Submit
+        </ElButton>
+      </div>
     </div>
   </div>
 </template>

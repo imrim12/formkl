@@ -93,11 +93,25 @@ onMounted(() => {
     throw new Error('Either syntax or form is required')
   }
 })
+
+const formTemplate = useTemplateRef('formRef')
+const layoutTemplate = useTemplateRef('layoutRef')
+
+defineExpose({
+  layoutRef: layoutTemplate,
+  formRef: formTemplate,
+})
 </script>
 
 <template>
-  <component :is="VNodeFormWrapper" class="formkl__wrapper" v-on="listerers$">
-    <component :is="VNodeLayout" v-if="formComputed" v-bind="{ form: formComputed }">
+  <component
+    :is="VNodeFormWrapper"
+    ref="formRef"
+    class="formkl__wrapper"
+    v-bind="$attrs"
+    v-on="listerers$"
+  >
+    <component :is="VNodeLayout" v-if="formComputed" ref="layoutRef" v-bind="{ form: formComputed }">
       <FormNode
         v-model="modelValue"
         :form="formComputed"

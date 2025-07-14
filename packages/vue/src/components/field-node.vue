@@ -4,6 +4,7 @@ import { cloneDeep as _cloneDeep, set as _set } from 'es-toolkit/compat'
 import { themeInjectionKey } from '../keys/theme'
 
 const props = defineProps<{
+  path: string
   form?: Formkl
   section?: Section
   field?: FieldDefault | FieldSelection | FieldCustom
@@ -63,6 +64,7 @@ const VNodeBtnRemoveField = computed(() =>
           :is="VNodeFieldWrapper"
           v-for="(modelValueEach, index) in modelValue"
           :key="index"
+          :prop="`${path}.${index}`"
           class="formkl-field__inner"
         >
           <component
@@ -87,7 +89,7 @@ const VNodeBtnRemoveField = computed(() =>
           </component>
         </div>
       </template>
-      <component :is="VNodeFieldWrapper" v-else>
+      <component :is="VNodeFieldWrapper" v-else :prop="path">
         <component
           :is="VNodeField"
           v-bind="field"

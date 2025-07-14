@@ -76,6 +76,7 @@ const VNodeBtnRemoveSection = computed(() =>
             class="formkl-section__inner"
           >
             <FieldNode
+              :path="section.key ? `${section.key}.${index}.${field.key}` : field.key"
               :section="section"
               :field="field"
               :model-value="modelValueEach[field.key]"
@@ -100,6 +101,7 @@ const VNodeBtnRemoveSection = computed(() =>
         <FieldNode
           v-else
           :key="field.key"
+          :path="section.key ? `${section.key}.${field.key}` : field.key"
           :section="section"
           :field="field"
           :model-value="(modelValue as Record<string, any>)?.[field.key]"
