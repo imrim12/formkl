@@ -1,5 +1,5 @@
-import { FieldTypeSelection } from "./field-selection.type";
-import { Validation } from "./validation.interface";
+import type { FieldTypeSelection } from "./field-selection.type";
+import type { Validation } from "./validation.interface";
 
 export interface FieldSelection {
   type: FieldTypeSelection;

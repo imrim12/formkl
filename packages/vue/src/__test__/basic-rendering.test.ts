@@ -3,7 +3,7 @@ import { mount } from "@vue/test-utils";
 import formklTheme from "@formkl/elemento";
 
 import FormklPlugin, { Formkl } from "..";
-import { Formkl as FormklType } from "@formkl/shared";
+import type { Formkl as FormklType } from "@formkl/shared";
 
 // @ts-ignore
 import formSyntax from "./syntax.form";

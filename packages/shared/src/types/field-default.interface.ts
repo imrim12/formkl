@@ -1,5 +1,5 @@
-import { FieldTypeDefault } from "./field-default.type";
-import { Validation } from "./validation.interface";
+import type { FieldTypeDefault } from "./field-default.type";
+import type { Validation } from "./validation.interface";
 
 export interface FieldDefault {
   type: FieldTypeDefault;

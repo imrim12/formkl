@@ -2,6 +2,8 @@ import path from "path";
 import vue from "@vitejs/plugin-vue";
 import vueJsx from "@vitejs/plugin-vue-jsx";
 import dts from "vite-plugin-dts";
+import autoImport from "unplugin-auto-import/vite";
+
 import { defineConfig } from "vite";
 
 export default defineConfig({
@@ -29,5 +31,8 @@ export default defineConfig({
       entryRoot: "./src",
       outDir: "./dist/types",
     }),
+		autoImport({
+			imports: ['vue']
+		})
   ],
 });

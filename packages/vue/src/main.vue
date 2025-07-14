@@ -3,8 +3,7 @@
     <component v-if="formComputed" :is="VNodeLayout">
       <FormNode
         :form="formComputed"
-        :model-value="modelValue"
-        @update:model-value="$emit('update:modelValue', $event)"
+        v-model="modelValue"
       />
     </component>
     <div v-else class="formkl__error">Failed to load form</div>
@@ -18,49 +17,24 @@ export default defineComponent({
 </script>
 
 <script lang="ts" setup>
-import {
-  computed,
-  defineComponent,
-  h,
-  inject,
-  onMounted,
-  toValue,
-  useAttrs,
-} from "vue";
-import type { PropType } from "vue";
 import type { Formkl, Schema } from "@formkl/shared";
-
 import { themeInjectionKey } from "./keys/theme";
-
 import { set as _set } from 'es-toolkit/compat'
-
 import FormParser from "formkl";
 import LayoutDefault from "./layouts/default.vue";
 import FormNode from "./components/form-node.vue";
 
-const props = defineProps({
-  syntax: {
-    type: String,
-    required: false,
-  },
-  form: {
-    type: Object as PropType<Formkl>,
-    required: false,
-  },
-  modelValue: {
-    type: Object as PropType<Schema>,
-    default: () => ({}),
-  },
-});
-
-const emit = defineEmits<{
-  (event: "update:modelValue", model: any): void;
+const props = defineProps<{
+  syntax?: string;
+  form?: Formkl;
 }>();
+
+const modelValue = defineModel<Schema>({ default: () => ({}) });
 
 const currentTheme = inject(themeInjectionKey)
 
 if (!currentTheme) {
-	throw new Error("[formkl] Theme is not provided. Please make sure to install the Formkl plugin with a theme.");
+  throw new Error("[formkl] Theme is not provided. Please make sure to install the Formkl plugin with a theme.");
 }
 
 const formComputed = computed<Formkl | null | undefined>(() => {
@@ -69,11 +43,9 @@ const formComputed = computed<Formkl | null | undefined>(() => {
       return FormParser.parse(props.syntax);
     } catch (error) {
       console.error(error);
-
       return null;
     }
   }
-
   return props.form;
 });
 
@@ -87,56 +59,51 @@ const listerers$ = computed(() => {
       listeners[key] = attrs[key];
     }
   });
-
   return listeners;
 });
 
 const _buildSchema = () => {
   const schema = {};
   formComputed.value?.sections.forEach((section) => {
-		section.fields.forEach((field) => {
-				if (section.key) {
-					if (section.multiple) {
-						_set(schema, section.key, [
-							{
-								[field.key]: null,
-							},
-						]);
-					} else if (field.multiple) {
-						_set(schema, `${section.key}.${field.key}`, [null]);
-					} else {
-						_set(schema, `${section.key}.${field.key}`, null);
-					}
-				}
-			});
+    section.fields.forEach((field) => {
+      if (section.key) {
+        if (section.multiple) {
+          _set(schema, section.key, [
+            {
+              [field.key]: null,
+            },
+          ]);
+        } else if (field.multiple) {
+          _set(schema, `${section.key}.${field.key}`, [null]);
+        } else {
+          _set(schema, `${section.key}.${field.key}`, null);
+        }
+      }
+    });
   });
-
-  emit("update:modelValue", schema);
+  modelValue.value = schema;
 };
+
 _buildSchema();
 
 const VNodeLayout = defineComponent({
   name: "FormLayout",
-  setup:
-    (props, { slots }) =>
-    () =>
-      h(
-        toValue(currentTheme).vNodeLayout || LayoutDefault,
-        { form: formComputed.value },
-        {
-          default: () => slots.default?.(),
-        },
-      ),
+  setup: (props, { slots }) => () =>
+    h(
+      toValue(currentTheme).vNodeLayout || LayoutDefault,
+      { form: formComputed.value },
+      {
+        default: () => slots.default?.(),
+      },
+    ),
 });
 
 const VNodeFormWrapper = defineComponent({
   name: "FormWrapper",
-  setup:
-    (props, { slots }) =>
-    () =>
-      h(toValue(currentTheme).VNodeFormWrapper || "form", listerers$, {
-        default: () => slots.default?.(),
-      }),
+  setup: (props, { slots }) => () =>
+    h(toValue(currentTheme).VNodeFormWrapper || "form", listerers$, {
+      default: () => slots.default?.(),
+    }),
 });
 
 onMounted(() => {

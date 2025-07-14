@@ -139,7 +139,7 @@ importers:
         version: link:packages/shared
       '@formkl/vue':
         specifier: workspace:*
-        version: link:packages/adapters/vue
+        version: link:packages/vue
       element-plus:
         specifier: 'catalog:'
         version: 2.10.3(vue@3.5.17(typescript@5.8.3))
@@ -238,31 +238,6 @@ importers:
         specifier: 'catalog:'
         version: 3.0.1(typescript@5.8.3)
 
-  packages/adapters/vue:
-    dependencies:
-      '@formkl/shared':
-        specifier: workspace:*
-        version: link:../../shared
-      element-plus:
-        specifier: 'catalog:'
-        version: 2.10.3(vue@3.5.17(typescript@5.8.3))
-      es-toolkit:
-        specifier: 'catalog:'
-        version: 1.39.7
-      formkl:
-        specifier: workspace:*
-        version: link:../../language
-      vue:
-        specifier: 'catalog:'
-        version: 3.5.17(typescript@5.8.3)
-    devDependencies:
-      '@vitejs/plugin-vue':
-        specifier: 'catalog:'
-        version: 6.0.0(vite@7.0.4(@types/node@24.0.13)(jiti@2.4.2)(sass@1.89.2)(terser@5.43.1)(yaml@2.8.0))(vue@3.5.17(typescript@5.8.3))
-      '@vitejs/plugin-vue-jsx':
-        specifier: 'catalog:'
-        version: 5.0.1(vite@7.0.4(@types/node@24.0.13)(jiti@2.4.2)(sass@1.89.2)(terser@5.43.1)(yaml@2.8.0))(vue@3.5.17(typescript@5.8.3))
-
   packages/editor:
     dependencies:
       '@codemirror/autocomplete':
@@ -322,6 +297,31 @@ importers:
 
   packages/shared: {}
 
+  packages/vue:
+    dependencies:
+      '@formkl/shared':
+        specifier: workspace:*
+        version: link:../shared
+      element-plus:
+        specifier: 'catalog:'
+        version: 2.10.3(vue@3.5.17(typescript@5.8.3))
+      es-toolkit:
+        specifier: 'catalog:'
+        version: 1.39.7
+      formkl:
+        specifier: workspace:*
+        version: link:../language
+      vue:
+        specifier: 'catalog:'
+        version: 3.5.17(typescript@5.8.3)
+    devDependencies:
+      '@vitejs/plugin-vue':
+        specifier: 'catalog:'
+        version: 6.0.0(vite@7.0.4(@types/node@24.0.13)(jiti@2.4.2)(sass@1.89.2)(terser@5.43.1)(yaml@2.8.0))(vue@3.5.17(typescript@5.8.3))
+      '@vitejs/plugin-vue-jsx':
+        specifier: 'catalog:'
+        version: 5.0.1(vite@7.0.4(@types/node@24.0.13)(jiti@2.4.2)(sass@1.89.2)(terser@5.43.1)(yaml@2.8.0))(vue@3.5.17(typescript@5.8.3))
+
   sandbox:
     dependencies:
       '@formkl/editor':
@@ -338,7 +338,7 @@ importers:
         version: link:../packages/shared
       '@formkl/vue':
         specifier: workspace:*
-        version: link:../packages/adapters/vue
+        version: link:../packages/vue
       element-plus:
         specifier: 'catalog:'
         version: 2.10.3(vue@3.5.17(typescript@5.8.3))

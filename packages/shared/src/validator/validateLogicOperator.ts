@@ -1,4 +1,4 @@
-import { ValidationLogic } from "../types";
+import type { ValidationLogic } from "../types";
 import { validateLogicAnd } from "./validateLogicAnd";
 import { validateLogicOr } from "./validateLogicOr";
 
@@ -8,10 +8,10 @@ export const validateLogicOperator = (value: string | number, validation: Valida
   const val = validation[key] as string | number;
 
   return {
-    $gt: () => (typeof value === "number" ? value > val : value.length > val),
-    $lt: () => (typeof value === "number" ? value < val : value.length < val),
-    $gteq: () => (typeof value === "number" ? value >= val : value.length >= val),
-    $lteq: () => (typeof value === "number" ? value <= val : value.length <= val),
+    $gt: () => (typeof value === "number" ? value > Number(val) : value.length > Number(val)),
+    $lt: () => (typeof value === "number" ? value < Number(val) : value.length < Number(val)),
+    $gteq: () => (typeof value === "number" ? value >= Number(val) : value.length >= Number(val)),
+    $lteq: () => (typeof value === "number" ? value <= Number(val) : value.length <= Number(val)),
     $eq: () => value === val,
     $has: () => String(value).includes(val.toString()),
     $and: () => validation.$and && validateLogicAnd(value, validation.$and),

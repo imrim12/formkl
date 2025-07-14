@@ -1,4 +1,4 @@
-import { ValidationLogic } from "../types";
+import type { ValidationLogic } from "../types";
 import { validateLogicOperator } from "./validateLogicOperator";
 
 export const validateLogicOr = (

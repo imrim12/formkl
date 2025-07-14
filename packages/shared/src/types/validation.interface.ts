@@ -1,4 +1,4 @@
-import { ValidationLogic } from "./validation-logic.interface";
+import type { ValidationLogic } from "./validation-logic.interface";
 
 export interface Validation {
   regex?: RegExp;

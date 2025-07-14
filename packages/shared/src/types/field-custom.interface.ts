@@ -1,4 +1,4 @@
-import { Validation } from "./validation.interface";
+import type { Validation } from "./validation.interface";
 
 export interface FieldCustom {
   type: string;

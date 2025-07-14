@@ -32,7 +32,7 @@
           :key="field.key"
           :section="section"
           :field="field"
-          :model-value="modelValue?.[field.key]"
+          :model-value="(modelValue as Record<string, any>)?.[field.key]"
           @update:model-value="handleUpdateFieldSingle($event, field)"
         />
       </template>
@@ -41,70 +41,57 @@
 </template>
 
 <script lang="ts" setup>
-import { defineComponent, h, inject, toValue } from "vue";
-import type { PropType } from "vue";
 import type { FieldCustom, FieldDefault, FieldSelection, Formkl, Section } from "@formkl/shared";
-
 import { cloneDeep as _cloneDeep } from 'es-toolkit/compat'
-
 import FieldNode from "./field-node.vue";
 import { themeInjectionKey } from "../keys/theme";
 
-const props = defineProps({
-  form: Object as PropType<Formkl>,
-  section: Object as PropType<Section>,
-  modelValue: {
-    type: [Object, Array],
-    default: () => ({}),
-  },
-});
-
-const emit = defineEmits<{
-  (event: "update:modelValue", model: any): void;
+const props = defineProps<{
+  form?: Formkl;
+  section?: Section;
 }>();
+
+const modelValue = defineModel<Record<string, any> | Array<any>>({ default: () => ({}) });
 
 const handleUpdateFieldMultiple = (
   value: any,
   field: FieldDefault | FieldSelection | FieldCustom,
   index: number,
 ) => {
-  emit(
-    "update:modelValue",
-    Object.assign({}, props.modelValue, {
-      [index]: Object.assign({}, props.modelValue[index], { [field.key]: value }),
-    }),
-  );
+  const currentValue = { ...modelValue.value as Record<string, any> };
+  currentValue[index] = { ...currentValue[index], [field.key]: value };
+  modelValue.value = currentValue;
 };
 
 const handleUpdateFieldSingle = (
   value: any,
   field: FieldDefault | FieldSelection | FieldCustom,
 ) => {
-  emit("update:modelValue", Object.assign({}, props.modelValue, { [field.key]: value }));
+  modelValue.value = { ...modelValue.value as Record<string, any>, [field.key]: value };
 };
 
 const handleAddValueSectionMultiple = () => {
-	if ( props.section) {
-		const newModelValue = _cloneDeep(props.modelValue) as Array<any>;
-		const sectionModel = props.section.fields.reduce(
-			(a, b) => Object.assign({}, a, { [b.key]: null }),
-			{},
-		);
-		newModelValue.push(sectionModel);
-		emit("update:modelValue", newModelValue);
-	}
+  if (props.section) {
+    const newModelValue = _cloneDeep(modelValue.value) as Array<any>;
+    const sectionModel = props.section.fields.reduce(
+      (a, b) => ({ ...a, [b.key]: null }),
+      {},
+    );
+    newModelValue.push(sectionModel);
+    modelValue.value = newModelValue;
+  }
 };
 
 const handleRemoveValueSectionMultiple = (index: number) => {
-  const newModelValue = _cloneDeep(props.modelValue) as Array<any>;
+  const newModelValue = _cloneDeep(modelValue.value) as Array<any>;
   newModelValue.splice(index, 1);
-  emit("update:modelValue", newModelValue);
+  modelValue.value = newModelValue;
 };
 
 const currentTheme = inject(themeInjectionKey);
 
 if (!currentTheme) {
-	throw new Error("[formkl] Theme is not provided. Please make sure to install the Formkl plugin with a theme.");
+  throw new Error("[formkl] Theme is not provided. Please make sure to install the Formkl plugin with a theme.");
 }
 
 const VNodeBtnAddSection = defineComponent({

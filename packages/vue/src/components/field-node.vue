@@ -38,45 +38,38 @@
 </template>
 
 <script lang="ts" setup>
-import { defineComponent, h, inject, toValue } from "vue";
-import type { PropType } from "vue";
 import type { FieldCustom, FieldDefault, FieldSelection, Formkl, Section } from "@formkl/shared";
 import { themeInjectionKey } from "../keys/theme";
-
 import { set as _set, cloneDeep as _cloneDeep } from 'es-toolkit/compat'
 
-const props = defineProps({
-  form: Object as PropType<Formkl>,
-  section: Object as PropType<Section>,
-  field: Object as PropType<FieldDefault | FieldSelection | FieldCustom>,
-  modelValue: {
-    type: [Object, Array, String, Number, Boolean] as PropType<any>,
-    default: () => null,
-  },
-});
+const props = defineProps<{
+  form?: Formkl;
+  section?: Section;
+  field?: FieldDefault | FieldSelection | FieldCustom;
+}>();
 
-const emit = defineEmits(["update:modelValue"]);
+const modelValue = defineModel<any>({ default: null });
 
 const handleUpdateFieldMultiple = (value: any, index: number) => {
-  const currentValue = _cloneDeep(props.modelValue) as Array<any>;
+  const currentValue = _cloneDeep(modelValue.value) as Array<any>;
   _set(currentValue, String(index), value);
-  emit("update:modelValue", currentValue);
+  modelValue.value = currentValue;
 };
 
 const handleUpdateFieldSingle = (value: any) => {
-  emit("update:modelValue", value);
+  modelValue.value = value;
 };
 
 const handleAddValueFieldMultiple = () => {
-  const currentValue = _cloneDeep(props.modelValue) as Array<any>;
+  const currentValue = _cloneDeep(modelValue.value) as Array<any>;
   currentValue.push(null);
-  emit("update:modelValue", currentValue);
+  modelValue.value = currentValue;
 };
 
 const handleRemoveValueFieldMultiple = (index: number) => {
-  const currentValue = _cloneDeep(props.modelValue) as Array<any>;
+  const currentValue = _cloneDeep(modelValue.value) as Array<any>;
   currentValue.splice(index, 1);
-  emit("update:modelValue", currentValue);
+  modelValue.value = currentValue;
 };
 
 const currentTheme = inject(themeInjectionKey);
@@ -87,10 +80,8 @@ if (!currentTheme) {
 
 const VNodeFieldWrapper = defineComponent({
   name: "FieldWrapper",
-  setup:
-    (props, { slots }) =>
-    () =>
-      h(toValue(currentTheme).vNodeFieldWrapper || "div", slots.default?.()),
+  setup: (_props: any, { slots }: any) => () =>
+    h(toValue(currentTheme).vNodeFieldWrapper || "div", slots.default?.()),
 });
 
 const VNodeField = defineComponent({
