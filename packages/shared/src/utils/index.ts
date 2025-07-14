@@ -1,2 +1,2 @@
-export * from "./isNaNStrict";
-export * from "./uniqBy";
+export * from './isNaNStrict'
+export * from './uniqBy'

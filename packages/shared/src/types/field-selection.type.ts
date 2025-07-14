@@ -1,1 +1,1 @@
-export type FieldTypeSelection = "checkbox" | "radio" | "select";
+export type FieldTypeSelection = 'checkbox' | 'radio' | 'select'

@@ -1,32 +1,32 @@
-import { ElRadioGroup, ElRadio } from "element-plus";
-import { defineComponent, h } from "vue";
-import { useSelection } from "./useSelection";
+import { ElRadio, ElRadioGroup } from 'element-plus'
+import { defineComponent, h } from 'vue'
+import { useSelection } from './useSelection'
 
 export default defineComponent({
-  name: "FormklRadio",
+  name: 'FormklRadio',
   props: {
     options: Array,
     modelValue: [String, Number],
     fetchUrl: {
       type: String,
-      default: "",
+      default: '',
     },
     fetchDataPath: {
       type: String,
-      default: "",
+      default: '',
     },
     labelKey: {
       type: String,
-      default: "name",
+      default: 'name',
     },
     valueKey: {
       type: String,
-      default: "id",
+      default: 'id',
     },
   },
-  emits: ["update:modelValue", "change"],
+  emits: ['update:modelValue', 'change'],
   setup(props, { attrs }) {
-    const { computedOptions } = useSelection();
+    const { computedOptions } = useSelection()
 
     return () =>
       h(
@@ -35,6 +35,6 @@ export default defineComponent({
         computedOptions.value.map((option: any) =>
           h(ElRadio, { label: option.value }, option.label),
         ),
-      );
+      )
   },
-});
+})

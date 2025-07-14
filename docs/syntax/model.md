@@ -18,11 +18,11 @@ And the model structure would look like this
 In Typescript
 
 ```typescript
-export type Schema = {
+export interface Schema {
   [section: string]: {
-    [field: string]: any;
+    [field: string]: any
   }
-};
+}
 ```
 
 ## Section with multiple responses
@@ -44,11 +44,11 @@ And the model structure would look like this
 In Typescript
 
 ```typescript
-export type Schema = {
+export interface Schema {
   [section: string]: Array<{
-    [field: string]: any;
+    [field: string]: any
   }>
-};
+}
 ```
 
 ## Field with multiple responses
@@ -56,17 +56,17 @@ export type Schema = {
 {
   "personal-info": {
     "addressed": [
-      null,
-    ],
+      null
+    ]
   }
 }
 ```
 In Typescript
 
 ```typescript
-export type Schema = {
+export interface Schema {
   [section: string]: {
-    [field: string]: Array<any>;
+    [field: string]: Array<any>
   }
-};
+}
 ```

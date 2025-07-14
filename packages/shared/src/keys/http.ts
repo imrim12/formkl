@@ -1,1 +1,1 @@
-export const httpInjectionKey = Symbol("http");
+export const httpInjectionKey = Symbol('http')

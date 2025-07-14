@@ -1,5 +1,51 @@
-node_modules
-
+# Nuxt dev/build outputs
+.output
+.data
+.nuxt
+.nitro
+.cache
+.nx
 dist
 
-.nx
+# Node dependencies
+node_modules
+
+# Logs
+logs
+*.log
+
+# Misc
+.DS_Store
+.fleet
+.idea
+
+# Local env files
+.env
+.env.*
+!.env.example
+
+# 👉 Custom Git ignores
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+!.vscode/*.code-snippets
+!.vscode/tours
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.yarn
+
+# iconify dist files
+plugins/iconify/icons.css
+
+# Ignore MSW script
+public/mockServiceWorker.js
+
+# Env files
+.env*
+!.env.example

@@ -1,14 +1,14 @@
-import { mount } from "@vue/test-utils";
+import type { Formkl as FormklType } from '@formkl/shared'
 
-import formklTheme from "@formkl/elemento";
+import formklTheme from '@formkl/elemento'
 
-import FormklPlugin, { Formkl } from "..";
-import type { Formkl as FormklType } from "@formkl/shared";
+import { mount } from '@vue/test-utils'
+import FormklPlugin, { Formkl } from '..'
 
 // @ts-ignore
-import formSyntax from "./syntax.form";
+import formSyntax from './syntax.form'
 
-let form: FormklType = formSyntax;
+const form: FormklType = formSyntax
 
 const mountOptions = {
   global: {
@@ -17,42 +17,42 @@ const mountOptions = {
   propsData: {
     form,
   },
-} as any;
+} as any
 
-describe("Basic rendering usage including vite plugin.", () => {
-  it("should mount the Formkl component correctly", () => {
-    const wrapper = mount(Formkl, mountOptions);
+describe('basic rendering usage including vite plugin.', () => {
+  it('should mount the Formkl component correctly', () => {
+    const wrapper = mount(Formkl, mountOptions)
 
-    expect(wrapper).toBeTruthy();
-  });
+    expect(wrapper).toBeTruthy()
+  })
 
-  it("should render the Formkl title correctly", () => {
-    const wrapper = mount(Formkl, mountOptions);
+  it('should render the Formkl title correctly', () => {
+    const wrapper = mount(Formkl, mountOptions)
 
-    expect(wrapper.element.innerHTML).toContain(form.title);
-  });
+    expect(wrapper.element.innerHTML).toContain(form.title)
+  })
 
-  it("should render the Formkl description correctly", () => {
-    const wrapper = mount(Formkl, mountOptions);
+  it('should render the Formkl description correctly', () => {
+    const wrapper = mount(Formkl, mountOptions)
 
-    expect(wrapper.element.innerHTML).toContain(form.description);
-  });
+    expect(wrapper.element.innerHTML).toContain(form.description)
+  })
 
-  it("should render the sections' titles correctly", () => {
-    const wrapper = mount(Formkl, mountOptions);
+  it('should render the sections\' titles correctly', () => {
+    const wrapper = mount(Formkl, mountOptions)
 
     form.sections.forEach((section) => {
-      expect(wrapper.element.innerHTML).toContain(section.title);
-    });
-  });
+      expect(wrapper.element.innerHTML).toContain(section.title)
+    })
+  })
 
-  it("should render the fields' labels correctly", () => {
-    const wrapper = mount(Formkl, mountOptions);
+  it('should render the fields\' labels correctly', () => {
+    const wrapper = mount(Formkl, mountOptions)
 
     form.sections.forEach((section) => {
       section.fields.forEach((field) => {
-        expect(wrapper.element.innerHTML).toContain(field.label);
-      });
-    });
-  });
-});
+        expect(wrapper.element.innerHTML).toContain(field.label)
+      })
+    })
+  })
+})

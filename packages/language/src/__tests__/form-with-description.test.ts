@@ -1,7 +1,7 @@
-import parser, { defineForm } from "../";
+import parser, { defineForm } from '../'
 
-describe("Form with description", () => {
-  it("should parse the form syntax correctly", () => {
+describe('form with description', () => {
+  it('should parse the form syntax correctly', () => {
     const result = parser.parse(`
     formkl
       "Form title (Must has)"
@@ -10,52 +10,52 @@ describe("Form with description", () => {
       has {
         text;
       }
-    }`);
+    }`)
 
     expect(result).toStrictEqual(
       defineForm({
-        model: "base",
-        title: "Form title (Must has)",
-        description: "Form description",
+        model: 'base',
+        title: 'Form title (Must has)',
+        description: 'Form description',
         sections: [
           {
             fields: [
               {
-                type: "text",
-                label: "Text",
-                key: "text",
+                type: 'text',
+                label: 'Text',
+                key: 'text',
               },
             ],
           },
         ],
       }),
-    );
-  });
+    )
+  })
 
-  it("should stringify the form syntax correctly", () => {
+  it('should stringify the form syntax correctly', () => {
     const result = parser.stringify(
       defineForm({
-        model: "base",
-        title: "Form title (Must has)",
-        description: "Form description",
+        model: 'base',
+        title: 'Form title (Must has)',
+        description: 'Form description',
         sections: [
           {
             fields: [
               {
-                type: "text",
-                label: "Text",
-                key: "text",
+                type: 'text',
+                label: 'Text',
+                key: 'text',
               },
             ],
           },
         ],
       }),
-    );
+    )
 
     expect(result).toBe(`formkl "Form title (Must has)" "Form description" {
 	has {
 		text;
 	}
-}`);
-  });
-});
+}`)
+  })
+})

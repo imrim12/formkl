@@ -1,38 +1,38 @@
-import { ElCheckboxGroup, ElCheckbox } from "element-plus";
-import { defineComponent, h } from "vue";
-import { useSelection } from "./useSelection";
+import { ElCheckbox, ElCheckboxGroup } from 'element-plus'
+import { defineComponent, h } from 'vue'
+import { useSelection } from './useSelection'
 
 export default defineComponent({
-  name: "FormklCheckbox",
+  name: 'FormklCheckbox',
   props: {
     options: Array,
     modelValue: [String, Number],
     fetchUrl: {
       type: String,
-      default: "",
+      default: '',
     },
     fetchDataPath: {
       type: String,
-      default: "",
+      default: '',
     },
     labelKey: {
       type: String,
-      default: "name",
+      default: 'name',
     },
     valueKey: {
       type: String,
-      default: "id",
+      default: 'id',
     },
   },
-  emits: ["update:modelValue", "change"],
+  emits: ['update:modelValue', 'change'],
   setup(props, { attrs }) {
-    const { computedOptions } = useSelection();
+    const { computedOptions } = useSelection()
 
     return () =>
       h(
         ElCheckboxGroup,
         Object.assign({}, props as any, attrs),
-        computedOptions.value.map((option) => h(ElCheckbox, { label: option.value }, option.label)),
-      );
+        computedOptions.value.map(option => h(ElCheckbox, { label: option.value }, option.label)),
+      )
   },
-});
+})

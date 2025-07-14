@@ -1,24 +1,24 @@
 {
   "name": "@formkl/sandbox",
-  "private": true,
   "type": "module",
+  "private": true,
   "scripts": {
     "dev": "vite",
     "typecheck": "vue-tsc --noEmit",
     "build": "vite build",
     "preview": "vite preview"
   },
-	"dependencies": {
-		"@formkl/editor": "workspace:*",
+  "dependencies": {
+    "@formkl/editor": "workspace:*",
+    "@formkl/elemento": "workspace:*",
     "@formkl/plugin-vite": "workspace:*",
     "@formkl/shared": "workspace:*",
-    "@formkl/elemento": "workspace:*",
     "@formkl/vue": "workspace:*",
-		"element-plus": "catalog:",
+    "element-plus": "catalog:",
     "formkl": "workspace:*"
-	},
-	"devDependencies": {
-		"@vitejs/plugin-vue": "catalog:",
-		"@vitejs/plugin-vue-jsx": "catalog:"
-	}
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "catalog:",
+    "@vitejs/plugin-vue-jsx": "catalog:"
+  }
 }

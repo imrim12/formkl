@@ -1,86 +1,86 @@
-import parser, { defineForm } from "..";
+import parser, { defineForm } from '..'
 
-describe("Required field", () => {
-  it("should parse the form syntax correctly", () => {
+describe('required field', () => {
+  it('should parse the form syntax correctly', () => {
     const result = parser.parse(`formkl {
       has {
         require $something;
         require multiple $other;
         "Not required" $another;
       }
-    }`);
+    }`)
 
     expect(result).toStrictEqual(
       defineForm({
-        model: "base",
+        model: 'base',
         sections: [
           {
             fields: [
               {
-                type: "$something",
-                label: "Something",
-                key: "something",
+                type: '$something',
+                label: 'Something',
+                key: 'something',
                 required: true,
               },
               {
-                type: "$other",
-                label: "Other",
-                key: "other",
+                type: '$other',
+                label: 'Other',
+                key: 'other',
                 required: true,
                 multiple: true,
               },
               {
-                type: "$another",
-                label: "Not required",
-                key: "not-required",
+                type: '$another',
+                label: 'Not required',
+                key: 'not-required',
               },
             ],
           },
         ],
       }),
-    );
-  });
+    )
+  })
 
-  it("should throw syntax error for unsupported field", () => {
+  it('should throw syntax error for unsupported field', () => {
     expect(() => {
       parser.parse(`formkl {
 				has {
 					require something;
 				}
-			}`);
-    }).toThrowError(/Unexpected token/g);
-  });
+			}`)
+    }).toThrowError(/Unexpected token/g)
+  })
 
-  it("should stringify the form syntax correctly", () => {
+  it('should stringify the form syntax correctly', () => {
     const result = parser.stringify(
       defineForm({
-        model: "base",
+        model: 'base',
         sections: [
           {
             fields: [
               {
-                type: "$something",
-                label: "Something",
-                key: "something",
+                type: '$something',
+                label: 'Something',
+                key: 'something',
                 required: true,
               },
               {
-                type: "$other",
-                label: "Other",
-                key: "other",
+                type: '$other',
+                label: 'Other',
+                key: 'other',
                 required: true,
                 multiple: true,
               },
               {
-                type: "$another",
-                label: "Not required",
-                key: "not-required",
+                type: '$another',
+                label: 'Not required',
+                key: 'not-required',
               },
             ],
           },
         ],
       }),
-    );
+    )
 
     expect(result).toBe(`formkl {
 	has {
@@ -88,6 +88,6 @@ describe("Required field", () => {
 		require multiple "Other" $other;
 		"Not required" $another;
 	}
-}`);
-  });
-});
+}`)
+  })
+})

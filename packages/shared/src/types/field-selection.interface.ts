@@ -1,17 +1,17 @@
-import type { FieldTypeSelection } from "./field-selection.type";
-import type { Validation } from "./validation.interface";
+import type { FieldTypeSelection } from './field-selection.type'
+import type { Validation } from './validation.interface'
 
 export interface FieldSelection {
-  type: FieldTypeSelection;
-  label: string;
-  key: string;
-  options: Array<any>;
-  required?: boolean;
-  multiple?: boolean;
-  maxResponseAllowed?: number;
-  fetchDataPath?: string;
-  fetchUrl?: string;
-  valueKey?: string;
-  labelKey?: string;
-  validation?: Validation;
+  type: FieldTypeSelection
+  label: string
+  key: string
+  options: Array<any>
+  required?: boolean
+  multiple?: boolean
+  maxResponseAllowed?: number
+  fetchDataPath?: string
+  fetchUrl?: string
+  valueKey?: string
+  labelKey?: string
+  validation?: Validation
 }

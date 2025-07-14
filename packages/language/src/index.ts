@@ -1,10 +1,10 @@
-import { Parser } from "./parser";
-import { Tokenizer } from "./tokenizer";
+import { Parser } from './parser'
+import { Tokenizer } from './tokenizer'
 
-const parser = new Parser();
+const parser = new Parser()
 
-export default parser;
+export default parser
 
-export * from "./define";
+export * from './define'
 
-export { Parser, Tokenizer };
+export { Parser, Tokenizer }

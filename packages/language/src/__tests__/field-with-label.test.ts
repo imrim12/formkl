@@ -1,53 +1,53 @@
-import parser, { defineForm } from "../";
+import parser, { defineForm } from '../'
 
-describe("Field with label", () => {
-  it("should parse the form syntax correctly", () => {
+describe('field with label', () => {
+  it('should parse the form syntax correctly', () => {
     const result = parser.parse(`formkl {
       has {
         "Some field" text;
       }
-    }`);
+    }`)
 
     expect(result).toStrictEqual(
       defineForm({
-        model: "base",
+        model: 'base',
         sections: [
           {
             fields: [
               {
-                type: "text",
-                label: "Some field",
-                key: "some-field",
+                type: 'text',
+                label: 'Some field',
+                key: 'some-field',
               },
             ],
           },
         ],
       }),
-    );
-  });
+    )
+  })
 
-  it("should stringify the form syntax correctly", () => {
+  it('should stringify the form syntax correctly', () => {
     const result = parser.stringify(
       defineForm({
-        model: "base",
+        model: 'base',
         sections: [
           {
             fields: [
               {
-                type: "text",
-                label: "Some field",
-                key: "some-field",
+                type: 'text',
+                label: 'Some field',
+                key: 'some-field',
               },
             ],
           },
         ],
       }),
-    );
+    )
 
     expect(result).toBe(`formkl {
 	has {
 		"Some field" text;
 	}
-}`);
-  });
-});
+}`)
+  })
+})

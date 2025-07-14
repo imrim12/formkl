@@ -1,55 +1,55 @@
-import { Formkl, Section, FieldDefault, FieldSelection, HttpMethod } from "@formkl/shared";
-import { Tokenizer } from "./tokenizer";
-import { Token } from "./types";
+import type { FieldDefault, FieldSelection, Formkl, HttpMethod, Section } from '@formkl/shared'
+import type { Token } from './types'
+import { Stringifier } from './stringifier'
 
-import { Stringifier } from "./stringifier";
-import { capitalize } from "./utils/capitalize";
-import { kebabCase } from "./utils/kebabCase";
+import { Tokenizer } from './tokenizer'
+import { capitalize } from './utils/capitalize'
+import { kebabCase } from './utils/kebabCase'
 
 export class Parser {
-  public syntax: string;
-  public tokenizer: Tokenizer;
+  public syntax: string
+  public tokenizer: Tokenizer
 
-  private _lookahead: Token | null;
+  private _lookahead: Token | null
 
   /**
    * Initializes the parser.
    */
   constructor() {
-    this.syntax = "";
-    this.tokenizer = new Tokenizer("");
+    this.syntax = ''
+    this.tokenizer = new Tokenizer('')
 
-    this._lookahead = null;
+    this._lookahead = null
   }
 
   /**
    * Parse a Formkl syntax string into Formkl object
    */
   parse(string: string): Formkl {
-    this.syntax = "";
-    this._lookahead = null;
+    this.syntax = ''
+    this._lookahead = null
 
-    this.syntax = string;
-    this.tokenizer = new Tokenizer(this.syntax);
+    this.syntax = string
+    this.tokenizer = new Tokenizer(this.syntax)
 
     // Prime the tokenizer to obtain the first
     // token which is our lookahead. The lookahead is
     // used for predective parsing.
 
-    this._lookahead = this.tokenizer.getNextToken();
+    this._lookahead = this.tokenizer.getNextToken()
 
     // Parse recursively starting from the main
     // entry point, the Program:
-    return this.FormBlock();
+    return this.FormBlock()
   }
 
   /**
    * Stringify a Formkl object to a Formkl syntax string
    */
   stringify(formkl: Formkl) {
-    const stringifier = new Stringifier();
+    const stringifier = new Stringifier()
 
-    return stringifier.stringify(formkl);
+    return stringifier.stringify(formkl)
   }
 
   /**
@@ -61,59 +61,62 @@ export class Parser {
    */
   private FormBlock(): Formkl {
     const form: Formkl = {
-      model: "base",
+      model: 'base',
       sections: [],
-    };
-
-    this._eat("FORMKL");
-
-    if (this._lookahead?.type === "FLAT") {
-      this._eat("FLAT");
-      form.model = "flat";
-    } else if (this._lookahead?.type === "BASE") {
-      this._eat("BASE");
-      form.model = "base";
-    } else {
-      form.model = "base";
     }
 
-    if (this._lookahead?.type === "HTTPMETHOD") {
-      form.method = this._eat("HTTPMETHOD").value as HttpMethod;
-      this._eat("(");
-      form.endpoint = this.StringLiteral();
-      this._eat(")");
+    this._eat('FORMKL')
+
+    if (this._lookahead?.type === 'FLAT') {
+      this._eat('FLAT')
+      form.model = 'flat'
+    }
+    else if (this._lookahead?.type === 'BASE') {
+      this._eat('BASE')
+      form.model = 'base'
+    }
+    else {
+      form.model = 'base'
     }
 
-    if (this._lookahead?.type === "STRING") {
-      form.title = this.StringLiteral();
+    if (this._lookahead?.type === 'HTTPMETHOD') {
+      form.method = this._eat('HTTPMETHOD').value as HttpMethod
+      this._eat('(')
+      form.endpoint = this.StringLiteral()
+      this._eat(')')
     }
 
-    if (this._lookahead?.type === "STRING") {
-      form.description = this.StringLiteral();
+    if (this._lookahead?.type === 'STRING') {
+      form.title = this.StringLiteral()
     }
 
-    this._eat("{");
+    if (this._lookahead?.type === 'STRING') {
+      form.description = this.StringLiteral()
+    }
 
-    const sections = this.SectionBlockList();
+    this._eat('{')
+
+    const sections = this.SectionBlockList()
 
     if (sections.length > 1) {
-      const keySet = new Set();
+      const keySet = new Set()
       sections.forEach((section) => {
         if (keySet.has(section.key)) {
           throw new SyntaxError(
             `Duplicate section key "${section.key}", this will make the your schema looks confusing! Please use different aliases if your sections have the same title.`,
-          );
-        } else {
-          keySet.add(section.key);
+          )
         }
-      });
+        else {
+          keySet.add(section.key)
+        }
+      })
     }
 
-    Object.assign(form, { sections });
+    Object.assign(form, { sections })
 
-    this._eat("}");
+    this._eat('}')
 
-    return form;
+    return form
   }
 
   /**
@@ -121,12 +124,12 @@ export class Parser {
    *  = (SectionBlock)*
    *  ;
    */
-  private SectionBlockList(stopLookAhead = "}") {
-    const sectionList = [this.SectionBlock()];
+  private SectionBlockList(stopLookAhead = '}') {
+    const sectionList = [this.SectionBlock()]
     while (this._lookahead != null && this._lookahead?.type !== stopLookAhead) {
-      sectionList.push(this.SectionBlock());
+      sectionList.push(this.SectionBlock())
     }
-    return sectionList;
+    return sectionList
   }
 
   /**
@@ -137,66 +140,68 @@ export class Parser {
   private SectionBlock(): Section {
     const section: Section = {
       fields: [],
-    };
-
-    if (this._lookahead?.type === "NUMBER") {
-      section.maxResponseAllowed = this.NumericLiteral();
-      section.multiple = true;
-    } else if (this._lookahead?.type === "MULTIPLE") {
-      this._eat("MULTIPLE");
-      section.multiple = true;
     }
 
-    if (this._lookahead?.type === "STRING") {
-      section.title = this.StringLiteral();
-      section.key = kebabCase(section.title).toLowerCase();
+    if (this._lookahead?.type === 'NUMBER') {
+      section.maxResponseAllowed = this.NumericLiteral()
+      section.multiple = true
+    }
+    else if (this._lookahead?.type === 'MULTIPLE') {
+      this._eat('MULTIPLE')
+      section.multiple = true
     }
 
-    this._eat("HAS");
-    this._eat("{");
-    const fields = this.FieldStatementList();
-    this._eat("}");
+    if (this._lookahead?.type === 'STRING') {
+      section.title = this.StringLiteral()
+      section.key = kebabCase(section.title).toLowerCase()
+    }
 
-    if (this._lookahead?.type === "AS") {
-      this._eat("AS");
-      section.key = this.StringLiteral();
+    this._eat('HAS')
+    this._eat('{')
+    const fields = this.FieldStatementList()
+    this._eat('}')
+
+    if (this._lookahead?.type === 'AS') {
+      this._eat('AS')
+      section.key = this.StringLiteral()
     }
 
     if (fields.length > 1) {
-      const keySet = new Set();
+      const keySet = new Set()
       fields.forEach((field) => {
         if (keySet.has(field.key)) {
           throw new SyntaxError(
             `Duplicate field key "${field.key}", this will make the your schema looks confusing! Please use different aliases if your fields have the same name.`,
-          );
-        } else {
-          keySet.add(field.key);
+          )
         }
-      });
+        else {
+          keySet.add(field.key)
+        }
+      })
     }
 
-    if (section.multiple && fields.some((f) => f.multiple)) {
+    if (section.multiple && fields.some(f => f.multiple)) {
       throw new SyntaxError(
         `A section with multiple responses cannot have fields that also have multiple responses!`,
-      );
+      )
     }
 
-    Object.assign(section, { fields });
+    Object.assign(section, { fields })
 
-    return section;
+    return section
   }
 
   /**
    * FieldStatementList
    * : (FieldStatement)*
    * ;
-   * */
-  private FieldStatementList(stopLookAhead = "}") {
-    const fieldStatementList = [this.FieldStatement()];
+   */
+  private FieldStatementList(stopLookAhead = '}') {
+    const fieldStatementList = [this.FieldStatement()]
     while (this._lookahead !== null && this._lookahead?.type !== stopLookAhead) {
-      fieldStatementList.push(this.FieldStatement());
+      fieldStatementList.push(this.FieldStatement())
     }
-    return fieldStatementList;
+    return fieldStatementList
   }
 
   /**
@@ -207,44 +212,45 @@ export class Parser {
    */
   private FieldStatement(): FieldDefault | FieldSelection {
     const field: FieldDefault | FieldSelection = {
-      type: "text",
-      label: "",
-      key: "",
-    };
-
-    if (this._lookahead?.type === "NUMBER") {
-      field.maxResponseAllowed = this.NumericLiteral();
-      field.multiple = true;
+      type: 'text',
+      label: '',
+      key: '',
     }
 
-    if (this._lookahead?.type === "REQUIRE") {
-      this._eat("REQUIRE");
-      field.required = true;
+    if (this._lookahead?.type === 'NUMBER') {
+      field.maxResponseAllowed = this.NumericLiteral()
+      field.multiple = true
     }
 
-    if (this._lookahead?.type === "MULTIPLE") {
-      this._eat("MULTIPLE");
-      field.multiple = true;
+    if (this._lookahead?.type === 'REQUIRE') {
+      this._eat('REQUIRE')
+      field.required = true
     }
 
-    if (this._lookahead?.type === "STRING") {
-      field.label = this.StringLiteral();
-    } else {
-      field.label = capitalize(String(this._lookahead?.value).replace(/^\$/g, ""));
+    if (this._lookahead?.type === 'MULTIPLE') {
+      this._eat('MULTIPLE')
+      field.multiple = true
     }
 
-    field.key = kebabCase(field.label).toLowerCase();
-
-    Object.assign(field, this.FieldExpression());
-
-    if (this._lookahead?.type === "AS") {
-      this._eat("AS");
-      field.key = this.StringLiteral();
+    if (this._lookahead?.type === 'STRING') {
+      field.label = this.StringLiteral()
+    }
+    else {
+      field.label = capitalize(String(this._lookahead?.value).replace(/^\$/g, ''))
     }
 
-    this._eat(";");
+    field.key = kebabCase(field.label).toLowerCase()
 
-    return field;
+    Object.assign(field, this.FieldExpression())
+
+    if (this._lookahead?.type === 'AS') {
+      this._eat('AS')
+      field.key = this.StringLiteral()
+    }
+
+    this._eat(';')
+
+    return field
   }
 
   /**
@@ -257,7 +263,7 @@ export class Parser {
    *  ;
    */
   private FieldExpression() {
-    const field: any = {};
+    const field: any = {}
 
     const expression = {
       FIELD: this.FieldDefaultExpression.bind(this),
@@ -265,51 +271,52 @@ export class Parser {
       FIELDSELECTION: this.FieldSelectionExpression.bind(this),
       FIELDVALIDATED: this.FieldValidatedExpression.bind(this),
       FIELDDATETIME: this.FieldDatetimeExpression.bind(this),
-    }[String(this._lookahead?.type)];
+    }[String(this._lookahead?.type)]
 
     if (expression) {
-      Object.assign(field, expression());
+      Object.assign(field, expression())
 
-      const validation = this.ValidationExpression();
+      const validation = this.ValidationExpression()
 
-      Object.assign(field, validation);
-    } else {
-      throw new SyntaxError(`Unsupported field type "${this._lookahead?.value}"`);
+      Object.assign(field, validation)
+    }
+    else {
+      throw new SyntaxError(`Unsupported field type "${this._lookahead?.value}"`)
     }
 
-    return field;
+    return field
   }
 
   private FieldDefaultExpression() {
-    const expression: Pick<FieldDefault, "type"> = {
-      type: "text",
-    };
+    const expression: Pick<FieldDefault, 'type'> = {
+      type: 'text',
+    }
 
-    if (this._lookahead?.type === "FIELD") {
-      const fieldType = this._eat("FIELD").value;
+    if (this._lookahead?.type === 'FIELD') {
+      const fieldType = this._eat('FIELD').value
 
       Object.assign(expression, {
         type: (fieldType as string).toLowerCase(),
-      });
+      })
     }
 
-    return expression;
+    return expression
   }
 
   private FieldCustomExpression() {
-    const expression: Pick<FieldDefault, "type"> = {
-      type: "text",
-    };
+    const expression: Pick<FieldDefault, 'type'> = {
+      type: 'text',
+    }
 
-    if (this._lookahead?.type === "FIELDCUSTOM") {
-      const fieldType = this._eat("FIELDCUSTOM").value;
+    if (this._lookahead?.type === 'FIELDCUSTOM') {
+      const fieldType = this._eat('FIELDCUSTOM').value
 
       Object.assign(expression, {
         type: (fieldType as string).toLowerCase(),
-      });
+      })
     }
 
-    return expression;
+    return expression
   }
 
   /**
@@ -321,89 +328,89 @@ export class Parser {
    *  ;
    */
   private FieldSelectionExpression() {
-    let fetchDataPath = "";
+    let fetchDataPath = ''
 
-    const expression: Pick<FieldSelection, "type" | "options"> = {
-      type: "select",
+    const expression: Pick<FieldSelection, 'type' | 'options'> = {
+      type: 'select',
       options: [],
-    };
+    }
 
-    if (this._lookahead?.type === "FIELDSELECTION") {
-      const fieldType = this._eat("FIELDSELECTION").value;
+    if (this._lookahead?.type === 'FIELDSELECTION') {
+      const fieldType = this._eat('FIELDSELECTION').value
 
       Object.assign(expression, {
         type: (fieldType as string).toLowerCase(),
-      });
+      })
     }
 
-    if (this._lookahead?.type === "STRING") {
-      fetchDataPath = this.StringLiteral();
+    if (this._lookahead?.type === 'STRING') {
+      fetchDataPath = this.StringLiteral()
     }
 
-    if (this._lookahead?.type === "URL") {
-      this._eat("URL");
-      this._eat("(");
-      const args = this.StringList();
+    if (this._lookahead?.type === 'URL') {
+      this._eat('URL')
+      this._eat('(')
+      const args = this.StringList()
 
       if (args.length > 3) {
         throw new SyntaxError(
           'Selection field fetching data from URL can only have less or equal to 3 arguments ("fetchUrl", "valueKey", "labelKey")',
-        );
+        )
       }
 
-      this._eat(")");
+      this._eat(')')
 
       Object.assign(expression, {
         options: [],
-        fetchUrl: args[0] || "",
-        valueKey: args[1] || "id",
-        labelKey: args[2] || "name",
-      });
+        fetchUrl: args[0] || '',
+        valueKey: args[1] || 'id',
+        labelKey: args[2] || 'name',
+      })
     }
 
-    if (this._lookahead?.type === "(") {
-      this._eat("(");
-      const args = this.StringList();
-      this._eat(")");
+    if (this._lookahead?.type === '(') {
+      this._eat('(')
+      const args = this.StringList()
+      this._eat(')')
 
-      expression["options"] = args;
+      expression.options = args
     }
 
-    Object.assign(expression, { fetchDataPath });
+    Object.assign(expression, { fetchDataPath })
 
-    return expression;
+    return expression
   }
 
   private FieldValidatedExpression() {
-    const expression: Pick<FieldDefault, "type"> = {
-      type: "text",
-    };
+    const expression: Pick<FieldDefault, 'type'> = {
+      type: 'text',
+    }
 
-    if (this._lookahead?.type === "FIELDVALIDATED") {
-      const fieldType = this._eat("FIELDVALIDATED").value;
+    if (this._lookahead?.type === 'FIELDVALIDATED') {
+      const fieldType = this._eat('FIELDVALIDATED').value
 
       Object.assign(expression, {
         type: (fieldType as string).toLowerCase(),
-      });
+      })
     }
 
-    return expression;
+    return expression
   }
 
   private FieldDatetimeExpression() {
-    const expression: Pick<FieldDefault, "type"> = {
-      type: "datetime",
-    };
+    const expression: Pick<FieldDefault, 'type'> = {
+      type: 'datetime',
+    }
 
-    if (this._lookahead?.type === "FIELDDATETIME") {
-      const fieldType = this._eat("FIELDDATETIME").value;
+    if (this._lookahead?.type === 'FIELDDATETIME') {
+      const fieldType = this._eat('FIELDDATETIME').value
 
       Object.assign(expression, {
         type: (fieldType as string).toLowerCase(),
-      });
+      })
     }
 
-    return expression;
+    return expression
   }
 
   /**
@@ -415,34 +422,35 @@ export class Parser {
    *  ;
    */
   private ValidationExpression() {
-    const expression: any = {};
+    const expression: any = {}
 
     do {
-      if (this._lookahead?.type === "VALID") {
-        this._eat("VALID");
-        this._eat("(");
-        const validation = this.LogicalORExpression();
-        this._eat(")");
+      if (this._lookahead?.type === 'VALID') {
+        this._eat('VALID')
+        this._eat('(')
+        const validation = this.LogicalORExpression()
+        this._eat(')')
 
         Object.assign(expression, {
           logic: validation,
-        });
+        })
       }
 
-      if (this._lookahead?.type === "REGEX") {
-        this._eat("REGEX");
-        this._eat("(");
-        const regex = this.StringLiteral();
-        this._eat(")");
+      if (this._lookahead?.type === 'REGEX') {
+        this._eat('REGEX')
+        this._eat('(')
+        const regex = this.StringLiteral()
+        this._eat(')')
 
-        Object.assign(expression, { regex: new RegExp(regex) });
+        Object.assign(expression, { regex: new RegExp(regex) })
       }
-    } while (["REGEX", "VALID"].includes(String(this._lookahead?.type)));
+    } while (['REGEX', 'VALID'].includes(String(this._lookahead?.type)))
 
-    if (expression.logic || expression.regex)
+    if (expression.logic || expression.regex) {
       return {
         validation: expression,
-      };
+      }
+    }
   }
 
   /**
@@ -452,16 +460,16 @@ export class Parser {
    *  ;
    */
   private LogicalORExpression() {
-    const expresion = [];
+    const expresion = []
     do {
-      expresion.push(this.LogicalANDExpression());
-    } while (this._lookahead?.type === "OR" && this._eat("OR"));
+      expresion.push(this.LogicalANDExpression())
+    } while (this._lookahead?.type === 'OR' && this._eat('OR'))
 
     return expresion.length > 1
       ? {
           $or: expresion,
         }
-      : expresion[0];
+      : expresion[0]
   }
 
   /**
@@ -471,16 +479,16 @@ export class Parser {
    *  ;
    */
   private LogicalANDExpression() {
-    const expresion = [];
+    const expresion = []
     do {
-      expresion.push(this.RelationalExpression());
-    } while (this._lookahead?.type === "AND" && this._eat("AND"));
+      expresion.push(this.RelationalExpression())
+    } while (this._lookahead?.type === 'AND' && this._eat('AND'))
 
     return expresion.length > 1
       ? {
           $and: expresion,
         }
-      : expresion[0];
+      : expresion[0]
   }
 
   /**
@@ -494,69 +502,69 @@ export class Parser {
    */
   private RelationalExpression() {
     switch (this._lookahead?.type) {
-      case "OPERATOR_RELATIONAL":
-        const relationalOperator = this._eat("OPERATOR_RELATIONAL").value;
+      case 'OPERATOR_RELATIONAL':
+        const relationalOperator = this._eat('OPERATOR_RELATIONAL').value
 
         switch (relationalOperator) {
-          case ">":
-            return { $gt: this.NumericLiteral() };
-          case ">=":
-            return { $gte: this.NumericLiteral() };
-          case "<":
-            return { $lt: this.NumericLiteral() };
-          case "<=":
-            return { $lte: this.NumericLiteral() };
+          case '>':
+            return { $gt: this.NumericLiteral() }
+          case '>=':
+            return { $gte: this.NumericLiteral() }
+          case '<':
+            return { $lt: this.NumericLiteral() }
+          case '<=':
+            return { $lte: this.NumericLiteral() }
           default:
-            throw new SyntaxError(`Unknown relational operator: ${relationalOperator}`);
+            throw new SyntaxError(`Unknown relational operator: ${relationalOperator}`)
         }
-      case "OPERATOR_EQUALITY":
-        const equalityOperator = this._eat("OPERATOR_EQUALITY").value;
-        const equalityOperatorKey = equalityOperator === "==" ? "$eq" : "$neq";
+      case 'OPERATOR_EQUALITY':
+        const equalityOperator = this._eat('OPERATOR_EQUALITY').value
+        const equalityOperatorKey = equalityOperator === '==' ? '$eq' : '$neq'
 
         switch (equalityOperator) {
-          case "==":
-          case "!=":
+          case '==':
+          case '!=':
             switch (
               this._lookahead?.type as
-                | "NUMBER"
-                | "NAN"
-                | "NULL"
-                | "UNDEFINED"
-                | "TRUE"
-                | "FALSE"
-                | "STRING"
+              | 'NUMBER'
+              | 'NAN'
+              | 'NULL'
+              | 'UNDEFINED'
+              | 'TRUE'
+              | 'FALSE'
+              | 'STRING'
             ) {
-              case "NUMBER":
-                return { [equalityOperatorKey]: this.NumericLiteral() };
-              case "NAN":
-                return { [equalityOperatorKey]: this.NaNLiteral() };
-              case "NULL":
-                return { [equalityOperatorKey]: this.NullLiteral() };
-              case "UNDEFINED":
-                return { [equalityOperatorKey]: this.UndefinedLiteral() };
-              case "TRUE":
-              case "FALSE":
+              case 'NUMBER':
+                return { [equalityOperatorKey]: this.NumericLiteral() }
+              case 'NAN':
+                return { [equalityOperatorKey]: this.NaNLiteral() }
+              case 'NULL':
+                return { [equalityOperatorKey]: this.NullLiteral() }
+              case 'UNDEFINED':
+                return { [equalityOperatorKey]: this.UndefinedLiteral() }
+              case 'TRUE':
+              case 'FALSE':
                 return {
                   [equalityOperatorKey]: this.BooleanLiteral(
-                    this._lookahead?.type as "TRUE" | "FALSE",
+                    this._lookahead?.type as 'TRUE' | 'FALSE',
                   ),
-                };
-              case "STRING":
-                return { [equalityOperatorKey]: this.StringLiteral() };
+                }
+              case 'STRING':
+                return { [equalityOperatorKey]: this.StringLiteral() }
               default:
-                throw new SyntaxError(`Unknown equality value type: ${this._lookahead?.type}`);
+                throw new SyntaxError(`Unknown equality value type: ${this._lookahead?.type}`)
             }
           default:
-            throw new SyntaxError(`Unknown equality operator: ${equalityOperator}`);
+            throw new SyntaxError(`Unknown equality operator: ${equalityOperator}`)
         }
-      case "HAS":
-        this._eat("HAS");
+      case 'HAS':
+        this._eat('HAS')
 
         return {
           $has: isNaN(this._lookahead?.value as number)
             ? this.StringLiteral()
             : this.NumericLiteral(),
-        };
+        }
     }
   }
 
@@ -567,12 +575,12 @@ export class Parser {
    *  ;
    */
   private StringList() {
-    const strings = [];
+    const strings = []
     do {
-      strings.push(this.StringLiteral());
-    } while (this._lookahead?.type === "," && this._eat(","));
+      strings.push(this.StringLiteral())
+    } while (this._lookahead?.type === ',' && this._eat(','))
 
-    return strings;
+    return strings
   }
 
   /**
@@ -581,8 +589,8 @@ export class Parser {
    *  ;
    */
   private NaNLiteral() {
-    this._eat("NAN");
-    return NaN;
+    this._eat('NAN')
+    return Number.NaN
   }
 
   /*
@@ -591,8 +599,8 @@ export class Parser {
    *  ;
    */
   private NumericLiteral() {
-    const token = this._eat("NUMBER");
-    return Number(token.value);
+    const token = this._eat('NUMBER')
+    return Number(token.value)
   }
 
   /**
@@ -601,8 +609,8 @@ export class Parser {
    *   ;
    */
   private StringLiteral() {
-    const token = this._eat("STRING");
-    return String(token.value).slice(1, -1);
+    const token = this._eat('STRING')
+    return String(token.value).slice(1, -1)
   }
 
   /**
@@ -611,9 +619,9 @@ export class Parser {
    *  | FALSE
    *  ;
    */
-  private BooleanLiteral(value: "TRUE" | "FALSE") {
-    this._eat(value ? "TRUE" : "FALSE");
-    return value;
+  private BooleanLiteral(value: 'TRUE' | 'FALSE') {
+    this._eat(value ? 'TRUE' : 'FALSE')
+    return value
   }
 
   /**
@@ -622,8 +630,8 @@ export class Parser {
    *  ;
    */
   private NullLiteral() {
-    this._eat("NULL");
-    return null;
+    this._eat('NULL')
+    return null
   }
 
   /**
@@ -632,30 +640,30 @@ export class Parser {
    *  ;
    */
   private UndefinedLiteral() {
-    this._eat("UNDEFINED");
-    return undefined;
+    this._eat('UNDEFINED')
+    return undefined
   }
 
   /**
    * Expects a token of a given type.
    */
-  _eat(tokenType: Token["type"]) {
-    const token = this._lookahead;
+  _eat(tokenType: Token['type']) {
+    const token = this._lookahead
 
     if (token === null) {
       // un token nulo es como un token EOF.
-      throw new SyntaxError(`Unexpected end of input, expected: "${tokenType}"`);
+      throw new SyntaxError(`Unexpected end of input, expected: "${tokenType}"`)
     }
 
     if (token.type !== tokenType) {
       throw new SyntaxError(
         `Unexpected token: "${token.value}" at ${this.tokenizer.currentLine}:${this.tokenizer.currentColumn}, expected: "${tokenType}"`,
-      );
+      )
     }
 
     // Advance to next token.
-    this._lookahead = this.tokenizer.getNextToken();
+    this._lookahead = this.tokenizer.getNextToken()
 
-    return token;
+    return token
   }
 }

@@ -1,12 +1,12 @@
-import { isValueValidated } from "@formkl/shared";
+import { isValueValidated } from '@formkl/shared'
 
-describe("Test recursive validator", () => {
-  it("should return true", () => {
-    const result = isValueValidated("test something with and", {
+describe('test recursive validator', () => {
+  it('should return true', () => {
+    const result = isValueValidated('test something with and', {
       logic: {
         $or: [
           {
-            $has: "something",
+            $has: 'something',
           },
           {
             $and: [
@@ -20,8 +20,8 @@ describe("Test recursive validator", () => {
           },
         ],
       },
-    });
+    })
 
-    expect(result).toBe(true);
-  });
-});
+    expect(result).toBe(true)
+  })
+})

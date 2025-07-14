@@ -1,7 +1,7 @@
-import { isValueValidated } from "@formkl/shared";
+import { isValueValidated } from '@formkl/shared'
 
-describe("Test recursive validator", () => {
-  it("should return true", () => {
+describe('test recursive validator', () => {
+  it('should return true', () => {
     const result = isValueValidated(11, {
       logic: {
         $and: [
@@ -13,12 +13,12 @@ describe("Test recursive validator", () => {
           },
         ],
       },
-    });
+    })
 
-    expect(result).toBe(true);
-  });
+    expect(result).toBe(true)
+  })
 
-  it("should return false", () => {
+  it('should return false', () => {
     const result = isValueValidated(25, {
       logic: {
         $and: [
@@ -30,12 +30,12 @@ describe("Test recursive validator", () => {
           },
         ],
       },
-    });
+    })
 
-    expect(result).toBe(false);
-  });
+    expect(result).toBe(false)
+  })
 
-  it("should return true", () => {
+  it('should return true', () => {
     const result = isValueValidated(12, {
       logic: {
         $and: [
@@ -47,8 +47,8 @@ describe("Test recursive validator", () => {
           },
         ],
       },
-    });
+    })
 
-    expect(result).toBe(true);
-  });
-});
+    expect(result).toBe(true)
+  })
+})

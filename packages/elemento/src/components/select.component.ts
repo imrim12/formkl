@@ -1,52 +1,50 @@
-import { ElSelectV2 } from "element-plus";
-import { defineComponent, getCurrentInstance, h } from "vue";
+import { isNaNStrict } from '@formkl/shared'
+import { ElSelectV2 } from 'element-plus'
 
-import { isNaNStrict } from "@formkl/shared";
-import { useSelection } from "./useSelection";
+import { defineComponent, getCurrentInstance, h } from 'vue'
+import { useSelection } from './useSelection'
 
 export default defineComponent({
-  name: "FormklSelect",
+  name: 'FormklSelect',
   props: {
     options: Array,
     modelValue: [String, Number],
     fetchUrl: {
       type: String,
-      default: "",
+      default: '',
     },
     fetchDataPath: {
       type: String,
-      default: "",
+      default: '',
     },
     labelKey: {
       type: String,
-      default: "name",
+      default: 'name',
     },
     valueKey: {
       type: String,
-      default: "id",
+      default: 'id',
     },
   },
-  emits: ["update:modelValue", "change"],
+  emits: ['update:modelValue', 'change'],
   setup(props, { emit }) {
-    const vm = getCurrentInstance()?.proxy;
+    const vm = getCurrentInstance()?.proxy
 
-    const { computedOptions, isLoading, handleSearchOption } = useSelection();
+    const { computedOptions, isLoading, handleSearchOption } = useSelection()
 
     const handleSelectionChange = (event: any) => {
-      emit("change", event);
-      emit("update:modelValue", event);
+      emit('change', event)
+      emit('update:modelValue', event);
 
-      (vm.$refs.selectV2Ref as any).handleClickOutside();
-    };
-
-    console.log(computedOptions.value);
+      (vm.$refs.selectV2Ref as any).handleClickOutside()
+    }
 
     return () =>
       h(
         ElSelectV2,
         {
-          ref: "selectV2Ref",
-          valueKey: "value",
+          ref: 'selectV2Ref',
+          valueKey: 'value',
           filterable: true,
           clearable: true,
           multiple: false,
@@ -60,8 +58,8 @@ export default defineComponent({
           onClear: handleSelectionChange as any,
         },
         {
-          default: ({ item }) => h("span", { class: "text-sm" }, item.label),
+          default: ({ item }) => h('span', { class: 'text-sm' }, item.label),
         },
-      );
+      )
   },
-});
+})

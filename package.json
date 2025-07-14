@@ -1,82 +1,84 @@
 {
-	"type": "module",
-	"version": "0.2.0",
-	"description": "Form marKup Language",
-	"scripts": {
-		"nx": "nx",
-		"build": "nx build",
-		"build:all": "nx run-many --target=build --all --exclude=@formkl/sandbox",
-		"typecheck": "nx run-many --target=typecheck --all --exclude=@formkl/sandbox",
-		"test": "vitest run",
-		"test:ui": "vitest --ui",
-		"dev:docs": "vitepress dev docs",
-		"serve:docs": "vitepress serve docs",
-		"build:docs": "vitepress build docs",
-		"prepare-husky": "husky install",
-		"release": "release-it",
-		"dev:vue": "pnpm -F ./sandbox dev"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/imrim12/formkl.git"
-	},
-	"keywords": [
-		"form",
-		"formkl",
-		"formjs",
-		"form",
-		"generator",
-		"schema"
-	],
-	"author": "thecodeorigin",
-	"license": "MIT",
-	"bugs": {
-		"url": "https://github.com/imrim12/formkl/issues"
-	},
-	"homepage": "https://github.com/imrim12/formkl#readme",
-	"workspaces": [
-		"packages/**",
-		"sandbox"
-	],
-	"dependencies": {
-		"@formkl/editor": "workspace:*",
+  "type": "module",
+  "version": "0.3.0",
+  "description": "Form marKup Language",
+  "author": "thecodeorigin",
+  "license": "MIT",
+  "homepage": "https://github.com/imrim12/formkl#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/imrim12/formkl.git"
+  },
+  "bugs": {
+    "url": "https://github.com/imrim12/formkl/issues"
+  },
+  "keywords": [
+    "form",
+    "formkl",
+    "formjs",
+    "form",
+    "generator",
+    "schema"
+  ],
+  "scripts": {
+    "nx": "nx",
+    "build": "nx build",
+    "build:all": "nx run-many --target=build --all --exclude=@formkl/sandbox",
+    "typecheck": "nx run-many --target=typecheck --all --exclude=@formkl/sandbox",
+    "lint": "eslint .",
+    "test": "vitest run",
+    "test:ui": "vitest --ui",
+    "dev:docs": "vitepress dev docs",
+    "serve:docs": "vitepress serve docs",
+    "build:docs": "vitepress build docs",
+    "prepare-husky": "husky install",
+    "release": "release-it",
+    "dev:vue": "pnpm -F ./sandbox dev"
+  },
+  "workspaces": [
+    "packages/**",
+    "sandbox"
+  ],
+  "dependencies": {
+    "@formkl/editor": "workspace:*",
+    "@formkl/elemento": "workspace:*",
     "@formkl/plugin-vite": "workspace:*",
     "@formkl/shared": "workspace:*",
-    "@formkl/elemento": "workspace:*",
     "@formkl/vue": "workspace:*",
-		"element-plus": "catalog:",
+    "element-plus": "catalog:",
     "formkl": "workspace:*"
-	},
-	"devDependencies": {
-		"@commitlint/cli": "catalog:",
-		"@commitlint/config-conventional": "catalog:",
-		"@nrwl/nx-cloud": "catalog:",
-		"@nrwl/workspace": "catalog:",
-		"@release-it/conventional-changelog": "catalog:",
-		"@types/node": "catalog:",
-		"@typescript-eslint/eslint-plugin": "catalog:",
-		"@typescript-eslint/parser": "catalog:",
-		"@vitejs/plugin-vue": "catalog:",
-		"@vitejs/plugin-vue-jsx": "catalog:",
-		"@vitest/ui": "catalog:",
-		"@vue/test-utils": "catalog:",
-		"@vue/tsconfig": "catalog:",
-		"eslint": "catalog:",
-		"husky": "catalog:",
-		"jsdom": "catalog:",
-		"nx": "catalog:",
-		"release-it": "catalog:",
-		"rimraf": "catalog:",
-		"ts-node": "catalog:",
-		"typescript": "catalog:",
-		"unocss": "catalog:",
-		"unbuild": "catalog:",
-		"unplugin-auto-import": "catalog:",
-		"vite": "catalog:",
-		"vite-plugin-dts": "catalog:",
-		"vitest": "catalog:",
-		"vitepress": "catalog:",
-		"vue": "catalog:",
-		"vue-tsc": "catalog:"
-	}
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "catalog:",
+    "@commitlint/cli": "catalog:",
+    "@commitlint/config-conventional": "catalog:",
+    "@nrwl/nx-cloud": "catalog:",
+    "@nrwl/workspace": "catalog:",
+    "@release-it/conventional-changelog": "catalog:",
+    "@types/node": "catalog:",
+    "@typescript-eslint/eslint-plugin": "catalog:",
+    "@typescript-eslint/parser": "catalog:",
+    "@vitejs/plugin-vue": "catalog:",
+    "@vitejs/plugin-vue-jsx": "catalog:",
+    "@vitest/ui": "catalog:",
+    "@vue/test-utils": "catalog:",
+    "@vue/tsconfig": "catalog:",
+    "eslint": "catalog:",
+    "husky": "catalog:",
+    "jsdom": "catalog:",
+    "nx": "catalog:",
+    "release-it": "catalog:",
+    "rimraf": "catalog:",
+    "ts-node": "catalog:",
+    "typescript": "catalog:",
+    "unbuild": "catalog:",
+    "unocss": "catalog:",
+    "unplugin-auto-import": "catalog:",
+    "vite": "catalog:",
+    "vite-plugin-dts": "catalog:",
+    "vitepress": "catalog:",
+    "vitest": "catalog:",
+    "vue": "catalog:",
+    "vue-tsc": "catalog:"
+  }
 }

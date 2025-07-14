@@ -1,34 +1,96 @@
+<script lang="ts" setup>
+import type { FieldCustom, FieldDefault, FieldSelection, Formkl, Section } from '@formkl/shared'
+import { cloneDeep as _cloneDeep, set as _set } from 'es-toolkit/compat'
+import { themeInjectionKey } from '../keys/theme'
+
+const props = defineProps<{
+  form?: Formkl
+  section?: Section
+  field?: FieldDefault | FieldSelection | FieldCustom
+}>()
+
+const modelValue = defineModel<any>({ default: null })
+
+function handleUpdateFieldMultiple(value: any, index: number) {
+  const currentValue = _cloneDeep(modelValue.value) as Array<any>
+  _set(currentValue, String(index), value)
+  modelValue.value = currentValue
+}
+
+function handleUpdateFieldSingle(value: any) {
+  modelValue.value = value
+}
+
+function handleAddValueFieldMultiple() {
+  const currentValue = _cloneDeep(modelValue.value) as Array<any>
+  currentValue.push(null)
+  modelValue.value = currentValue
+}
+
+function handleRemoveValueFieldMultiple(index: number) {
+  const currentValue = _cloneDeep(modelValue.value) as Array<any>
+  currentValue.splice(index, 1)
+  modelValue.value = currentValue
+}
+
+const currentTheme = inject(themeInjectionKey)
+
+if (!currentTheme) {
+  throw new Error('[formkl] Theme is not provided. Please make sure to install the Formkl plugin with a theme.')
+}
+
+const VNodeFieldWrapper = computed(() => toValue(currentTheme).vNodeFieldWrapper || 'div')
+
+const VNodeField = computed(() => toValue(currentTheme).vNodeFields?.[props.field?.type || ''] || 'div')
+
+const VNodeBtnAddField = computed(() =>
+  toValue(currentTheme).vNodeComponents?.addField || 'button',
+)
+
+const VNodeBtnRemoveField = computed(() =>
+  toValue(currentTheme).vNodeComponents?.removeField || 'button',
+)
+</script>
+
 <template>
   <div v-if="field" class="formkl-field__wrapper">
-    <p v-if="field.label" class="formkl-field__title">{{ field.label }}</p>
+    <p v-if="field.label" class="formkl-field__title">
+      {{ field.label }}
+    </p>
     <div class="formkl-field__container">
       <template v-if="field.multiple">
         <component
-          v-for="(modelValueEach, index) in modelValue"
-          class="formkl-field__inner"
           :is="VNodeFieldWrapper"
+          v-for="(modelValueEach, index) in modelValue"
           :key="index"
+          class="formkl-field__inner"
         >
           <component
             :is="VNodeField"
+            v-bind="field"
             :model-value="modelValueEach"
             @update:model-value="handleUpdateFieldMultiple($event, index)"
           />
           <div class="formkl-field__remover">
             <component
-              v-if="modelValue.length > 1"
               :is="VNodeBtnRemoveField"
+              v-if="modelValue.length > 1"
               @click="handleRemoveValueFieldMultiple(index)"
-            />
+            >
+              Remove field
+            </component>
           </div>
         </component>
         <div class="formkl-field__footer">
-          <component :is="VNodeBtnAddField" @click="handleAddValueFieldMultiple" />
+          <component :is="VNodeBtnAddField" @click="handleAddValueFieldMultiple">
+            Add field
+          </component>
         </div>
       </template>
-      <component v-else :is="VNodeFieldWrapper">
+      <component :is="VNodeFieldWrapper" v-else>
         <component
           :is="VNodeField"
+          v-bind="field"
           :model-value="modelValue"
           @update:model-value="handleUpdateFieldSingle"
         />
@@ -36,74 +98,3 @@
     </div>
   </div>
 </template>
-
-<script lang="ts" setup>
-import type { FieldCustom, FieldDefault, FieldSelection, Formkl, Section } from "@formkl/shared";
-import { themeInjectionKey } from "../keys/theme";
-import { set as _set, cloneDeep as _cloneDeep } from 'es-toolkit/compat'
-
-const props = defineProps<{
-  form?: Formkl;
-  section?: Section;
-  field?: FieldDefault | FieldSelection | FieldCustom;
-}>();
-
-const modelValue = defineModel<any>({ default: null });
-
-const handleUpdateFieldMultiple = (value: any, index: number) => {
-  const currentValue = _cloneDeep(modelValue.value) as Array<any>;
-  _set(currentValue, String(index), value);
-  modelValue.value = currentValue;
-};
-
-const handleUpdateFieldSingle = (value: any) => {
-  modelValue.value = value;
-};
-
-const handleAddValueFieldMultiple = () => {
-  const currentValue = _cloneDeep(modelValue.value) as Array<any>;
-  currentValue.push(null);
-  modelValue.value = currentValue;
-};
-
-const handleRemoveValueFieldMultiple = (index: number) => {
-  const currentValue = _cloneDeep(modelValue.value) as Array<any>;
-  currentValue.splice(index, 1);
-  modelValue.value = currentValue;
-};
-
-const currentTheme = inject(themeInjectionKey);
-
-if (!currentTheme) {
-	throw new Error("[formkl] Theme is not provided. Please make sure to install the Formkl plugin with a theme.");
-}
-
-const VNodeFieldWrapper = defineComponent({
-  name: "FieldWrapper",
-  setup: (_props: any, { slots }: any) => () =>
-    h(toValue(currentTheme).vNodeFieldWrapper || "div", slots.default?.()),
-});
-
-const VNodeField = defineComponent({
-  name: "Field",
-  setup: () => () => props.field
-		? h(toValue(currentTheme).vNodeFields?.[props.field.type] || "div", props.field)
-		: null,
-});
-
-const VNodeBtnAddField = defineComponent({
-  name: "BtnAddField",
-  setup: () => () =>
-    toValue(currentTheme).vNodeComponents?.addField
-      ? h(toValue(currentTheme).vNodeComponents?.addField)
-      : h("button", () => "Add field"),
-});
-
-const VNodeBtnRemoveField = defineComponent({
-  name: "BtnRemoveField",
-  setup: () => () =>
-    toValue(currentTheme).vNodeComponents?.addField
-      ? h(toValue(currentTheme).vNodeComponents?.removeField)
-      : h("button", () => "Remove field"),
-});
-</script>

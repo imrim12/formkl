@@ -1,16 +1,16 @@
-import type { Plugin } from "vue";
+import type { Plugin } from 'vue'
 
-import Formkl from "./main.vue";
-import { themeInjectionKey } from "./keys/theme";
+import { themeInjectionKey } from './keys/theme'
+import Formkl from './main.vue'
 
 const plugin: Plugin = {
   install(app, options) {
-    app.component("formkl", Formkl);
+    app.component('formkl', Formkl)
 
-		app.provide(themeInjectionKey, options.theme)
+    app.provide(themeInjectionKey, options.theme)
   },
-};
+}
 
-export { Formkl };
+export { Formkl }
 
-export default plugin;
+export default plugin

@@ -1,49 +1,48 @@
 {
-	"name": "@formkl/vue",
-	"version": "0.2.0",
-	"description": "A Vue adapter to generate usable Vue from component from Formkl syntax/schema",
-	"type": "module",
-	"exports": {
-		".": {
-			"import": "./dist/index.mjs",
-			"require": "./dist/index.cjs",
-			"types": "./dist/types/index.d.ts"
-		}
-	},
-	"main": "./dist/index.cjs",
-	"types": "./dist/types/index.d.ts",
-	"files": [
-		"dist"
-	],
-	"scripts": {
-		"typecheck": "vue-tsc --noEmit",
-		"build": "rimraf ./dist && vite build"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/imrim12/formkl.git",
-		"directory": "packages/vue"
-	},
-	"keywords": [
-		"formkl"
-	],
-	"author": "thecodeorigin",
-	"license": "MIT",
-	"bugs": {
-		"url": "https://github.com/imrim12/formkl/issues"
-	},
-	"homepage": "https://github.com/imrim12/formkl#readme",
-	"peerDependencies": {
-		"element-plus": "catalog:",
-		"es-toolkit": "catalog:",
-		"vue": "catalog:"
-	},
-	"dependencies": {
-		"@formkl/shared": "workspace:*",
-		"formkl": "workspace:*"
-	},
-	"devDependencies": {
-		"@vitejs/plugin-vue": "catalog:",
-		"@vitejs/plugin-vue-jsx": "catalog:"
-	}
+  "name": "@formkl/vue",
+  "type": "module",
+  "version": "0.3.0",
+  "description": "A Vue adapter to generate usable Vue from component from Formkl syntax/schema",
+  "author": "thecodeorigin",
+  "license": "MIT",
+  "homepage": "https://github.com/imrim12/formkl#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/imrim12/formkl.git",
+    "directory": "packages/vue"
+  },
+  "bugs": {
+    "url": "https://github.com/imrim12/formkl/issues"
+  },
+  "keywords": [
+    "formkl"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "main": "./dist/index.cjs",
+  "types": "./dist/types/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "typecheck": "vue-tsc --noEmit",
+    "build": "rimraf ./dist && vite build"
+  },
+  "peerDependencies": {
+    "element-plus": "catalog:",
+    "es-toolkit": "catalog:",
+    "vue": "catalog:"
+  },
+  "dependencies": {
+    "@formkl/shared": "workspace:*",
+    "formkl": "workspace:*"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "catalog:",
+    "@vitejs/plugin-vue-jsx": "catalog:"
+  }
 }
