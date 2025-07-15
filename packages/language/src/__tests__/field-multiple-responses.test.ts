@@ -1,3 +1,4 @@
+/* eslint-disable style/no-tabs */
 import parser, { defineForm } from '../'
 
 describe('field with multiple responses support', () => {
@@ -54,7 +55,7 @@ describe('field with multiple responses support', () => {
     )
   })
 
-  it('should parse the form syntax correctly with multiple required fields', () => {
+  it('should parse the form syntax correctly with multiple required number fields', () => {
     const result = parser.parse(`formkl {
       has {
         require multiple number;

@@ -1,3 +1,4 @@
+/* eslint-disable style/no-tabs */
 import parser, { defineForm } from '../'
 
 describe('multiple section in one form', () => {

@@ -1,3 +1,4 @@
+/* eslint-disable style/no-tabs */
 import parser, { defineForm } from '../'
 
 describe('section with multiple responses support', () => {

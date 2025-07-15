@@ -15,6 +15,7 @@ export interface FormKitSchemaNode {
   method?: string
   action?: string
   max?: number
+  min?: number
 }
 
 export type FormKitSchemaDefinition = FormKitSchemaNode
@@ -55,7 +56,43 @@ export class FormKitParser extends Parser {
 
     // Process sections
     for (const section of formkl.sections) {
-      if (section.title) {
+      if (section.multiple) {
+        // Multiple section - wrap in list container
+        const sectionContent: FormKitSchemaNode = {
+          $formkit: 'group',
+          name: '$item',
+          children: [] as FormKitSchemaNode[],
+        }
+
+        // Add section title as heading if present
+        if (section.title) {
+          (sectionContent.children as FormKitSchemaNode[]).push({
+            $el: 'h3',
+            children: section.title,
+          })
+        }
+
+        // Add section fields
+        for (const field of section.fields) {
+          (sectionContent.children as FormKitSchemaNode[]).push(this.convertField(field))
+        }
+
+        const listContainer: FormKitSchemaNode = {
+          $formkit: 'list',
+          name: section.key || `section_${Date.now()}`,
+          label: section.title,
+          min: 1,
+          children: [sectionContent],
+        }
+
+        // Add max constraint if specified
+        if (section.maxResponseAllowed) {
+          listContainer.max = section.maxResponseAllowed
+        }
+
+        children.push(listContainer)
+      }
+      else if (section.title) {
         // Section with title - wrap in section container
         const sectionChildren: FormKitSchemaNode[] = [
           {
