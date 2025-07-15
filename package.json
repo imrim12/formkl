@@ -54,6 +54,7 @@
     "@commitlint/config-conventional": "catalog:",
     "@formkit/core": "catalog:",
     "@formkit/inputs": "catalog:",
+    "@formkit/themes": "catalog:",
     "@formkit/vue": "catalog:",
     "@nrwl/nx-cloud": "catalog:",
     "@nrwl/workspace": "catalog:",

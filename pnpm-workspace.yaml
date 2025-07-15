@@ -12,6 +12,7 @@ catalog:
   '@commitlint/config-conventional': ^19.8.1
   '@formkit/core': ^1.6.9
   '@formkit/inputs': ^1.6.9
+  '@formkit/themes': ^1.6.9
   '@formkit/vue': ^1.6.9
   '@nrwl/nx-cloud': ^19.1.0
   '@nrwl/workspace': ^19.8.4

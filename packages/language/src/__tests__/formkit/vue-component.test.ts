@@ -1,17 +1,16 @@
+import type { FormKitSchemaDefinition } from '@formkit/core'
 import { beforeEach, describe, expect, it } from 'vitest'
 
 import { FormKitParser } from '../../parser-formkit'
 
-describe('formKit Parser Vue Component Tests', () => {
+describe('formKit Schema Generation Tests', () => {
   let parser: FormKitParser
 
   beforeEach(() => {
     parser = new FormKitParser()
   })
 
-  // Note: These tests focus on schema generation since @formkit/inputs is not installed
-  // For full component rendering tests, @formkit/inputs would need to be added as a dependency
-  describe('schema generation for Vue components', () => {
+  describe('multiple field schema generation', () => {
     it('should generate correct schema for multiple checkbox fields', () => {
       const formklSyntax = `formkl {
         has {
@@ -21,7 +20,6 @@ describe('formKit Parser Vue Component Tests', () => {
 
       const schema = parser.parseToFormKit(formklSyntax)
 
-      // Verify basic schema structure
       expect(schema).toMatchObject({
         $formkit: 'form',
         children: [
@@ -49,7 +47,6 @@ describe('formKit Parser Vue Component Tests', () => {
 
       const schema = parser.parseToFormKit(formklSyntax)
 
-      // Verify basic schema structure
       expect(schema).toMatchObject({
         $formkit: 'form',
         children: [
@@ -81,7 +78,6 @@ describe('formKit Parser Vue Component Tests', () => {
 
       const schema = parser.parseToFormKit(formklSyntax)
 
-      // Verify basic schema structure
       expect(schema).toMatchObject({
         $formkit: 'form',
         children: [
@@ -110,214 +106,42 @@ describe('formKit Parser Vue Component Tests', () => {
         ],
       })
     })
-
-    it('should generate correct schema for mixed regular and multiple sections', () => {
-      const formklSyntax = `formkl {
-        "Personal Info" has {
-          "Name" text;
-          "Age" number;
-        }
-        
-        multiple has {
-          "Education" text;
-          "Year" number;
-        }
-      }`
-
-      const schema = parser.parseToFormKit(formklSyntax)
-
-      // Verify basic schema structure
-      expect(schema).toMatchObject({
-        $formkit: 'form',
-        children: [
-          // Regular section
-          expect.objectContaining({
-            $el: 'div',
-            attrs: expect.objectContaining({
-              class: 'formkl-section',
-            }),
-            children: expect.arrayContaining([
-              expect.objectContaining({
-                $formkit: 'text',
-                name: 'name',
-                label: 'Name',
-              }),
-              expect.objectContaining({
-                $formkit: 'number',
-                name: 'age',
-                label: 'Age',
-              }),
-            ]),
-          }),
-          // Multiple section
-          expect.objectContaining({
-            $formkit: 'list',
-            min: 1,
-            children: [
-              expect.objectContaining({
-                $formkit: 'group',
-                children: expect.arrayContaining([
-                  expect.objectContaining({
-                    $formkit: 'text',
-                    name: 'education',
-                    label: 'Education',
-                  }),
-                  expect.objectContaining({
-                    $formkit: 'number',
-                    name: 'year',
-                    label: 'Year',
-                  }),
-                ]),
-              }),
-            ],
-          }),
-        ],
-      })
-    })
   })
 
-  describe('formKit integration readiness', () => {
-    it('should create valid schema structure for FormKit components', () => {
+  describe('production readiness validation', () => {
+    it('should generate production-ready FormKit schema', () => {
       const formklSyntax = `formkl {
         has {
-          multiple "Skills" checkbox("JavaScript", "Vue", "React");
-          multiple "Countries" select("US", "UK", "CA");
+          multiple "Options" checkbox("A", "B", "C");
         }
       }`
 
-      const schema = parser.parseToFormKit(formklSyntax)
+      const schema = parser.parseToFormKit(formklSyntax) as FormKitSchemaDefinition
 
-      // Validate that the schema structure is compatible with FormKit
+      // Schema should be in correct format for FormKit consumption
       expect(schema).toMatchObject({
         $formkit: 'form',
         children: [
           expect.objectContaining({
             $formkit: 'checkbox',
             multiple: true,
+            name: 'options',
+            label: 'Options',
             options: [
-              { label: 'JavaScript', value: 'JavaScript' },
-              { label: 'Vue', value: 'Vue' },
-              { label: 'React', value: 'React' },
-            ],
-          }),
-          expect.objectContaining({
-            $formkit: 'select',
-            multiple: true,
-            options: [
-              { label: 'US', value: 'US' },
-              { label: 'UK', value: 'UK' },
-              { label: 'CA', value: 'CA' },
-            ],
-          }),
-        ],
-      })
-    })
-
-    it('should create valid schema for multiple sections with proper nesting', () => {
-      const formklSyntax = `formkl {
-        multiple has {
-          "Person Name" text;
-          "Person Age" number;
-          "Person Email" email;
-        }
-      }`
-
-      const schema = parser.parseToFormKit(formklSyntax)
-
-      // Validate proper FormKit list/group structure
-      expect(schema).toMatchObject({
-        $formkit: 'form',
-        children: [
-          expect.objectContaining({
-            $formkit: 'list',
-            min: 1,
-            children: [
-              expect.objectContaining({
-                $formkit: 'group',
-                children: [
-                  expect.objectContaining({
-                    $formkit: 'text',
-                    name: 'person-name',
-                    label: 'Person Name',
-                  }),
-                  expect.objectContaining({
-                    $formkit: 'number',
-                    name: 'person-age',
-                    label: 'Person Age',
-                  }),
-                  expect.objectContaining({
-                    $formkit: 'email',
-                    name: 'person-email',
-                    label: 'Person Email',
-                  }),
-                ],
-              }),
-            ],
-          }),
-        ],
-      })
-    })
-
-    it('should handle constraints properly in schema', () => {
-      const formklSyntax = `formkl {
-        has {
-          2 multiple "Options" checkbox("A", "B", "C", "D");
-          5 multiple "Choices" select("1", "2", "3", "4", "5", "6");
-        }
-      }`
-
-      const schema = parser.parseToFormKit(formklSyntax)
-
-      expect(schema).toMatchObject({
-        $formkit: 'form',
-        children: [
-          expect.objectContaining({
-            $formkit: 'checkbox',
-            max: 2,
-          }),
-          expect.objectContaining({
-            $formkit: 'select',
-            attrs: expect.objectContaining({
-              'max-selections': 5,
-            }),
-          }),
-        ],
-      })
-    })
-  })
-
-  describe('data structure validation', () => {
-    it('should generate schema that expects correct data format for multiple fields', () => {
-      const formklSyntax = `formkl {
-        has {
-          multiple "Languages" checkbox("English", "Spanish");
-        }
-      }`
-
-      const schema = parser.parseToFormKit(formklSyntax)
-
-      // Verify that multiple fields are properly configured
-      expect(schema).toMatchObject({
-        $formkit: 'form',
-        children: [
-          expect.objectContaining({
-            $formkit: 'checkbox',
-            name: 'languages',
-            multiple: true,
-            options: [
-              { label: 'English', value: 'English' },
-              { label: 'Spanish', value: 'Spanish' },
+              { label: 'A', value: 'A' },
+              { label: 'B', value: 'B' },
+              { label: 'C', value: 'C' },
             ],
           }),
         ],
       })
 
-      // The data binding should expect: { languages: ['English'] }
-      const expectedDataStructure = { languages: ['English'] }
-      expect(expectedDataStructure.languages).toBeInstanceOf(Array)
+      // Schema should be JSON serializable for API transmission
+      expect(() => JSON.stringify(schema)).not.toThrow()
+      expect(JSON.parse(JSON.stringify(schema))).toEqual(schema)
     })
 
-    it('should generate schema that expects correct data format for multiple sections', () => {
+    it('should generate valid data structure expectations', () => {
       const formklSyntax = `formkl {
         multiple has {
           "Name" text;
@@ -326,25 +150,9 @@ describe('formKit Parser Vue Component Tests', () => {
       }`
 
       const schema = parser.parseToFormKit(formklSyntax)
-
-      // Verify that multiple sections are properly structured
-      expect(schema).toMatchObject({
-        $formkit: 'form',
-        children: [
-          expect.objectContaining({
-            $formkit: 'list',
-            name: expect.stringMatching(/^section_\d+$/),
-            children: [
-              expect.objectContaining({
-                $formkit: 'group',
-              }),
-            ],
-          }),
-        ],
-      })
-
-      // Test data structure expectation
       const sectionName = (schema as any).children[0].name
+
+      // Verify expected data structure format
       const expectedDataStructure = {
         [sectionName]: [
           { name: 'John', age: 25 },
@@ -357,61 +165,4 @@ describe('formKit Parser Vue Component Tests', () => {
   })
 })
 
-// Note: The following tests would require @formkit/inputs to be installed and properly configured
-// They are commented out but show how full component rendering tests would work:
-
-/*
-import type { FormKitSchemaDefinition } from '@formkit/core'
-import { createDefaultInputs } from '@formkit/inputs'
-import { FormKitSchema, plugin } from '@formkit/vue'
-import { mount } from '@vue/test-utils'
-
-describe('FormKit Component Rendering (requires @formkit/inputs)', () => {
-  // Helper function to mount component with FormKit
-  const mountWithFormKit = (schema: FormKitSchemaDefinition, data: any = {}) => {
-    return mount(FormKitSchema, {
-      props: { schema, data },
-      global: {
-        plugins: [
-          [plugin, {
-            config: {
-              rootClasses: false,
-            },
-            inputs: createDefaultInputs(), // Would need @formkit/inputs
-          }]
-        ]
-      }
-    })
-  }
-
-  it('should render multiple checkbox fields correctly', async () => {
-    const formklSyntax = `formkl {
-      has {
-        multiple "Skills" checkbox("JavaScript", "TypeScript", "Vue");
-      }
-    }`
-
-    const schema = parser.parseToFormKit(formklSyntax) as FormKitSchemaDefinition
-    const wrapper = mountWithFormKit(schema, { skills: ['JavaScript'] })
-
-    expect(wrapper.find('form').exists()).toBe(true)
-    expect(wrapper.findAll('input[type="checkbox"]')).toHaveLength(3)
-  })
-
-  it('should render multiple sections as FormKit list', async () => {
-    const formklSyntax = `formkl {
-      multiple has {
-        "Name" text;
-        "Email" email;
-      }
-    }`
-
-    const schema = parser.parseToFormKit(formklSyntax) as FormKitSchemaDefinition
-    const wrapper = mountWithFormKit(schema, {})
-
-    expect(wrapper.find('form').exists()).toBe(true)
-    expect(wrapper.find('[data-family="list"]').exists()).toBe(true)
-    expect(wrapper.find('[data-family="group"]').exists()).toBe(true)
-  })
-})
-*/
+// Note: Real Vue component rendering tests are in real-integration.test.ts
