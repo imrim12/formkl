@@ -84,6 +84,9 @@ catalogs:
     nx:
       specifier: ^21.2.2
       version: 21.2.2
+    ofetch:
+      specifier: ^1.4.1
+      version: 1.4.1
     release-it:
       specifier: ^19.0.3
       version: 19.0.3
@@ -159,6 +162,12 @@ importers:
       '@commitlint/config-conventional':
         specifier: 'catalog:'
         version: 19.8.1
+      '@formkit/core':
+        specifier: ^1.6.9
+        version: 1.6.9
+      '@formkit/vue':
+        specifier: ^1.6.9
+        version: 1.6.9(unocss@66.3.3(postcss@8.5.6)(vite@7.0.4(@types/node@24.0.13)(jiti@2.4.2)(sass@1.89.2)(terser@5.43.1)(yaml@2.8.0))(vue@3.5.17(typescript@5.8.3)))(vue@3.5.17(typescript@5.8.3))
       '@nrwl/nx-cloud':
         specifier: 'catalog:'
         version: 19.1.0
@@ -204,6 +213,9 @@ importers:
       nx:
         specifier: 'catalog:'
         version: 21.2.2
+      ofetch:
+        specifier: 'catalog:'
+        version: 1.4.1
       release-it:
         specifier: 'catalog:'
         version: 19.0.3(@types/node@24.0.13)
@@ -276,9 +288,6 @@ importers:
       '@formkl/shared':
         specifier: workspace:*
         version: link:../shared
-      axios:
-        specifier: ^1.3.5
-        version: 1.10.0
       element-plus:
         specifier: 'catalog:'
         version: 2.10.3(vue@3.5.17(typescript@5.8.3))
@@ -288,6 +297,10 @@ importers:
       vue:
         specifier: 'catalog:'
         version: 3.5.17(typescript@5.8.3)
+    devDependencies:
+      ofetch:
+        specifier: 'catalog:'
+        version: 1.4.1
 
   packages/language:
     dependencies:
@@ -327,6 +340,9 @@ importers:
       '@vitejs/plugin-vue-jsx':
         specifier: 'catalog:'
         version: 5.0.1(vite@7.0.4(@types/node@24.0.13)(jiti@2.4.2)(sass@1.89.2)(terser@5.43.1)(yaml@2.8.0))(vue@3.5.17(typescript@5.8.3))
+      ofetch:
+        specifier: 'catalog:'
+        version: 1.4.1
 
   sandbox:
     dependencies:
@@ -1175,6 +1191,49 @@ packages:
 
   '@floating-ui/utils@0.2.10':
     resolution: {integrity: sha512-aGTxbpbg8/b5JfU1HXSrbH3wXZuLPJcNEcZQFMxLs3oSzgtVu6nFPkbbGGUvBcUjKV2YyB9Wxxabo+HEH9tcRQ==}
+
+  '@formkit/core@1.6.9':
+    resolution: {integrity: sha512-Zb5OkYKMf7Rp1pd4iUMv0TJQvfgl1PdKtRRQoGiTA0XIFLB/7tcRMr1wc5isA2JS+hllfxMTh3RWF8N+64fTMg==}
+
+  '@formkit/dev@1.6.9':
+    resolution: {integrity: sha512-4ueBpZAOiKr8/LZnq3mNePCX4ZB1j1JuJscBEwugWMnDeDwCNo5XWBrng1ER/LlitTRQ3mtEBNy2Qpm0yAHlwA==}
+
+  '@formkit/i18n@1.6.9':
+    resolution: {integrity: sha512-8NA5bALlspCBEwInuZVgBqgQr0lDfproZdmbs2LciQpGi2B15u74JCjAkEwaKlMs+qgf/ds3QcIgUv2ztyyVEA==}
+
+  '@formkit/inputs@1.6.9':
+    resolution: {integrity: sha512-k9gjV1e5F87NxSnu13JtKb30XYt6ndx2KGHZG8Xz0etoP75yJlMaeROHHPvlxdy2gZM6qH7Ex4it51W74Wh2Eg==}
+
+  '@formkit/observer@1.6.9':
+    resolution: {integrity: sha512-p3MCmzp6jwzXIuV3gI9uTJTJl+sN5689C7qf7gdrS8jb1fbX1snKiTyWA8FXOrBXu+ne5z/sA/yBWqYFTSLy8A==}
+
+  '@formkit/rules@1.6.9':
+    resolution: {integrity: sha512-5Vu3JACKyws1kw02qF+024WkS7L9kYZ0lmdSpsaTqg5Wf7+InsxWXFYaG6vCzqIh4Lk9NeffIzq/xyGpGxf5uQ==}
+
+  '@formkit/themes@1.6.9':
+    resolution: {integrity: sha512-/UD+MehQEdcCEadt73eIBGGAMEK8ODN0yq9r9299WvQxIELCOP2MbcxuWCV/g2Vd15Xhl8YFdn4KCzQi4X7QXA==}
+    peerDependencies:
+      tailwindcss: ^3.2.0
+      unocss: 0.x.x
+      windicss: ^3.0.0
+    peerDependenciesMeta:
+      tailwindcss:
+        optional: true
+      unocss:
+        optional: true
+      windicss:
+        optional: true
+
+  '@formkit/utils@1.6.9':
+    resolution: {integrity: sha512-vSFhB/Sm/A+SdwKdBi4WhJcdbePqSYRaB878Ol9HL8roTmmmgQpThvkv6EjLM6aRRP27Il5rS8XtIAIeh8vdTA==}
+
+  '@formkit/validation@1.6.9':
+    resolution: {integrity: sha512-9PGwN0ZDJt3hsrMyaL8KTG3diSQDik1OGogVG6/nFcZhWUycpeamFfXZSQ5pfzmwnvrTHsvyT0FtKitUnWWuPA==}
+
+  '@formkit/vue@1.6.9':
+    resolution: {integrity: sha512-WrjAtEsKnFJzxQuATWsWKMpTAyJE15PUmRh9hwEAqgTDy2yMog1gxqxfZv3rEAdIdgXNp08tWmRVnQgDIF3vAQ==}
+    peerDependencies:
+      vue: ^3.4.0
 
   '@humanfs/core@0.19.1':
     resolution: {integrity: sha512-5DyQ4+1JEUzejeK1JGICcideyfUbGixgS9jNgex5nqkW+cY7WZhxBigmieN5Qnw9ZosSNVC9KQKyb+GUaGyKUA==}
@@ -6740,6 +6799,68 @@ snapshots:
       '@floating-ui/utils': 0.2.10
 
   '@floating-ui/utils@0.2.10': {}
+
+  '@formkit/core@1.6.9':
+    dependencies:
+      '@formkit/utils': 1.6.9
+
+  '@formkit/dev@1.6.9':
+    dependencies:
+      '@formkit/core': 1.6.9
+      '@formkit/utils': 1.6.9
+
+  '@formkit/i18n@1.6.9':
+    dependencies:
+      '@formkit/core': 1.6.9
+      '@formkit/utils': 1.6.9
+      '@formkit/validation': 1.6.9
+
+  '@formkit/inputs@1.6.9':
+    dependencies:
+      '@formkit/core': 1.6.9
+      '@formkit/utils': 1.6.9
+
+  '@formkit/observer@1.6.9':
+    dependencies:
+      '@formkit/core': 1.6.9
+      '@formkit/utils': 1.6.9
+
+  '@formkit/rules@1.6.9':
+    dependencies:
+      '@formkit/core': 1.6.9
+      '@formkit/utils': 1.6.9
+      '@formkit/validation': 1.6.9
+
+  '@formkit/themes@1.6.9(unocss@66.3.3(postcss@8.5.6)(vite@7.0.4(@types/node@24.0.13)(jiti@2.4.2)(sass@1.89.2)(terser@5.43.1)(yaml@2.8.0))(vue@3.5.17(typescript@5.8.3)))':
+    dependencies:
+      '@formkit/core': 1.6.9
+    optionalDependencies:
+      unocss: 66.3.3(postcss@8.5.6)(vite@7.0.4(@types/node@24.0.13)(jiti@2.4.2)(sass@1.89.2)(terser@5.43.1)(yaml@2.8.0))(vue@3.5.17(typescript@5.8.3))
+
+  '@formkit/utils@1.6.9': {}
+
+  '@formkit/validation@1.6.9':
+    dependencies:
+      '@formkit/core': 1.6.9
+      '@formkit/observer': 1.6.9
+      '@formkit/utils': 1.6.9
+
+  '@formkit/vue@1.6.9(unocss@66.3.3(postcss@8.5.6)(vite@7.0.4(@types/node@24.0.13)(jiti@2.4.2)(sass@1.89.2)(terser@5.43.1)(yaml@2.8.0))(vue@3.5.17(typescript@5.8.3)))(vue@3.5.17(typescript@5.8.3))':
+    dependencies:
+      '@formkit/core': 1.6.9
+      '@formkit/dev': 1.6.9
+      '@formkit/i18n': 1.6.9
+      '@formkit/inputs': 1.6.9
+      '@formkit/observer': 1.6.9
+      '@formkit/rules': 1.6.9
+      '@formkit/themes': 1.6.9(unocss@66.3.3(postcss@8.5.6)(vite@7.0.4(@types/node@24.0.13)(jiti@2.4.2)(sass@1.89.2)(terser@5.43.1)(yaml@2.8.0))(vue@3.5.17(typescript@5.8.3)))
+      '@formkit/utils': 1.6.9
+      '@formkit/validation': 1.6.9
+      vue: 3.5.17(typescript@5.8.3)
+    transitivePeerDependencies:
+      - tailwindcss
+      - unocss
+      - windicss
 
   '@humanfs/core@0.19.1': {}
 

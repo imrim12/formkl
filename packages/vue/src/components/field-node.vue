@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import type { FieldCustom, FieldDefault, FieldSelection, Formkl, Section } from '@formkl/shared'
-import { cloneDeep as _cloneDeep, set as _set } from 'es-toolkit/compat'
+import { cloneDeep as _cloneDeep, omit as _omit, set as _set } from 'es-toolkit/compat'
 import { themeInjectionKey } from '../keys/theme'
 
 const props = defineProps<{
@@ -64,12 +64,13 @@ const VNodeBtnRemoveField = computed(() =>
           :is="VNodeFieldWrapper"
           v-for="(modelValueEach, index) in modelValue"
           :key="index"
+          :required="field.required"
           :prop="`${path}.${index}`"
           class="formkl-field__inner"
         >
           <component
             :is="VNodeField"
-            v-bind="field"
+            v-bind="_omit(field, ['required'])"
             :model-value="modelValueEach"
             @update:model-value="handleUpdateFieldMultiple($event, index)"
           />
@@ -89,10 +90,10 @@ const VNodeBtnRemoveField = computed(() =>
           </component>
         </div>
       </template>
-      <component :is="VNodeFieldWrapper" v-else :prop="path">
+      <component :is="VNodeFieldWrapper" v-else :prop="path" :required="field.required">
         <component
           :is="VNodeField"
-          v-bind="field"
+          v-bind="_omit(field, ['required'])"
           :model-value="modelValue"
           @update:model-value="handleUpdateFieldSingle"
         />

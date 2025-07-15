@@ -19,6 +19,10 @@ function handleSubmit() {
     formkl.formRef.validate()
   }
 }
+
+function onSubmit() {
+  console.log('Form submitted with model:', exampleModel.value)
+}
 </script>
 
 <template>
@@ -27,13 +31,19 @@ function handleSubmit() {
       <formkl-editor v-model="formklSyntax" />
     </div>
     <div class="flex-1 py-2 px-8">
-      <formkl ref="formklRef" v-model="exampleModel" :syntax="formklSyntax" :model="exampleModel" />
-
-      <div>
-        <ElButton @click="handleSubmit">
-          Submit
-        </ElButton>
-      </div>
+      <formkl
+        ref="formklRef"
+        v-model="exampleModel"
+        :syntax="formklSyntax"
+        :model="exampleModel"
+        @submit="onSubmit"
+      >
+        <div>
+          <ElButton native-type="submit" @click="handleSubmit">
+            Submit
+          </ElButton>
+        </div>
+      </formkl>
     </div>
   </div>
 </template>

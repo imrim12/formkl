@@ -116,6 +116,7 @@ defineExpose({
         v-model="modelValue"
         :form="formComputed"
       />
+      <slot />
     </component>
     <div v-else class="formkl__error">
       Failed to load form

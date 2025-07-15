@@ -1,3 +1,4 @@
+/* eslint-disable no-case-declarations */
 import type { FieldDefault, FieldSelection, Formkl, HttpMethod, Section } from '@formkl/shared'
 import type { Token } from './types'
 import { Stringifier } from './stringifier'
@@ -560,10 +561,13 @@ export class Parser {
       case 'HAS':
         this._eat('HAS')
 
-        return {
-          $has: isNaN(this._lookahead?.value as number)
-            ? this.StringLiteral()
-            : this.NumericLiteral(),
+        switch (this._lookahead?.type as 'NUMBER' | 'STRING') {
+          case 'STRING':
+            return { $has: this.StringLiteral() }
+          case 'NUMBER':
+            return { $has: this.NumericLiteral() }
+          default:
+            throw new SyntaxError(`Unknown 'has' value type: ${this._lookahead?.type}`)
         }
     }
   }

@@ -35,6 +35,7 @@
   "peerDependencies": {
     "element-plus": "catalog:",
     "es-toolkit": "catalog:",
+    "ofetch": "catalog:",
     "vue": "catalog:"
   },
   "dependencies": {
@@ -43,6 +44,7 @@
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "catalog:",
-    "@vitejs/plugin-vue-jsx": "catalog:"
+    "@vitejs/plugin-vue-jsx": "catalog:",
+    "ofetch": "catalog:"
   }
 }

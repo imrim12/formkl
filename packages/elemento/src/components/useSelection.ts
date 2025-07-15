@@ -1,6 +1,6 @@
 import { isNaNStrict, uniqBy } from '@formkl/shared'
-import axios from 'axios'
 import { get } from 'es-toolkit/compat'
+import { ofetch } from 'ofetch'
 import { computed, getCurrentInstance, onBeforeMount, ref } from 'vue'
 
 export function useSelection() {
@@ -41,8 +41,8 @@ export function useSelection() {
     if (props.fetchUrl && vm) {
       try {
         isLoading.value = true
-        const { data } = await axios.get(props.fetchUrl, {
-          params: {
+        const { data } = await ofetch(props.fetchUrl, {
+          query: {
             page: 1,
             limit: 50,
             keyword,

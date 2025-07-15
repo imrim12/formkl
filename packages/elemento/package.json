@@ -22,10 +22,13 @@
   "peerDependencies": {
     "element-plus": "catalog:",
     "es-toolkit": "catalog:",
+    "ofetch": "catalog:",
     "vue": "catalog:"
   },
   "dependencies": {
-    "@formkl/shared": "workspace:*",
-    "axios": "^1.3.5"
+    "@formkl/shared": "workspace:*"
+  },
+  "devDependencies": {
+    "ofetch": "catalog:"
   }
 }
