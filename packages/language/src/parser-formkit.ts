@@ -1,24 +1,6 @@
+import type { FormKitSchemaDefinition, FormKitSchemaNode } from '@formkit/core'
 import type { FieldCustom, FieldDefault, FieldSelection, Formkl } from '@formkl/shared'
 import { Parser } from './parser'
-
-// FormKit Schema Definition Types
-export interface FormKitSchemaNode {
-  $el?: string
-  $formkit?: string
-  name?: string
-  label?: string
-  children?: FormKitSchemaNode[] | string
-  attrs?: Record<string, any>
-  validation?: string
-  multiple?: boolean
-  options?: Array<{ label: string, value: string }> | string
-  method?: string
-  action?: string
-  max?: number
-  min?: number
-}
-
-export type FormKitSchemaDefinition = FormKitSchemaNode
 
 /**
  * Parser that converts FormKL syntax to FormKit schema definition

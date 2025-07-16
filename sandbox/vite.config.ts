@@ -1,14 +1,14 @@
 import FormklPlugin from '@formkl/plugin-vite'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
-import UnoCSS from 'unocss/vite'
-import AutoImport from 'unplugin-auto-import/vite'
+import unoCSS from 'unocss/vite'
+import autoImport from 'unplugin-auto-import/vite'
 import { defineConfig } from 'vite'
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
-    AutoImport({
+    autoImport({
       imports: ['vue'],
     }),
     vue({
@@ -20,7 +20,9 @@ export default defineConfig({
       },
     }),
     vueJsx(),
-    UnoCSS(),
-    FormklPlugin(),
+    unoCSS(),
+    FormklPlugin({
+      formkit: true,
+    }),
   ],
 })

@@ -33,7 +33,13 @@ catalogs:
     '@formkit/core':
       specifier: ^1.6.9
       version: 1.6.9
+    '@formkit/icons':
+      specifier: ^1.6.9
+      version: 1.6.9
     '@formkit/inputs':
+      specifier: ^1.6.9
+      version: 1.6.9
+    '@formkit/themes':
       specifier: ^1.6.9
       version: 1.6.9
     '@formkit/vue':
@@ -174,11 +180,14 @@ importers:
       '@formkit/core':
         specifier: 'catalog:'
         version: 1.6.9
+      '@formkit/icons':
+        specifier: 'catalog:'
+        version: 1.6.9
       '@formkit/inputs':
         specifier: 'catalog:'
         version: 1.6.9
       '@formkit/themes':
-        specifier: ^1.6.9
+        specifier: 'catalog:'
         version: 1.6.9(unocss@66.3.3(postcss@8.5.6)(vite@7.0.4(@types/node@24.0.13)(jiti@2.4.2)(sass@1.89.2)(terser@5.43.1)(yaml@2.8.0))(vue@3.5.17(typescript@5.8.3)))
       '@formkit/vue':
         specifier: 'catalog:'
@@ -1215,6 +1224,9 @@ packages:
 
   '@formkit/i18n@1.6.9':
     resolution: {integrity: sha512-8NA5bALlspCBEwInuZVgBqgQr0lDfproZdmbs2LciQpGi2B15u74JCjAkEwaKlMs+qgf/ds3QcIgUv2ztyyVEA==}
+
+  '@formkit/icons@1.6.9':
+    resolution: {integrity: sha512-Fg54j0ArCGNdE1EbwarEhOBj04WlFdF9wafRiwOueqDM9/aUy4j8T2W/4eu8Wk8sNZ1nmrcQ5qUNFIb6MT27aQ==}
 
   '@formkit/inputs@1.6.9':
     resolution: {integrity: sha512-k9gjV1e5F87NxSnu13JtKb30XYt6ndx2KGHZG8Xz0etoP75yJlMaeROHHPvlxdy2gZM6qH7Ex4it51W74Wh2Eg==}
@@ -6829,6 +6841,10 @@ snapshots:
       '@formkit/core': 1.6.9
       '@formkit/utils': 1.6.9
       '@formkit/validation': 1.6.9
+
+  '@formkit/icons@1.6.9':
+    dependencies:
+      '@formkit/core': 1.6.9
 
   '@formkit/inputs@1.6.9':
     dependencies:

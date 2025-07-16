@@ -1,28 +1,12 @@
 <script lang="ts" setup>
-import { ElButton } from 'element-plus'
+import { FormKitSchema } from '@formkit/vue'
 
-import FormParser from 'formkl'
 // TODO: Pending https://github.com/microsoft/TypeScript/pull/51435
 // @ts-expect-error: ExampleForm uses non-standard export until TypeScript PR 51435 is merged
-import ExampleForm from './example.form'
+import exampleForm from './example.form'
+import rawExampleForm from './example.form?raw'
 
-const formklSyntax = ref(FormParser.stringify(ExampleForm))
-
-const exampleModel = ref({})
-
-const formklTemplate = useTemplateRef('formklRef')
-
-function handleSubmit() {
-  if (formklTemplate.value) {
-    const formkl = formklTemplate.value as any
-
-    formkl.formRef.validate()
-  }
-}
-
-function onSubmit() {
-  console.log('Form submitted with model:', exampleModel.value)
-}
+const formklSyntax = ref(rawExampleForm)
 </script>
 
 <template>
@@ -31,19 +15,9 @@ function onSubmit() {
       <formkl-editor v-model="formklSyntax" />
     </div>
     <div class="flex-1 py-2 px-8">
-      <formkl
-        ref="formklRef"
-        v-model="exampleModel"
-        :syntax="formklSyntax"
-        :model="exampleModel"
-        @submit="onSubmit"
-      >
-        <div>
-          <ElButton native-type="submit" @click="handleSubmit">
-            Submit
-          </ElButton>
-        </div>
-      </formkl>
+      <FormKitSchema
+        :schema="exampleForm"
+      />
     </div>
   </div>
 </template>

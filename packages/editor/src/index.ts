@@ -124,6 +124,6 @@ export function createEditor(options?: EditorOptions): CustomElementConstructor 
 
 export default { createEditor }
 
-if (window && window.customElements) {
-  window.customElements.define('formkl-editor', createEditor())
+if (globalThis.window?.customElements) {
+  globalThis.window.customElements.define('formkl-editor', createEditor())
 }

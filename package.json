@@ -53,6 +53,7 @@
     "@commitlint/cli": "catalog:",
     "@commitlint/config-conventional": "catalog:",
     "@formkit/core": "catalog:",
+    "@formkit/icons": "catalog:",
     "@formkit/inputs": "catalog:",
     "@formkit/themes": "catalog:",
     "@formkit/vue": "catalog:",
