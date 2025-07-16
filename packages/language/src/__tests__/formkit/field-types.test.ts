@@ -59,7 +59,7 @@ describe('formKit parser - field types', () => {
           label: 'Time',
         },
         {
-          $formkit: 'datetime-local',
+          $formkit: 'datetime',
           name: 'datetime',
           label: 'Datetime',
         },
@@ -74,7 +74,7 @@ describe('formKit parser - field types', () => {
           label: 'Timerange',
         },
         {
-          $formkit: 'datetime-local',
+          $formkit: 'datetime',
           name: 'datetimerange',
           label: 'Datetimerange',
         },

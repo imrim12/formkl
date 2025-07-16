@@ -12,7 +12,7 @@ export default defineConfig({
       fileName: (format: string) => (format === 'es' ? 'index.mjs' : 'index.cjs'),
     },
     rollupOptions: {
-      external: ['@formkl/shared', 'axios', 'element-plus', 'vue'],
+      external: ['@formkl/shared', '@formkit/vue', 'ofetch', 'element-plus', 'vue'],
       output: {
         exports: 'named',
         globals: {},
