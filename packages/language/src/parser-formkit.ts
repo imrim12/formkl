@@ -173,8 +173,10 @@ export class FormKitParser extends Parser {
    */
   private mapFieldType(type: string): string {
     const typeMapping: Record<string, string> = {
+      input: 'text',
       text: 'text',
       paragraph: 'textarea',
+      textarea: 'textarea',
       email: 'email',
       tel: 'tel',
       number: 'number',

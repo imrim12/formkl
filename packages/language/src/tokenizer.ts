@@ -75,7 +75,7 @@ const Specs: Array<Spec> = [
 
   // --------------------------------------
   // Fields
-  ...['text', 'paragraph', 'number', 'switch'].map(
+  ...['text', 'input', 'paragraph', 'textarea', 'number', 'switch'].map(
     field => [createKeywordRegex(field), 'FIELD'] as Spec,
   ),
   ...['checkbox', 'radio', 'select'].map(

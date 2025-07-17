@@ -4,20 +4,20 @@
   "version": "0.3.0",
   "exports": {
     ".": {
-      "types": "./dist/types/index.d.ts",
+      "types": "./dist/index.d.ts",
       "import": "./dist/index.mjs",
       "require": "./dist/index.cjs"
     },
     "./style.css": "./src/style.css"
   },
   "main": "./dist/index.cjs",
-  "types": "./dist/types/index.d.ts",
+  "types": "./dist/index.d.ts",
   "files": [
     "dist"
   ],
   "scripts": {
     "typecheck": "tsc --noEmit",
-    "build": "vite build"
+    "build": "npx unbuild"
   },
   "peerDependencies": {
     "element-plus": "catalog:",

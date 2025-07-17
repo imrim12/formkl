@@ -2,7 +2,7 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "baseUrl": ".",
-    "types": ["vite/client", "vitest/globals"],
+    "types": ["vitest/globals"],
     "outDir": "./dist"
   },
   "include": ["./**/*.ts", "./**/*.tsx"],
