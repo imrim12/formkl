@@ -1,1 +1,1 @@
-export const modelInjectionKey = Symbol("modelInjectionKey");
+export const modelInjectionKey = Symbol('modelInjectionKey')

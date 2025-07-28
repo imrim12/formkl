@@ -1,12 +1,12 @@
-export type Schema = {
+export interface Schema {
   [section: string]:
     | {
-        [field: string]: any;
-      }
+      [field: string]: any
+    }
     | Array<{
-        [field: string]: any;
-      }>
+      [field: string]: any
+    }>
     | {
-        [field: string]: Array<any>;
-      };
-};
+      [field: string]: Array<any>
+    }
+}

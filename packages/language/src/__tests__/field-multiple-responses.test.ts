@@ -1,49 +1,50 @@
-import parser, { defineForm } from "../";
+/* eslint-disable style/no-tabs */
+import parser, { defineForm } from '../'
 
-describe("Field with multiple responses support", () => {
-  it("should parse the form syntax correctly", () => {
+describe('field with multiple responses support', () => {
+  it('should parse the form syntax correctly', () => {
     const result = parser.parse(`formkl {
       has {
         multiple text;
       }
-    }`);
+    }`)
 
     expect(result).toStrictEqual(
       defineForm({
-        model: "base",
+        model: 'base',
         sections: [
           {
             fields: [
               {
-                type: "text",
-                label: "Text",
-                key: "text",
+                type: 'text',
+                label: 'Text',
+                key: 'text',
                 multiple: true,
               },
             ],
           },
         ],
       }),
-    );
-  });
+    )
+  })
 
-  it("should parse the form syntax correctly with multiple required fields", () => {
+  it('should parse the form syntax correctly with multiple required fields', () => {
     const result = parser.parse(`formkl {
       has {
         require multiple text;
       }
-    }`);
+    }`)
 
     expect(result).toStrictEqual(
       defineForm({
-        model: "base",
+        model: 'base',
         sections: [
           {
             fields: [
               {
-                type: "text",
-                label: "Text",
-                key: "text",
+                type: 'text',
+                label: 'Text',
+                key: 'text',
                 required: true,
                 multiple: true,
               },
@@ -51,26 +52,26 @@ describe("Field with multiple responses support", () => {
           },
         ],
       }),
-    );
-  });
+    )
+  })
 
-  it("should parse the form syntax correctly with multiple required fields", () => {
+  it('should parse the form syntax correctly with multiple required number fields', () => {
     const result = parser.parse(`formkl {
       has {
         require multiple number;
       }
-    }`);
+    }`)
 
     expect(result).toStrictEqual(
       defineForm({
-        model: "base",
+        model: 'base',
         sections: [
           {
             fields: [
               {
-                type: "number",
-                label: "Number",
-                key: "number",
+                type: 'number',
+                label: 'Number',
+                key: 'number',
                 required: true,
                 multiple: true,
               },
@@ -78,20 +79,20 @@ describe("Field with multiple responses support", () => {
           },
         ],
       }),
-    );
-  });
+    )
+  })
 
-  it("should stringify the formkl object correctly", () => {
+  it('should stringify the formkl object correctly', () => {
     const result = parser.stringify(
       defineForm({
-        model: "base",
+        model: 'base',
         sections: [
           {
             fields: [
               {
-                type: "text",
-                label: "Text",
-                key: "text",
+                type: 'text',
+                label: 'Text',
+                key: 'text',
                 required: true,
                 multiple: true,
               },
@@ -99,7 +100,7 @@ describe("Field with multiple responses support", () => {
           },
         ],
       }),
-    );
+    )
 
     expect(result).toBe(
       `formkl {
@@ -107,6 +108,6 @@ describe("Field with multiple responses support", () => {
 		require multiple text;
 	}
 }`,
-    );
-  });
-});
+    )
+  })
+})

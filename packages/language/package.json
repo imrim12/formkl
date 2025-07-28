@@ -1,51 +1,44 @@
 {
-	"name": "formkl",
-	"version": "0.2.0",
-	"description": "Form marKup Language",
-	"type": "module",
-	"exports": {
-		".": {
-			"import": "./dist/index.mjs",
-			"require": "./dist/index.cjs"
-		}
-	},
-	"main": "./dist/index.cjs",
-	"types": "./dist/types/index.d.ts",
-	"files": [
-		"dist"
-	],
-	"scripts": {
-		"typecheck": "tsc --noEmit",
-		"build": "rimraf ./dist && vite build"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/imrim12/formkl.git",
-		"directory": "language"
-	},
-	"keywords": [
-		"form",
-		"formkl",
-		"formjs",
-		"form",
-		"generator",
-		"schema"
-	],
-	"author": "thecodeorigin",
-	"license": "MIT",
-	"bugs": {
-		"url": "https://github.com/imrim12/formkl/issues"
-	},
-	"homepage": "https://github.com/imrim12/formkl#readme",
-	"dependencies": {
-		"@formkl/shared": "workspace:*"
-	},
-	"devDependencies": {
-		"@vitest/ui": "^0.34.6",
-		"rimraf": "^5.0.5",
-		"typescript": "^5.2.2",
-		"vite": "^4.5.0",
-		"vite-plugin-dts": "^3.6.3",
-		"vitest": "^0.34.6"
-	}
+  "name": "formkl",
+  "type": "module",
+  "version": "0.3.0",
+  "description": "Form marKup Language",
+  "author": "thecodeorigin",
+  "license": "MIT",
+  "homepage": "https://github.com/imrim12/formkl#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/imrim12/formkl.git",
+    "directory": "language"
+  },
+  "bugs": {
+    "url": "https://github.com/imrim12/formkl/issues"
+  },
+  "keywords": [
+    "form",
+    "formkl",
+    "formjs",
+    "form",
+    "generator",
+    "schema"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "main": "./dist/index.cjs",
+  "types": "./dist/types/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "build": "rimraf ./dist && vite build"
+  },
+  "dependencies": {
+    "@formkl/shared": "workspace:*"
+  }
 }

@@ -1,7 +1,7 @@
-import parser, { defineForm } from "../";
+import parser, { defineForm } from '../'
 
-describe("Field validation using keyword value like null, undefined, NaN", () => {
-  it("should parse the form syntax correctly", () => {
+describe('field validation using keyword value like null, undefined, NaN', () => {
+  it('should parse the form syntax correctly', () => {
     const result = parser.parse(`formkl {
 			has {
 				text valid(== null);
@@ -9,18 +9,18 @@ describe("Field validation using keyword value like null, undefined, NaN", () =>
 				"Test with AND" text valid(> 5 and == undefined and has "Keyword");
 				"Test with Both" text valid(> 5 or == null and has "Keyword");
 			}
-		}`);
+		}`)
 
     expect(result).toStrictEqual(
       defineForm({
-        model: "base",
+        model: 'base',
         sections: [
           {
             fields: [
               {
-                type: "text",
-                label: "Text",
-                key: "text",
+                type: 'text',
+                label: 'Text',
+                key: 'text',
                 validation: {
                   logic: {
                     $eq: null,
@@ -28,9 +28,9 @@ describe("Field validation using keyword value like null, undefined, NaN", () =>
                 },
               },
               {
-                type: "text",
-                label: "Test with OR",
-                key: "test-with-or",
+                type: 'text',
+                label: 'Test with OR',
+                key: 'test-with-or',
                 validation: {
                   logic: {
                     $or: [
@@ -38,19 +38,19 @@ describe("Field validation using keyword value like null, undefined, NaN", () =>
                         $gt: 5,
                       },
                       {
-                        $eq: NaN,
+                        $eq: Number.NaN,
                       },
                       {
-                        $has: "Keyword",
+                        $has: 'Keyword',
                       },
                     ],
                   },
                 },
               },
               {
-                type: "text",
-                label: "Test with AND",
-                key: "test-with-and",
+                type: 'text',
+                label: 'Test with AND',
+                key: 'test-with-and',
                 validation: {
                   logic: {
                     $and: [
@@ -61,16 +61,16 @@ describe("Field validation using keyword value like null, undefined, NaN", () =>
                         $eq: undefined,
                       },
                       {
-                        $has: "Keyword",
+                        $has: 'Keyword',
                       },
                     ],
                   },
                 },
               },
               {
-                type: "text",
-                label: "Test with Both",
-                key: "test-with-both",
+                type: 'text',
+                label: 'Test with Both',
+                key: 'test-with-both',
                 validation: {
                   logic: {
                     $or: [
@@ -83,7 +83,7 @@ describe("Field validation using keyword value like null, undefined, NaN", () =>
                             $eq: null,
                           },
                           {
-                            $has: "Keyword",
+                            $has: 'Keyword',
                           },
                         ],
                       },
@@ -95,20 +95,20 @@ describe("Field validation using keyword value like null, undefined, NaN", () =>
           },
         ],
       }),
-    );
-  });
+    )
+  })
 
-  it("should stringify the formkl object correctly", () => {
+  it('should stringify the formkl object correctly', () => {
     const result = parser.stringify(
       defineForm({
-        model: "base",
+        model: 'base',
         sections: [
           {
             fields: [
               {
-                type: "text",
-                label: "Text",
-                key: "text",
+                type: 'text',
+                label: 'Text',
+                key: 'text',
                 validation: {
                   logic: {
                     $eq: null,
@@ -116,9 +116,9 @@ describe("Field validation using keyword value like null, undefined, NaN", () =>
                 },
               },
               {
-                type: "text",
-                label: "Test with OR",
-                key: "test-with-or",
+                type: 'text',
+                label: 'Test with OR',
+                key: 'test-with-or',
                 validation: {
                   logic: {
                     $or: [
@@ -126,19 +126,19 @@ describe("Field validation using keyword value like null, undefined, NaN", () =>
                         $gt: 5,
                       },
                       {
-                        $eq: NaN,
+                        $eq: Number.NaN,
                       },
                       {
-                        $has: "Keyword",
+                        $has: 'Keyword',
                       },
                     ],
                   },
                 },
               },
               {
-                type: "text",
-                label: "Test with AND",
-                key: "test-with-and",
+                type: 'text',
+                label: 'Test with AND',
+                key: 'test-with-and',
                 validation: {
                   logic: {
                     $and: [
@@ -149,16 +149,16 @@ describe("Field validation using keyword value like null, undefined, NaN", () =>
                         $eq: undefined,
                       },
                       {
-                        $has: "Keyword",
+                        $has: 'Keyword',
                       },
                     ],
                   },
                 },
               },
               {
-                type: "text",
-                label: "Test with Both",
-                key: "test-with-both",
+                type: 'text',
+                label: 'Test with Both',
+                key: 'test-with-both',
                 validation: {
                   logic: {
                     $or: [
@@ -171,7 +171,7 @@ describe("Field validation using keyword value like null, undefined, NaN", () =>
                             $eq: null,
                           },
                           {
-                            $has: "Keyword",
+                            $has: 'Keyword',
                           },
                         ],
                       },
@@ -183,7 +183,7 @@ describe("Field validation using keyword value like null, undefined, NaN", () =>
           },
         ],
       }),
-    );
+    )
 
     expect(result).toBe(`formkl {
 	has {
@@ -192,6 +192,6 @@ describe("Field validation using keyword value like null, undefined, NaN", () =>
 		"Test with AND" text valid(> 5 and == undefined and has "Keyword");
 		"Test with Both" text valid(> 5 or == null and has "Keyword");
 	}
-}`);
-  });
-});
+}`)
+  })
+})

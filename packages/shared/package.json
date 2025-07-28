@@ -1,14 +1,9 @@
 {
-	"name": "@formkl/shared",
-	"version": "0.2.0",
-	"type": "module",
-	"main": "./src/index.ts",
-	"scripts": {
-		"typecheck": "tsc --noEmit"
-	},
-	"devDependencies": {
-		"@vitest/ui": "^0.34.6",
-		"typescript": "^5.2.2",
-		"vitest": "^0.34.6"
-	}
+  "name": "@formkl/shared",
+  "type": "module",
+  "version": "0.3.0",
+  "main": "./src/index.ts",
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  }
 }

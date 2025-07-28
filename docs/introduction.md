@@ -78,7 +78,7 @@ pnpm add formkl
 ```
 
 ```javascript
-import FormklParser from "formkl";
+import FormklParser from 'formkl'
 
 const yourFormklSyntax = `
   formkl {
@@ -87,9 +87,9 @@ const yourFormklSyntax = `
       "Bio" paragraph;
     }
   }
-`;
+`
 
-const parsedForm = FormklParser.parse(yourFormklSyntax);
+const parsedForm = FormklParser.parse(yourFormklSyntax)
 ```
 
 The above formkl will be parsed into
@@ -130,7 +130,6 @@ Result:
 <div>
   <formkl syntax="formkl {'Personal Information' has {'Fullname' text;'Bio' paragraph;}}"></formkl>
 </div>
-
 
 ## Techstack
 

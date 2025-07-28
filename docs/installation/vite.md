@@ -10,9 +10,9 @@ Checkout guides for frameworks:
 ## Configuration
 
 ```js
+import path from 'node:path'
 // vite.config.js
-import FormklPlugin from "@formkl/plugin-vite";
-import path from "path";
+import FormklPlugin from '@formkl/plugin-vite'
 
 export default {
   plugins: [
@@ -22,14 +22,14 @@ export default {
       // }
     }),
   ],
-};
+}
 ```
 
 ## Usage
 
 ```js
 // In your project files app.vue, app.jsx, app.tsx, etc.
-import LoginForm from "./login.form";
+import LoginForm from './login.form'
 
 // Login form is only a raw Formkl instance
 // You have to display it in your app by your own code

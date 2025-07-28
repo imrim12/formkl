@@ -1,2 +1,2 @@
-export * from "./token.type";
-export * from "./spec.type";
+export * from './spec.type'
+export * from './token.type'

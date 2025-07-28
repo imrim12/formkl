@@ -1,32 +1,24 @@
 {
-	"name": "@formkl/plugin-vite",
-	"description": "A Formkl Vite plugin to load .form files.",
-	"version": "0.2.0",
-	"type": "module",
-	"exports": {
-		".": {
-			"import": "./dist/index.mjs",
-			"require": "./dist/index.cjs"
-		}
-	},
-	"main": "./dist/index.mjs",
-	"types": "./dist/types/index.d.ts",
-	"files": [
-		"dist"
-	],
-	"scripts": {
-		"typecheck": "tsc --noEmit",
-		"build": "rimraf ./dist && vite build"
-	},
-	"devDependencies": {
-		"@vitest/ui": "^0.34.6",
-		"rimraf": "^5.0.5",
-		"typescript": "^5.2.2",
-		"vite": "^4.5.0",
-		"vite-plugin-dts": "^3.6.3",
-		"vitest": "^0.34.6"
-	},
-	"dependencies": {
-		"@formkl/shared": "workspace:*"
-	}
+  "name": "@formkl/plugin-vite",
+  "type": "module",
+  "version": "0.3.0",
+  "description": "A Formkl Vite plugin to load .form files.",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "main": "./dist/index.mjs",
+  "types": "./dist/types/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "build": "rimraf ./dist && vite build"
+  },
+  "dependencies": {
+    "@formkl/shared": "workspace:*"
+  }
 }

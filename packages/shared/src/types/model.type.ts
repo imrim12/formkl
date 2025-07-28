@@ -1,1 +1,1 @@
-export type ModelType = "base" | "flat";
+export type ModelType = 'base' | 'flat'

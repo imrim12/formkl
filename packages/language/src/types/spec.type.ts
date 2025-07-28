@@ -1,1 +1,1 @@
-export type Spec = [RegExp, string | null];
+export type Spec = [RegExp, string | null]

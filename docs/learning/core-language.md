@@ -100,12 +100,12 @@ The parser uses the tokenizer to check for the syntax's grammar and return the p
 class Parser {
   constructor() {
     // Initialize the tokenizer
-    this._tokenizer = new Tokenizer();
+    this._tokenizer = new Tokenizer()
   }
 
   parse(string: string): Formkl {
     // Parse the input string
-    return this.FormBlock();
+    return this.FormBlock()
   }
 
   /**

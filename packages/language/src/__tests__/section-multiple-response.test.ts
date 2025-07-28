@@ -1,59 +1,60 @@
-import parser, { defineForm } from "../";
+/* eslint-disable style/no-tabs */
+import parser, { defineForm } from '../'
 
-describe("Section with multiple responses support", () => {
-  it("should parse the form syntax correctly", () => {
+describe('section with multiple responses support', () => {
+  it('should parse the form syntax correctly', () => {
     const result = parser.parse(`formkl {
       multiple has {
         text;
       }
-    }`);
+    }`)
 
     expect(result).toStrictEqual(
       defineForm({
-        model: "base",
+        model: 'base',
         sections: [
           {
             multiple: true,
             fields: [
               {
-                type: "text",
-                label: "Text",
-                key: "text",
+                type: 'text',
+                label: 'Text',
+                key: 'text',
               },
             ],
           },
         ],
       }),
-    );
-  });
+    )
+  })
 
-  it("should stringify the form syntax correctly", () => {
+  it('should stringify the form syntax correctly', () => {
     const result = parser.stringify(
       defineForm({
-        model: "base",
+        model: 'base',
         sections: [
           {
             multiple: true,
             fields: [
               {
-                type: "text",
-                label: "Text",
-                key: "text",
+                type: 'text',
+                label: 'Text',
+                key: 'text',
               },
             ],
           },
         ],
       }),
-    );
+    )
 
     expect(result).toBe(`formkl {
 	multiple has {
 		text;
 	}
-}`);
-  });
+}`)
+  })
 
-  it("should emit syntax error for multiple response field in multiple response section.", () => {
+  it('should emit syntax error for multiple response field in multiple response section.', () => {
     expect(() =>
       parser.parse(`formkl {
         multiple has {
@@ -62,7 +63,7 @@ describe("Section with multiple responses support", () => {
         }
       }`),
     ).toThrowError(
-      "A section with multiple responses cannot have fields that also have multiple responses!",
-    );
-  });
-});
+      'A section with multiple responses cannot have fields that also have multiple responses!',
+    )
+  })
+})

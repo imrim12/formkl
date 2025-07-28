@@ -50,7 +50,6 @@ Checkout the sandbox to experiment with the packages locally
 pnpm -F ./sandbox dev
 ```
 
-
 ## Project structure
 
 These are the main packages in this project, include our core language parser, adapters, editor and utils

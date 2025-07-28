@@ -1,11 +1,8 @@
-import { ValidationLogic } from "../types";
-import { validateLogicOperator } from "./validateLogicOperator";
+import type { ValidationLogic } from '../types'
+import { validateLogicOperator } from './validateLogicOperator'
 
-export const validateLogicOr = (
-  value: string | number,
-  validations: Array<ValidationLogic>,
-): boolean => {
-  const results = validations.map((validation) => validateLogicOperator(value, validation));
+export function validateLogicOr(value: string | number, validations: Array<ValidationLogic>): boolean {
+  const results = validations.map(validation => validateLogicOperator(value, validation))
 
-  return results.some((result) => result);
-};
+  return results.some(result => result)
+}

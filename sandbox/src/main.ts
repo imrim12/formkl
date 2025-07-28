@@ -1,22 +1,22 @@
-import "virtual:windi.css";
+import { genesisIcons } from '@formkit/icons'
+import { defaultConfig, plugin as FormkitPlugin } from '@formkit/vue'
+// Import FormKit inputs configuration from elemento package
+import { formkitElementoInputs } from '@formkl/elemento'
 
-import { createApp } from "vue";
+import { createApp } from 'vue'
 
-import FormklPlugin from "@formkl/vue";
+import App from './App.vue'
 
-import ElementPlus from "element-plus";
+import 'virtual:uno.css'
 
-import formklTheme from "@formkl/elemento";
+import '@formkl/editor'
 
-import App from "./App.vue";
-
-import "@formkl/editor";
-
-import "./style.css";
+import 'element-plus/dist/index.css'
+import './style.css'
 
 createApp(App)
-  .use(FormklPlugin, {
-    theme: formklTheme,
-  })
-  .use(ElementPlus)
-  .mount("#app");
+  .use(FormkitPlugin, defaultConfig({
+    icons: genesisIcons,
+    inputs: formkitElementoInputs,
+  }))
+  .mount('#app')

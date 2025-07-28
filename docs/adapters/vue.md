@@ -25,14 +25,14 @@ You can checkout the installation guide for [Vite](/installation/vite) or [Webpa
 
 ```typescript
 // vite.config.ts
-import FormklPlugin from "@formkl/plugin-vite";
+import FormklPlugin from '@formkl/plugin-vite'
 
 export default {
   plugins: [
     // Your other plugins
     FormklPlugin(),
   ],
-};
+}
 ```
 
 ### Setup plugin
@@ -40,20 +40,19 @@ export default {
 Setup `@formkl/vue` using the default theme `@formkl/elemento` or your own theme
 
 ```typescript
+import formklTheme from '@formkl/elemento'
+import FormklPlugin from '@formkl/vue'
 // main.ts
-import { createApp } from "vue";
-import FormklPlugin from "@formkl/vue";
-import formklTheme from "@formkl/elemento";
-import App from "./App.vue";
+import { createApp } from 'vue'
+import App from './App.vue'
 
-import "./style.css";
+import './style.css'
 
 createApp(App)
   .use(FormklPlugin, {
     theme: formklTheme,
   })
-  .mount("#app");
-
+  .mount('#app')
 ```
 
 ```css

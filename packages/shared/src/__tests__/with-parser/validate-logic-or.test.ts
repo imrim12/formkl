@@ -1,20 +1,20 @@
-import { isValueValidated } from "@formkl/shared";
+import { isValueValidated } from '@formkl/shared'
 
-import parser from "../../../../language";
+import parser from '../../../../language'
 
-describe("Test recursive validator", () => {
-  it("should return true", () => {
+describe('test recursive validator', () => {
+  it('should return true', () => {
     const form = parser.parse(`formkl {
       has {
         text valid(> 10 or has "something");
       }
-    }`);
+    }`)
 
     const result = isValueValidated(
-      "test something with or",
+      'test something with or',
       form.sections[0].fields[0].validation,
-    );
+    )
 
-    expect(result).toBe(true);
-  });
-});
+    expect(result).toBe(true)
+  })
+})

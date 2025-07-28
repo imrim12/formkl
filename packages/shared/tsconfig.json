@@ -2,8 +2,8 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "baseUrl": ".",
-    "outDir": "./dist",
-    "types": ["vitest/globals"]
+    "types": ["vitest/globals"],
+    "outDir": "./dist"
   },
   "include": ["./**/*.ts", "./**/*.tsx", "./**/*.vue"],
   "exclude": ["./node_modules", "./dist"]

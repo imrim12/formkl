@@ -1,27 +1,27 @@
 {
+  "publisher": "FormKL",
   "name": "formkl",
   "displayName": "FormKL Language Service (VSCode)",
-  "description": "",
   "version": "0.0.4",
-  "publisher": "FormKL",
-  "icon": "images/logo.png",
-  "engines": {
-    "vscode": "^1.54.0"
-  },
+  "description": "",
   "repository": {
     "type": "git",
     "url": "https://github.com/imrim12/formkl.git"
   },
-  "categories": [
-    "Programming Languages"
-  ],
   "keywords": [
     "multi-root ready"
   ],
+  "categories": [
+    "Programming Languages"
+  ],
+  "main": "./lsp/client/out/extension",
+  "icon": "images/logo.png",
+  "engines": {
+    "vscode": "^1.54.0"
+  },
   "activationEvents": [
     "onLanguage:formkl"
   ],
-  "main": "./lsp/client/out/extension",
   "contributes": {
     "languages": [
       {

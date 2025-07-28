@@ -1,11 +1,10 @@
-export type FieldTypeDefault =
-  | "text"
-  | "paragraph"
-  | "switch"
-  | "number"
-  | "date"
-  | "time"
-  | "datetime"
-  | "daterange"
-  | "timerange"
-  | "datetimerange";
+export type FieldTypeDefault
+  = | 'input'
+    | 'text'
+    | 'textarea'
+    | 'paragraph'
+    | 'switch'
+    | 'number'
+    | 'date'
+    | 'time'
+    | 'datetime'

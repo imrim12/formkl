@@ -1,20 +1,20 @@
 export interface Theme<GenericNode = any, GenericRule = any> {
-  vNodeLayout?: GenericNode;
-  VNodeFormWrapper?: GenericNode;
-  vNodeFieldWrapper?: GenericNode;
+  vNodeLayout?: GenericNode
+  VNodeFormWrapper?: GenericNode
+  vNodeFieldWrapper?: GenericNode
   vNodeFields: {
-    [key: string]: GenericNode;
-  };
+    [key: string]: GenericNode
+  }
   vNodeComponents?: {
-    [key: string]: GenericNode;
-  };
+    [key: string]: GenericNode
+  }
   validator?: (
     state: {
-      fieldValue: any;
-      fieldPath: string;
-      formValue: any;
+      fieldValue: any
+      fieldPath: string
+      formValue: any
     },
     rules: Array<GenericRule>,
     resolver: (...args: Array<any>) => void,
-  ) => boolean;
+  ) => boolean
 }
